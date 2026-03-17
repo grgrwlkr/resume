@@ -7,6 +7,7 @@ alwaysApply: true
 
 - Keep public resume drafts ATS-friendly, concise, and outcome-focused.
 - Prefer bullet structure like `scope + action + result` over generic traits or vague claims.
+- Order dated resume entries reverse-chronologically, with the newest items first at the top of each section.
 - Keep recent leadership roles detailed and compress older supporting roles when space is tight.
 - Keep facts separate from positioning: factual updates belong in `cv.master.yaml`, while summary and emphasis belong in draft resumes.
 - Do not invent titles, dates, metrics, team sizes, stack details, or achievements. Use placeholders until the user confirms them.
