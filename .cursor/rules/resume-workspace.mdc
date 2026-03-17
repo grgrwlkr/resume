@@ -1,0 +1,17 @@
+---
+description: Workspace layout and source-of-truth rules for the resume project
+alwaysApply: true
+---
+
+# Resume Workspace
+
+- Treat `cv.master.yaml` as the canonical source of truth for resume facts.
+- Update derived resume drafts after factual changes in `cv.master.yaml`.
+- Keep Russian and English resume variants in sync when dates, roles, projects, stack, or achievements change.
+- Put assistant-authored resume drafts in `resume-examples/` and assistant-authored analysis in `reviews/`.
+- Keep `ai/` only for materials produced by other AIs.
+- If a fact is incomplete, keep a visible placeholder in drafts and record the missing detail in `cv.master.yaml` instead of inventing it.
+
+Examples:
+- Good: update `cv.master.yaml` and both `resume-examples/*.en.md` and `resume-examples/*.ru.md` after a job change.
+- Bad: edit only one language variant or write assistant output into `ai/`.

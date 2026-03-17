@@ -1,0 +1,21 @@
+# macOS
+.DS_Store
+
+# Cursor / editor-local state
+.cursor/*
+!.cursor/rules/
+!.cursor/rules/**
+!.cursor/hooks/
+.cursor/hooks/*
+!.cursor/hooks/state/
+.cursor/hooks/state/*
+!.cursor/hooks/state/continual-learning.json
+!.cursor/hooks/state/continual-learning-index.json
+.vscode/
+.idea/
+
+# Temporary files
+*.swp
+*.swo
+*.tmp
+*.temp

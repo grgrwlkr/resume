@@ -1,0 +1,586 @@
+schemaVersion: 1
+
+metadata:
+  purpose: canonical_resume_source
+  firstClassProfiles:
+    - teamLead
+  maintainedResumeLanguages:
+    - en
+    - ru
+  sourceDocuments:
+    - path: Gregory_Agapov_Resume.pdf
+      role: primary_factual_source
+    - path: Gregory Agapov Results.pdf
+      role: optional_positioning_source
+
+basics:
+  fullName: Gregory Agapov
+  defaultHeadline: Team Lead
+  legacyHeadline: Team Leader & Proud Geek
+  location:
+    city: Moscow
+    country: Russia
+  contacts:
+    email: gregoryagapov@icloud.com
+    legacyStreetAddress:
+      value: 19, Yana Rainisa blvd, 125459 Russia
+      publishByDefault: false
+      verificationStatus: needs_review
+  links:
+    github:
+      username: grgrwlkr
+      url: https://github.com/grgrwlkr
+    legacyHandles:
+      - value: '@xawkay'
+        source: legacy_resume_icon_row
+        verificationStatus: needs_review
+      - value: xawkay
+        source: legacy_resume_icon_row
+        verificationStatus: needs_review
+  languages:
+    - name: Russian
+      proficiency: native
+    - name: English
+      proficiency: B1
+
+positioning:
+  coreThemes:
+    - hands_on_technical_leadership
+    - mentoring_and_team_growth
+    - turnaround_and_stabilization
+    - product_and_business_alignment
+    - delivery_under_ambiguity
+  summaryBlocks:
+    - id: handsOnLead
+      text: Hands-on engineering leader who combines delivery ownership, mentoring, and technical depth across backend, frontend, data, and platform concerns.
+    - id: turnaroundBuilder
+      text: Strong fit for situations that need a product or team reset, clearer direction, and execution discipline without losing technical credibility.
+    - id: mentorManager
+      text: Comfortable building teams, growing engineers, and keeping work tied to business value rather than delivery theater.
+  legacyResumeSignals:
+    proudOf:
+      - Took a sinking project and made it stand out.
+      - Chooses companies carefully and stays loyal through long collaborations.
+      - Grows projects from business ideas into valuable working products.
+      - Raised and led two project teams.
+    strengths:
+      - Hard-working
+      - Persuasive
+      - Motivator and leader
+      - Product management and team leading
+      - Microservices and architecture
+      - Mentoring
+  assessmentDerivedSignals:
+    primaryArchetype: Shaper
+    secondaryArchetypes:
+      - Orchestrator
+      - Growth Seeker
+    reusableStrengths:
+      - Sets ambitious goals and pushes execution through uncertainty.
+      - Holds high standards and is comfortable taking charge.
+      - Adapts plans to changing demands.
+      - Combines imagination, logic, and rigor in problem solving.
+      - Stays calm and confident under pressure.
+      - Takes feedback well and keeps learning.
+    watchouts:
+      - Direct communication can read as harsh.
+      - Can miss emotional cues if not deliberate.
+      - Should actively show appreciation and make space for others.
+
+experience:
+  - id: tinkoff-mentoring-team-lead
+    company: Tinkoff Bank
+    title: Team Lead
+    project: Mentoring project
+    start: 2022-12
+    end: 2025-03
+    location: Moscow, Russia
+    team:
+      size: 6
+      composition:
+        backendDevelopers: 2
+        frontendDevelopers: 1
+        qaEngineers: 1
+        uiDesigners: 1
+        analysts: 1
+    achievements:
+      - Built the MVP on schedule and got strong feedback from business and users.
+      - Led the company's first pilot project staffed only by mentees, who later moved into full-time roles.
+      - Mentored two backend mentees while still helping the previous team with development tasks.
+    stack:
+      - .NET
+      - Angular
+      - Postgres
+      - DDD
+      - CQRS
+      - Microservices
+      - Docker
+      - Kubernetes
+      - GitLab CI/CD
+    tags:
+      - team_lead
+      - mentoring
+      - mvp
+      - delivery
+      - people_growth
+      - microservices
+
+  - id: vk-team-lead
+    company: VK
+    title: Team Lead
+    start: 2025-04
+    end: present
+    location: Moscow, Russia
+    products:
+      - name: SocCom
+        description: Seller integrations into VK, including independent sellers and Ozon with 2M+ products.
+      - name: Communities
+        description: Donations in VK communities.
+    stack:
+      - PHP
+      - Go
+      - React
+      - In-house storage systems
+      - Postgres
+      - Monolith
+      - Microservices
+    notes:
+      - User confirmed the move to VK in April 2025 as a Team Lead.
+      - Responsibilities, scope, and achievements still need to be added.
+    tags:
+      - current_role
+      - team_lead
+      - php
+      - go
+      - react
+      - monolith
+      - microservices
+      - seller_integrations
+      - donations
+      - pending_details
+
+  - id: tinkoff-performance-review-team-lead
+    company: Tinkoff Bank
+    title: Team Lead
+    project: Performance Review project
+    start: 2021-04
+    end: 2022-12
+    location: Moscow, Russia
+    team:
+      size: 7
+      composition:
+        backendDevelopers: 3
+        frontendDevelopers: 1
+        qaEngineers: 1
+        uiDesigners: 1
+        analysts: 1
+    achievements:
+      - Took over a struggling project and turned it into a standout one.
+      - Assembled a team with strong hard and soft skills.
+      - Mentored one backend mentee and helped him transition into the staff on this project.
+      - Created a one-year turnaround plan from the state in which the project arrived and aligned it with the business.
+    stack:
+      - .NET
+      - Angular
+      - Postgres
+      - Microservices
+      - Docker
+      - Kubernetes
+      - GitLab CI/CD
+      - CRUD
+      - DDD
+    tags:
+      - team_lead
+      - turnaround
+      - team_building
+      - mentoring
+      - cross_functional
+      - delivery
+
+  - id: tinkoff-organization-structure-senior
+    company: Tinkoff Bank
+    title: Senior Developer
+    project: Organization Structure project
+    start: 2020-04
+    end: 2021-04
+    location: Moscow, Russia
+    achievements:
+      - Built a small service from scratch and launched it to production solo across backend and frontend.
+      - Worked closely with business and analytics to debate options and choose the right implementation path.
+      - Focused on difficult tasks and delivered strong technical solutions.
+    stack:
+      - .NET
+      - Angular
+      - Postgres
+      - Microservices
+    tags:
+      - senior_engineer
+      - full_stack
+      - greenfield
+      - production_launch
+      - stakeholder_alignment
+
+  - id: tinkoff-performance-review-middle
+    company: Tinkoff Bank
+    title: Middle Developer
+    project: Performance Review project
+    start: 2019-04
+    end: 2020-04
+    location: Moscow, Russia
+    achievements:
+      - Helped the team achieve its business goals.
+      - Contributed to in-house task tracker and feedback systems.
+      - Grew engineering skills through internal training and support from colleagues.
+    stack:
+      - .NET
+      - Angular
+      - Postgres
+      - Microservices
+      - Docker
+      - Kubernetes
+      - TeamCity
+      - Custom CI/CD tooling
+    tags:
+      - software_engineer
+      - internal_product
+      - growth_phase
+
+  - id: neotech-gis-senior
+    company: Neotech
+    title: Senior Developer
+    project: GIS projects
+    start: 2013-12
+    end: 2019-03
+    location: Moscow, Russia
+    clients:
+      - MTS
+      - MGTS
+      - TAT Telecom
+    achievements:
+      - Became a certified General Electric Smallworld GIS developer.
+      - Worked on multiple GIS projects for customers across Russia and CIS countries.
+      - Reverse engineered a client-side project because the original source code was unavailable to customers.
+      - Maintained close customer communication around development process and business ideas.
+      - Participated in General Electric Smallworld developer conferences in the UK, Italy, and the Netherlands.
+      - Built extensions for Smallworld GIS using the internal Magic language and Spatial DB technology.
+      - Built client-side extensions in Java, JSP, JavaScript, jQuery, and Mustache.
+    stack:
+      - General Electric Smallworld GIS
+      - Magic
+      - Spatial DB
+      - Java
+      - JSP
+      - JavaScript
+      - jQuery
+      - Mustache
+    tags:
+      - senior_engineer
+      - enterprise
+      - gis
+      - reverse_engineering
+      - client_facing
+
+  - id: cinimex-middle
+    company: CINIMEX
+    title: Middle Developer
+    start: 2012-11
+    end: 2013-01
+    location: Moscow, Russia
+    achievements:
+      - Worked with IBM WebSphere and Message Broker using ESQL.
+    stack:
+      - IBM WebSphere
+      - IBM Message Broker
+      - ESQL
+    tags:
+      - integration
+      - enterprise
+
+  - id: aisa-railway-middle
+    company: AISA IT-Service
+    title: Middle Developer
+    project: Railway Automation project
+    start: 2010-11
+    end: 2012-05
+    location: Moscow, Russia
+    achievements:
+      - Worked on automation for machinists using touch information booths and digital forms.
+      - Built XFDL forms in IBM Lotus Forms.
+      - Built web services with Java EE using Java, JSP, WSDL, and SOAP.
+      - Created and optimized SQL queries for IBM Db2 and developed stored procedures with PL/SQL.
+      - Optimized the client-side project with Java and ExtJS.
+    stack:
+      - IBM Lotus Forms
+      - XFDL
+      - Java
+      - Java EE
+      - JSP
+      - WSDL
+      - SOAP
+      - IBM Db2
+      - PL/SQL
+      - ExtJS
+    tags:
+      - software_engineer
+      - enterprise
+      - automation
+      - integrations
+
+projects:
+  - id: mentoring-platform
+    name: Mentoring project
+    employer: Tinkoff Bank
+    experienceIds:
+      - tinkoff-mentoring-team-lead
+    role: Team Lead
+    start: 2022-12
+    end: 2025-03
+    whyItMatters:
+      - Strong evidence of delivery plus people development in the same role.
+      - Shows leadership in an MVP context rather than only in stable maintenance work.
+      - Shows ability to grow mentees into full-time contributors.
+    tags:
+      - team_lead
+      - mentoring
+      - mvp
+
+  - id: performance-review-platform
+    name: Performance Review project
+    employer: Tinkoff Bank
+    experienceIds:
+      - tinkoff-performance-review-middle
+      - tinkoff-performance-review-team-lead
+    roles:
+      - Middle Developer
+      - Team Lead
+    start: 2019-04
+    end: 2022-12
+    whyItMatters:
+      - Shows growth from contributor to leader on the same product area.
+      - Includes a clear turnaround story and business alignment.
+      - Demonstrates ownership across multiple services and cross-functional delivery.
+    tags:
+      - ownership_growth
+      - turnaround
+      - cross_functional
+
+  - id: organization-structure-service
+    name: Organization Structure project
+    employer: Tinkoff Bank
+    experienceIds:
+      - tinkoff-organization-structure-senior
+    role: Senior Developer
+    start: 2020-04
+    end: 2021-04
+    whyItMatters:
+      - Strong proof of hands-on technical depth and solo execution.
+      - Useful supporting case when a lead resume also needs credible implementation experience.
+    tags:
+      - greenfield
+      - production_launch
+      - full_stack
+
+  - id: vk-soccom
+    name: SocCom
+    employer: VK
+    experienceIds:
+      - vk-team-lead
+    role: Team Lead
+    start: 2025-04
+    end: present
+    whyItMatters:
+      - Current seller integration initiative inside VK.
+      - Includes independent sellers and Ozon integration with 2M+ products.
+    tags:
+      - current_role
+      - seller_integrations
+      - ecommerce
+
+  - id: vk-communities-donations
+    name: Communities / Donations
+    employer: VK
+    experienceIds:
+      - vk-team-lead
+    role: Team Lead
+    start: 2025-04
+    end: present
+    whyItMatters:
+      - Current donations product area inside VK communities.
+    tags:
+      - current_role
+      - communities
+      - donations
+
+  - id: gis-customization
+    name: GIS customization projects
+    employer: Neotech
+    experienceIds:
+      - neotech-gis-senior
+    role: Senior Developer
+    start: 2013-12
+    end: 2019-03
+    whyItMatters:
+      - Shows depth in enterprise engineering, customer communication, and reverse engineering.
+      - Good supporting evidence for complex legacy and domain-heavy environments.
+    tags:
+      - enterprise
+      - gis
+      - reverse_engineering
+
+  - id: railway-automation
+    name: Railway Automation project
+    employer: AISA IT-Service
+    experienceIds:
+      - aisa-railway-middle
+    role: Middle Developer
+    start: 2010-11
+    end: 2012-05
+    whyItMatters:
+      - Establishes early enterprise and integration background.
+      - Useful when targeting roles that value system integration or heavy legacy stacks.
+    tags:
+      - enterprise
+      - automation
+      - integration
+
+skills:
+  leadership:
+    - Team leadership
+    - Mentoring
+    - Team building
+    - Product management
+    - Stakeholder management
+    - Roadmap planning
+  architecture:
+    - Microservices
+    - DDD
+    - CQRS
+    - OOP
+    - FP
+    - RESTful API
+  backend:
+    - .NET
+    - ASP.NET
+    - C#
+    - Java
+    - Java EE
+    - Rust
+    - SQL
+    - SOAP
+    - WSDL
+    - ESQL
+    - PL/SQL
+  frontend:
+    - Angular
+    - JavaScript
+    - TypeScript
+    - JSP
+    - jQuery
+    - Mustache
+    - ExtJS
+  dataAndMessaging:
+    - Postgres
+    - IBM Db2
+    - Kafka
+    - RabbitMQ
+    - Spatial DB
+  platformAndDevOps:
+    - Docker
+    - Kubernetes
+    - GitLab CI/CD
+    - TeamCity
+    - Custom CI/CD tooling
+    - IBM WebSphere
+    - IBM Message Broker
+    - IBM Lotus Forms
+  domainSpecific:
+    - General Electric Smallworld GIS
+    - Magic
+    - XFDL
+
+education:
+  - id: mtuci-college-computer-science
+    degree: Degree in Computer Science
+    institution: International College of Business and Design at the Moscow Technical University of Communications and Informatics
+    start: 2006-09
+    end: 2010-06
+    location: Moscow, Russia
+
+certifications:
+  - id: ge-smallworld-certified-developer
+    name: General Electric Smallworld GIS Certified Developer
+    issuer: General Electric
+    issuerUrl: https://www.ge.com
+    verificationStatus: needs_review
+    notes:
+      - Exact certification wording is reconstructed from split PDF text and should be confirmed.
+
+targetProfiles:
+  teamLead:
+    targetTitle: Team Lead
+    goal: Maximize evidence of leadership, mentoring, turnaround ownership, and hands-on technical credibility.
+    summaryStrategy:
+      openingNarrative: Hands-on engineering leader with a strong software background who builds teams, mentors engineers, rescues struggling initiatives, and ships internal platforms with clear business value.
+      proofPoints:
+        - Built an MVP on schedule and got strong business and user feedback.
+        - Turned around a struggling project with a business-aligned one-year plan.
+        - Built and mentored teams, including mentees who later moved into full-time roles.
+        - Keeps technical credibility by directly shipping backend and frontend systems.
+      tone:
+        - direct
+        - outcome_oriented
+        - leadership_first
+        - technically_grounded
+    emphasisTags:
+      - team_lead
+      - mentoring
+      - turnaround
+      - delivery
+      - cross_functional
+      - stakeholder_alignment
+      - hands_on
+    preferredExperienceIds:
+      - vk-team-lead
+      - tinkoff-mentoring-team-lead
+      - tinkoff-performance-review-team-lead
+      - tinkoff-organization-structure-senior
+    supportingExperienceIds:
+      - tinkoff-performance-review-middle
+      - neotech-gis-senior
+      - aisa-railway-middle
+    optionalCompressedExperienceIds:
+      - cinimex-middle
+    bulletSelectionHints:
+      mustIncludeThemes:
+        - mentoring_and_people_growth
+        - turnaround_or_stabilization
+        - business_and_analytics_alignment
+        - production_delivery
+        - hands_on_technical_depth
+      avoidOverweighting:
+        - personality_assessment_jargon
+        - raw_psychometric_percentages
+        - exact_street_address
+        - short_low_signal_roles
+      compressionRules:
+        - Keep both Tinkoff Team Lead roles detailed.
+        - Keep at least one hands-on senior role detailed to preserve implementation credibility.
+        - Compress early legacy enterprise work unless the target role explicitly values those stacks.
+
+verification:
+  reviewBeforePublishing:
+    - id: vk-role-details
+      item: VK responsibilities and achievements
+      detail: User confirmed employment at VK started in 2025-04 as a Team Lead on SocCom and Communities / Donations, with a PHP, Go, React, in-house storage, Postgres, monolith, and microservices stack. Responsibilities, scope, and outcomes still need to be added before generating final public CVs.
+    - id: legacy-contact-handles
+      item: Mapping of legacy handles to actual public profiles
+      detail: The icon row in the legacy resume includes "@xawkay" and "xawkay", but the services are not fully recoverable from PDF extraction.
+    - id: street-address
+      item: Street-level address from the legacy resume
+      detail: Confirm whether any future CV should include the exact address or only city and country.
+    - id: certification-title
+      item: Exact General Electric certification title
+      detail: The certification text is split in the PDF and should be checked against the official wording.
+    - id: legacy-headline
+      item: Legacy headline wording
+      detail: '"Team Leader & Proud Geek" is preserved as historical input but not treated as the default canonical headline.'

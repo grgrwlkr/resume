@@ -1,0 +1,17 @@
+---
+description: Resume writing standards for public draft resumes
+alwaysApply: true
+---
+
+# Resume Writing
+
+- Keep public resume drafts ATS-friendly, concise, and outcome-focused.
+- Prefer bullet structure like `scope + action + result` over generic traits or vague claims.
+- Keep recent leadership roles detailed and compress older supporting roles when space is tight.
+- Keep facts separate from positioning: factual updates belong in `cv.master.yaml`, while summary and emphasis belong in draft resumes.
+- Do not invent titles, dates, metrics, team sizes, stack details, or achievements. Use placeholders until the user confirms them.
+- Keep English resume content in English and Russian resume content in Russian. User-facing chat stays in Russian.
+
+Examples:
+- Good: `Led a 7-person cross-functional team and aligned a one-year turnaround plan with business stakeholders.`
+- Bad: `Hard-working`, `Proud Geek`, psychometric labels, or decorative fluff in public resume drafts.
