@@ -8,6 +8,11 @@ alwaysApply: true
 - Keep public resume drafts ATS-friendly, concise, and outcome-focused.
 - Prefer bullet structure like `scope + action + result` over generic traits or vague claims.
 - Order dated resume entries reverse-chronologically, with the newest items first at the top of each section.
+- If an employer block is split into dated project or subrole blocks, omit the parent date line and keep dates only on the sub-blocks.
+- Use present tense only for role or project blocks whose end date is `present`; use past tense for every block with a closed end date, even when it is nested under a currently active employer.
+- Format dated role headings as `Title, Project` when a project or subrole name exists.
+- In Russian resume drafts, prefer `Русский title (English title)` for role names when it improves searchability; use the standard spelling `Team Lead`, not `Teamlead`.
+- In Russian resume drafts, keep headings, placeholders, and narrative text in Russian; allow English for brands, technology names, search-oriented role aliases in parentheses, and established project or product names when that wording is clearer than a forced translation.
 - Keep recent leadership roles detailed and compress older supporting roles when space is tight.
 - Keep facts separate from positioning: factual updates belong in `cv.master.yaml`, while summary and emphasis belong in draft resumes.
 - Do not invent titles, dates, metrics, team sizes, stack details, or achievements. Use placeholders until the user confirms them.

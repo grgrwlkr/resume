@@ -30,6 +30,7 @@
 - Use `unknown` when a role looked active in a legacy source but is not confirmed as current.
 - Use `present` for a currently active role only when it is confirmed.
 - Preserve legacy wording like `ongoing` only in supporting fields such as `legacyResumeEndLabel`.
+- Generated public resume drafts should use present tense only for blocks with `end: present`; any block with a closed end date should be phrased in past tense, even if it sits under a still-active employer.
 
 ## Target Profile Conventions
 

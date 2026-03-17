@@ -4,15 +4,16 @@
 
 Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | github.com/grgrwlkr | [LinkedIn URL]
 
-> Replace bracketed placeholders before sending. VK responsibilities and achievements still need to be filled in before using this draft externally.
+> Replace bracketed placeholders before sending. The SocCom assignment still needs responsibilities and achievements, and the Donations assignment still needs quantified DAU/MAU impact before using this draft externally.
 
 ## Summary
 
-Engineering Team Lead with 15+ years in software engineering, including cross-functional leadership at Tinkoff across internal platforms and product delivery. Built MVPs on schedule, helped recover a struggling multi-service product, and mentored engineers into stronger roles while staying hands-on across backend, frontend, architecture, and delivery. Strong in team growth, stakeholder alignment, and turning ambiguous business needs into shipped software.
+Engineering Team Lead with 15+ years in software engineering, including cross-functional leadership at Tinkoff (T-Bank) across internal platforms and product delivery. Built MVPs on schedule, helped recover a struggling multi-service product, and mentored engineers into stronger roles while staying hands-on across backend, frontend, architecture, and delivery. Strong in team growth, stakeholder alignment, and turning ambiguous business needs into shipped software.
 
 ## Selected Impact
 
-- Led 6-7 person cross-functional teams across mentoring and performance review platforms at Tinkoff.
+- At VK, lead an 8-person Donations team and delivered a rebrand plus expansion from Communities into VK profiles within one quarter, increasing audience reach and supporting DAU/MAU growth.
+- Led 6-7 person cross-functional teams across mentoring and performance review platforms at Tinkoff (T-Bank).
 - Delivered a mentoring platform MVP on schedule and earned strong feedback from business stakeholders and end users.
 - Inherited a struggling 3-service performance review platform and aligned a one-year turnaround plan with business stakeholders.
 - Mentored backend engineers into stronger roles, including transitions into full-time staff positions.
@@ -22,26 +23,27 @@ Engineering Team Lead with 15+ years in software engineering, including cross-fu
 
 ### VK
 
-Apr 2025 - Present
-
-**Platform Team, SocCom Business Unit (Team Lead)**
-
-Apr 2025 - Dec 2025
-
-- Working on seller integrations into VK, including independent sellers and Ozon with 2M+ products.
-
-**Product Team, Donations (Team Lead)**
+**Team Lead, Donations Product Team, Communities Business Unit**
 
 Jan 2026 - Present
 
-- Working on the Donations product inside VK Communities.
+- Manage 8 direct reports across backend, frontend, iOS, Android, and QA: 3 backend engineers, 2 frontend engineers, 1 iOS engineer, 1 Android engineer, and 1 QA engineer.
+- Delivered a Donations rebrand and launched Donations in VK profiles within one quarter, where the donation flow had previously existed only in Communities.
+- Connected backend delivery with a dedicated migration team to accelerate the Donations service move from monolith to microservices.
+- Expanded Donations beyond Communities into VK profiles, increasing audience reach and supporting product DAU/MAU growth.
+
+**Team Lead, SocCom Platform Team**
+
+Apr 2025 - Dec 2025
+
+- Worked on seller integrations into VK, including independent sellers and Ozon with 2M+ products.
 
 **Shared VK stack**
 
 - PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices.
-- Add role scope, responsibilities, and measurable outcomes before sending this resume externally.
+- Add responsibilities and outcomes for the SocCom assignment, plus quantified DAU/MAU impact for the Donations assignment, before sending this resume externally.
 
-### Tinkoff Bank
+### Tinkoff Bank (T-Bank)
 
 **Team Lead, Mentoring Project**  
 Dec 2022 - Mar 2025
