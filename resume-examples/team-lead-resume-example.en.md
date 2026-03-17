@@ -22,13 +22,23 @@ Engineering Team Lead with 15+ years in software engineering, including cross-fu
 
 ### VK
 
-**Team Lead**  
 Apr 2025 - Present
 
-- Joined VK in April 2025 as a Team Lead.
-- Working on SocCom, a seller integration direction inside VK that includes independent sellers and Ozon with 2M+ products.
-- Working on Communities / Donations in VK.
-- Current stack includes PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices.
+**Platform Team, SocCom Business Unit (Team Lead)**
+
+Apr 2025 - Dec 2025
+
+- Working on seller integrations into VK, including independent sellers and Ozon with 2M+ products.
+
+**Product Team, Donations (Team Lead)**
+
+Jan 2026 - Present
+
+- Working on the Donations product inside VK Communities.
+
+**Shared VK stack**
+
+- PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices.
 - Add role scope, responsibilities, and measurable outcomes before sending this resume externally.
 
 ### Tinkoff Bank

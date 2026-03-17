@@ -11,4 +11,5 @@
 - The workspace root already contains older resume PDFs that can be used as reference material.
 - This workspace should maintain both Russian and English resume versions.
 - `cv.master.yaml` is the canonical source of truth for resume facts; derived resume drafts should stay aligned with it.
+- Resume structures should list dated items from the oldest to the newest, including work history, projects, and other chronological sections.
 - The `ai/` folder is reserved for answers from other AIs; assistant-authored outputs should live in root-level folders such as `resume-examples/` and `reviews/`.

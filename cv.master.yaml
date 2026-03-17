@@ -131,11 +131,26 @@ experience:
     start: 2025-04
     end: present
     location: Moscow, Russia
-    products:
-      - name: SocCom
-        description: Seller integrations into VK, including independent sellers and Ozon with 2M+ products.
-      - name: Communities
-        description: Donations in VK communities.
+    teamAssignments:
+      - id: vk-soccom-platform
+        teamName: Platform team
+        businessUnit: SocCom
+        role: Team Lead
+        start: 2025-04
+        end: 2025-12
+        focus: Seller integrations into VK, including independent sellers and Ozon with 2M+ products.
+        notes:
+          - Responsibilities, scope, and outcomes still need to be added.
+      - id: vk-donations-product
+        teamName: Product team
+        product: Donations
+        platform: VK Communities
+        role: Team Lead
+        start: 2026-01
+        end: present
+        focus: Donations in VK communities.
+        notes:
+          - Responsibilities, scope, and outcomes still need to be added.
     stack:
       - PHP
       - Go
@@ -381,33 +396,36 @@ projects:
       - full_stack
 
   - id: vk-soccom
-    name: SocCom
+    name: Platform team, SocCom business unit
     employer: VK
     experienceIds:
       - vk-team-lead
     role: Team Lead
     start: 2025-04
-    end: present
+    end: 2025-12
     whyItMatters:
-      - Current seller integration initiative inside VK.
+      - Platform team assignment inside the SocCom business unit.
       - Includes independent sellers and Ozon integration with 2M+ products.
     tags:
       - current_role
+      - platform_team
+      - soccom
       - seller_integrations
       - ecommerce
 
   - id: vk-communities-donations
-    name: Communities / Donations
+    name: Product team, Donations
     employer: VK
     experienceIds:
       - vk-team-lead
     role: Team Lead
-    start: 2025-04
+    start: 2026-01
     end: present
     whyItMatters:
-      - Current donations product area inside VK communities.
+      - Product team assignment focused on Donations inside VK Communities.
     tags:
       - current_role
+      - product_team
       - communities
       - donations
 
@@ -571,7 +589,7 @@ verification:
   reviewBeforePublishing:
     - id: vk-role-details
       item: VK responsibilities and achievements
-      detail: User confirmed employment at VK started in 2025-04 as a Team Lead on SocCom and Communities / Donations, with a PHP, Go, React, in-house storage, Postgres, monolith, and microservices stack. Responsibilities, scope, and outcomes still need to be added before generating final public CVs.
+      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Responsibilities, scope, and outcomes still need to be added before generating final public CVs.'
     - id: legacy-contact-handles
       item: Mapping of legacy handles to actual public profiles
       detail: The icon row in the legacy resume includes "@xawkay" and "xawkay", but the services are not fully recoverable from PDF extraction.
