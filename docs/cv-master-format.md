@@ -11,6 +11,7 @@
 - Do not invent missing details. Put uncertain or legacy-only data in `verification`.
 - Keep each experience bullet atomic. One bullet should describe one outcome, responsibility, or proof point.
 - Reuse existing IDs. If you rename an ID, update all references in `projects` and `targetProfiles`.
+- When experience changes materially affect current scope, leadership level, or impact, update the relevant `positioning` blocks in `cv.master.yaml` and then refresh `Summary` / `Профиль` and `Selected Impact` / `Ключевые результаты` in derived resume drafts.
 
 ## Section Guide
 

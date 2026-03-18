@@ -52,7 +52,9 @@ positioning:
     - delivery_under_ambiguity
   summaryBlocks:
     - id: handsOnLead
-      text: Hands-on engineering leader who combines delivery ownership, mentoring, and technical depth across backend, frontend, data, and platform concerns.
+      text: Hands-on engineering leader who combines direct people management, delivery ownership, and technical depth across backend, frontend, mobile, data, and platform concerns.
+    - id: currentVkScope
+      text: Currently leads the Donations product team in VK's Communities business unit after driving SocCom platform initiatives in product scaling, critical migration, and frontend unification across iOS, Android, and web.
     - id: turnaroundBuilder
       text: Strong fit for situations that need a product or team reset, clearer direction, and execution discipline without losing technical credibility.
     - id: mentorManager
@@ -129,9 +131,19 @@ experience:
         role: Team Lead
         start: 2025-04
         end: 2025-12
-        focus: Seller integrations into VK, including independent sellers and Ozon with 2M+ products.
+        focus: Strategic platform initiatives across the SocCom direction, including seller integrations, product scaling, critical migration, and frontend unification.
+        responsibilities:
+          - Led strategic technical initiatives across the SocCom direction, coordinating multiple teams, planning risk mitigation, and driving release readiness for business-critical changes.
+          - Coordinated urgent migration work between the SocCom and EKP teams under the Hadoop shutdown deadline, including delivery of the K2 Goods component needed for feed migration to microservices.
+          - Built cross-functional operating processes for the platform team, including the team working model and engineering duty rotation.
+          - Led frontend unification across iOS, Android, and web, prioritizing work and coordinating delivery around VKUI adoption and SPA modernization.
+        achievements:
+          - Removed a key business constraint by scaling community goods from 20K to millions through a stable release backed by load testing and risk management.
+          - Enabled integration for 40 Ozon sellers with catalogs of 20K+ products; imported about 3M products and created about 1M AdBlogger offers for 1P and 3P goods, while opening a seller flow that no longer required creating a community before uploading goods.
+          - Hit the recommendation-system migration deadline and helped prevent a significant traffic loss during incident response.
+          - Increased VKUI coverage from 35% to 64% on iOS and reached 84% on Android.
         notes:
-          - Add responsibilities, scope, and outcomes for the SocCom assignment.
+          - Add an exact traffic-loss metric only if it is needed before publishing an external resume version.
     stack:
       - PHP
       - Go
@@ -143,7 +155,8 @@ experience:
     notes:
       - User confirmed the move to VK in April 2025 as a Team Lead.
       - Donations assignment now has confirmed team scope and delivery outcomes.
-      - SocCom responsibilities, scope, and achievements still need to be added.
+      - SocCom assignment now has confirmed scaling, migration, process, and frontend-unification outcomes.
+      - Quantified Donations DAU/MAU impact is still missing.
     tags:
       - current_role
       - team_lead
@@ -157,6 +170,10 @@ experience:
       - donations
       - rebranding
       - audience_growth
+      - platform_scaling
+      - critical_migration
+      - process_building
+      - frontend_unification
       - pending_details
 
   - id: tinkoff-mentoring-team-lead
@@ -397,13 +414,21 @@ projects:
     start: 2025-04
     end: 2025-12
     whyItMatters:
-      - Platform team assignment inside the SocCom business unit.
-      - Includes independent sellers and Ozon integration with 2M+ products.
+      - Shows strategic technical leadership across a multi-team platform direction.
+      - Removed a key business limit by scaling community goods from 20K to millions.
+      - Includes 40 Ozon seller integrations, about 3M imported products, and about 1M created AdBlogger offers.
+      - Includes a critical recommendation-system migration under the Hadoop shutdown deadline.
+      - Shows process building through the platform team working model and engineering duty rotation.
+      - Demonstrates client modernization through VKUI and SPA unification across iOS, Android, and web.
     tags:
       - platform_team
       - soccom
       - seller_integrations
       - ecommerce
+      - platform_scaling
+      - critical_migration
+      - process_building
+      - frontend_unification
 
   - id: mentoring-platform
     name: Mentoring project
@@ -567,8 +592,14 @@ targetProfiles:
     targetTitle: Team Lead
     goal: Maximize evidence of leadership, mentoring, turnaround ownership, and hands-on technical credibility.
     summaryStrategy:
-      openingNarrative: Hands-on engineering leader with a strong software background who builds teams, mentors engineers, rescues struggling initiatives, and ships internal platforms with clear business value.
+      openingNarrative: Hands-on engineering leader who currently leads the Donations product team at VK and previously drove SocCom platform scaling, critical migration, and client unification, combining direct people management with earlier turnaround and mentoring wins at Tinkoff (T-Bank).
       proofPoints:
+        - Leads an 8-person Donations team across backend, frontend, iOS, Android, and QA.
+        - Delivered a one-quarter rebrand and expanded Donations from Communities into VK profiles.
+        - Helped accelerate the Donations service move from monolith to microservices.
+        - Led SocCom platform work that lifted community goods limits from 20K to millions and enabled 40 Ozon seller integrations with about 3M imported products.
+        - Coordinated a critical recommendation-system migration under the Hadoop shutdown deadline and helped avoid major traffic loss.
+        - Built platform operating processes and led frontend unification, growing VKUI coverage from 35% to 64% on iOS and to 84% on Android.
         - Built an MVP on schedule and got strong business and user feedback.
         - Turned around a struggling project with a business-aligned one-year plan.
         - Built and mentored teams, including mentees who later moved into full-time roles.
@@ -580,12 +611,18 @@ targetProfiles:
         - technically_grounded
     emphasisTags:
       - team_lead
+      - direct_people_management
       - mentoring
       - turnaround
       - delivery
       - cross_functional
       - stakeholder_alignment
       - hands_on
+      - audience_growth
+      - platform_scaling
+      - critical_migration
+      - process_building
+      - frontend_unification
     preferredExperienceIds:
       - vk-team-lead
       - tinkoff-mentoring-team-lead
@@ -618,7 +655,7 @@ verification:
   reviewBeforePublishing:
     - id: vk-role-details
       item: VK responsibilities and achievements
-      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are now confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. SocCom responsibilities and quantified product metrics still need to be added before generating final public CVs.'
+      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. SocCom details are confirmed: scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Optional follow-up precision before final publication: quantified Donations DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'
     - id: legacy-contact-handles
       item: Mapping of legacy handles to actual public profiles
       detail: The icon row in the legacy resume includes "@xawkay" and "xawkay", but the services are not fully recoverable from PDF extraction.

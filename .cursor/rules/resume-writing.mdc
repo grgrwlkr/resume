@@ -15,6 +15,7 @@ alwaysApply: true
 - In Russian resume drafts, keep headings, placeholders, and narrative text in Russian; allow English for brands, technology names, search-oriented role aliases in parentheses, and established project or product names when that wording is clearer than a forced translation.
 - Keep recent leadership roles detailed and compress older supporting roles when space is tight.
 - Keep facts separate from positioning: factual updates belong in `cv.master.yaml`, while summary and emphasis belong in draft resumes.
+- When material experience updates change current scope, leadership level, or impact, review and refresh `Summary` / `Профиль` and `Selected Impact` / `Ключевые результаты` in both resume drafts.
 - Do not invent titles, dates, metrics, team sizes, stack details, or achievements. Use placeholders until the user confirms them.
 - Keep English resume content in English and Russian resume content in Russian. User-facing chat stays in Russian.
 

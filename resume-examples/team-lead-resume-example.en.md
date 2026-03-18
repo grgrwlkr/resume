@@ -4,20 +4,20 @@
 
 Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | github.com/grgrwlkr | [LinkedIn URL]
 
-> Replace bracketed placeholders before sending. The SocCom assignment still needs responsibilities and achievements, and the Donations assignment still needs quantified DAU/MAU impact before using this draft externally.
+> Replace bracketed placeholders before sending. The Donations assignment still needs quantified DAU/MAU impact, and you may optionally add the exact traffic-loss metric avoided during the recommendations migration incident.
 
 ## Summary
 
-Engineering Team Lead with 15+ years in software engineering, including cross-functional leadership at Tinkoff (T-Bank) across internal platforms and product delivery. Built MVPs on schedule, helped recover a struggling multi-service product, and mentored engineers into stronger roles while staying hands-on across backend, frontend, architecture, and delivery. Strong in team growth, stakeholder alignment, and turning ambiguous business needs into shipped software.
+Engineering Team Lead with 15+ years in software engineering. Currently leads the Donations product team in VK's Communities business unit: 8 direct reports, a one-quarter rebrand, expansion from Communities into VK profiles, and backend delivery tied into the move from monolith to microservices. Before that, led strategic platform work in VK's SocCom direction: scaling goods from 20K to millions, coordinating a critical recommendations migration under the Hadoop shutdown deadline, and driving frontend unification across iOS, Android, and web. Previously at Tinkoff (T-Bank), shipped an MVP, turned around a struggling platform, and grew engineers while staying hands-on across backend, frontend, architecture, and delivery. Strong in team growth, stakeholder alignment, and turning ambiguous business needs into shipped software.
 
 ## Selected Impact
 
-- At VK, lead an 8-person Donations team and delivered a rebrand plus expansion from Communities into VK profiles within one quarter, increasing audience reach and supporting DAU/MAU growth.
+- At VK, lead the 8-person Donations team in the Communities business unit; within one quarter, delivered a rebrand, expanded Donations into VK profiles, and accelerated the service move from monolith to microservices, increasing audience reach and supporting DAU/MAU growth.
+- In VK's SocCom platform team, removed a key business constraint by raising community goods limits from `20K` to millions and enabled `40` Ozon seller integrations with about `3M` imported products and about `1M` AdBlogger offers.
+- Coordinated a critical recommendations migration under the Hadoop shutdown deadline and led frontend unification, increasing VKUI coverage from `35%` to `64%` on iOS and reaching `84%` on Android.
 - Led 6-7 person cross-functional teams across mentoring and performance review platforms at Tinkoff (T-Bank).
 - Delivered a mentoring platform MVP on schedule and earned strong feedback from business stakeholders and end users.
 - Inherited a struggling 3-service performance review platform and aligned a one-year turnaround plan with business stakeholders.
-- Mentored backend engineers into stronger roles, including transitions into full-time staff positions.
-- Built and launched a greenfield internal service end-to-end across backend and frontend.
 
 ## Work Experience
 
@@ -36,12 +36,16 @@ Jan 2026 - Present
 
 Apr 2025 - Dec 2025
 
-- Worked on seller integrations into VK, including independent sellers and Ozon with 2M+ products.
+- Led the strategic goods-scaling initiative, coordinating multiple teams, load testing, and release readiness to lift the communities goods limit from `20K` to millions.
+- Enabled integration for `40` Ozon sellers with `20K+` catalogs; imported about `3M` products and created about `1M` AdBlogger offers for 1P and 3P scenarios, while opening a flow where sellers no longer needed to create a community before uploading goods.
+- Coordinated the urgent recommendations-system migration between SocCom and EKP under the Hadoop shutdown deadline; the teams hit the deadline, responded to an incident, and avoided significant traffic loss. In parallel, the platform team delivered the K2 Goods component needed for feed migration to microservices.
+- Built the platform team's working model and engineering duty rotation from scratch.
+- Led the frontend unification and client tech-debt reduction program across iOS, Android, and web, increasing VKUI coverage from `35%` to `64%` on iOS and reaching `84%` on Android.
 
 **Shared VK stack**
 
 - PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices.
-- Add responsibilities and outcomes for the SocCom assignment, plus quantified DAU/MAU impact for the Donations assignment, before sending this resume externally.
+- Add quantified DAU/MAU impact for the Donations assignment before sending this resume externally; optionally add the exact traffic-loss metric avoided during the recommendations migration incident.
 
 ### Tinkoff Bank (T-Bank)
 
