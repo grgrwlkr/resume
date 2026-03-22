@@ -27,6 +27,8 @@ basics:
       publishByDefault: false
       verificationStatus: needs_review
   links:
+    linkedin:
+      url: https://www.linkedin.com/in/gregory-agapov-24b13221
     github:
       username: grgrwlkr
       url: https://github.com/grgrwlkr
@@ -132,13 +134,25 @@ experience:
         start: 2025-04
         end: 2025-12
         focus: Strategic platform initiatives across the SocCom direction, including seller integrations, product scaling, critical migration, and frontend unification.
+        team:
+          directReports: 8
+          composition:
+            backendDevelopers: 3
+            frontendDevelopers: 1
+            iosDevelopers: 2
+            androidDevelopers: 1
+            qaEngineers: 1
+          initiativeScope:
+            coordinatedTeams: 3
+            additionalBackendDevelopersFromAnotherTeam: 3
         responsibilities:
+          - Led a platform team of eight direct reports across backend, frontend, iOS, Android, and QA, and during the goods-scaling initiative also coordinated delivery from three backend engineers in another team.
           - Led strategic technical initiatives across the SocCom direction, coordinating multiple teams, planning risk mitigation, and driving release readiness for business-critical changes.
           - Coordinated urgent migration work between the SocCom and EKP teams under the Hadoop shutdown deadline, including delivery of the K2 Goods component needed for feed migration to microservices.
           - Built cross-functional operating processes for the platform team, including the team working model and engineering duty rotation.
           - Led frontend unification across iOS, Android, and web, prioritizing work and coordinating delivery around VKUI adoption and SPA modernization.
         achievements:
-          - Removed a key business constraint by scaling community goods from 20K to millions through a stable release backed by load testing and risk management.
+          - Removed a key business constraint by scaling community goods from 20K to millions through a stable release backed by load testing, synchronization across three teams, and delivery leadership for three additional backend engineers from another team.
           - Enabled integration for 40 Ozon sellers with catalogs of 20K+ products; imported about 3M products and created about 1M AdBlogger offers for 1P and 3P goods, while opening a seller flow that no longer required creating a community before uploading goods.
           - Hit the recommendation-system migration deadline and helped prevent a significant traffic loss during incident response.
           - Increased VKUI coverage from 35% to 64% on iOS and reached 84% on Android.
@@ -415,6 +429,7 @@ projects:
     end: 2025-12
     whyItMatters:
       - Shows strategic technical leadership across a multi-team platform direction.
+      - Includes cross-team coordination across three teams and delivery leadership for three additional backend engineers during the goods-scaling initiative.
       - Removed a key business limit by scaling community goods from 20K to millions.
       - Includes 40 Ozon seller integrations, about 3M imported products, and about 1M created AdBlogger offers.
       - Includes a critical recommendation-system migration under the Hadoop shutdown deadline.
@@ -531,18 +546,20 @@ skills:
     - FP
     - RESTful API
   backend:
+    - PHP
+    - Go
     - .NET
     - ASP.NET
     - C#
     - Java
     - Java EE
-    - Rust
     - SQL
     - SOAP
     - WSDL
     - ESQL
     - PL/SQL
   frontend:
+    - React
     - Angular
     - JavaScript
     - TypeScript
@@ -585,7 +602,7 @@ certifications:
     issuerUrl: https://www.ge.com
     verificationStatus: needs_review
     notes:
-      - Exact certification wording is reconstructed from split PDF text and should be confirmed.
+      - Legacy resume and public LinkedIn profile both use this wording, but the exact official certificate title should still be confirmed if the certification section is kept in a final public version.
 
 targetProfiles:
   teamLead:
@@ -597,7 +614,7 @@ targetProfiles:
         - Leads an 8-person Donations team across backend, frontend, iOS, Android, and QA.
         - Delivered a one-quarter rebrand and expanded Donations from Communities into VK profiles.
         - Helped accelerate the Donations service move from monolith to microservices.
-        - Led SocCom platform work that lifted community goods limits from 20K to millions and enabled 40 Ozon seller integrations with about 3M imported products.
+        - Led SocCom platform work across three teams, including delivery leadership for three additional backend engineers, lifting community goods limits from 20K to millions and enabling 40 Ozon seller integrations with about 3M imported products.
         - Coordinated a critical recommendation-system migration under the Hadoop shutdown deadline and helped avoid major traffic loss.
         - Built platform operating processes and led frontend unification, growing VKUI coverage from 35% to 64% on iOS and to 84% on Android.
         - Built an MVP on schedule and got strong business and user feedback.
@@ -655,7 +672,7 @@ verification:
   reviewBeforePublishing:
     - id: vk-role-details
       item: VK responsibilities and achievements
-      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. SocCom details are confirmed: scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Optional follow-up precision before final publication: quantified Donations DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'
+      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. SocCom details are confirmed: a direct platform team of 8, cross-team synchronization across 3 teams during the goods-scaling initiative, delivery leadership for 3 additional backend engineers from another team, scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Optional follow-up precision before final publication: quantified Donations DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'
     - id: legacy-contact-handles
       item: Mapping of legacy handles to actual public profiles
       detail: The icon row in the legacy resume includes "@xawkay" and "xawkay", but the services are not fully recoverable from PDF extraction.
@@ -664,7 +681,7 @@ verification:
       detail: Confirm whether any future CV should include the exact address or only city and country.
     - id: certification-title
       item: Exact General Electric certification title
-      detail: The certification text is split in the PDF and should be checked against the official wording.
+      detail: Legacy resume and public LinkedIn profile both use "General Electric Smallworld GIS Certified Developer", but the exact official certificate wording should still be checked if the certification stays in a final public version.
     - id: legacy-headline
       item: Legacy headline wording
       detail: '"Team Leader & Proud Geek" is preserved as historical input but not treated as the default canonical headline.'

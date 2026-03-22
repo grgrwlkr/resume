@@ -2,9 +2,7 @@
 
 **Engineering Team Lead**
 
-Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | github.com/grgrwlkr | [LinkedIn URL]
-
-> Replace bracketed placeholders before sending. The Donations assignment still needs quantified DAU/MAU impact, and you may optionally add the exact traffic-loss metric avoided during the recommendations migration incident.
+Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | [GitHub](https://github.com/grgrwlkr) | [LinkedIn](https://www.linkedin.com/in/gregory-agapov-24b13221)
 
 ## Summary
 
@@ -12,12 +10,11 @@ Engineering Team Lead with 15+ years in software engineering. Currently leads th
 
 ## Selected Impact
 
-- At VK, lead the 8-person Donations team in the Communities business unit; within one quarter, delivered a rebrand, expanded Donations into VK profiles, and accelerated the service move from monolith to microservices, increasing audience reach and supporting DAU/MAU growth.
-- In VK's SocCom platform team, removed a key business constraint by raising community goods limits from `20K` to millions and enabled `40` Ozon seller integrations with about `3M` imported products and about `1M` AdBlogger offers.
-- Coordinated a critical recommendations migration under the Hadoop shutdown deadline and led frontend unification, increasing VKUI coverage from `35%` to `64%` on iOS and reaching `84%` on Android.
-- Led 6-7 person cross-functional teams across mentoring and performance review platforms at Tinkoff (T-Bank).
-- Delivered a mentoring platform MVP on schedule and earned strong feedback from business stakeholders and end users.
-- Inherited a struggling 3-service performance review platform and aligned a one-year turnaround plan with business stakeholders.
+- At VK, lead the 8-person Donations team in the Communities business unit; within one quarter, delivered a rebrand, expanded Donations into VK profiles, and accelerated the service move from monolith to microservices, broadening audience reach and supporting growth in key product metrics.
+- In VK's SocCom platform team, removed a key business constraint by lifting community goods limits from `20K` to millions through coordination across `3` teams and delivery leadership for `3` additional backend engineers from another team, then enabled `40` Ozon seller integrations with about `3M` imported products and about `1M` AdBlogger offers.
+- Coordinated a critical recommendations migration under the Hadoop shutdown deadline and led client unification across iOS, Android, and web, increasing VKUI coverage from `35%` to `64%` on iOS and reaching `84%` on Android.
+- At Tinkoff (T-Bank), led a 6-person cross-functional team and delivered the mentoring platform MVP on schedule; the first company pilot was staffed entirely by mentees who later moved into full-time roles.
+- Inherited a struggling 3-service performance review platform, built a 7-person cross-functional team, and aligned a one-year turnaround plan with business stakeholders.
 
 ## Work Experience
 
@@ -30,31 +27,32 @@ Jan 2026 - Present
 - Manage 8 direct reports across backend, frontend, iOS, Android, and QA: 3 backend engineers, 2 frontend engineers, 1 iOS engineer, 1 Android engineer, and 1 QA engineer.
 - Delivered a Donations rebrand and launched Donations in VK profiles within one quarter, where the donation flow had previously existed only in Communities.
 - Connected backend delivery with a dedicated migration team to accelerate the Donations service move from monolith to microservices.
-- Expanded Donations beyond Communities into VK profiles, increasing audience reach and supporting product DAU/MAU growth.
+- Expanded Donations beyond Communities into VK profiles, increasing audience reach and supporting growth in key product metrics.
 
 **Team Lead, SocCom Platform Team**
 
 Apr 2025 - Dec 2025
 
-- Led the strategic goods-scaling initiative, coordinating multiple teams, load testing, and release readiness to lift the communities goods limit from `20K` to millions.
+- Led a platform team of 8 engineers: 3 backend engineers, 1 frontend engineer, 2 iOS engineers, 1 Android engineer, and 1 QA engineer.
+- Led the strategic goods-scaling initiative across `3` teams, including the platform team, and directly coordinated delivery from `3` additional backend engineers in another team; organized load testing and release readiness for a stable launch that lifted the communities goods limit from `20K` to millions.
 - Enabled integration for `40` Ozon sellers with `20K+` catalogs; imported about `3M` products and created about `1M` AdBlogger offers for 1P and 3P scenarios, while opening a flow where sellers no longer needed to create a community before uploading goods.
-- Coordinated the urgent recommendations-system migration between SocCom and EKP under the Hadoop shutdown deadline; the teams hit the deadline, responded to an incident, and avoided significant traffic loss. In parallel, the platform team delivered the K2 Goods component needed for feed migration to microservices.
+- Coordinated the urgent recommendations-system migration between SocCom and EKP under the Hadoop shutdown deadline; the teams hit the deadline, responded to an incident, and avoided significant traffic loss.
+- Organized delivery of the K2 Goods component within the platform team, providing a required building block for feed migration to microservices.
 - Built the platform team's working model and engineering duty rotation from scratch.
 - Led the frontend unification and client tech-debt reduction program across iOS, Android, and web, increasing VKUI coverage from `35%` to `64%` on iOS and reaching `84%` on Android.
 
 **Shared VK stack**
 
 - PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices.
-- Add quantified DAU/MAU impact for the Donations assignment before sending this resume externally; optionally add the exact traffic-loss metric avoided during the recommendations migration incident.
 
 ### Tinkoff Bank (T-Bank)
 
 **Team Lead, Mentoring Project**  
 Dec 2022 - Mar 2025
 
-- Led a 6-person cross-functional team of backend, frontend, QA, design, and analytics specialists to deliver the mentoring platform MVP on schedule.
+- Led a 6-person cross-functional team of backend, frontend, QA, design, and analytics specialists; delivered the mentoring platform MVP on schedule.
 - Built the company's first pilot project staffed entirely by mentees, helping participants transition into full-time roles.
-- Mentored backend engineers while continuing to support adjacent teams with hands-on development work.
+- Mentored backend engineers while continuing hands-on support for adjacent teams.
 - Worked across a stack including .NET, Angular, Postgres, DDD, CQRS, microservices, Docker, Kubernetes, and GitLab CI/CD.
 
 **Team Lead, Performance Review Project**  
@@ -108,19 +106,19 @@ Nov 2010 - May 2012
 
 ## Skills
 
-**Leadership:** Team leadership, mentoring, team building, stakeholder management, roadmap planning, product collaboration
+**Leadership:** Team leadership, mentoring, team building, stakeholder management, roadmap planning, product collaboration, engineering process design
 
-**Architecture:** Microservices, DDD, CQRS, OOP, FP, RESTful APIs
+**Architecture:** Microservices, monolith decomposition, DDD, CQRS, RESTful APIs
 
-**Backend:** .NET, ASP.NET, C#, Java, Java EE, SQL, SOAP, WSDL, ESQL, PL/SQL
+**Backend:** PHP, Go, .NET, ASP.NET, C#, Java, Java EE, SQL
 
-**Frontend:** Angular, JavaScript, TypeScript, JSP, jQuery, Mustache, ExtJS
+**Frontend:** React, Angular, JavaScript, TypeScript
 
-**Data and Messaging:** Postgres, IBM Db2, Kafka, RabbitMQ, Spatial DB
+**Data and Messaging:** Postgres, Kafka, RabbitMQ, IBM Db2, Spatial DB
 
-**Platform and DevOps:** Docker, Kubernetes, GitLab CI/CD, TeamCity, custom CI/CD tooling, IBM WebSphere, IBM Message Broker, IBM Lotus Forms
+**Platform and DevOps:** Docker, Kubernetes, GitLab CI/CD, TeamCity, custom CI/CD tooling
 
-**Other:** General Electric Smallworld GIS, Magic, XFDL, Rust
+**Legacy and Domain Technologies:** General Electric Smallworld GIS, Magic, IBM WebSphere, IBM Message Broker, IBM Lotus Forms, XFDL, SOAP, WSDL, ESQL, PL/SQL, JSP, jQuery, Mustache, ExtJS, Rust
 
 ## Education
 
