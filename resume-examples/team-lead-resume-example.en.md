@@ -6,15 +6,14 @@ Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | [
 
 ## Summary
 
-Engineering Team Lead with 15+ years in software engineering. Currently leads the Donations product team in VK's Communities business unit: 8 direct reports, a one-quarter rebrand, expansion from Communities into VK profiles, and backend delivery tied into the move from monolith to microservices. Before that, led strategic platform work in VK's SocCom direction: scaling goods from 20K to millions, coordinating a critical recommendations migration under the Hadoop shutdown deadline, and driving frontend unification across iOS, Android, and web. Previously at Tinkoff (T-Bank), shipped an MVP, turned around a struggling platform, and grew engineers while staying hands-on across backend, frontend, architecture, and delivery. Strong in team growth, stakeholder alignment, and turning ambiguous business needs into shipped software.
+Hands-on Engineering Team Lead who currently leads VK's Donations product team in the Communities business unit: `8` direct reports, expansion from Communities into VK profiles, and faster migration from monolith to microservices. Previously led platform initiatives for VK's social commerce products, scaling goods in Communities from `20K` to millions, integrating `40` Ozon sellers, leading a critical recommendation system migration under the Hadoop shutdown deadline, and driving client and platform modernization across iOS, Android, and web. Earlier at Tinkoff (T-Bank), shipped an MVP, turned around a struggling internal platform, and helped mentoring-program participants move into full-time roles while staying close to delivery, architecture, and complex cross-functional execution.
 
 ## Selected Impact
 
-- At VK, lead the 8-person Donations team in the Communities business unit; within one quarter, delivered a rebrand, expanded Donations into VK profiles, and accelerated the service move from monolith to microservices, broadening audience reach and supporting growth in key product metrics.
-- In VK's SocCom platform team, removed a key business constraint by lifting community goods limits from `20K` to millions through coordination across `3` teams and delivery leadership for `3` additional backend engineers from another team, then enabled `40` Ozon seller integrations with about `3M` imported products and about `1M` AdBlogger offers.
-- Coordinated a critical recommendations migration under the Hadoop shutdown deadline and led client unification across iOS, Android, and web, increasing VKUI coverage from `35%` to `64%` on iOS and reaching `84%` on Android.
-- At Tinkoff (T-Bank), led a 6-person cross-functional team and delivered the mentoring platform MVP on schedule; the first company pilot was staffed entirely by mentees who later moved into full-time roles.
-- Inherited a struggling 3-service performance review platform, built a 7-person cross-functional team, and aligned a one-year turnaround plan with business stakeholders.
+- At VK, lead the `8`-person Donations product team in the Communities business unit; within one quarter, delivered a rebrand, launched Donations in VK profiles, and accelerated the service migration from monolith to microservices, broadening audience reach and supporting growth in key product metrics.
+- At VK, removed a core business constraint in social commerce by coordinating `3` teams to scale goods in Communities from `20K` to millions, and enabled integration with `40` Ozon sellers, importing about `3M` products and creating about `1M` AdBlogger offers.
+- Led the recommendation system migration under the Hadoop shutdown deadline, helped teams respond to an incident without losing a significant share of traffic, and in parallel drove client and platform modernization: coverage of the `VKUI` design system grew from `35%` to `64%` on iOS and reached `84%` on Android.
+- At Tinkoff (T-Bank), delivered the mentoring platform MVP on schedule, staffed the first pilot entirely with mentoring-program participants who later moved into full-time roles, then took over the struggling Performance Review platform, built a `7`-person cross-functional team, and aligned a one-year turnaround plan with the business.
 
 ## Work Experience
 
@@ -24,22 +23,20 @@ Engineering Team Lead with 15+ years in software engineering. Currently leads th
 
 Jan 2026 - Present
 
-- Manage 8 direct reports across backend, frontend, iOS, Android, and QA: 3 backend engineers, 2 frontend engineers, 1 iOS engineer, 1 Android engineer, and 1 QA engineer.
-- Delivered a Donations rebrand and launched Donations in VK profiles within one quarter, where the donation flow had previously existed only in Communities.
-- Connected backend delivery with a dedicated migration team to accelerate the Donations service move from monolith to microservices.
-- Expanded Donations beyond Communities into VK profiles, increasing audience reach and supporting growth in key product metrics.
+- Lead the Donations product team with `8` direct reports: `3` backend engineers, `2` frontend engineers, `1` iOS engineer, `1` Android engineer, and `1` QA engineer.
+- Led the Donations rebrand and launched Donations in VK profiles within one quarter, where the flow had previously been available only in Communities.
+- Connected backend delivery with a dedicated migration team to accelerate the Donations service migration from monolith to microservices.
+- Expanded Donations into VK profiles, opening a new user scenario, broadening audience reach, and supporting growth in key product metrics.
 
-**Team Lead, SocCom Platform Team**
+**Team Lead, Social Commerce Platform Team**
 
 Apr 2025 - Dec 2025
 
-- Led a platform team of 8 engineers: 3 backend engineers, 1 frontend engineer, 2 iOS engineers, 1 Android engineer, and 1 QA engineer.
-- Led the strategic goods-scaling initiative across `3` teams, including the platform team, and directly coordinated delivery from `3` additional backend engineers in another team; organized load testing and release readiness for a stable launch that lifted the communities goods limit from `20K` to millions.
-- Enabled integration for `40` Ozon sellers with `20K+` catalogs; imported about `3M` products and created about `1M` AdBlogger offers for 1P and 3P scenarios, while opening a flow where sellers no longer needed to create a community before uploading goods.
-- Coordinated the urgent recommendations-system migration between SocCom and EKP under the Hadoop shutdown deadline; the teams hit the deadline, responded to an incident, and avoided significant traffic loss.
-- Organized delivery of the K2 Goods component within the platform team, providing a required building block for feed migration to microservices.
-- Built the platform team's working model and engineering duty rotation from scratch.
-- Led the frontend unification and client tech-debt reduction program across iOS, Android, and web, increasing VKUI coverage from `35%` to `64%` on iOS and reaching `84%` on Android.
+- Led a platform team of `8` direct reports and coordinated the goods initiative across teams, including delivery from `3` backend engineers in a neighboring team.
+- Ran load testing and shipped the scaling rollout, lifting the limit on goods listed in VK Communities from `20K` to millions.
+- Led delivery of the `40`-seller `Ozon` integration: imported about `3M` products and created about `1M` `AdBlogger` offers for first-party and third-party scenarios.
+- Led the cross-team migration and release of the recommendation system under the `Hadoop` shutdown deadline; the teams hit the deadline and handled an incident without losing a significant share of traffic.
+- Prioritized adoption of the `VKUI` design system across iOS, Android, and web, increasing coverage on iOS from `35%` to `64%` and on Android to `84%`.
 
 **Shared VK stack**
 
@@ -50,88 +47,70 @@ Apr 2025 - Dec 2025
 **Team Lead, Mentoring Project**  
 Dec 2022 - Mar 2025
 
-- Led a 6-person cross-functional team of backend, frontend, QA, design, and analytics specialists; delivered the mentoring platform MVP on schedule.
-- Built the company's first pilot project staffed entirely by mentees, helping participants transition into full-time roles.
-- Mentored backend engineers while continuing hands-on support for adjacent teams.
-- Worked across a stack including .NET, Angular, Postgres, DDD, CQRS, microservices, Docker, Kubernetes, and GitLab CI/CD.
+- Led a `6`-person cross-functional team across backend, frontend, QA, design, and analytics; delivered the mentoring platform MVP on schedule.
+- Built the company's first pilot fully staffed by mentoring-program participants and helped them move into full-time roles.
+- Mentored `2` backend engineers inside the mentoring program.
 
 **Team Lead, Performance Review Project**  
 Apr 2021 - Dec 2022
 
-- Inherited a struggling performance review platform and led its recovery through a business-aligned one-year turnaround plan.
-- Built and shaped a 7-person cross-functional team spanning backend, frontend, QA, design, and analytics.
-- Mentored a backend engineer into a full-time staff role on the project.
-- Owned delivery across a 3-service platform using .NET, Angular, Postgres, microservices, Docker, Kubernetes, and GitLab CI/CD.
+- Took over the struggling `Performance Review` platform and aligned a one-year turnaround plan with the business, bringing the project out of crisis.
+- Built and grew a `7`-person cross-functional team to stabilize delivery across a `3`-service platform.
+- Mentored a backend engineer and helped him move into a full-time role within the project.
 
 **Senior Developer, Organization Structure Project**  
 Apr 2020 - Apr 2021
 
-- Built and launched a greenfield internal service end-to-end, owning backend, frontend, and production rollout independently.
-- Worked directly with business and analytics stakeholders to challenge requirements and choose the right implementation path.
-- Focused on technically difficult problems and delivered production-ready solutions across .NET, Angular, Postgres, and microservices.
+- Independently designed, built, and launched a new internal service from scratch across `.NET`, `Angular`, `Postgres`, and microservices, owning backend, frontend, and rollout.
+- Worked directly with business and analysts, filtered weak requirements, and chose workable implementation paths.
 
 **Middle Developer, Performance Review Project**  
 Apr 2019 - Apr 2020
 
-- Contributed to internal performance review tooling and related feedback systems.
-- Helped the team meet business goals while growing through internal training and strong peer collaboration.
-- Worked across .NET, Angular, Postgres, microservices, Docker, Kubernetes, TeamCity, and custom CI/CD tooling.
+- Developed the internal `Performance Review` platform, the in-house task tracker, and related feedback systems while continuing to grow through internal training.
 
 ### Neotech
 
 **Senior Developer, GIS Projects**  
 Dec 2013 - Mar 2019
 
-- Delivered GIS customizations for major telecom customers across Russia and CIS countries, including MTS, MGTS, and TAT Telecom.
-- Reverse engineered client-side systems when source code was unavailable, enabling continued delivery in constrained enterprise environments.
-- Worked directly with customers on development process and business topics.
-- Built extensions for General Electric Smallworld GIS using Magic, Spatial DB, Java, JSP, JavaScript, jQuery, and Mustache.
+- Built and customized solutions on `General Electric Smallworld GIS` for major telecom customers across Russia and the CIS, including `MTS`, `MGTS`, and `TAT Telecom`.
+- Reverse engineered client systems without source-code access, preserving the ability to keep developing in a constrained enterprise environment.
 
 ### CINIMEX
 
 **Middle Developer**  
 Nov 2012 - Jan 2013
 
-- Worked with IBM WebSphere, IBM Message Broker, and ESQL in enterprise integration environments.
+- Worked with `IBM WebSphere`, `IBM Message Broker`, and `ESQL` in enterprise integration environments.
 
 ### AISA IT-Service
 
 **Middle Developer, Railway Automation Project**  
 Nov 2010 - May 2012
 
-- Built automation-related software for machinist workflows using digital forms and touch information booths.
-- Developed XFDL forms in IBM Lotus Forms and web services with Java EE, JSP, WSDL, and SOAP.
-- Created and optimized SQL queries for IBM Db2 and developed stored procedures with PL/SQL.
-- Improved client-side functionality using Java and ExtJS.
+- Built automation systems for `Russian Railways (RZD)`, including digital forms, web services, and integrations with `Java EE`, `SOAP/WSDL`, and `IBM Db2`.
 
 ## Skills
 
-**Leadership:** Team leadership, mentoring, team building, stakeholder management, roadmap planning, product collaboration, engineering process design
+**Leadership & Delivery:** team leadership, engineer growth, mentoring, stakeholder management, roadmap planning, cross-functional delivery
 
-**Architecture:** Microservices, monolith decomposition, DDD, CQRS, RESTful APIs
+**Architecture & Systems:** monolith decomposition, microservices, DDD, CQRS, API design, REST APIs
 
-**Backend:** PHP, Go, .NET, ASP.NET, C#, Java, Java EE, SQL
+**Backend:** .NET, C#, SQL, PHP, Go, Java
 
-**Frontend:** React, Angular, JavaScript, TypeScript
+**Frontend:** Angular, TypeScript, JavaScript, React
 
-**Data and Messaging:** Postgres, Kafka, RabbitMQ, IBM Db2, Spatial DB
+**Platform & Data:** Postgres, Docker, Kubernetes, CI/CD
 
-**Platform and DevOps:** Docker, Kubernetes, GitLab CI/CD, TeamCity, custom CI/CD tooling
-
-**Legacy and Domain Technologies:** General Electric Smallworld GIS, Magic, IBM WebSphere, IBM Message Broker, IBM Lotus Forms, XFDL, SOAP, WSDL, ESQL, PL/SQL, JSP, jQuery, Mustache, ExtJS, Rust
+**Inter-service Communication & Messaging:** Kafka, RabbitMQ
 
 ## Education
 
-**Degree in Computer Science**  
+**Degree in Computer Science**<br>
 International College of Business and Design at the Moscow Technical University of Communications and Informatics  
 Sep 2006 - Jun 2010 | Moscow, Russia
 
-## Certifications
-
-**General Electric Smallworld GIS Certified Developer**  
-General Electric | [Confirm official certification wording]
-
 ## Languages
 
-- Russian - Native
-- English - B1
+Russian - Native | English - B1

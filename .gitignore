@@ -1,6 +1,10 @@
 # macOS
 .DS_Store
 
+# Local git worktrees
+.worktrees/
+.superpowers/
+
 # Cursor / editor-local state
 .cursor/*
 !.cursor/rules/
