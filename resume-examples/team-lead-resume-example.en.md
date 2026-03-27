@@ -6,14 +6,14 @@ Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | [
 
 ## Summary
 
-Hands-on Engineering Team Lead who currently leads VK's Donations product team in the Communities business unit: `8` direct reports, expansion from Communities into VK profiles, and faster migration from monolith to microservices. Previously led platform initiatives for VK's social commerce products, scaling goods in Communities from `20K` to millions, integrating `40` Ozon sellers, leading a critical recommendation system migration under the Hadoop shutdown deadline, and driving client and platform modernization across iOS, Android, and web. Earlier at Tinkoff (T-Bank), shipped an MVP, turned around a struggling internal platform, and helped mentoring-program participants move into full-time roles while staying close to delivery, architecture, and complex cross-functional execution.
+Hands-on Engineering Team Lead currently leading VK's Donations product team with `8` direct reports, combining people leadership with day-to-day involvement in architecture, migration work, and complex cross-team delivery. Previously led platform initiatives in VK's social commerce area, including goods scaling, the recommendation migration under the Hadoop shutdown deadline, and client unification across iOS, Android, and web. Earlier at Tinkoff (T-Bank), shipped the mentoring platform MVP and later took over Performance Review when it needed stabilization and a clearer execution plan.
 
 ## Selected Impact
 
-- At VK, lead the `8`-person Donations product team in the Communities business unit; within one quarter, delivered a rebrand, launched Donations in VK profiles, and accelerated the service migration from monolith to microservices, broadening audience reach and supporting growth in key product metrics.
-- At VK, removed a core business constraint in social commerce by coordinating `3` teams to scale goods in Communities from `20K` to millions, and enabled integration with `40` Ozon sellers, importing about `3M` products and creating about `1M` AdBlogger offers.
-- Led the recommendation system migration under the Hadoop shutdown deadline, helped teams respond to an incident without losing a significant share of traffic, and in parallel drove client and platform modernization: coverage of the `VKUI` design system grew from `35%` to `64%` on iOS and reached `84%` on Android.
-- At Tinkoff (T-Bank), delivered the mentoring platform MVP on schedule, staffed the first pilot entirely with mentoring-program participants who later moved into full-time roles, then took over the struggling Performance Review platform, built a `7`-person cross-functional team, and aligned a one-year turnaround plan with the business.
+- At VK, lead the `8`-person Donations product team in the Communities business unit; within one quarter, delivered a rebrand, launched Donations in VK profiles, and accelerated the service migration from monolith to microservices, opening a new user scenario beyond Communities.
+- At VK, removed a core business constraint in social commerce by coordinating `3` teams to scale goods in Communities from `20K` to millions, and launched integration with `40` Ozon sellers, importing about `3M` products and creating about `1M` product offers.
+- Led the recommendation system migration under the Hadoop shutdown deadline, helped teams work through an incident without losing a significant share of traffic, and in parallel drove client and platform modernization: coverage of the `VKUI` design system grew from `35%` to `64%` on iOS and reached `84%` on Android.
+- At Tinkoff (T-Bank), delivered the mentoring platform MVP on schedule, staffed the first pilot entirely with mentoring-program participants who later moved into full-time roles, then took over Performance Review during its reset, built a `7`-person cross-functional team, and aligned a one-year stabilization plan with the business.
 
 ## Work Experience
 
@@ -25,17 +25,17 @@ Jan 2026 - Present
 
 - Lead the Donations product team with `8` direct reports: `3` backend engineers, `2` frontend engineers, `1` iOS engineer, `1` Android engineer, and `1` QA engineer.
 - Led the Donations rebrand and launched Donations in VK profiles within one quarter, where the flow had previously been available only in Communities.
-- Connected backend delivery with a dedicated migration team to accelerate the Donations service migration from monolith to microservices.
-- Expanded Donations into VK profiles, opening a new user scenario, broadening audience reach, and supporting growth in key product metrics.
+- Aligned the product backend team and a dedicated migration team to accelerate the Donations service migration from monolith to microservices.
+- Launching Donations in VK profiles turned the product from a Communities-only flow into a broader product scenario with an additional entry point in VK.
 
 **Team Lead, Social Commerce Platform Team**
 
 Apr 2025 - Dec 2025
 
-- Led a platform team of `8` direct reports and coordinated the goods initiative across teams, including delivery from `3` backend engineers in a neighboring team.
+- Led a platform team of `8` direct reports and coordinated the goods-scaling program across `3` teams.
 - Ran load testing and shipped the scaling rollout, lifting the limit on goods listed in VK Communities from `20K` to millions.
-- Led delivery of the `40`-seller `Ozon` integration: imported about `3M` products and created about `1M` `AdBlogger` offers for first-party and third-party scenarios.
-- Led the cross-team migration and release of the recommendation system under the `Hadoop` shutdown deadline; the teams hit the deadline and handled an incident without losing a significant share of traffic.
+- Launched the `40`-seller `Ozon` integration: imported about `3M` products and generated about `1M` product offers.
+- Built the cross-team plan for the recommendation system migration and release under the `Hadoop` shutdown deadline; the teams hit the deadline and worked through an incident without losing a significant share of traffic.
 - Prioritized adoption of the `VKUI` design system across iOS, Android, and web, increasing coverage on iOS from `35%` to `64%` and on Android to `84%`.
 
 **Shared VK stack**
@@ -48,21 +48,21 @@ Apr 2025 - Dec 2025
 Dec 2022 - Mar 2025
 
 - Led a `6`-person cross-functional team across backend, frontend, QA, design, and analytics; delivered the mentoring platform MVP on schedule.
-- Built the company's first pilot fully staffed by mentoring-program participants and helped them move into full-time roles.
+- Staffed the company's first pilot entirely with mentoring-program participants who later moved into full-time roles.
 - Mentored `2` backend engineers inside the mentoring program.
 
 **Team Lead, Performance Review Project**  
 Apr 2021 - Dec 2022
 
-- Took over the struggling `Performance Review` platform and aligned a one-year turnaround plan with the business, bringing the project out of crisis.
-- Built and grew a `7`-person cross-functional team to stabilize delivery across a `3`-service platform.
+- Took over the `Performance Review` project during its reset and aligned a one-year stabilization plan with the business.
+- Built and grew a `7`-person cross-functional team that established stable execution on the project.
 - Mentored a backend engineer and helped him move into a full-time role within the project.
 
 **Senior Developer, Organization Structure Project**  
 Apr 2020 - Apr 2021
 
 - Independently designed, built, and launched a new internal service from scratch across `.NET`, `Angular`, `Postgres`, and microservices, owning backend, frontend, and rollout.
-- Worked directly with business and analysts, filtered weak requirements, and chose workable implementation paths.
+- Worked directly with business and analysts, challenged unclear requirements, and chose workable implementation paths.
 
 **Middle Developer, Performance Review Project**  
 Apr 2019 - Apr 2020
