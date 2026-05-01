@@ -8,10 +8,11 @@ alwaysApply: true
 - Treat `cv.master.yaml` as the canonical source of truth for resume facts.
 - Update derived resume drafts after factual changes in `cv.master.yaml`.
 - Keep Russian and English resume variants in sync when dates, roles, projects, stack, or achievements change.
+- When resume facts (summary, roles, dates, metrics, stack, achievements, education, certifications) change, also update the public landing at `landing/index.html` — both the RU and EN entries inside the i18n dictionary, plus any stat cards in the Selected Impact / Ключевые результаты grid.
 - Put assistant-authored resume drafts in `resume-examples/` and assistant-authored analysis in `reviews/`.
 - Keep `ai/` only for materials produced by other AIs.
-- If a fact is incomplete, keep a visible placeholder in drafts and record the missing detail in `cv.master.yaml` instead of inventing it.
+- If a fact is incomplete, keep a visible placeholder in drafts and record the missing detail in `cv.master.yaml` instead of inventing it. The same applies to the landing — never invent metrics or dates there either.
 
 Examples:
-- Good: update `cv.master.yaml` and both `resume-examples/*.en.md` and `resume-examples/*.ru.md` after a job change.
-- Bad: edit only one language variant or write assistant output into `ai/`.
+- Good: update `cv.master.yaml`, both `resume-examples/*.en.md` and `resume-examples/*.ru.md`, and `landing/index.html` (RU + EN strings, and any affected impact card) after a job change.
+- Bad: edit only one language variant, write assistant output into `ai/`, or update the resume drafts but forget to refresh the landing.

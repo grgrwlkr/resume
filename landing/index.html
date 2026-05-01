@@ -1,0 +1,2202 @@
+<!doctype html>
+<html lang="en" class="dark">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="theme-color" content="#0A0A0B" />
+    <title>Gregory Agapov — Engineering Team Lead</title>
+    <meta
+      name="description"
+      content="Gregory Agapov — Engineering Team Lead in Moscow. 15+ years in software engineering, 5+ years of people management. Currently leading VK's Donations product team."
+    />
+
+    <!-- Open Graph -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:title" content="Gregory Agapov — Engineering Team Lead" />
+    <meta
+      property="og:description"
+      content="Hands-on Team Lead. 15+ years in software engineering, 5+ years of people management. VK Donations product team."
+    />
+    <meta property="og:image" content="assets/portrait.jpg" />
+    <meta name="twitter:card" content="summary_large_image" />
+
+    <!-- Inter -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+    />
+
+    <!-- Tailwind config must come BEFORE the CDN script -->
+    <script>
+      window.tailwind = window.tailwind || {};
+      tailwind.config = {
+        darkMode: 'class',
+        theme: {
+          extend: {
+            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+            colors: { accent: '#6366F1' }
+          }
+        }
+      };
+    </script>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Pre-paint: apply persisted/system theme + lang BEFORE body renders to avoid flicker -->
+    <script>
+      (function () {
+        try {
+          var url = new URL(window.location.href);
+          var urlTheme = url.searchParams.get('theme');
+          var urlLang = url.searchParams.get('lang');
+          var isPrint = url.searchParams.get('print') === '1';
+
+          var savedTheme = localStorage.getItem('theme');
+          var prefersDark =
+            window.matchMedia && window.matchMedia('(prefers-color-scheme: dark)').matches;
+          var theme = urlTheme || savedTheme || (prefersDark ? 'dark' : 'light');
+          document.documentElement.classList.toggle('dark', theme === 'dark');
+
+          var savedLang = localStorage.getItem('lang');
+          var browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
+          var lang = urlLang || savedLang || (browserLang === 'ru' ? 'ru' : 'en');
+          document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+
+          if (isPrint) document.documentElement.classList.add('print-mode');
+          window.__urlOverrides = { theme: !!urlTheme, lang: !!urlLang };
+        } catch (e) {
+          /* localStorage may be blocked under file://; fall through to defaults */
+        }
+      })();
+    </script>
+
+    <style>
+      /* Base palette via CSS variables, mirrored by .dark class on <html>. */
+      :root {
+        --bg: #ffffff;
+        --surface: #f5f5f7;
+        --border: #e5e5ea;
+        --text: #0a0a0b;
+        --muted: #6b6b72;
+        --accent: #6366f1;
+      }
+      html.dark {
+        --bg: #0a0a0b;
+        --surface: #111114;
+        --border: #1f1f23;
+        --text: #e6e6e8;
+        --muted: #9a9aa3;
+      }
+
+      html {
+        scroll-behavior: smooth;
+        -webkit-text-size-adjust: 100%;
+      }
+      body {
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Inter', system-ui, sans-serif;
+        font-feature-settings: 'cv11', 'ss01', 'ss03';
+      }
+      ::selection {
+        background: rgba(99, 102, 241, 0.35);
+        color: var(--text);
+      }
+
+      /* Language visibility — drives the dual-span date pattern */
+      html[lang='ru'] .lang-en,
+      html[lang='en'] .lang-ru {
+        display: none;
+      }
+
+      /* Cards / surfaces / chips */
+      .surface {
+        background: var(--surface);
+      }
+      .border-app {
+        border-color: var(--border);
+      }
+      .text-muted {
+        color: var(--muted);
+      }
+      .bg-app {
+        background: var(--bg);
+      }
+
+      .chip {
+        display: inline-flex;
+        align-items: center;
+        padding: 0.3rem 0.75rem;
+        border-radius: 9999px;
+        background: var(--bg);
+        border: 1px solid var(--border);
+        color: var(--text);
+        font-size: 0.85rem;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      html.dark .chip {
+        background: rgba(255, 255, 255, 0.02);
+      }
+
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.625rem 1rem;
+        border-radius: 0.75rem;
+        border: 1px solid var(--border);
+        background: var(--surface);
+        color: var(--text);
+        font-weight: 500;
+        font-size: 0.95rem;
+        transition: transform 120ms ease, background-color 200ms ease, border-color 200ms ease;
+      }
+      .btn:hover {
+        border-color: rgba(99, 102, 241, 0.6);
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: transparent;
+      }
+      .btn-primary:hover {
+        filter: brightness(1.05);
+        border-color: transparent;
+      }
+
+      /* Visible focus rings — WCAG */
+      a,
+      button {
+        outline: none;
+      }
+      a:focus-visible,
+      button:focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 2px;
+        border-radius: 0.5rem;
+      }
+
+      /* Sticky nav surface */
+      .nav-surface {
+        background: rgba(255, 255, 255, 0.72);
+        border-bottom: 1px solid var(--border);
+        -webkit-backdrop-filter: saturate(180%) blur(14px);
+        backdrop-filter: saturate(180%) blur(14px);
+      }
+      html.dark .nav-surface {
+        background: rgba(10, 10, 11, 0.65);
+      }
+
+      /* Anchor offset to clear the sticky nav */
+      section[id] {
+        scroll-margin-top: 5.5rem;
+      }
+
+      /* Entrance animation */
+      .reveal {
+        opacity: 0;
+        transform: translateY(12px);
+        transition: opacity 600ms ease-out, transform 600ms ease-out;
+        will-change: opacity, transform;
+      }
+      .reveal.is-visible {
+        opacity: 1;
+        transform: translateY(0);
+      }
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        .reveal {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+      }
+
+      /* Hero photo radial backdrop — keeps black T-shirt visible on dark theme */
+      .hero-glow {
+        background: radial-gradient(
+          70% 60% at 50% 35%,
+          rgba(99, 102, 241, 0.32),
+          rgba(99, 102, 241, 0.06) 55%,
+          transparent 75%
+        );
+        filter: blur(2px);
+      }
+
+      /* Subtle background grid for hero, dark-only */
+      html.dark .hero-grid {
+        background-image: radial-gradient(rgba(255, 255, 255, 0.04) 1px, transparent 1px);
+        background-size: 22px 22px;
+        mask-image: radial-gradient(ellipse at 50% 30%, #000 40%, transparent 75%);
+      }
+
+      /* Lang switch active state */
+      .lang-btn[aria-pressed='true'] {
+        background: var(--accent);
+        color: #ffffff;
+        border-color: transparent;
+      }
+
+      /* Timeline rail + dot */
+      .timeline {
+        border-left: 1px solid var(--border);
+      }
+      .timeline-dot {
+        position: absolute;
+        left: -7px;
+        top: 8px;
+        width: 12px;
+        height: 12px;
+        border-radius: 9999px;
+        background: var(--accent);
+        box-shadow: 0 0 0 4px rgba(99, 102, 241, 0.18);
+      }
+
+      /* ============================================================ */
+      /* Print / PDF — keeps the landing visual identity but optimized */
+      /* for paper: light theme, no chrome, page-break-aware blocks.   */
+      /* `.print-mode` mirrors @media print so the result can be       */
+      /* previewed on screen via ?print=1.                             */
+      /* ============================================================ */
+      @media print {
+        html.print-preview,
+        html {
+          color-scheme: light;
+        }
+      }
+
+      @media print {
+        html,
+        html.dark {
+          --bg: #ffffff;
+          --surface: #f6f6f9;
+          --border: #d8d8df;
+          --text: #0a0a0b;
+          --muted: #4a4a52;
+          --accent: #4f46e5;
+        }
+        body {
+          background: #ffffff !important;
+          color: var(--text) !important;
+          -webkit-print-color-adjust: exact;
+          print-color-adjust: exact;
+        }
+        @page {
+          size: A4;
+          margin: 14mm 14mm 14mm 14mm;
+        }
+      }
+
+      html.print-mode,
+      html.print-mode.dark {
+        --bg: #ffffff;
+        --surface: #f6f6f9;
+        --border: #d8d8df;
+        --text: #0a0a0b;
+        --muted: #4a4a52;
+        --accent: #4f46e5;
+      }
+      html.print-mode body {
+        background: #ffffff;
+      }
+
+      /* Shared rules: apply both in real print and in `.print-mode` preview */
+      @media print {
+        header.nav-surface,
+        footer a[href='#top'],
+        .hero-grid,
+        .hero-glow {
+          display: none !important;
+        }
+        section[id] {
+          scroll-margin-top: 0;
+        }
+        section {
+          padding-top: 0.5rem !important;
+          padding-bottom: 0.5rem !important;
+        }
+        #about {
+          padding: 0 !important;
+        }
+        /* Pull last few sections tighter to keep the footer on the same page */
+        #languages {
+          padding-bottom: 0.25rem !important;
+        }
+        /* Compact hero so it fits one page next to the content */
+        #about > div {
+          padding-top: 0 !important;
+          padding-bottom: 0 !important;
+          gap: 1rem !important;
+          align-items: start !important;
+        }
+        #about .relative.rounded-\[2rem\] {
+          max-height: 95mm;
+          max-width: 70mm;
+          aspect-ratio: auto !important;
+          margin-left: auto;
+          margin-right: 0;
+        }
+        #about h1 {
+          font-size: 2.25rem !important;
+          line-height: 1.05 !important;
+        }
+        #about p[data-i18n='hero.summary'] {
+          font-size: 0.95rem !important;
+          line-height: 1.55 !important;
+        }
+        #about .btn {
+          display: inline-flex !important;
+          padding: 0.4rem 0.7rem !important;
+          font-size: 0.85rem !important;
+        }
+        #about .btn + .btn,
+        #about > div > div .btn ~ .btn {
+          margin-left: 0;
+        }
+        /* Container holding the Email/GitHub/LinkedIn buttons */
+        #about > div > div > div.flex.flex-wrap {
+          display: flex !important;
+          flex-wrap: wrap !important;
+          gap: 0.5rem !important;
+          margin-top: 1rem !important;
+        }
+        .reveal {
+          opacity: 1 !important;
+          transform: none !important;
+          transition: none !important;
+        }
+        ul > li,
+        .flex.flex-wrap.gap-2,
+        #impact .surface,
+        #education .surface,
+        #education > div > div,
+        #skills .surface,
+        #languages > div {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        /* === Timeline atomicity ======================================
+           Big employers (VK, Tinkoff) have multiple project blocks that
+           together exceed one A4 page, so we can't make the whole
+           `<article>` atomic. Instead, we promote each project block
+           into its own card and keep the company header floating above
+           them. Single-project employers keep their wrapper card.       */
+
+        /* Multi-project employers: shed the big wrapper card */
+        ol.timeline > li > article:has(> div.space-y-8) {
+          background: transparent !important;
+          border: none !important;
+          padding: 0 !important;
+          box-shadow: none !important;
+        }
+        ol.timeline > li > article:has(> div.space-y-8) > header {
+          margin: 0 0 0.6rem 0 !important;
+          padding: 0 0 0.4rem 0 !important;
+          border-bottom: 1px solid var(--border) !important;
+        }
+        ol.timeline > li > article:has(> div.space-y-8) > header h3 {
+          font-size: 1.15rem !important;
+          font-weight: 600 !important;
+        }
+        /* The decorative timeline dot sits at left:-7px of the <li>. For
+           multi-project employers the wrapper card is gone, so the dot
+           ends up overlapping the company name. Hide it there; the
+           single-project cards keep their dot. */
+        ol.timeline > li:has(> article > div.space-y-8) > .timeline-dot {
+          display: none !important;
+        }
+        /* Without the dot the timeline rail is visually unbalanced —
+           ensure the rail still runs along multi-project entries. */
+        ol.timeline {
+          padding-left: 1.5rem !important;
+        }
+        ol.timeline > li > article > div.space-y-8 {
+          margin: 0 !important;
+        }
+        ol.timeline > li > article > div.space-y-8 > * + * {
+          margin-top: 0.45rem !important;
+        }
+        /* Each project / shared-stack block becomes its own atomic card.
+           Tight padding + condensed type so big employers (VK, Tinkoff)
+           with shared-stack chips still fit on one page. */
+        ol.timeline > li > article > div.space-y-8 > div {
+          background: var(--surface) !important;
+          border: 1px solid var(--border) !important;
+          border-radius: 0.85rem !important;
+          padding: 0.7rem 1rem !important;
+          break-inside: avoid !important;
+          page-break-inside: avoid !important;
+          /* override Tailwind's inline `border-t pt-6/pt-8` (was an in-card
+             separator on the web; meaningless once each block is its own card) */
+          border-top-width: 1px !important;
+        }
+        /* Compact card typography for print */
+        ol.timeline > li > article > div.space-y-8 > div h4 {
+          font-size: 0.92rem !important;
+          line-height: 1.3 !important;
+          margin-bottom: 0.1rem !important;
+        }
+        ol.timeline > li > article > div.space-y-8 > div h4 + p {
+          font-size: 0.78rem !important;
+          margin-top: 0.05rem !important;
+          margin-bottom: 0.4rem !important;
+        }
+        ol.timeline > li > article > div.space-y-8 > div ul {
+          margin-top: 0.3rem !important;
+        }
+        ol.timeline > li > article > div.space-y-8 > div ul li {
+          font-size: 0.82rem !important;
+          line-height: 1.4 !important;
+          margin-top: 0.25rem !important;
+        }
+        ol.timeline > li > article > div.space-y-8 > div ul li::before {
+          top: 0.42rem !important;
+        }
+        /* Apply the same compaction to single-project employers so the
+           overall density is consistent. */
+        ol.timeline > li > article > div:not(.space-y-8) h4 {
+          font-size: 0.92rem !important;
+          line-height: 1.3 !important;
+        }
+        ol.timeline > li > article > div:not(.space-y-8) h4 + p {
+          font-size: 0.78rem !important;
+        }
+        ol.timeline > li > article > div:not(.space-y-8) ul li {
+          font-size: 0.82rem !important;
+          line-height: 1.4 !important;
+          margin-top: 0.25rem !important;
+        }
+        ol.timeline > li > article > div:not(.space-y-8) ul li::before {
+          top: 0.42rem !important;
+        }
+        /* Single-project wrapper card padding tightened too */
+        ol.timeline > li > article:not(:has(> div.space-y-8)) {
+          padding: 0.85rem 1.1rem !important;
+        }
+
+        /* Single-project employers (Neotech, CINIMEX, AISA): keep the
+           wrapper card and make the whole article atomic. */
+        ol.timeline > li > article:not(:has(> div.space-y-8)) {
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+
+        /* The company header ("VK", "Tinkoff Bank") must not be orphaned
+           at the bottom of a page — Chrome will keep it with its first
+           project card. */
+        ol.timeline > li > article > header {
+          break-after: avoid-page;
+          page-break-after: avoid;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        /* Section headers stick to their first content block */
+        section > div > header.reveal {
+          break-after: avoid-page;
+          page-break-after: avoid;
+          break-inside: avoid;
+          page-break-inside: avoid;
+        }
+        /* Prevent lonely h-tags at the bottom of a page */
+        h1,
+        h2,
+        h3,
+        h4 {
+          break-after: avoid-page;
+          page-break-after: avoid;
+        }
+        /* Reasonable widows/orphans for paragraph text */
+        p,
+        li {
+          orphans: 3;
+          widows: 3;
+        }
+        a {
+          color: inherit !important;
+          text-decoration: none !important;
+        }
+        /* Surface backgrounds are subtle but should print */
+        .surface,
+        .chip {
+          background: var(--surface) !important;
+        }
+        /* Tighten timeline spacing for paper */
+        ol.timeline {
+          gap: 0 !important;
+        }
+        ol.timeline > li + li {
+          margin-top: 1.25rem !important;
+        }
+        /* Trim outer footer space */
+        footer {
+          padding-top: 0.5rem !important;
+          padding-bottom: 0 !important;
+          border-top: none !important;
+        }
+        footer > div > div.mt-10 {
+          margin-top: 0.5rem !important;
+          padding-top: 0.4rem !important;
+        }
+        /* Fallback bullets — Tailwind Play CDN can race the print snapshot */
+        ul li.pl-5.relative {
+          position: relative !important;
+          padding-left: 1.1rem !important;
+        }
+        ul li.pl-5.relative::before {
+          content: '' !important;
+          position: absolute !important;
+          left: 0 !important;
+          top: 0.55rem !important;
+          width: 5px !important;
+          height: 5px !important;
+          border-radius: 9999px !important;
+          background: var(--accent) !important;
+        }
+      }
+
+      html.print-mode header.nav-surface,
+      html.print-mode footer a[href='#top'],
+      html.print-mode .hero-grid,
+      html.print-mode .hero-glow {
+        display: none !important;
+      }
+      html.print-mode .reveal {
+        opacity: 1 !important;
+        transform: none !important;
+        transition: none !important;
+      }
+      html.print-mode section[id] {
+        scroll-margin-top: 0;
+      }
+      html.print-mode #about .btn {
+        padding: 0.4rem 0.7rem;
+        font-size: 0.85rem;
+      }
+      /* Mirror the @media print bullet fallback so ?print=1 preview matches */
+      html.print-mode ul li.pl-5.relative {
+        padding-left: 1.1rem;
+      }
+      html.print-mode ul li.pl-5.relative::before {
+        content: '';
+        position: absolute;
+        left: 0;
+        top: 0.55rem;
+        width: 5px;
+        height: 5px;
+        border-radius: 9999px;
+        background: var(--accent);
+      }
+    </style>
+  </head>
+
+  <body class="antialiased">
+    <a
+      href="#main"
+      class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-2 focus:rounded-md focus:bg-accent focus:text-white"
+      data-i18n="a11y.skipToContent"
+      >Skip to content</a
+    >
+
+    <!-- ============================================================ -->
+    <!-- Sticky nav -->
+    <!-- ============================================================ -->
+    <header class="sticky top-0 z-40 nav-surface">
+      <div class="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between gap-4">
+        <a href="#top" class="font-semibold tracking-tight text-base sm:text-lg">Gregory Agapov</a>
+
+        <nav aria-label="Primary" class="hidden md:flex items-center gap-1 text-sm">
+          <a
+            href="#about"
+            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-i18n="nav.about"
+            >About</a
+          >
+          <a
+            href="#impact"
+            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-i18n="nav.impact"
+            >Impact</a
+          >
+          <a
+            href="#experience"
+            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-i18n="nav.experience"
+            >Experience</a
+          >
+          <a
+            href="#skills"
+            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-i18n="nav.skills"
+            >Skills</a
+          >
+          <a
+            href="#contact"
+            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-i18n="nav.contact"
+            >Contact</a
+          >
+        </nav>
+
+        <div class="flex items-center gap-2">
+          <!-- Language switch -->
+          <div
+            class="inline-flex rounded-xl border border-app overflow-hidden text-xs sm:text-sm"
+            role="group"
+            aria-label="Language"
+          >
+            <button
+              type="button"
+              class="lang-btn px-2.5 py-1.5 font-medium transition-colors hover:bg-[color:var(--surface)]"
+              data-lang="ru"
+              aria-pressed="false"
+              data-i18n-attr="aria-label:nav.langRuAria"
+              aria-label="Switch to Russian"
+            >
+              RU
+            </button>
+            <button
+              type="button"
+              class="lang-btn px-2.5 py-1.5 font-medium transition-colors hover:bg-[color:var(--surface)]"
+              data-lang="en"
+              aria-pressed="false"
+              data-i18n-attr="aria-label:nav.langEnAria"
+              aria-label="Switch to English"
+            >
+              EN
+            </button>
+          </div>
+
+          <!-- Theme toggle -->
+          <button
+            id="themeToggle"
+            type="button"
+            class="inline-flex items-center justify-center w-9 h-9 rounded-xl border border-app surface hover:border-accent transition-colors"
+            data-i18n-attr="aria-label:nav.themeAria,title:nav.themeAria"
+            aria-label="Toggle color theme"
+            title="Toggle color theme"
+          >
+            <!-- Sun shows when current theme is dark (click → switch to light) -->
+            <svg
+              data-theme-icon="dark"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4.5 h-4.5"
+              width="18"
+              height="18"
+              aria-hidden="true"
+            >
+              <circle cx="12" cy="12" r="4" />
+              <path d="M12 2v2" />
+              <path d="M12 20v2" />
+              <path d="m4.93 4.93 1.41 1.41" />
+              <path d="m17.66 17.66 1.41 1.41" />
+              <path d="M2 12h2" />
+              <path d="M20 12h2" />
+              <path d="m4.93 19.07 1.41-1.41" />
+              <path d="m17.66 6.34 1.41-1.41" />
+            </svg>
+            <!-- Moon shows when current theme is light -->
+            <svg
+              data-theme-icon="light"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              class="w-4.5 h-4.5 hidden"
+              width="18"
+              height="18"
+              aria-hidden="true"
+            >
+              <path d="M21 12.79A9 9 0 1 1 11.21 3 7 7 0 0 0 21 12.79z" />
+            </svg>
+          </button>
+        </div>
+      </div>
+    </header>
+
+    <main id="main">
+      <span id="top" aria-hidden="true"></span>
+
+      <!-- ============================================================ -->
+      <!-- Hero -->
+      <!-- ============================================================ -->
+      <section
+        id="about"
+        class="relative overflow-hidden"
+        aria-labelledby="hero-heading"
+      >
+        <div class="absolute inset-0 -z-10 hero-grid" aria-hidden="true"></div>
+        <div
+          class="max-w-6xl mx-auto px-5 sm:px-6 py-16 sm:py-20 md:py-28 grid md:grid-cols-2 gap-10 md:gap-16 items-center"
+        >
+          <div class="reveal order-2 md:order-1">
+            <p
+              class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-muted mb-5 px-3 py-1.5 rounded-full border border-app surface"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="14"
+                height="14"
+                aria-hidden="true"
+              >
+                <path d="M20 10c0 7-8 12-8 12s-8-5-8-12a8 8 0 0 1 16 0Z" />
+                <circle cx="12" cy="10" r="3" />
+              </svg>
+              <span data-i18n="hero.kicker">Moscow, Russia</span>
+            </p>
+
+            <h1
+              id="hero-heading"
+              class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05]"
+            >
+              Gregory Agapov
+            </h1>
+            <p
+              class="mt-4 text-lg md:text-xl font-medium"
+              style="color: var(--accent)"
+              data-i18n="hero.role"
+            >
+              Engineering Team Lead
+            </p>
+            <p
+              class="mt-6 text-base md:text-lg leading-relaxed text-muted max-w-prose"
+              data-i18n="hero.summary"
+            >
+              Hands-on Team Lead with 15+ years in software engineering and 5+ years of direct
+              people management across teams of 6–8. Builds products from MVP to scale without
+              losing technical depth. Currently leading VK's Donations product team — 8 direct
+              reports across backend, frontend, mobile, and QA.
+            </p>
+
+            <div class="mt-8 flex flex-wrap gap-3">
+              <a class="btn btn-primary" href="mailto:gregoryagapov@icloud.com">
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <rect x="3" y="5" width="18" height="14" rx="2" />
+                  <path d="m3 7 9 6 9-6" />
+                </svg>
+                <span data-i18n="hero.email">Email</span>
+              </a>
+              <a
+                class="btn"
+                href="https://github.com/grgrwlkr"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M12 .5C5.65.5.5 5.66.5 12.02c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.06 11.06 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.05.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.67.79.55C20.21 21.41 23.5 17.1 23.5 12.02 23.5 5.66 18.35.5 12 .5z"
+                  />
+                </svg>
+                <span>GitHub</span>
+              </a>
+              <a
+                class="btn"
+                href="https://www.linkedin.com/in/gregory-agapov-24b13221"
+                target="_blank"
+                rel="noopener noreferrer"
+              >
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="currentColor"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path
+                    d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.62 0 4.29 2.38 4.29 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"
+                  />
+                </svg>
+                <span>LinkedIn</span>
+              </a>
+            </div>
+          </div>
+
+          <div class="reveal order-1 md:order-2 relative">
+            <div class="relative mx-auto max-w-sm md:max-w-none">
+              <div class="absolute inset-0 hero-glow rounded-[2rem]" aria-hidden="true"></div>
+              <div
+                class="relative rounded-[2rem] overflow-hidden border border-app surface aspect-[683/1024]"
+              >
+                <img
+                  src="assets/portrait.jpg"
+                  alt="Portrait of Gregory Agapov"
+                  data-i18n-attr="alt:hero.portraitAlt"
+                  loading="eager"
+                  width="683"
+                  height="1024"
+                  class="w-full h-full object-cover"
+                />
+              </div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- Selected Impact -->
+      <!-- ============================================================ -->
+      <section id="impact" class="py-16 sm:py-24">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+          <header class="reveal mb-10 md:mb-12">
+            <p class="text-sm font-medium uppercase tracking-wider text-muted">
+              <span data-i18n="impact.eyebrow">Numbers I delivered</span>
+            </p>
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight"
+              data-i18n="impact.title"
+            >
+              Selected Impact
+            </h2>
+          </header>
+
+          <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-5">
+            <!-- Card 1 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.0.value">+3,276</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.0.label">
+                creators with Donations enabled
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.0.context">
+                +3.96% over the active-creator base, first 3 weeks after VK Donations rebrand
+              </p>
+            </article>
+            <!-- Card 2 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.1.value">+469</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.1.label">
+                monetizing creators
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.1.context">
+                +1.4% in the first 3 weeks after the rebrand
+              </p>
+            </article>
+            <!-- Card 3 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.2.value">+880,743 ₽</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.2.label">
+                donations turnover
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.2.context">
+                +0.37% lift in the first 3 weeks after the rebrand
+              </p>
+            </article>
+            <!-- Card 4 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.3.value">20K → millions</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.3.label">
+                goods cap in VK Communities
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.3.context">
+                Removed business limit by coordinating 3 teams
+              </p>
+            </article>
+            <!-- Card 5 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.4.value">40 / ~3M</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.4.label">
+                Ozon sellers / products imported
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.4.context">
+                ~1M product offers via AdBlogger
+              </p>
+            </article>
+            <!-- Card 6 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.5.value">35% → 64% / 84%</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.5.label">
+                VKUI coverage iOS / Android
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.5.context">
+                Frontend unification across iOS, Android, web
+              </p>
+            </article>
+            <!-- Card 7 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.6.value">60K</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.6.label">
+                users on Performance Review
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.6.context">
+                Two high-load windows per year, turnaround led at T-Bank
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- Experience -->
+      <!-- ============================================================ -->
+      <section id="experience" class="py-16 sm:py-24">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+          <header class="reveal mb-10 md:mb-12">
+            <p class="text-sm font-medium uppercase tracking-wider text-muted">
+              <span data-i18n="experience.eyebrow">Career</span>
+            </p>
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight"
+              data-i18n="experience.title"
+            >
+              Experience
+            </h2>
+          </header>
+
+          <ol class="timeline pl-8 md:pl-10 space-y-12">
+            <!-- VK -->
+            <li class="reveal relative">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <article class="surface border border-app rounded-2xl p-6 md:p-8">
+                <header class="mb-6">
+                  <h3 class="text-xl md:text-2xl font-semibold tracking-tight">VK</h3>
+                </header>
+
+                <div class="space-y-8">
+                  <!-- VK / Donations -->
+                  <div>
+                    <h4
+                      class="font-medium text-base md:text-lg"
+                      data-i18n="experience.vk.donations.role"
+                    >
+                      Team Lead, Donations Product Team — Communities Business Unit
+                    </h4>
+                    <p class="mt-1 text-sm text-muted">
+                      <span class="lang-en">Jan 2026 — Present</span>
+                      <span class="lang-ru">янв. 2026 — настоящее время</span>
+                    </p>
+                    <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.donations.bullets.0"
+                      >
+                        Lead the Donations product team with 8 direct reports: 3 backend, 2
+                        frontend, 1 iOS, 1 Android, 1 QA.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.donations.bullets.1"
+                      >
+                        Within one quarter, delivered the Donations rebrand and launched Donations
+                        in VK profiles, where the flow had previously been available only in
+                        Communities.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.donations.bullets.2"
+                      >
+                        Aligned the product backend team with a dedicated migration team to
+                        accelerate the Donations service move from monolith to microservices.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.donations.bullets.3"
+                      >
+                        First 3 weeks after the rebrand release: +3,276 creators with Donations
+                        enabled (+3.96%), +469 monetizing creators (+1.4%), +880,743 ₽ in
+                        donations turnover (+0.37%), +3,578 donations (+0.55%).
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- VK / Social Commerce -->
+                  <div class="border-t border-app pt-8">
+                    <h4
+                      class="font-medium text-base md:text-lg"
+                      data-i18n="experience.vk.commerce.role"
+                    >
+                      Team Lead, Social Commerce Platform Team
+                    </h4>
+                    <p class="mt-1 text-sm text-muted">
+                      <span class="lang-en">Apr 2025 — Dec 2025</span>
+                      <span class="lang-ru">апр. 2025 — дек. 2025</span>
+                    </p>
+                    <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.commerce.bullets.0"
+                      >
+                        Led a platform team of 8 direct reports and coordinated the goods-scaling
+                        program across 3 teams.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.commerce.bullets.1"
+                      >
+                        Lifted the goods cap in VK Communities from 20K to millions through load
+                        testing and a coordinated release.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.commerce.bullets.2"
+                      >
+                        Launched the 40-seller Ozon integration: ~3M imported products and ~1M
+                        AdBlogger offers.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.commerce.bullets.3"
+                      >
+                        Hit the recommendation-system migration deadline tied to the Hadoop
+                        shutdown and worked through an incident without losing a significant share
+                        of traffic.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.vk.commerce.bullets.4"
+                      >
+                        Increased VKUI coverage on iOS from 35% to 64% and reached 84% on Android,
+                        leading frontend unification across iOS, Android, and web.
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- VK shared stack -->
+                  <div class="border-t border-app pt-6">
+                    <p
+                      class="text-xs font-medium uppercase tracking-wider text-muted mb-3"
+                      data-i18n="experience.vk.sharedLabel"
+                    >
+                      Shared VK stack:
+                    </p>
+                    <div class="flex flex-wrap gap-2">
+                      <span class="chip">PHP</span>
+                      <span class="chip">Go</span>
+                      <span class="chip">React</span>
+                      <span class="chip">Postgres</span>
+                      <span class="chip" data-i18n="experience.vk.stack.inhouseStorage"
+                        >in-house storage</span
+                      >
+                      <span class="chip" data-i18n="experience.vk.stack.monolith">monolith</span>
+                      <span class="chip" data-i18n="experience.vk.stack.microservices"
+                        >microservices</span
+                      >
+                    </div>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <!-- Tinkoff -->
+            <li class="reveal relative">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <article class="surface border border-app rounded-2xl p-6 md:p-8">
+                <header class="mb-6">
+                  <h3 class="text-xl md:text-2xl font-semibold tracking-tight">
+                    Tinkoff Bank (T-Bank)
+                  </h3>
+                </header>
+
+                <div class="space-y-8">
+                  <!-- Mentoring -->
+                  <div>
+                    <h4
+                      class="font-medium text-base md:text-lg"
+                      data-i18n="experience.tinkoff.mentoring.role"
+                    >
+                      Team Lead, Mentoring Project
+                    </h4>
+                    <p class="mt-1 text-sm text-muted">
+                      <span class="lang-en">Dec 2022 — Mar 2025</span>
+                      <span class="lang-ru">дек. 2022 — март 2025</span>
+                    </p>
+                    <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.mentoring.bullets.0"
+                      >
+                        Led a 6-person cross-functional team (backend, frontend, QA, design,
+                        analytics) and shipped the MVP of the company's first mentoring platform
+                        on schedule.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.mentoring.bullets.1"
+                      >
+                        Staffed the company's first pilot entirely with mentoring-program
+                        participants who later moved into full-time roles.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.mentoring.bullets.2"
+                      >
+                        Mentored 2 backend engineers inside the program.
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- PerfReview Lead -->
+                  <div class="border-t border-app pt-8">
+                    <h4
+                      class="font-medium text-base md:text-lg"
+                      data-i18n="experience.tinkoff.perfReview.role"
+                    >
+                      Team Lead, Performance Review Project
+                    </h4>
+                    <p class="mt-1 text-sm text-muted">
+                      <span class="lang-en">Apr 2021 — Dec 2022</span>
+                      <span class="lang-ru">апр. 2021 — дек. 2022</span>
+                    </p>
+                    <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.perfReview.bullets.0"
+                      >
+                        Took over the Performance Review platform — 60K users with two high-load
+                        windows per year — during its reset and aligned a one-year stabilization
+                        plan with the business.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.perfReview.bullets.1"
+                      >
+                        Built and grew a 7-person cross-functional team that established stable
+                        execution.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.perfReview.bullets.2"
+                      >
+                        Mentored a backend engineer who moved into a full-time role on the
+                        project.
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- OrgStructure Senior -->
+                  <div class="border-t border-app pt-8">
+                    <h4
+                      class="font-medium text-base md:text-lg"
+                      data-i18n="experience.tinkoff.orgStructure.role"
+                    >
+                      Senior Developer, Organization Structure Project
+                    </h4>
+                    <p class="mt-1 text-sm text-muted">
+                      <span class="lang-en">Apr 2020 — Apr 2021</span>
+                      <span class="lang-ru">апр. 2020 — апр. 2021</span>
+                    </p>
+                    <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.orgStructure.bullets.0"
+                      >
+                        Independently designed, built, and launched a new internal service from
+                        scratch on .NET, Angular, Postgres, and microservices — owning backend,
+                        frontend, and rollout.
+                      </li>
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.orgStructure.bullets.1"
+                      >
+                        Worked directly with business and analysts, challenged unclear
+                        requirements, and chose workable implementation paths.
+                      </li>
+                    </ul>
+                  </div>
+
+                  <!-- PerfReview Middle -->
+                  <div class="border-t border-app pt-8">
+                    <h4
+                      class="font-medium text-base md:text-lg"
+                      data-i18n="experience.tinkoff.midPerfReview.role"
+                    >
+                      Middle Developer, Performance Review Project
+                    </h4>
+                    <p class="mt-1 text-sm text-muted">
+                      <span class="lang-en">Apr 2019 — Apr 2020</span>
+                      <span class="lang-ru">апр. 2019 — апр. 2020</span>
+                    </p>
+                    <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                      <li
+                        class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                        data-i18n="experience.tinkoff.midPerfReview.bullets.0"
+                      >
+                        Developed the Performance Review platform, the in-house task tracker, and
+                        related feedback systems while continuing to grow through internal
+                        training.
+                      </li>
+                    </ul>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <!-- Neotech -->
+            <li class="reveal relative">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <article class="surface border border-app rounded-2xl p-6 md:p-8">
+                <header class="mb-6">
+                  <h3 class="text-xl md:text-2xl font-semibold tracking-tight">
+                    Neotech (Paravan 2000)
+                  </h3>
+                </header>
+
+                <div>
+                  <h4
+                    class="font-medium text-base md:text-lg"
+                    data-i18n="experience.neotech.gis.role"
+                  >
+                    Senior Developer, GIS Projects
+                  </h4>
+                  <p class="mt-1 text-sm text-muted">
+                    <span class="lang-en">Dec 2013 — Mar 2019</span>
+                    <span class="lang-ru">дек. 2013 — мар. 2019</span>
+                  </p>
+                  <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                    <li
+                      class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                      data-i18n="experience.neotech.gis.bullets.0"
+                    >
+                      Built and customized solutions on General Electric Smallworld GIS for major
+                      telecom customers across Russia and the CIS — MTS, MGTS, TAT Telecom.
+                    </li>
+                    <li
+                      class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                      data-i18n="experience.neotech.gis.bullets.1"
+                    >
+                      Reverse-engineered client systems without source-code access, preserving the
+                      ability to keep developing in a constrained enterprise environment.
+                    </li>
+                    <li
+                      class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                      data-i18n="experience.neotech.gis.bullets.2"
+                    >
+                      Attended international GE Smallworld developer conferences in the UK, Italy,
+                      and the Netherlands; earned the GE Smallworld GIS Certified Developer
+                      certification.
+                    </li>
+                    <li
+                      class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                      data-i18n="experience.neotech.gis.bullets.3"
+                    >
+                      Developed extensions in Magic and Spatial DB plus client-side features in
+                      Java, JSP, JavaScript, jQuery, and Mustache.
+                    </li>
+                  </ul>
+                </div>
+              </article>
+            </li>
+
+            <!-- CINIMEX -->
+            <li class="reveal relative">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <article class="surface border border-app rounded-2xl p-6 md:p-8">
+                <header class="mb-4">
+                  <h3 class="text-xl md:text-2xl font-semibold tracking-tight">CINIMEX</h3>
+                </header>
+                <div
+                  class="flex flex-col md:flex-row md:items-center md:justify-between gap-3 md:gap-6"
+                >
+                  <div>
+                    <h4
+                      class="font-medium text-base md:text-lg"
+                      data-i18n="experience.cinimex.role"
+                    >
+                      Middle Developer
+                    </h4>
+                    <p class="mt-1 text-sm text-muted">
+                      <span class="lang-en">Nov 2012 — Jan 2013</span>
+                      <span class="lang-ru">нояб. 2012 — янв. 2013</span>
+                    </p>
+                  </div>
+                  <div class="flex flex-wrap gap-2">
+                    <span class="chip">IBM WebSphere</span>
+                    <span class="chip">IBM Message Broker</span>
+                    <span class="chip">ESQL</span>
+                  </div>
+                </div>
+              </article>
+            </li>
+
+            <!-- AISA IT-Service -->
+            <li class="reveal relative">
+              <span class="timeline-dot" aria-hidden="true"></span>
+              <article class="surface border border-app rounded-2xl p-6 md:p-8">
+                <header class="mb-6">
+                  <h3 class="text-xl md:text-2xl font-semibold tracking-tight">
+                    AISA IT-Service
+                  </h3>
+                </header>
+                <div>
+                  <h4
+                    class="font-medium text-base md:text-lg"
+                    data-i18n="experience.aisa.railway.role"
+                  >
+                    Middle Developer, Railway Automation Project
+                  </h4>
+                  <p class="mt-1 text-sm text-muted">
+                    <span class="lang-en">Nov 2010 — May 2012</span>
+                    <span class="lang-ru">нояб. 2010 — май 2012</span>
+                  </p>
+                  <ul class="mt-4 space-y-2.5 text-sm md:text-base leading-relaxed">
+                    <li
+                      class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                      data-i18n="experience.aisa.railway.bullets.0"
+                    >
+                      Automated how Russian Railways (RZD) machinists interacted with route
+                      documentation through touch-screen terminals and digital forms (XFDL, IBM
+                      Lotus Forms).
+                    </li>
+                    <li
+                      class="pl-5 relative before:content-[''] before:absolute before:left-0 before:top-2.5 before:w-1.5 before:h-1.5 before:rounded-full before:bg-accent"
+                      data-i18n="experience.aisa.railway.bullets.1"
+                    >
+                      Built web services with Java EE (JSP, SOAP/WSDL) and optimized queries and
+                      stored procedures in IBM Db2.
+                    </li>
+                  </ul>
+                </div>
+              </article>
+            </li>
+          </ol>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- Skills -->
+      <!-- ============================================================ -->
+      <section id="skills" class="py-16 sm:py-24">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+          <header class="reveal mb-10 md:mb-12">
+            <p class="text-sm font-medium uppercase tracking-wider text-muted">
+              <span data-i18n="skills.eyebrow">Stack & strengths</span>
+            </p>
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight"
+              data-i18n="skills.title"
+            >
+              Skills
+            </h2>
+          </header>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <h3 class="font-medium mb-4" data-i18n="skills.groups.currentVk">
+                Current stack (VK)
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">PHP</span>
+                <span class="chip">Go</span>
+                <span class="chip">React</span>
+                <span class="chip">Postgres</span>
+                <span class="chip" data-i18n="experience.vk.stack.microservices">microservices</span>
+              </div>
+            </article>
+
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <h3 class="font-medium mb-4" data-i18n="skills.groups.prevTinkoff">
+                Previous stack (Tinkoff)
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">.NET</span>
+                <span class="chip">C#</span>
+                <span class="chip">Angular</span>
+                <span class="chip">TypeScript</span>
+                <span class="chip">Postgres</span>
+                <span class="chip">Docker</span>
+                <span class="chip">Kubernetes</span>
+                <span class="chip">GitLab CI/CD</span>
+              </div>
+            </article>
+
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <h3 class="font-medium mb-4" data-i18n="skills.groups.leadership">
+                Leadership & Delivery
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip" data-i18n="skills.tags.teamLeadership">Team leadership</span>
+                <span class="chip" data-i18n="skills.tags.mentoring">Mentoring</span>
+                <span class="chip" data-i18n="skills.tags.teamBuilding">Team building</span>
+                <span class="chip" data-i18n="skills.tags.stakeholder">Stakeholder management</span>
+                <span class="chip" data-i18n="skills.tags.roadmap">Roadmap planning</span>
+                <span class="chip" data-i18n="skills.tags.crossFn"
+                  >Cross-functional coordination</span
+                >
+              </div>
+            </article>
+
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <h3 class="font-medium mb-4" data-i18n="skills.groups.architecture">
+                Architecture & Systems
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip" data-i18n="experience.vk.stack.microservices">Microservices</span>
+                <span class="chip" data-i18n="skills.tags.monolithDecomp">Monolith decomposition</span>
+                <span class="chip">DDD</span>
+                <span class="chip">CQRS</span>
+                <span class="chip">REST API</span>
+                <span class="chip">OOP</span>
+                <span class="chip">FP</span>
+              </div>
+            </article>
+
+            <article class="reveal surface border border-app rounded-2xl p-6 md:col-span-2">
+              <h3 class="font-medium mb-4" data-i18n="skills.groups.messaging">
+                Messaging & Data
+              </h3>
+              <div class="flex flex-wrap gap-2">
+                <span class="chip">Kafka</span>
+                <span class="chip">RabbitMQ</span>
+                <span class="chip">Postgres</span>
+                <span class="chip">IBM Db2</span>
+              </div>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- Education & Certifications -->
+      <!-- ============================================================ -->
+      <section id="education" class="py-16 sm:py-24">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+          <header class="reveal mb-10 md:mb-12">
+            <p class="text-sm font-medium uppercase tracking-wider text-muted">
+              <span data-i18n="eduCert.eyebrow">Background</span>
+            </p>
+            <h2
+              class="mt-2 text-3xl md:text-4xl font-semibold tracking-tight"
+              data-i18n="eduCert.title"
+            >
+              Education & Certifications
+            </h2>
+          </header>
+
+          <div class="grid grid-cols-1 md:grid-cols-2 gap-4 md:gap-5">
+            <article class="reveal surface border border-app rounded-2xl p-6 md:p-7">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-accent/15 text-accent"
+                  aria-hidden="true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    width="18"
+                    height="18"
+                  >
+                    <path d="M22 10 12 4 2 10l10 6 10-6Z" />
+                    <path d="M6 12v5c0 1 4 3 6 3s6-2 6-3v-5" />
+                  </svg>
+                </span>
+                <h3
+                  class="text-lg font-semibold tracking-tight"
+                  data-i18n="eduCert.educationTitle"
+                >
+                  Education
+                </h3>
+              </div>
+              <p
+                class="text-sm md:text-base leading-relaxed text-muted"
+                data-i18n="eduCert.educationBody"
+              >
+                Degree in Computer Science — International College of Business and Design at the
+                Moscow Technical University of Communications and Informatics. Sep 2006 — Jun
+                2010, Moscow.
+              </p>
+            </article>
+
+            <article class="reveal surface border border-app rounded-2xl p-6 md:p-7">
+              <div class="flex items-center gap-3 mb-3">
+                <span
+                  class="inline-flex items-center justify-center w-9 h-9 rounded-xl bg-accent/15 text-accent"
+                  aria-hidden="true"
+                >
+                  <svg
+                    xmlns="http://www.w3.org/2000/svg"
+                    viewBox="0 0 24 24"
+                    fill="none"
+                    stroke="currentColor"
+                    stroke-width="1.8"
+                    stroke-linecap="round"
+                    stroke-linejoin="round"
+                    width="18"
+                    height="18"
+                  >
+                    <path d="M12 15a4 4 0 1 0 0-8 4 4 0 0 0 0 8Z" />
+                    <path d="m8 14-2 7 6-3 6 3-2-7" />
+                  </svg>
+                </span>
+                <h3
+                  class="text-lg font-semibold tracking-tight"
+                  data-i18n="eduCert.certificationsTitle"
+                >
+                  Certifications
+                </h3>
+              </div>
+              <p
+                class="text-sm md:text-base leading-relaxed text-muted"
+                data-i18n="eduCert.certificationsBody"
+              >
+                General Electric Smallworld GIS Certified Developer — General Electric
+              </p>
+            </article>
+          </div>
+        </div>
+      </section>
+
+      <!-- ============================================================ -->
+      <!-- Languages -->
+      <!-- ============================================================ -->
+      <section id="languages" class="pb-16 sm:pb-24">
+        <div class="max-w-6xl mx-auto px-5 sm:px-6">
+          <header class="reveal mb-6">
+            <h2
+              class="text-2xl md:text-3xl font-semibold tracking-tight"
+              data-i18n="languages.title"
+            >
+              Languages
+            </h2>
+          </header>
+          <div class="reveal flex flex-wrap gap-3">
+            <span class="chip" data-i18n="languages.ru">Russian — native</span>
+            <span class="chip" data-i18n="languages.en">English — B2</span>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- ============================================================ -->
+    <!-- Footer / Contact -->
+    <!-- ============================================================ -->
+    <footer id="contact" class="border-t border-app py-12 sm:py-16">
+      <div class="max-w-6xl mx-auto px-5 sm:px-6">
+        <div
+          class="flex flex-col md:flex-row md:items-center md:justify-between gap-6 md:gap-8"
+        >
+          <div>
+            <p class="text-sm uppercase tracking-wider text-muted" data-i18n="footer.eyebrow">
+              Get in touch
+            </p>
+            <p
+              class="mt-2 text-xl md:text-2xl font-semibold tracking-tight"
+              data-i18n="footer.headline"
+            >
+              Open to engineering leadership roles.
+            </p>
+          </div>
+          <div class="flex items-center gap-3">
+            <a class="btn btn-primary" href="mailto:gregoryagapov@icloud.com">
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <rect x="3" y="5" width="18" height="14" rx="2" />
+                <path d="m3 7 9 6 9-6" />
+              </svg>
+              <span data-i18n="footer.email">Email</span>
+            </a>
+            <a
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-app surface hover:border-accent transition-colors"
+              href="https://github.com/grgrwlkr"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n-attr="aria-label:footer.githubAria"
+              aria-label="GitHub profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              >
+                <path
+                  d="M12 .5C5.65.5.5 5.66.5 12.02c0 5.09 3.29 9.4 7.86 10.93.58.1.79-.25.79-.56 0-.28-.01-1.02-.02-2-3.2.7-3.87-1.54-3.87-1.54-.52-1.32-1.27-1.67-1.27-1.67-1.04-.71.08-.7.08-.7 1.15.08 1.76 1.18 1.76 1.18 1.02 1.76 2.69 1.25 3.34.96.1-.74.4-1.25.72-1.54-2.55-.29-5.24-1.28-5.24-5.69 0-1.26.45-2.29 1.18-3.1-.12-.29-.51-1.46.11-3.04 0 0 .97-.31 3.18 1.18a11.06 11.06 0 0 1 5.78 0c2.21-1.49 3.18-1.18 3.18-1.18.62 1.58.23 2.75.11 3.04.74.81 1.18 1.84 1.18 3.1 0 4.42-2.7 5.39-5.27 5.68.41.36.78 1.05.78 2.13 0 1.54-.01 2.78-.01 3.16 0 .31.21.67.79.55C20.21 21.41 23.5 17.1 23.5 12.02 23.5 5.66 18.35.5 12 .5z"
+                />
+              </svg>
+            </a>
+            <a
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-app surface hover:border-accent transition-colors"
+              href="https://www.linkedin.com/in/gregory-agapov-24b13221"
+              target="_blank"
+              rel="noopener noreferrer"
+              data-i18n-attr="aria-label:footer.linkedinAria"
+              aria-label="LinkedIn profile"
+            >
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="currentColor"
+                width="18"
+                height="18"
+                aria-hidden="true"
+              >
+                <path
+                  d="M20.45 20.45h-3.55v-5.57c0-1.33-.03-3.04-1.85-3.04-1.86 0-2.15 1.45-2.15 2.95v5.66H9.36V9h3.41v1.56h.05c.48-.9 1.64-1.85 3.38-1.85 3.62 0 4.29 2.38 4.29 5.47v6.27zM5.34 7.43a2.06 2.06 0 1 1 0-4.12 2.06 2.06 0 0 1 0 4.12zM7.12 20.45H3.56V9h3.56v11.45zM22.22 0H1.77C.79 0 0 .77 0 1.72v20.56C0 23.23.79 24 1.77 24h20.45c.98 0 1.78-.77 1.78-1.72V1.72C24 .77 23.2 0 22.22 0z"
+                />
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div
+          class="mt-10 pt-6 border-t border-app flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-muted"
+        >
+          <p>
+            © <span id="year">2026</span> Gregory Agapov.
+            <span data-i18n="footer.rights">All rights reserved.</span>
+          </p>
+          <a href="#top" class="hover:text-[color:var(--text)] transition-colors" data-i18n="footer.backToTop"
+            >Back to top</a
+          >
+        </div>
+      </div>
+    </footer>
+
+    <!-- ============================================================ -->
+    <!-- Scripts: i18n, theme, year, reveal -->
+    <!-- ============================================================ -->
+    <script>
+      // ---------- i18n dictionary ----------
+      const dict = {
+        en: {
+          pageTitle: 'Gregory Agapov — Engineering Team Lead',
+          a11y: { skipToContent: 'Skip to content' },
+          nav: {
+            about: 'About',
+            impact: 'Impact',
+            experience: 'Experience',
+            skills: 'Skills',
+            contact: 'Contact',
+            themeAria: 'Toggle color theme',
+            langRuAria: 'Switch to Russian',
+            langEnAria: 'Switch to English'
+          },
+          hero: {
+            kicker: 'Moscow, Russia',
+            role: 'Engineering Team Lead',
+            summary:
+              "Hands-on Team Lead with 15+ years in software engineering and 5+ years of direct people management across teams of 6–8. Builds products from MVP to scale without losing technical depth. Currently leading VK's Donations product team — 8 direct reports across backend, frontend, mobile, and QA.",
+            email: 'Email',
+            portraitAlt: 'Portrait of Gregory Agapov'
+          },
+          impact: {
+            eyebrow: 'Numbers I delivered',
+            title: 'Selected Impact',
+            cards: [
+              {
+                value: '+3,276',
+                label: 'creators with Donations enabled',
+                context:
+                  '+3.96% over the active-creator base, first 3 weeks after VK Donations rebrand'
+              },
+              {
+                value: '+469',
+                label: 'monetizing creators',
+                context: '+1.4% in the first 3 weeks after the rebrand'
+              },
+              {
+                value: '+880,743 ₽',
+                label: 'donations turnover',
+                context: '+0.37% lift in the first 3 weeks after the rebrand'
+              },
+              {
+                value: '20K → millions',
+                label: 'goods cap in VK Communities',
+                context: 'Removed business limit by coordinating 3 teams'
+              },
+              {
+                value: '40 / ~3M',
+                label: 'Ozon sellers / products imported',
+                context: '~1M product offers via AdBlogger'
+              },
+              {
+                value: '35% → 64% / 84%',
+                label: 'VKUI coverage iOS / Android',
+                context: 'Frontend unification across iOS, Android, web'
+              },
+              {
+                value: '60K',
+                label: 'users on Performance Review',
+                context: 'Two high-load windows per year, turnaround led at T-Bank'
+              }
+            ]
+          },
+          experience: {
+            eyebrow: 'Career',
+            title: 'Experience',
+            vk: {
+              donations: {
+                role: 'Team Lead, Donations Product Team — Communities Business Unit',
+                bullets: [
+                  'Lead the Donations product team with 8 direct reports: 3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA.',
+                  'Within one quarter, delivered the Donations rebrand and launched Donations in VK profiles, where the flow had previously been available only in Communities.',
+                  'Aligned the product backend team with a dedicated migration team to accelerate the Donations service move from monolith to microservices.',
+                  'First 3 weeks after the rebrand release: +3,276 creators with Donations enabled (+3.96%), +469 monetizing creators (+1.4%), +880,743 ₽ in donations turnover (+0.37%), +3,578 donations (+0.55%).'
+                ]
+              },
+              commerce: {
+                role: 'Team Lead, Social Commerce Platform Team',
+                bullets: [
+                  'Led a platform team of 8 direct reports and coordinated the goods-scaling program across 3 teams.',
+                  'Lifted the goods cap in VK Communities from 20K to millions through load testing and a coordinated release.',
+                  'Launched the 40-seller Ozon integration: ~3M imported products and ~1M AdBlogger offers.',
+                  'Hit the recommendation-system migration deadline tied to the Hadoop shutdown and worked through an incident without losing a significant share of traffic.',
+                  'Increased VKUI coverage on iOS from 35% to 64% and reached 84% on Android, leading frontend unification across iOS, Android, and web.'
+                ]
+              },
+              sharedLabel: 'Shared VK stack:',
+              stack: {
+                inhouseStorage: 'in-house storage',
+                monolith: 'monolith',
+                microservices: 'microservices'
+              }
+            },
+            tinkoff: {
+              mentoring: {
+                role: 'Team Lead, Mentoring Project',
+                bullets: [
+                  "Led a 6-person cross-functional team (backend, frontend, QA, design, analytics) and shipped the MVP of the company's first mentoring platform on schedule.",
+                  "Staffed the company's first pilot entirely with mentoring-program participants who later moved into full-time roles.",
+                  'Mentored 2 backend engineers inside the program.'
+                ]
+              },
+              perfReview: {
+                role: 'Team Lead, Performance Review Project',
+                bullets: [
+                  'Took over the Performance Review platform — 60K users with two high-load windows per year — during its reset and aligned a one-year stabilization plan with the business.',
+                  'Built and grew a 7-person cross-functional team that established stable execution.',
+                  'Mentored a backend engineer who moved into a full-time role on the project.'
+                ]
+              },
+              orgStructure: {
+                role: 'Senior Developer, Organization Structure Project',
+                bullets: [
+                  'Independently designed, built, and launched a new internal service from scratch on .NET, Angular, Postgres, and microservices — owning backend, frontend, and rollout.',
+                  'Worked directly with business and analysts, challenged unclear requirements, and chose workable implementation paths.'
+                ]
+              },
+              midPerfReview: {
+                role: 'Middle Developer, Performance Review Project',
+                bullets: [
+                  'Developed the Performance Review platform, the in-house task tracker, and related feedback systems while continuing to grow through internal training.'
+                ]
+              }
+            },
+            neotech: {
+              gis: {
+                role: 'Senior Developer, GIS Projects',
+                bullets: [
+                  'Built and customized solutions on General Electric Smallworld GIS for major telecom customers across Russia and the CIS — MTS, MGTS, TAT Telecom.',
+                  'Reverse-engineered client systems without source-code access, preserving the ability to keep developing in a constrained enterprise environment.',
+                  'Attended international GE Smallworld developer conferences in the UK, Italy, and the Netherlands; earned the GE Smallworld GIS Certified Developer certification.',
+                  'Developed extensions in Magic and Spatial DB plus client-side features in Java, JSP, JavaScript, jQuery, and Mustache.'
+                ]
+              }
+            },
+            cinimex: {
+              role: 'Middle Developer'
+            },
+            aisa: {
+              railway: {
+                role: 'Middle Developer, Railway Automation Project',
+                bullets: [
+                  'Automated how Russian Railways (RZD) machinists interacted with route documentation through touch-screen terminals and digital forms (XFDL, IBM Lotus Forms).',
+                  'Built web services with Java EE (JSP, SOAP/WSDL) and optimized queries and stored procedures in IBM Db2.'
+                ]
+              }
+            }
+          },
+          skills: {
+            eyebrow: 'Stack & strengths',
+            title: 'Skills',
+            groups: {
+              currentVk: 'Current stack (VK)',
+              prevTinkoff: 'Previous stack (Tinkoff)',
+              leadership: 'Leadership & Delivery',
+              architecture: 'Architecture & Systems',
+              messaging: 'Messaging & Data'
+            },
+            tags: {
+              teamLeadership: 'Team leadership',
+              mentoring: 'Mentoring',
+              teamBuilding: 'Team building',
+              stakeholder: 'Stakeholder management',
+              roadmap: 'Roadmap planning',
+              crossFn: 'Cross-functional coordination',
+              monolithDecomp: 'Monolith decomposition'
+            }
+          },
+          eduCert: {
+            eyebrow: 'Background',
+            title: 'Education & Certifications',
+            educationTitle: 'Education',
+            educationBody:
+              'Degree in Computer Science — International College of Business and Design at the Moscow Technical University of Communications and Informatics. Sep 2006 — Jun 2010, Moscow.',
+            certificationsTitle: 'Certifications',
+            certificationsBody:
+              'General Electric Smallworld GIS Certified Developer — General Electric'
+          },
+          languages: {
+            title: 'Languages',
+            ru: 'Russian — native',
+            en: 'English — B2'
+          },
+          footer: {
+            eyebrow: 'Get in touch',
+            headline: 'Open to engineering leadership roles.',
+            email: 'Email',
+            githubAria: 'GitHub profile',
+            linkedinAria: 'LinkedIn profile',
+            rights: 'All rights reserved.',
+            backToTop: 'Back to top'
+          }
+        },
+        ru: {
+          pageTitle: 'Григорий Агапов — Руководитель команды разработки',
+          a11y: { skipToContent: 'Перейти к содержимому' },
+          nav: {
+            about: 'Обо мне',
+            impact: 'Результаты',
+            experience: 'Опыт',
+            skills: 'Навыки',
+            contact: 'Контакты',
+            themeAria: 'Переключить тему',
+            langRuAria: 'Переключить на русский',
+            langEnAria: 'Switch to English'
+          },
+          hero: {
+            kicker: 'Москва, Россия',
+            role: 'Руководитель команды (Team Lead)',
+            summary:
+              'Hands-on Team Lead с 15+ годами в разработке и 5+ годами прямого руководства командами из 6–8 человек. Строю продукт от MVP до масштабирования, не теряя техническую глубину. Сейчас веду продуктовую команду Донатов в VK — 8 прямых подчинённых: бэкенд, фронтенд, мобайл и QA.',
+            email: 'Написать',
+            portraitAlt: 'Портрет Григория Агапова'
+          },
+          impact: {
+            eyebrow: 'Цифры, которые я довёл до релиза',
+            title: 'Ключевые результаты',
+            cards: [
+              {
+                value: '+3 276',
+                label: 'авторов с подключенным донатом',
+                context:
+                  '+3,96% к базе активных авторов, первые 3 недели после ребрендинга Донатов VK'
+              },
+              {
+                value: '+469',
+                label: 'зарабатывающих авторов',
+                context: '+1,4% за первые 3 недели после ребрендинга'
+              },
+              {
+                value: '+880 743 ₽',
+                label: 'оборот донатов',
+                context: '+0,37% за первые 3 недели после ребрендинга'
+              },
+              {
+                value: '20 тыс. → миллионы',
+                label: 'лимит товаров в Сообществах VK',
+                context: 'Снят за счёт координации 3 команд'
+              },
+              {
+                value: '40 / ~3 млн',
+                label: 'продавцов Ozon / импортированных товаров',
+                context: '~1 млн товарных предложений через AdBlogger'
+              },
+              {
+                value: '35% → 64% / 84%',
+                label: 'покрытие VKUI iOS / Android',
+                context: 'Унификация фронтенда между iOS, Android и вебом'
+              },
+              {
+                value: '60 тыс.',
+                label: 'пользователей Performance Review',
+                context: 'Два пиковых периода в год, turnaround в Т-Банке'
+              }
+            ]
+          },
+          experience: {
+            eyebrow: 'Карьера',
+            title: 'Опыт работы',
+            vk: {
+              donations: {
+                role: 'Team Lead, продуктовая команда «Донаты», направление Сообществ',
+                bullets: [
+                  'Веду продуктовую команду Донатов из 8 прямых подчинённых: 3 бэкенд, 2 фронтенд, 1 iOS, 1 Android, 1 QA.',
+                  'За один квартал провёл ребрендинг Донатов и запустил Донаты в профилях VK, где раньше сценарий был доступен только в Сообществах.',
+                  'Скоординировал бэкенд продукта и отдельную команду миграции, чтобы ускорить перевод сервиса Донатов из монолита в микросервисы.',
+                  'За первые 3 недели после релиза ребрендинга: +3 276 авторов с подключенным донатом (+3,96%), +469 зарабатывающих авторов (+1,4%), +880 743 ₽ оборота (+0,37%), +3 578 донов (+0,55%).'
+                ]
+              },
+              commerce: {
+                role: 'Team Lead, платформенная команда, направление социальной коммерции',
+                bullets: [
+                  'Руководил платформенной командой из 8 прямых подчинённых и координировал масштабирование товаров между 3 командами.',
+                  'Снял ограничение на количество товаров в Сообществах VK с 20 тыс. до миллионов за счёт нагрузочного тестирования и согласованного релиза.',
+                  'Запустил интеграцию с 40 продавцами Ozon: ~3 млн импортированных товаров и ~1 млн предложений через AdBlogger.',
+                  'Уложился в дедлайн миграции системы рекомендаций к отключению Hadoop и прошёл через инцидент без потери значимой доли трафика.',
+                  'Увеличил покрытие VKUI на iOS с 35% до 64%, на Android — до 84%, ведя унификацию фронтенда между iOS, Android и вебом.'
+                ]
+              },
+              sharedLabel: 'Общий стек по проектам VK:',
+              stack: {
+                inhouseStorage: 'in-house хранилище',
+                monolith: 'монолит',
+                microservices: 'микросервисы'
+              }
+            },
+            tinkoff: {
+              mentoring: {
+                role: 'Team Lead, проект «Менторство»',
+                bullets: [
+                  'Руководил кросс-функциональной командой из 6 человек (бэкенд, фронтенд, QA, дизайн, аналитика) и в срок запустил MVP первой в компании платформы наставничества.',
+                  'Собрал первый в компании пилот полностью из участников программы наставничества, которые затем перешли в штатные роли.',
+                  'Менторил 2 бэкенд-инженеров внутри программы.'
+                ]
+              },
+              perfReview: {
+                role: 'Team Lead, проект Performance Review',
+                bullets: [
+                  'Принял платформу Performance Review (60 тыс. пользователей, два пиковых периода в год) на этапе перезапуска и согласовал с бизнесом годовой план стабилизации.',
+                  'Собрал и развил кросс-функциональную команду из 7 человек, выстроив устойчивую работу проекта.',
+                  'Менторил бэкенд-инженера, который перешёл в штатную роль внутри проекта.'
+                ]
+              },
+              orgStructure: {
+                role: 'Senior разработчик, проект «Орг. структура»',
+                bullets: [
+                  'Самостоятельно спроектировал, разработал и вывел в эксплуатацию новый внутренний сервис с нуля на .NET, Angular, Postgres и микросервисах, закрыв бэкенд, фронтенд и запуск.',
+                  'Напрямую работал с бизнесом и аналитиками, разбирал спорные требования и выбирал рабочий путь реализации.'
+                ]
+              },
+              midPerfReview: {
+                role: 'Middle разработчик, проект Performance Review',
+                bullets: [
+                  'Развивал платформу Performance Review, внутренний трекер задач и связанные системы обратной связи, параллельно усиливая инженерный уровень через внутреннее обучение.'
+                ]
+              }
+            },
+            neotech: {
+              gis: {
+                role: 'Senior разработчик, ГИС-проекты',
+                bullets: [
+                  'Разрабатывал и кастомизировал решения на General Electric Smallworld GIS для крупных телеком-заказчиков из России и СНГ — MTS, MGTS, TAT Telecom.',
+                  'Проводил обратную разработку клиентских систем без доступа к исходному коду, сохраняя возможность дальнейшей разработки в сложной корпоративной среде.',
+                  'Участвовал в международных конференциях GE Smallworld в Великобритании, Италии и Нидерландах; получил сертификацию GE Smallworld GIS Certified Developer.',
+                  'Разрабатывал расширения на Magic и Spatial DB, а также клиентскую часть на Java, JSP, JavaScript, jQuery и Mustache.'
+                ]
+              }
+            },
+            cinimex: {
+              role: 'Middle разработчик'
+            },
+            aisa: {
+              railway: {
+                role: 'Middle разработчик, проект автоматизации РЖД',
+                bullets: [
+                  'Автоматизировал взаимодействие машинистов РЖД с маршрутной документацией через сенсорные терминалы и цифровые формы (XFDL, IBM Lotus Forms).',
+                  'Разрабатывал веб-сервисы на Java EE (JSP, SOAP/WSDL), оптимизировал запросы и хранимые процедуры в IBM Db2.'
+                ]
+              }
+            }
+          },
+          skills: {
+            eyebrow: 'Стек и сильные стороны',
+            title: 'Навыки',
+            groups: {
+              currentVk: 'Текущий стек (VK)',
+              prevTinkoff: 'Предыдущий стек (Tinkoff)',
+              leadership: 'Лидерство и управление',
+              architecture: 'Архитектура и системы',
+              messaging: 'Сообщения и данные'
+            },
+            tags: {
+              teamLeadership: 'Лидерство в команде',
+              mentoring: 'Менторинг',
+              teamBuilding: 'Сборка команд',
+              stakeholder: 'Работа со стейкхолдерами',
+              roadmap: 'Планирование роадмапа',
+              crossFn: 'Кросс-функциональная координация',
+              monolithDecomp: 'Декомпозиция монолита'
+            }
+          },
+          eduCert: {
+            eyebrow: 'Базовая подготовка',
+            title: 'Образование и сертификации',
+            educationTitle: 'Образование',
+            educationBody:
+              'Информатика — Международный колледж бизнеса и дизайна при МТУСИ. сент. 2006 — июнь 2010, Москва.',
+            certificationsTitle: 'Сертификации',
+            certificationsBody:
+              'General Electric Smallworld GIS Certified Developer — General Electric'
+          },
+          languages: {
+            title: 'Языки',
+            ru: 'Русский — родной',
+            en: 'Английский — B2'
+          },
+          footer: {
+            eyebrow: 'Связаться',
+            headline: 'Открыт к ролям engineering-лидера.',
+            email: 'Написать',
+            githubAria: 'Профиль на GitHub',
+            linkedinAria: 'Профиль на LinkedIn',
+            rights: 'Все права защищены.',
+            backToTop: 'Наверх'
+          }
+        }
+      };
+
+      let currentLang = document.documentElement.lang === 'ru' ? 'ru' : 'en';
+
+      // Resolve a dotted path like "experience.vk.donations.bullets.0" against the current dictionary.
+      function t(k) {
+        return k.split('.').reduce((o, p) => (o && o[p] !== undefined ? o[p] : undefined), dict[currentLang]) ?? k;
+      }
+
+      function applyLang(l) {
+        currentLang = l;
+        document.documentElement.lang = l;
+        if (!(window.__urlOverrides && window.__urlOverrides.lang)) {
+          try {
+            localStorage.setItem('lang', l);
+          } catch (e) {
+            /* ignore */
+          }
+        }
+
+        document.title = t('pageTitle');
+
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          el.textContent = t(el.dataset.i18n);
+        });
+        document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+          el.dataset.i18nAttr.split(',').forEach((pair) => {
+            const [attr, key] = pair.split(':').map((s) => s.trim());
+            if (attr && key) el.setAttribute(attr, t(key));
+          });
+        });
+
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
+          btn.setAttribute('aria-pressed', btn.dataset.lang === l ? 'true' : 'false');
+        });
+      }
+
+      // ---------- Theme ----------
+      function applyTheme(theme) {
+        const isDark = theme === 'dark';
+        document.documentElement.classList.toggle('dark', isDark);
+        if (!(window.__urlOverrides && window.__urlOverrides.theme)) {
+          try {
+            localStorage.setItem('theme', theme);
+          } catch (e) {
+            /* ignore */
+          }
+        }
+        // Show the icon that represents the *current* theme; clicking flips it.
+        document.querySelectorAll('[data-theme-icon]').forEach((el) => {
+          el.classList.toggle('hidden', el.dataset.themeIcon !== theme);
+        });
+        const meta = document.querySelector('meta[name="theme-color"]');
+        if (meta) meta.setAttribute('content', isDark ? '#0A0A0B' : '#FFFFFF');
+      }
+
+      // ---------- Wire up ----------
+      document.addEventListener('DOMContentLoaded', () => {
+        // Initial theme honors the pre-paint script's decision.
+        const initialTheme = document.documentElement.classList.contains('dark') ? 'dark' : 'light';
+        applyTheme(initialTheme);
+
+        // Initial lang likewise.
+        applyLang(document.documentElement.lang === 'ru' ? 'ru' : 'en');
+
+        document.getElementById('themeToggle').addEventListener('click', () => {
+          const next = document.documentElement.classList.contains('dark') ? 'light' : 'dark';
+          applyTheme(next);
+        });
+
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
+          btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+        });
+
+        // Footer year
+        document.getElementById('year').textContent = String(new Date().getFullYear());
+
+        // Reveal-on-scroll
+        const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+        const reveals = document.querySelectorAll('.reveal');
+        if (reduceMotion || !('IntersectionObserver' in window)) {
+          reveals.forEach((el) => el.classList.add('is-visible'));
+        } else {
+          const io = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (entry.isIntersecting) {
+                  entry.target.classList.add('is-visible');
+                  io.unobserve(entry.target);
+                }
+              });
+            },
+            { threshold: 0.12, rootMargin: '0px 0px -8% 0px' }
+          );
+          reveals.forEach((el) => io.observe(el));
+        }
+      });
+    </script>
+  </body>
+</html>

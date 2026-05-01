@@ -43,7 +43,7 @@ basics:
     - name: Russian
       proficiency: native
     - name: English
-      proficiency: B1
+      proficiency: B2
 
 positioning:
   coreThemes:
@@ -125,8 +125,32 @@ experience:
         achievements:
           - Delivered the Donations rebrand and launched Donations in VK profiles within one quarter, where donations had previously been available only in Communities.
           - Expanded Donations beyond Communities into VK profiles, increasing audience reach and contributing to product DAU/MAU growth.
+          - Drove measurable lift from the Donations rebrand within the first three weeks after release, partly preceding the full Donations-in-profile rollout to which the rebrand belongs - +3,276 creators with Donations enabled (+3.96% over the active-creator base), +469 monetizing creators (+1.4%), +880,743 RUB in donations turnover (+0.37%), and +3,578 donations (+0.55%).
+        metrics:
+          donationsRebrandFirstThreeWeeks:
+            window: first 3 weeks after release
+            scope: Donations rebrand (sub-feature of the Donations-in-profile initiative)
+            results:
+              - metric: creators with Donations enabled
+                deltaAbsolute: 3276
+                deltaPercentVsBase: 3.96
+                baseDescription: total active-creator base
+              - metric: monetizing creators
+                deltaAbsolute: 469
+                deltaPercentVsBase: 1.4
+                baseDescription: total monetizing-creator base
+              - metric: donations turnover
+                deltaAbsoluteRub: 880743
+                deltaPercentVsBase: 0.37
+                baseDescription: total donations turnover
+              - metric: number of donations
+                deltaAbsolute: 3578
+                deltaPercentVsBase: 0.55
+                baseDescription: total donation count
+            source: product manager and project analyst summary, internal Slack
+            longerTermExpectation: longer-running effect expected to exceed the 3-week numbers
         notes:
-          - Add quantified DAU/MAU impact before publishing external resume versions.
+          - Donations rebrand metrics are confirmed; full Donations-in-profile rollout metrics (DAU/MAU) still pending and can replace placeholders later.
       - id: vk-soccom-platform
         teamName: Platform team
         businessUnit: SocCom
@@ -168,9 +192,9 @@ experience:
       - Microservices
     notes:
       - User confirmed the move to VK in April 2025 as a Team Lead.
-      - Donations assignment now has confirmed team scope and delivery outcomes.
+      - Donations assignment now has confirmed team scope, delivery outcomes, and quantified rebrand metrics from the first three weeks.
       - SocCom assignment now has confirmed scaling, migration, process, and frontend-unification outcomes.
-      - Quantified Donations DAU/MAU impact is still missing.
+      - DAU/MAU impact from the full Donations-in-profile rollout is still pending; the early rebrand numbers are a partial early read.
     tags:
       - current_role
       - team_lead
@@ -205,8 +229,9 @@ experience:
         qaEngineers: 1
         uiDesigners: 1
         analysts: 1
+    isFirstInCompany: true
     achievements:
-      - Built the MVP on schedule and got strong feedback from business and users.
+      - Built the MVP of the company's first mentoring platform on schedule and got strong feedback from business and users.
       - Led the company's first pilot project staffed only by mentees, who later moved into full-time roles.
       - Mentored two backend mentees while still helping the previous team with development tasks.
     stack:
@@ -226,6 +251,7 @@ experience:
       - delivery
       - people_growth
       - microservices
+      - first_in_company
 
   - id: tinkoff-performance-review-team-lead
     company: Tinkoff Bank (T-Bank)
@@ -234,6 +260,8 @@ experience:
     start: 2021-04
     end: 2022-12
     location: Moscow, Russia
+    userScope: 60000
+    loadPattern: twice-yearly peaks (fall review + spring compensation cycle)
     team:
       size: 7
       composition:
@@ -315,6 +343,7 @@ experience:
 
   - id: neotech-gis-senior
     company: Neotech
+    alternativeName: Paravan 2000
     title: Senior Developer
     project: GIS projects
     start: 2013-12
@@ -409,6 +438,7 @@ projects:
       - Includes a one-quarter rebrand and product expansion from Communities into VK profiles.
       - Demonstrates contribution to audience reach expansion and DAU/MAU growth.
       - Shows involvement in the move from monolith to microservices.
+      - Shipped a measurable rebrand uplift in 3 weeks - +3.96% creators with Donations enabled, +1.4% monetizing creators, +0.37% turnover, +0.55% donation count - as an early read on the larger Donations-in-profile feature.
     tags:
       - current_role
       - product_team
@@ -418,6 +448,7 @@ projects:
       - rebranding
       - audience_growth
       - monolith_to_microservices
+      - measurable_business_impact
 
   - id: vk-soccom
     name: Platform team, SocCom business unit
@@ -609,10 +640,10 @@ targetProfiles:
     targetTitle: Team Lead
     goal: Maximize evidence of leadership, mentoring, turnaround ownership, and hands-on technical credibility.
     summaryStrategy:
-      openingNarrative: Hands-on engineering leader who currently leads the Donations product team at VK and previously drove SocCom platform scaling, critical migration, and client unification, combining direct people management with earlier turnaround and mentoring wins at Tinkoff (T-Bank).
+      openingNarrative: Hands-on Team Lead with 15+ years in software engineering and 5+ years of direct people management across teams of 6-8. Builds products from MVP to scale without losing technical depth. Currently leading VK's Donations product team (8 direct reports across backend, frontend, mobile, and QA).
       proofPoints:
         - Leads an 8-person Donations team across backend, frontend, iOS, Android, and QA.
-        - Delivered a one-quarter rebrand and expanded Donations from Communities into VK profiles.
+        - Delivered a one-quarter rebrand and expanded Donations from Communities into VK profiles, with the rebrand alone adding +3.96% creators with Donations enabled and +1.4% monetizing creators in the first three weeks.
         - Helped accelerate the Donations service move from monolith to microservices.
         - Led SocCom platform work across three teams, including delivery leadership for three additional backend engineers, lifting community goods limits from 20K to millions and enabling 40 Ozon seller integrations with about 3M imported products.
         - Coordinated a critical recommendation-system migration under the Hadoop shutdown deadline and helped avoid major traffic loss.
@@ -672,7 +703,7 @@ verification:
   reviewBeforePublishing:
     - id: vk-role-details
       item: VK responsibilities and achievements
-      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. SocCom details are confirmed: a direct platform team of 8, cross-team synchronization across 3 teams during the goods-scaling initiative, delivery leadership for 3 additional backend engineers from another team, scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Optional follow-up precision before final publication: quantified Donations DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'
+      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. Donations rebrand metrics are confirmed for the first three weeks after release: +3,276 creators with Donations enabled (+3.96% over the active-creator base), +469 monetizing creators (+1.4%), +880,743 RUB in donations turnover (+0.37%), and +3,578 donations (+0.55%); these came from product manager and analyst summary and are an early partial read of the larger Donations-in-profile rollout. SocCom details are confirmed: a direct platform team of 8, cross-team synchronization across 3 teams during the goods-scaling initiative, delivery leadership for 3 additional backend engineers from another team, scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Optional follow-up precision before final publication: full Donations-in-profile DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'
     - id: legacy-contact-handles
       item: Mapping of legacy handles to actual public profiles
       detail: The icon row in the legacy resume includes "@xawkay" and "xawkay", but the services are not fully recoverable from PDF extraction.
