@@ -5,16 +5,8 @@
 .worktrees/
 .superpowers/
 
-# Cursor / editor-local state
-.cursor/*
-!.cursor/rules/
-!.cursor/rules/**
-!.cursor/hooks/
-.cursor/hooks/*
-!.cursor/hooks/state/
-.cursor/hooks/state/*
-!.cursor/hooks/state/continual-learning.json
-!.cursor/hooks/state/continual-learning-index.json
+# Claude Code / editor-local state
+.claude/settings.local.json
 .vscode/
 .idea/
 
