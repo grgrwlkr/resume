@@ -423,6 +423,11 @@
           padding: 0.4rem 0.7rem !important;
           font-size: 0.85rem !important;
         }
+        /* The "Download CV (PDF)" button is meaningless inside the PDF itself.
+           Higher specificity than `#about .btn` above so it actually hides. */
+        #about .btn[data-pdf] {
+          display: none !important;
+        }
         #about .btn + .btn,
         #about > div > div .btn ~ .btn {
           margin-left: 0;
@@ -649,6 +654,9 @@
       html.print-mode #about .btn {
         padding: 0.4rem 0.7rem;
         font-size: 0.85rem;
+      }
+      html.print-mode #about .btn[data-pdf] {
+        display: none !important;
       }
       /* Mirror the @media print bullet fallback so ?print=1 preview matches */
       html.print-mode ul li.pl-5.relative {

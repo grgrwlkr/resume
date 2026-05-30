@@ -8,8 +8,8 @@ application code here — only resume content, generation rules, and one static 
 cv.master.yaml                              # canonical facts (source of truth)
   ├── resume-examples/*.en.md               # derived draft (English)
   ├── resume-examples/*.ru.md               # derived draft (Russian)
-  └── landing/index.html                    # derived single-file landing (RU/EN i18n)
-        └── build-pdf.sh → dist/*.{ru,en}.pdf
+  └── docs/index.html                       # derived single-file landing (RU/EN i18n)
+        └── build-pdf.sh → dist/*.{ru,en}.pdf  # docs/ is the GitHub Pages publish root
 ```
 
 ## Source of truth & propagation
@@ -84,10 +84,12 @@ cv.master.yaml                              # canonical facts (source of truth)
 
 ## Landing
 
-- `landing/index.html` is a single-file bilingual (RU/EN) landing: pure HTML +
+- Lives in `docs/` because GitHub Pages ("Deploy from a branch") only publishes from
+  `/ (root)` or `/docs`. `docs/.nojekyll` disables Jekyll so files are served verbatim.
+- `docs/index.html` is a single-file bilingual (RU/EN) landing: pure HTML +
   Tailwind Play CDN + vanilla JS, no build step. Strings live in a `data-i18n` i18n
   dictionary; theme and language persist in `localStorage`.
-- `landing/build-pdf.sh` renders it to A4 PDFs (`dist/*.{en,ru}.pdf`) via headless
+- `docs/build-pdf.sh` renders it to A4 PDFs (`docs/dist/*.{en,ru}.pdf`) via headless
   Chrome using `?lang=<l>&theme=light&print=1`.
 - Treat the landing as a third derived artifact alongside the two drafts — see the
   propagation rules above.

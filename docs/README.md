@@ -2,14 +2,24 @@
 
 Single-file bilingual (RU/EN) personal landing. Pure HTML + Tailwind Play CDN + vanilla JS. No build, no npm.
 
+Lives in `docs/` so GitHub Pages can publish it (Pages "Deploy from a branch" only
+serves from `/ (root)` or `/docs`). `docs/.nojekyll` disables Jekyll.
+
 ## Files
 
 ```
-landing/
+docs/
 ├── index.html             # everything: markup, styles, i18n dict, theme, reveal
 ├── README.md
-└── assets/
-    └── portrait.jpg
+├── build-pdf.sh           # renders index.html → dist/*.{en,ru}.pdf (headless Chrome)
+├── .nojekyll              # serve files verbatim, no Jekyll processing
+├── assets/
+│   ├── portrait.jpg
+│   ├── og.jpg             # 1200×630 social card
+│   └── og-card.html       # source template for og.jpg
+└── dist/
+    ├── Gregory_Agapov_Resume.en.pdf
+    └── Gregory_Agapov_Resume.ru.pdf
 ```
 
 ## Run locally
@@ -17,39 +27,32 @@ landing/
 Just open the file:
 
 ```bash
-open /Users/xawkay/Documents/Resume/landing/index.html
+open /Users/xawkay/Develop/resume/docs/index.html
 ```
 
 Or serve it (recommended — some browsers block `localStorage` on `file://`):
 
 ```bash
-cd /Users/xawkay/Documents/Resume/landing
+cd /Users/xawkay/Develop/resume/docs
 python3 -m http.server 8000
 # → http://localhost:8000
 ```
 
 ## Deploy
 
-### GitHub Pages
+### GitHub Pages (current)
 
-```bash
-cd /Users/xawkay/Documents/Resume/landing
-git init && git add . && git commit -m "Initial landing"
-git branch -M main
-git remote add origin git@github.com:grgrwlkr/landing.git
-git push -u origin main
-# Repo → Settings → Pages → Deploy from branch: main / root
+The site already lives in `docs/` on `main` of `github.com/grgrwlkr/resume`. Enable it once:
+
+```
+Repo → Settings → Pages → Deploy from a branch → Branch: main / folder: /docs → Save
 ```
 
-### Vercel
+After that, every `git push` to `main` republishes. Default URL: `https://grgrwlkr.github.io/resume/`.
 
-```bash
-npx vercel --prod   # static project, no framework, output is the folder itself
-```
+### Vercel / Netlify (alt)
 
-### Netlify drop
-
-Drag the `landing/` folder into the Netlify dashboard — done.
+Static, no framework — point the project's output/publish directory at `docs/`.
 
 ## Notes
 
