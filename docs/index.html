@@ -47,6 +47,7 @@
         "@context": "https://schema.org",
         "@type": "Person",
         "name": "Gregory Agapov",
+        "alternateName": "Григорий Агапов",
         "jobTitle": "Engineering Team Lead",
         "email": "mailto:gregoryagapov@icloud.com",
         "image": "assets/og.jpg",
@@ -691,7 +692,7 @@
     <!-- ============================================================ -->
     <header class="sticky top-0 z-40 nav-surface">
       <div class="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between gap-4">
-        <a href="#top" class="font-display font-semibold tracking-tight text-lg sm:text-xl">Gregory Agapov</a>
+        <a href="#top" class="font-display font-semibold tracking-tight text-lg sm:text-xl" data-i18n="name">Gregory Agapov</a>
 
         <nav aria-label="Primary" class="hidden md:flex items-center gap-1 text-sm">
           <a
@@ -915,6 +916,7 @@
             <h1
               id="hero-heading"
               class="text-4xl sm:text-5xl md:text-6xl font-semibold tracking-tight leading-[1.05]"
+              data-i18n="name"
             >
               Gregory Agapov
             </h1>
@@ -1908,7 +1910,7 @@
           class="mt-10 pt-6 border-t border-app flex flex-col sm:flex-row items-start sm:items-center justify-between gap-3 text-sm text-muted"
         >
           <p>
-            © <span id="year">2026</span> Gregory Agapov.
+            © <span id="year">2026</span> <span data-i18n="name">Gregory Agapov</span>.
             <span data-i18n="footer.rights">All rights reserved.</span>
           </p>
           <a href="#top" class="hover:text-[color:var(--text)] transition-colors" data-i18n="footer.backToTop"
@@ -1926,6 +1928,7 @@
       const dict = {
         en: {
           pageTitle: 'Gregory Agapov — Engineering Team Lead',
+          name: 'Gregory Agapov',
           a11y: { skipToContent: 'Skip to content' },
           cta: { downloadCv: 'Download CV (PDF)' },
           nav: {
@@ -2133,6 +2136,7 @@
         },
         ru: {
           pageTitle: 'Григорий Агапов — Руководитель команды разработки',
+          name: 'Григорий Агапов',
           a11y: { skipToContent: 'Перейти к содержимому' },
           cta: { downloadCv: 'Скачать резюме (PDF)' },
           nav: {
