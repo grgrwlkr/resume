@@ -132,6 +132,12 @@
         --text: #0a0a0b;
         --muted: #6b6b72;
         --accent: #6366f1;
+        /* Liquid-glass chrome tokens (translucent fill + luminous edge) */
+        --glass-blur: 16px;
+        --glass-bg: rgba(255, 255, 255, 0.5);
+        --glass-border: rgba(255, 255, 255, 0.55);
+        --glass-hi: rgba(255, 255, 255, 0.85);
+        --glass-shadow: 0 12px 40px -16px rgba(20, 20, 50, 0.28);
       }
       html.dark {
         --bg: #0a0a0b;
@@ -139,6 +145,10 @@
         --border: #1f1f23;
         --text: #e6e6e8;
         --muted: #9a9aa3;
+        --glass-bg: rgba(255, 255, 255, 0.05);
+        --glass-border: rgba(255, 255, 255, 0.12);
+        --glass-hi: rgba(255, 255, 255, 0.16);
+        --glass-shadow: 0 12px 40px -12px rgba(0, 0, 0, 0.6);
       }
 
       html {
@@ -256,15 +266,64 @@
         border-radius: 0.5rem;
       }
 
-      /* Sticky nav surface */
+      /* Sticky nav surface — liquid-glass chrome */
       .nav-surface {
-        background: rgba(255, 255, 255, 0.72);
-        border-bottom: 1px solid var(--border);
-        -webkit-backdrop-filter: saturate(180%) blur(14px);
-        backdrop-filter: saturate(180%) blur(14px);
+        background: rgba(255, 255, 255, 0.6);
+        border-bottom: 1px solid var(--glass-border);
+        -webkit-backdrop-filter: saturate(190%) blur(var(--glass-blur));
+        backdrop-filter: saturate(190%) blur(var(--glass-blur));
+        box-shadow: inset 0 -1px 0 var(--glass-hi), 0 10px 30px -24px rgba(15, 15, 40, 0.55);
       }
       html.dark .nav-surface {
-        background: rgba(10, 10, 11, 0.65);
+        background: rgba(10, 10, 11, 0.55);
+      }
+
+      /* ── Liquid-glass utility ─────────────────────────────────────
+         Frosted translucency + luminous top edge (the inset highlight
+         is the cheap "specular lip" that reads as Apple Liquid Glass).
+         Only used on chrome — never on long-form body text. */
+      .glass {
+        background: var(--glass-bg);
+        -webkit-backdrop-filter: saturate(180%) blur(var(--glass-blur));
+        backdrop-filter: saturate(180%) blur(var(--glass-blur));
+        border: 1px solid var(--glass-border);
+        box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-hi);
+      }
+
+      /* Ambient gradient-mesh behind everything so the glass has colour
+         to refract — frosted panels are invisible over a flat fill.
+         Fixed + low-alpha so it never hurts body-text contrast. */
+      .site-aurora {
+        position: fixed;
+        inset: 0;
+        z-index: -10;
+        pointer-events: none;
+        background:
+          radial-gradient(38% 44% at 12% 8%, rgba(99, 102, 241, 0.2), transparent 60%),
+          radial-gradient(32% 40% at 88% 4%, rgba(168, 85, 247, 0.16), transparent 58%),
+          radial-gradient(44% 50% at 78% 88%, rgba(56, 189, 248, 0.12), transparent 60%);
+      }
+      html.dark .site-aurora {
+        background:
+          radial-gradient(40% 46% at 12% 6%, rgba(99, 102, 241, 0.26), transparent 60%),
+          radial-gradient(34% 42% at 90% 2%, rgba(168, 85, 247, 0.18), transparent 58%),
+          radial-gradient(46% 52% at 80% 90%, rgba(56, 189, 248, 0.14), transparent 60%);
+      }
+
+      /* Stat cards → glass. Scoped by #impact so the identical card
+         markup in skills/experience stays solid (id beats Tailwind). */
+      #impact article {
+        background: var(--glass-bg);
+        -webkit-backdrop-filter: saturate(180%) blur(var(--glass-blur));
+        backdrop-filter: saturate(180%) blur(var(--glass-blur));
+        border-color: var(--glass-border);
+        box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-hi);
+        transition: transform 220ms ease, box-shadow 220ms ease;
+      }
+      #impact article:hover {
+        transform: translateY(-3px);
+        box-shadow: var(--glass-shadow), inset 0 1px 0 var(--glass-hi),
+          0 0 0 1px rgba(99, 102, 241, 0.28);
       }
 
       /* Anchor offset to clear the sticky nav */
@@ -617,6 +676,19 @@
         .chip {
           background: var(--surface) !important;
         }
+        /* Liquid glass collapses to flat surfaces on paper —
+           backdrop-filter / translucency / blur don't print cleanly. */
+        .site-aurora {
+          display: none !important;
+        }
+        .glass,
+        #impact article {
+          background: var(--surface) !important;
+          -webkit-backdrop-filter: none !important;
+          backdrop-filter: none !important;
+          border-color: var(--border) !important;
+          box-shadow: none !important;
+        }
         /* Tighten timeline spacing for paper */
         ol.timeline {
           gap: 0 !important;
@@ -665,6 +737,17 @@
         transform: none !important;
         transition: none !important;
       }
+      html.print-mode .site-aurora {
+        display: none !important;
+      }
+      html.print-mode .glass,
+      html.print-mode #impact article {
+        background: var(--surface) !important;
+        -webkit-backdrop-filter: none !important;
+        backdrop-filter: none !important;
+        border-color: var(--border) !important;
+        box-shadow: none !important;
+      }
       html.print-mode section[id] {
         scroll-margin-top: 0;
       }
@@ -693,6 +776,8 @@
   </head>
 
   <body class="antialiased">
+    <!-- Ambient gradient-mesh backdrop so the glass chrome has colour to refract -->
+    <div class="site-aurora" aria-hidden="true"></div>
     <a
       href="#main"
       class="sr-only focus:not-sr-only focus:fixed focus:top-3 focus:left-3 focus:z-50 focus:px-3 focus:py-2 focus:rounded-md focus:bg-accent focus:text-white"
@@ -753,7 +838,7 @@
           <button
             id="navToggle"
             type="button"
-            class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl border border-app surface hover:border-accent transition-colors"
+            class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl glass hover:border-accent transition-colors"
             aria-expanded="false"
             aria-controls="mobileNav"
             data-i18n-attr="aria-label:nav.menuAria,title:nav.menuAria"
@@ -798,7 +883,7 @@
 
           <!-- Language switch -->
           <div
-            class="inline-flex rounded-xl border border-app overflow-hidden text-xs sm:text-sm"
+            class="inline-flex rounded-xl glass overflow-hidden text-xs sm:text-sm"
             role="group"
             aria-label="Language"
           >
@@ -828,7 +913,7 @@
           <button
             id="themeToggle"
             type="button"
-            class="inline-flex items-center justify-center w-9 h-9 rounded-xl border border-app surface hover:border-accent transition-colors"
+            class="inline-flex items-center justify-center w-9 h-9 rounded-xl glass hover:border-accent transition-colors"
             data-i18n-attr="aria-label:nav.themeAria,title:nav.themeAria"
             aria-label="Toggle color theme"
             title="Toggle color theme"
@@ -909,7 +994,7 @@
         >
           <div class="reveal order-2 md:order-1">
             <p
-              class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-muted mb-5 px-3 py-1.5 rounded-full border border-app surface"
+              class="inline-flex items-center gap-2 text-xs sm:text-sm font-medium text-muted mb-5 px-3 py-1.5 rounded-full glass"
             >
               <svg
                 xmlns="http://www.w3.org/2000/svg"
@@ -1910,7 +1995,7 @@
             </div>
             <div class="flex items-center gap-2">
             <a
-              class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-app surface hover:border-accent transition-colors"
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl glass hover:border-accent transition-colors"
               href="mailto:gregoryagapov@icloud.com"
               data-i18n-attr="aria-label:footer.emailAria"
               aria-label="Email"
@@ -1932,7 +2017,7 @@
               </svg>
             </a>
             <a
-              class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-app surface hover:border-accent transition-colors"
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl glass hover:border-accent transition-colors"
               href="https://github.com/grgrwlkr"
               target="_blank"
               rel="noopener noreferrer"
@@ -1953,7 +2038,7 @@
               </svg>
             </a>
             <a
-              class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-app surface hover:border-accent transition-colors"
+              class="inline-flex items-center justify-center w-10 h-10 rounded-xl glass hover:border-accent transition-colors"
               href="https://www.linkedin.com/in/gregory-agapov-24b13221"
               target="_blank"
               rel="noopener noreferrer"
