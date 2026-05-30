@@ -10,22 +10,70 @@
       content="Gregory Agapov — Engineering Team Lead in Moscow. 15+ years in software engineering, 5+ years of people management. Currently leading VK's Donations product team."
     />
 
-    <!-- Open Graph -->
+    <!-- Open Graph / Twitter.
+         NOTE: og:image and og:url must be ABSOLUTE URLs for most scrapers
+         (Facebook, LinkedIn, Telegram). Once the deploy domain is known,
+         uncomment og:url / canonical below and prefix og:image accordingly,
+         e.g. https://YOUR-DOMAIN/assets/og.jpg -->
     <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Gregory Agapov" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
     <meta property="og:title" content="Gregory Agapov — Engineering Team Lead" />
     <meta
       property="og:description"
       content="Hands-on Team Lead. 15+ years in software engineering, 5+ years of people management. VK Donations product team."
     />
-    <meta property="og:image" content="assets/portrait.jpg" />
+    <meta property="og:image" content="assets/og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Gregory Agapov — Engineering Team Lead" />
+    <!-- <meta property="og:url" content="https://YOUR-DOMAIN/" /> -->
+    <!-- <link rel="canonical" href="https://YOUR-DOMAIN/" /> -->
     <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gregory Agapov — Engineering Team Lead" />
+    <meta
+      name="twitter:description"
+      content="Hands-on Team Lead. 15+ years in software engineering, 5+ years of people management. VK Donations product team."
+    />
+    <meta name="twitter:image" content="assets/og.jpg" />
+    <meta name="twitter:image:alt" content="Gregory Agapov — Engineering Team Lead" />
 
-    <!-- Inter -->
+    <!-- Structured data: lets search engines model the page as a person.
+         Add "url" once the deploy domain is known. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gregory Agapov",
+        "jobTitle": "Engineering Team Lead",
+        "email": "mailto:gregoryagapov@icloud.com",
+        "image": "assets/og.jpg",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Moscow",
+          "addressCountry": "RU"
+        },
+        "worksFor": { "@type": "Organization", "name": "VK" },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "International College of Business and Design at MTUCI"
+        },
+        "knowsLanguage": ["ru", "en"],
+        "sameAs": [
+          "https://github.com/grgrwlkr",
+          "https://www.linkedin.com/in/gregory-agapov-24b13221"
+        ]
+      }
+    </script>
+
+    <!-- Fonts: Fraunces (display) + Hanken Grotesk (body) -->
     <link rel="preconnect" href="https://fonts.googleapis.com" />
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
     <link
       rel="stylesheet"
-      href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap"
+      href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,500;9..144,600;9..144,700&family=Hanken+Grotesk:wght@400;500;600;700&display=swap"
     />
 
     <!-- Tailwind config must come BEFORE the CDN script -->
@@ -35,7 +83,10 @@
         darkMode: 'class',
         theme: {
           extend: {
-            fontFamily: { sans: ['Inter', 'system-ui', 'sans-serif'] },
+            fontFamily: {
+              sans: ['Hanken Grotesk', 'system-ui', 'sans-serif'],
+              display: ['Fraunces', 'Georgia', 'serif']
+            },
             colors: { accent: '#6366F1' }
           }
         }
@@ -96,8 +147,18 @@
       body {
         background: var(--bg);
         color: var(--text);
-        font-family: 'Inter', system-ui, sans-serif;
-        font-feature-settings: 'cv11', 'ss01', 'ss03';
+        font-family: 'Hanken Grotesk', system-ui, sans-serif;
+        font-feature-settings: 'ss01';
+      }
+      /* Editorial display face for the top-level voice: hero name, section
+         titles, and the brand wordmarks. Role/company sub-headings (h3/h4)
+         stay in the body grotesk for density and legibility. */
+      h1,
+      h2,
+      .font-display {
+        font-family: 'Fraunces', Georgia, serif;
+        font-optical-sizing: auto;
+        letter-spacing: -0.01em;
       }
       ::selection {
         background: rgba(99, 102, 241, 0.35);
@@ -241,6 +302,12 @@
         border-color: transparent;
       }
 
+      /* Scroll-spy: current section's nav link */
+      .nav-link[aria-current='true'] {
+        color: var(--text);
+        background: var(--surface);
+      }
+
       /* Timeline rail + dot */
       .timeline {
         border-left: 1px solid var(--border);
@@ -308,6 +375,9 @@
       @media print {
         header.nav-surface,
         footer a[href='#top'],
+        [data-pdf],
+        #navToggle,
+        #mobileNav,
         .hero-grid,
         .hero-glow {
           display: none !important;
@@ -561,6 +631,9 @@
 
       html.print-mode header.nav-surface,
       html.print-mode footer a[href='#top'],
+      html.print-mode [data-pdf],
+      html.print-mode #navToggle,
+      html.print-mode #mobileNav,
       html.print-mode .hero-grid,
       html.print-mode .hero-glow {
         display: none !important;
@@ -602,47 +675,102 @@
       >Skip to content</a
     >
 
+    <!-- Screen-reader announcements (language switch) -->
+    <div id="langStatus" class="sr-only" role="status" aria-live="polite"></div>
+
     <!-- ============================================================ -->
     <!-- Sticky nav -->
     <!-- ============================================================ -->
     <header class="sticky top-0 z-40 nav-surface">
       <div class="max-w-6xl mx-auto px-5 sm:px-6 h-16 flex items-center justify-between gap-4">
-        <a href="#top" class="font-semibold tracking-tight text-base sm:text-lg">Gregory Agapov</a>
+        <a href="#top" class="font-display font-semibold tracking-tight text-lg sm:text-xl">Gregory Agapov</a>
 
         <nav aria-label="Primary" class="hidden md:flex items-center gap-1 text-sm">
           <a
             href="#about"
-            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-spy
+            class="nav-link px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
             data-i18n="nav.about"
             >About</a
           >
           <a
             href="#impact"
-            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-spy
+            class="nav-link px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
             data-i18n="nav.impact"
             >Impact</a
           >
           <a
             href="#experience"
-            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-spy
+            class="nav-link px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
             data-i18n="nav.experience"
             >Experience</a
           >
           <a
             href="#skills"
-            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-spy
+            class="nav-link px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
             data-i18n="nav.skills"
             >Skills</a
           >
           <a
             href="#contact"
-            class="px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
+            data-spy
+            class="nav-link px-3 py-2 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors"
             data-i18n="nav.contact"
             >Contact</a
           >
         </nav>
 
         <div class="flex items-center gap-2">
+          <!-- Mobile menu toggle (sections nav collapses below md) -->
+          <button
+            id="navToggle"
+            type="button"
+            class="md:hidden inline-flex items-center justify-center w-9 h-9 rounded-xl border border-app surface hover:border-accent transition-colors"
+            aria-expanded="false"
+            aria-controls="mobileNav"
+            data-i18n-attr="aria-label:nav.menuAria,title:nav.menuAria"
+            aria-label="Menu"
+            title="Menu"
+          >
+            <svg
+              data-menu-icon="closed"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              width="18"
+              height="18"
+              aria-hidden="true"
+            >
+              <path d="M4 6h16" />
+              <path d="M4 12h16" />
+              <path d="M4 18h16" />
+            </svg>
+            <svg
+              data-menu-icon="open"
+              xmlns="http://www.w3.org/2000/svg"
+              viewBox="0 0 24 24"
+              fill="none"
+              stroke="currentColor"
+              stroke-width="1.8"
+              stroke-linecap="round"
+              stroke-linejoin="round"
+              width="18"
+              height="18"
+              class="hidden"
+              aria-hidden="true"
+            >
+              <path d="M18 6 6 18" />
+              <path d="m6 6 12 12" />
+            </svg>
+          </button>
+
           <!-- Language switch -->
           <div
             class="inline-flex rounded-xl border border-app overflow-hidden text-xs sm:text-sm"
@@ -679,6 +807,7 @@
             data-i18n-attr="aria-label:nav.themeAria,title:nav.themeAria"
             aria-label="Toggle color theme"
             title="Toggle color theme"
+            aria-pressed="false"
           >
             <!-- Sun shows when current theme is dark (click → switch to light) -->
             <svg
@@ -724,6 +853,17 @@
             </svg>
           </button>
         </div>
+      </div>
+
+      <!-- Mobile sections menu (toggled by #navToggle) -->
+      <div id="mobileNav" class="md:hidden hidden border-t border-app nav-surface">
+        <nav aria-label="Mobile" class="max-w-6xl mx-auto px-5 sm:px-6 py-2 flex flex-col">
+          <a href="#about" data-spy class="nav-link px-2 py-2.5 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors" data-i18n="nav.about">About</a>
+          <a href="#impact" data-spy class="nav-link px-2 py-2.5 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors" data-i18n="nav.impact">Impact</a>
+          <a href="#experience" data-spy class="nav-link px-2 py-2.5 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors" data-i18n="nav.experience">Experience</a>
+          <a href="#skills" data-spy class="nav-link px-2 py-2.5 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors" data-i18n="nav.skills">Skills</a>
+          <a href="#contact" data-spy class="nav-link px-2 py-2.5 rounded-lg text-muted hover:text-[color:var(--text)] transition-colors" data-i18n="nav.contact">Contact</a>
+        </nav>
       </div>
     </header>
 
@@ -805,6 +945,25 @@
                   <path d="m3 7 9 6 9-6" />
                 </svg>
                 <span data-i18n="hero.email">Email</span>
+              </a>
+              <a class="btn" data-pdf href="dist/Gregory_Agapov_Resume.en.pdf" download>
+                <svg
+                  xmlns="http://www.w3.org/2000/svg"
+                  viewBox="0 0 24 24"
+                  fill="none"
+                  stroke="currentColor"
+                  stroke-width="1.8"
+                  stroke-linecap="round"
+                  stroke-linejoin="round"
+                  width="16"
+                  height="16"
+                  aria-hidden="true"
+                >
+                  <path d="M12 3v12" />
+                  <path d="m7 12 5 5 5-5" />
+                  <path d="M5 21h14" />
+                </svg>
+                <span data-i18n="cta.downloadCv">Download CV (PDF)</span>
               </a>
               <a
                 class="btn"
@@ -927,48 +1086,72 @@
             <!-- Card 4 -->
             <article class="reveal surface border border-app rounded-2xl p-6">
               <div class="text-3xl md:text-4xl font-semibold tracking-tight">
-                <span data-i18n="impact.cards.3.value">20K → millions</span>
+                <span data-i18n="impact.cards.3.value">+103%</span>
               </div>
               <div class="mt-2 font-medium" data-i18n="impact.cards.3.label">
-                goods cap in VK Communities
+                donations turnover in VK profiles
               </div>
               <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.3.context">
-                Removed business limit by coordinating 3 teams
+                ~235K → ~478K ₽ in the first 2 months after the profiles launch
               </p>
             </article>
             <!-- Card 5 -->
             <article class="reveal surface border border-app rounded-2xl p-6">
               <div class="text-3xl md:text-4xl font-semibold tracking-tight">
-                <span data-i18n="impact.cards.4.value">40 / ~3M</span>
+                <span data-i18n="impact.cards.4.value">30% → 52%</span>
               </div>
               <div class="mt-2 font-medium" data-i18n="impact.cards.4.label">
-                Ozon sellers / products imported
+                connection-to-monetization in profiles
               </div>
               <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.4.context">
-                ~1M product offers via AdBlogger
+                Profiles that connected Donations and started earning, first 2 months
               </p>
             </article>
             <!-- Card 6 -->
             <article class="reveal surface border border-app rounded-2xl p-6">
               <div class="text-3xl md:text-4xl font-semibold tracking-tight">
-                <span data-i18n="impact.cards.5.value">35% → 64% / 84%</span>
+                <span data-i18n="impact.cards.5.value">20K → millions</span>
               </div>
               <div class="mt-2 font-medium" data-i18n="impact.cards.5.label">
-                VKUI coverage iOS / Android
+                goods cap in VK Communities
               </div>
               <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.5.context">
-                Frontend unification across iOS, Android, web
+                Removed business limit by coordinating 3 teams
               </p>
             </article>
             <!-- Card 7 -->
             <article class="reveal surface border border-app rounded-2xl p-6">
               <div class="text-3xl md:text-4xl font-semibold tracking-tight">
-                <span data-i18n="impact.cards.6.value">60K</span>
+                <span data-i18n="impact.cards.6.value">40 / ~3M</span>
               </div>
               <div class="mt-2 font-medium" data-i18n="impact.cards.6.label">
-                users on Performance Review
+                Ozon sellers / products imported
               </div>
               <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.6.context">
+                ~1M product offers via AdBlogger
+              </p>
+            </article>
+            <!-- Card 8 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.7.value">35% → 64% / 84%</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.7.label">
+                VKUI coverage iOS / Android
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.7.context">
+                Frontend unification across iOS, Android, web
+              </p>
+            </article>
+            <!-- Card 9 -->
+            <article class="reveal surface border border-app rounded-2xl p-6">
+              <div class="text-3xl md:text-4xl font-semibold tracking-tight">
+                <span data-i18n="impact.cards.8.value">60K</span>
+              </div>
+              <div class="mt-2 font-medium" data-i18n="impact.cards.8.label">
+                users on Performance Review
+              </div>
+              <p class="mt-2 text-sm text-muted" data-i18n="impact.cards.8.context">
                 Two high-load windows per year, turnaround led at T-Bank
               </p>
             </article>
@@ -1624,7 +1807,7 @@
               Get in touch
             </p>
             <p
-              class="mt-2 text-xl md:text-2xl font-semibold tracking-tight"
+              class="font-display mt-2 text-2xl md:text-3xl font-semibold tracking-tight"
               data-i18n="footer.headline"
             >
               Open to engineering leadership roles.
@@ -1648,6 +1831,25 @@
                 <path d="m3 7 9 6 9-6" />
               </svg>
               <span data-i18n="footer.email">Email</span>
+            </a>
+            <a class="btn" data-pdf href="dist/Gregory_Agapov_Resume.en.pdf" download>
+              <svg
+                xmlns="http://www.w3.org/2000/svg"
+                viewBox="0 0 24 24"
+                fill="none"
+                stroke="currentColor"
+                stroke-width="1.8"
+                stroke-linecap="round"
+                stroke-linejoin="round"
+                width="16"
+                height="16"
+                aria-hidden="true"
+              >
+                <path d="M12 3v12" />
+                <path d="m7 12 5 5 5-5" />
+                <path d="M5 21h14" />
+              </svg>
+              <span data-i18n="cta.downloadCv">Download CV (PDF)</span>
             </a>
             <a
               class="inline-flex items-center justify-center w-10 h-10 rounded-xl border border-app surface hover:border-accent transition-colors"
@@ -1717,12 +1919,14 @@
         en: {
           pageTitle: 'Gregory Agapov — Engineering Team Lead',
           a11y: { skipToContent: 'Skip to content' },
+          cta: { downloadCv: 'Download CV (PDF)' },
           nav: {
             about: 'About',
             impact: 'Impact',
             experience: 'Experience',
             skills: 'Skills',
             contact: 'Contact',
+            menuAria: 'Menu',
             themeAria: 'Toggle color theme',
             langRuAria: 'Switch to Russian',
             langEnAria: 'Switch to English'
@@ -1754,6 +1958,18 @@
                 value: '+880,743 ₽',
                 label: 'donations turnover',
                 context: '+0.37% lift in the first 3 weeks after the rebrand'
+              },
+              {
+                value: '+103%',
+                label: 'donations turnover in VK profiles',
+                context:
+                  '~235K → ~478K ₽ in the first 2 months after the profiles launch'
+              },
+              {
+                value: '30% → 52%',
+                label: 'connection-to-monetization in profiles',
+                context:
+                  'Profiles that connected Donations and started earning, first 2 months'
               },
               {
                 value: '20K → millions',
@@ -1910,12 +2126,14 @@
         ru: {
           pageTitle: 'Григорий Агапов — Руководитель команды разработки',
           a11y: { skipToContent: 'Перейти к содержимому' },
+          cta: { downloadCv: 'Скачать резюме (PDF)' },
           nav: {
             about: 'Обо мне',
             impact: 'Результаты',
             experience: 'Опыт',
             skills: 'Навыки',
             contact: 'Контакты',
+            menuAria: 'Меню',
             themeAria: 'Переключить тему',
             langRuAria: 'Переключить на русский',
             langEnAria: 'Switch to English'
@@ -1947,6 +2165,18 @@
                 value: '+880 743 ₽',
                 label: 'оборот донатов',
                 context: '+0,37% за первые 3 недели после ребрендинга'
+              },
+              {
+                value: '+103%',
+                label: 'оборот донатов в профилях VK',
+                context:
+                  '~235 тыс. → ~478 тыс. ₽ за первые 2 месяца после запуска в профилях'
+              },
+              {
+                value: '30% → 52%',
+                label: 'конверсия подключение→монетизация в профилях',
+                context:
+                  'Профили, подключившие Донаты и начавшие зарабатывать, первые 2 месяца'
               },
               {
                 value: '20 тыс. → миллионы',
@@ -2135,6 +2365,10 @@
         document.querySelectorAll('.lang-btn').forEach((btn) => {
           btn.setAttribute('aria-pressed', btn.dataset.lang === l ? 'true' : 'false');
         });
+
+        // Point every PDF link at the language-matched résumé export.
+        const pdfHref = 'dist/Gregory_Agapov_Resume.' + l + '.pdf';
+        document.querySelectorAll('[data-pdf]').forEach((a) => a.setAttribute('href', pdfHref));
       }
 
       // ---------- Theme ----------
@@ -2154,6 +2388,8 @@
         });
         const meta = document.querySelector('meta[name="theme-color"]');
         if (meta) meta.setAttribute('content', isDark ? '#0A0A0B' : '#FFFFFF');
+        const tt = document.getElementById('themeToggle');
+        if (tt) tt.setAttribute('aria-pressed', String(isDark));
       }
 
       // ---------- Wire up ----------
@@ -2171,8 +2407,65 @@
         });
 
         document.querySelectorAll('.lang-btn').forEach((btn) => {
-          btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+          btn.addEventListener('click', () => {
+            applyLang(btn.dataset.lang);
+            const status = document.getElementById('langStatus');
+            if (status)
+              status.textContent =
+                btn.dataset.lang === 'ru'
+                  ? 'Язык переключён на русский'
+                  : 'Language switched to English';
+          });
         });
+
+        // ---------- Mobile menu ----------
+        const navToggle = document.getElementById('navToggle');
+        const mobileNav = document.getElementById('mobileNav');
+        function setMenu(open) {
+          navToggle.setAttribute('aria-expanded', open ? 'true' : 'false');
+          mobileNav.classList.toggle('hidden', !open);
+          navToggle.querySelectorAll('[data-menu-icon]').forEach((el) => {
+            el.classList.toggle('hidden', (el.dataset.menuIcon === 'open') !== open);
+          });
+        }
+        navToggle.addEventListener('click', () => {
+          setMenu(navToggle.getAttribute('aria-expanded') !== 'true');
+        });
+        mobileNav.querySelectorAll('a').forEach((a) =>
+          a.addEventListener('click', () => setMenu(false))
+        );
+        document.addEventListener('keydown', (e) => {
+          if (e.key === 'Escape' && navToggle.getAttribute('aria-expanded') === 'true') {
+            setMenu(false);
+            navToggle.focus();
+          }
+        });
+
+        // ---------- Scroll-spy: highlight the section currently in view ----------
+        const spyLinks = Array.from(document.querySelectorAll('.nav-link[data-spy]'));
+        const linksById = {};
+        spyLinks.forEach((a) => {
+          const id = (a.getAttribute('href') || '').slice(1);
+          if (id) (linksById[id] = linksById[id] || []).push(a);
+        });
+        const spyTargets = Object.keys(linksById)
+          .map((id) => document.getElementById(id))
+          .filter(Boolean);
+        if ('IntersectionObserver' in window && spyTargets.length) {
+          const spy = new IntersectionObserver(
+            (entries) => {
+              entries.forEach((entry) => {
+                if (!entry.isIntersecting) return;
+                spyLinks.forEach((a) => a.removeAttribute('aria-current'));
+                (linksById[entry.target.id] || []).forEach((a) =>
+                  a.setAttribute('aria-current', 'true')
+                );
+              });
+            },
+            { rootMargin: '-45% 0px -50% 0px', threshold: 0 }
+          );
+          spyTargets.forEach((s) => spy.observe(s));
+        }
 
         // Footer year
         document.getElementById('year').textContent = String(new Date().getFullYear());

@@ -55,4 +55,6 @@ Drag the `landing/` folder into the Netlify dashboard — done.
 
 - Theme (`theme`) and language (`lang`) persist in `localStorage`. First visit respects `prefers-color-scheme` and `navigator.language`.
 - Tailwind dark mode is class-based; the pre-paint script in `<head>` sets the correct class before first render to avoid flicker.
-- Inter is loaded from Google Fonts. If embedding offline, swap to a local `@font-face`.
+- Fonts (Fraunces display + Hanken Grotesk body) load from Google Fonts. If embedding offline, swap to a local `@font-face`.
+- `assets/og.jpg` is the 1200×630 social-share card, generated from `assets/og-card.html` via headless Chrome (see the render command in that file). Regenerate it when the hero copy changes.
+- `og:url` / `canonical` / absolute `og:image` are commented out in `index.html` — fill them in with the real domain at deploy time.

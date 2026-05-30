@@ -10,7 +10,7 @@ Hands-on Team Lead with `15+` years in software engineering and `5+` years of di
 
 ## Selected Impact
 
-- At VK, lead the `8`-person Donations product team: within one quarter, delivered a rebrand, launched Donations in VK profiles, and accelerated the service migration from monolith to microservices; in the first `3` weeks after the rebrand release - `+3,276` creators with Donations enabled (`+3.96%` over the active-creator base), `+469` monetizing creators (`+1.4%`), `+880,743 RUB` in donations turnover (`+0.37%`), and `+3,578` donations (`+0.55%`).
+- At VK, lead the `8`-person Donations product team: within one quarter, delivered a rebrand and launched Donations in VK profiles, accelerating the service migration from monolith to microservices. In the first two months after the profiles launch, donations turnover roughly doubled (`+103%`), the number of donations nearly tripled (`+179%`), and connection-to-monetization improved from about `30%` to about `52%`.
 - At VK, removed a core business constraint in social commerce by coordinating `3` teams to scale goods in Communities from `20K` to millions, and launched integration with `40` Ozon sellers, importing about `3M` products and creating about `1M` product offers.
 - Led the recommendation system migration under the Hadoop shutdown deadline, helped teams work through an incident without losing a significant share of traffic, and in parallel drove client and platform modernization: coverage of the `VKUI` design system grew from `35%` to `64%` on iOS and reached `84%` on Android.
 - At Tinkoff (T-Bank), delivered the MVP of the company's first mentoring platform on schedule, staffed the first pilot entirely with mentoring-program participants who later moved into full-time roles.
@@ -28,7 +28,7 @@ Jan 2026 - Present
 - Led the Donations rebrand and launched Donations in VK profiles within one quarter, where the flow had previously been available only in Communities.
 - Aligned the product backend team and a dedicated migration team to accelerate the Donations service migration from monolith to microservices.
 - First `3` weeks after the rebrand release (a sub-feature of Donations-in-profile): `+3,276` active creators with Donations enabled (`+3.96%` over the total active-creator base), `+469` monetizing creators (`+1.4%`), `+880,743 RUB` in donations turnover (`+0.37%`), and `+3,578` donations (`+0.55%`); product manager and analyst expect the longer-running effect to exceed these early numbers.
-- Expanding Donations beyond Communities into VK profiles increased audience reach and contributed to `[full feature DAU/MAU — TBD]` growth.
+- After launching Donations in VK profiles, drove growth across the first two months (April-May 2026): turnover about `235K` → about `478K RUB` (`+103%`), donations `430` → `1,200` (`+179%`), connected profiles `789` → `999` (`+27%`), and monetizing profiles `240` → `521` (`+117%`); connection-to-monetization rose from about `30%` to about `52%`.
 
 **Team Lead, Social Commerce Platform Team**
 
