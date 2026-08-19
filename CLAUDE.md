@@ -17,7 +17,7 @@ cv.master.yaml                              # canonical facts (source of truth)
 - Treat `cv.master.yaml` as the single source of truth for resume facts. Update it
   **first**; derived variants must never become the canonical source.
 - After factual changes in `cv.master.yaml`, update **all three** derived artifacts:
-  both `resume-examples/*.{en,ru}.md` drafts and `landing/index.html`.
+  both `resume-examples/*.{en,ru}.md` drafts and `docs/index.html`.
 - Keep the Russian and English variants in sync whenever dates, roles, projects,
   stack, or achievements change. Never edit only one language.
 - When resume facts change (summary, roles, dates, metrics, stack, achievements,

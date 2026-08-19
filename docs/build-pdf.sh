@@ -1,6 +1,6 @@
 #!/usr/bin/env bash
-# Render landing/index.html to A4 PDF in both languages via headless Chrome.
-# Output goes to landing/dist/Gregory_Agapov_Resume.{en,ru}.pdf
+# Render docs/index.html to A4 PDF in both languages via headless Chrome.
+# Output goes to docs/dist/Gregory_Agapov_Resume.{en,ru}.pdf
 set -euo pipefail
 
 HERE="$(cd "$(dirname "${BASH_SOURCE[0]}")" && pwd)"
