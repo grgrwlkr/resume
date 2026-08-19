@@ -562,6 +562,45 @@ projects:
       - automation
       - integration
 
+openSource:
+  - id: claude-dashboard-vscode
+    name: Dashboard & Statusline for Claude Code
+    kind: VS Code extension
+    role: Author and maintainer
+    start: 2026-08
+    end: present
+    license: MIT
+    summary: >-
+      Open-source VS Code extension that turns Claude Code's on-disk state into two
+      surfaces: a 23-tab dashboard over every transcript on the machine - spend,
+      subagents, workflow runs, usage limits - and a status bar assembled from a
+      user-written template.
+    links:
+      repository: https://github.com/grgrwlkr/claude-dashboard-vscode
+      vsCodeMarketplace: https://marketplace.visualstudio.com/items?itemName=grgrwlkr.claude-dashboard
+      openVsx: https://open-vsx.org/extension/grgrwlkr/claude-dashboard
+    stack:
+      - JavaScript
+      - Node.js
+      - VS Code Extension API
+    whyItMatters:
+      - Shows end-to-end solo delivery of a public product - design, implementation, release, and support on two storefronts.
+      - Demonstrates ownership of developer tooling for AI-assisted engineering, the direction most teams are now investing in.
+      - Provides a public, readable code sample under a permissive licence, which no employer-side project can offer.
+    highlights:
+      - Published on both storefronts - VS Code Marketplace and Open VSX - under the MIT licence.
+      - About 20,000 lines of JavaScript across 33 modules with zero runtime dependencies, keeping the supply-chain surface empty.
+      - Ships 9 commands, 16 settings, and 4 sidebar views; the status bar is a template with 45 placeholders, 11 ready-made presets, and a live-preview editor.
+      - Surfaces the cost of subagents and workflow runs - the larger share of spend on a machine that runs fan-outs, and invisible to the built-in terminal status line, which only ever sees a single session.
+      - Local by default: reads only the tool's own state under the home directory, with no telemetry.
+    tags:
+      - open_source
+      - developer_tooling
+      - vscode_extension
+      - ai_tooling
+      - solo_delivery
+      - public_release
+
 skills:
   leadership:
     - Team leadership

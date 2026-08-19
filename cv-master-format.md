@@ -20,6 +20,7 @@
 - `positioning`: reusable narrative blocks, leadership themes, and optional assessment-derived signals.
 - `experience`: chronological work history with normalized dates, achievements, stacks, and tags.
 - `projects`: reusable project slices that can be selected independently from the full role history.
+- `openSource`: personal published projects that belong to no employer. Unlike `projects`, entries carry no `experienceIds`; they own a `license`, a `links` map (`repository` plus any storefront), and a `stack`.
 - `skills`: grouped skill inventory for filtering and summary generation.
 - `education`, `certifications`: formal background.
 - `targetProfiles`: rules for generating role-specific CV variants.

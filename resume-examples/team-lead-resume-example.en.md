@@ -94,6 +94,21 @@ Nov 2010 - May 2012
 - Automated how `Russian Railways (RZD)` machinists interacted with route documentation through touch-screen information terminals and digital forms (`XFDL`, `IBM Lotus Forms`).
 - Built web services with `Java EE` (`JSP`, `SOAP/WSDL`) and optimized queries and stored procedures in `IBM Db2`.
 
+## Projects
+
+### Dashboard & Statusline for Claude Code
+
+**Author and maintainer, open-source VS Code extension (MIT)**  
+Aug 2026 - present | `JavaScript`, `Node.js`, `VS Code Extension API`
+
+[VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=grgrwlkr.claude-dashboard) · [Open VSX](https://open-vsx.org/extension/grgrwlkr/claude-dashboard) · [GitHub](https://github.com/grgrwlkr/claude-dashboard-vscode)
+
+- Design, build, and maintain a developer tool that turns `Claude Code`'s on-disk state into two surfaces: a 23-tab dashboard over every transcript on the machine - spend, subagents, workflow runs, usage limits - and a status bar assembled from a user-written template.
+- Ship about 20,000 lines of `JavaScript` across 33 modules with zero runtime dependencies, leaving the extension without supply-chain surface.
+- Surface the cost of subagents and workflow runs - the larger share of spend when fan-outs are used, and invisible to the built-in terminal status line, which only ever sees a single session.
+- Deliver 9 commands, 16 settings, and 4 sidebar views; the status bar is a template with 45 placeholders, 11 ready-made presets, and a live-preview editor.
+- Release and support the extension on both storefronts - `VS Code Marketplace` and `Open VSX` - under the MIT licence, reading only local state with no telemetry.
+
 ## Skills
 
 **Leadership & Delivery:** team leadership, engineer growth, mentoring, stakeholder management, roadmap planning, cross-functional coordination
