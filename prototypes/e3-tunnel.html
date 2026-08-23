@@ -1,0 +1,488 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E3 — Neon tunnel</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #03040a;
+        --glass: rgba(5, 8, 17, 0.93);
+        --edge: rgba(34, 231, 255, 0.28);
+        --cyan: #22e7ff;
+        --magenta: #ff2d95;
+        --amber: #ffc24a;
+        --lime: #7cff6b;
+        --text: #d6e8f2;
+        --muted: #5b7686;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--void);
+        color: var(--text);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 15px;
+        line-height: 1.62;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      #tunnel {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: block;
+      }
+      .crt {
+        position: fixed;
+        inset: 0;
+        z-index: 40;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0 2px,
+          rgba(0, 0, 0, 0.15) 2px 3px
+        );
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 2;
+        max-width: 1080px;
+        margin: 0 auto;
+        padding: clamp(1rem, 4vh, 2.5rem) clamp(0.8rem, 3vw, 2rem) 4rem;
+      }
+
+      /* The content lives inside a hard-edged console panel — the scene
+         stays outside it, so nothing is ever read through the animation. */
+      .console {
+        background: var(--glass);
+        border: 1px solid var(--edge);
+        box-shadow: 0 0 0 1px rgba(0, 0, 0, 0.6), 0 30px 90px -30px rgba(34, 231, 255, 0.25);
+        backdrop-filter: blur(3px);
+      }
+      .console + .console {
+        margin-top: clamp(0.9rem, 2.4vh, 1.6rem);
+      }
+
+      .bar {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        flex-wrap: wrap;
+        padding: 0.55rem 1rem;
+        border-bottom: 1px solid var(--edge);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .bar .live {
+        color: var(--lime);
+      }
+      .bar .live::before {
+        content: '●';
+        margin-right: 0.35rem;
+        animation: bl 1.5s steps(2, start) infinite;
+      }
+      @keyframes bl {
+        50% { opacity: 0.2; }
+      }
+      .bar .r {
+        margin-left: auto;
+      }
+
+      .pad {
+        padding: clamp(1.1rem, 3vw, 2.2rem);
+      }
+
+      .ps1 {
+        font-size: 0.78rem;
+        color: var(--muted);
+        margin: 0 0 1rem;
+      }
+      .ps1 b {
+        color: var(--lime);
+        font-weight: 500;
+      }
+      .ps1 span {
+        color: var(--cyan);
+      }
+
+      h1 {
+        margin: 0;
+        font-family: 'Chakra Petch', system-ui, sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.1rem, 6.4vw, 4.4rem);
+        line-height: 1;
+        letter-spacing: -0.012em;
+        text-transform: uppercase;
+        color: #eaf6fb;
+        text-shadow: 0 0 24px rgba(34, 231, 255, 0.3);
+      }
+      h1 .sec {
+        display: block;
+        color: var(--cyan);
+      }
+      .lede {
+        margin: 1.3rem 0 0;
+        max-width: 62ch;
+        color: var(--muted);
+        font-size: 0.92rem;
+      }
+      .lede b {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      .grid {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+        gap: 1px;
+        margin-top: clamp(1.4rem, 4vh, 2.2rem);
+        background: var(--edge);
+        border: 1px solid var(--edge);
+      }
+      .cell {
+        background: rgba(5, 8, 17, 0.96);
+        padding: 0.95rem 1rem 1.05rem;
+      }
+      .cell .v {
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.6rem, 3vw, 2.2rem);
+        line-height: 1;
+        color: var(--cyan);
+        font-variant-numeric: tabular-nums;
+      }
+      .cell.m .v {
+        color: var(--magenta);
+      }
+      .cell .k {
+        margin-top: 0.45rem;
+        font-size: 0.66rem;
+        letter-spacing: 0.09em;
+        text-transform: uppercase;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      .sec-title {
+        font-size: 0.74rem;
+        letter-spacing: 0.22em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin: 0 0 1rem;
+      }
+
+      .rec {
+        display: grid;
+        grid-template-columns: 8rem minmax(0, 1fr);
+        gap: clamp(0.7rem, 2.4vw, 1.8rem);
+        padding: 0.9rem 0;
+        border-top: 1px solid rgba(34, 231, 255, 0.14);
+      }
+      .rec:first-of-type {
+        border-top: 0;
+      }
+      .rec .ts {
+        color: var(--cyan);
+        font-size: 0.78rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .rec .ts small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.68rem;
+        margin-top: 0.2rem;
+      }
+      .rec .org {
+        font-size: 0.66rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--magenta);
+      }
+      .rec h3 {
+        margin: 0.25rem 0 0;
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1rem, 1.8vw, 1.22rem);
+        line-height: 1.25;
+      }
+      .rec p {
+        margin: 0.5rem 0 0;
+        color: var(--muted);
+        max-width: 70ch;
+        font-size: 0.86rem;
+      }
+      .rec p b {
+        color: var(--amber);
+        font-weight: 500;
+      }
+
+      @media (max-width: 760px) {
+        .rec {
+          grid-template-columns: 1fr;
+          gap: 0.3rem;
+        }
+        .rec .ts small {
+          display: inline;
+          margin-left: 0.5rem;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .bar .live::before { animation: none; }
+      }
+      :focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="tunnel" aria-hidden="true"></canvas>
+    <div class="crt" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <section class="console">
+        <div class="bar">
+          <span class="live">канал открыт</span>
+          <span>vk / донаты</span>
+          <span>экипаж 08</span>
+          <span class="r" id="clock"></span>
+        </div>
+        <div class="pad">
+          <p class="ps1"><b>g.agapov@vk</b>:<span>~</span>$ whoami --full</p>
+          <h1>Григорий Агапов<span class="sec">тимлид разработки</span></h1>
+          <p class="lede">
+            Веду продуктовую команду Донатов в VK — <b>восемь человек</b> на четырёх платформах.
+            Пятнадцать лет в разработке, пять из них с людьми в прямом подчинении. Строю продукт
+            от MVP до масштабирования, не теряя техническую глубину.
+          </p>
+
+          <div class="grid">
+            <div class="cell">
+              <div class="v" data-count="8">0</div>
+              <div class="k">человек<br />в подчинении</div>
+            </div>
+            <div class="cell m">
+              <div class="v" data-count="2" data-prefix="×">×0</div>
+              <div class="k">оборот донатов<br />за два месяца</div>
+            </div>
+            <div class="cell m">
+              <div class="v" data-count="3" data-prefix="×">×0</div>
+              <div class="k">число донов<br />за тот же срок</div>
+            </div>
+            <div class="cell">
+              <div class="v" data-count="52" data-suffix=" %">0 %</div>
+              <div class="k">конверсия<br />было 30 %</div>
+            </div>
+          </div>
+        </div>
+      </section>
+
+      <section class="console">
+        <div class="pad">
+          <p class="sec-title">cat career.log --reverse</p>
+
+          <article class="rec">
+            <div class="ts">2026 —<small>активно</small></div>
+            <div>
+              <div class="org">vk</div>
+              <h3>Тимлид продуктовой команды «Донаты»</h3>
+              <p>
+                Восемь человек: бэкенд, фронтенд, iOS, Android, QA. За квартал — ребрендинг и
+                запуск донатов в профиле VK. Оборот <b>×2</b>, доны <b>×3</b>, конверсия с
+                <b>30 %</b> до <b>52 %</b>.
+              </p>
+            </div>
+          </article>
+
+          <article class="rec">
+            <div class="ts">2025<small>апр — дек</small></div>
+            <div>
+              <div class="org">vk</div>
+              <h3>Тимлид платформенной команды, соцкоммерция</h3>
+              <p>
+                Три команды под координацией. Лимит товаров снят с <b>20 000</b> до миллионов,
+                интеграция с <b>40</b> продавцами Ozon, <b>3 млн</b> товаров.
+              </p>
+            </div>
+          </article>
+
+          <article class="rec">
+            <div class="ts">2022<small>дек — мар 2025</small></div>
+            <div>
+              <div class="org">тинькофф банк</div>
+              <h3>Тимлид, наставничество и Performance Review</h3>
+              <p>
+                MVP платформы наставничества — в срок. Performance Review стабилизирован на
+                <b>60 000</b> пользователей.
+              </p>
+            </div>
+          </article>
+
+          <article class="rec">
+            <div class="ts">2013<small>дек — мар 2019</small></div>
+            <div>
+              <div class="org">neotech</div>
+              <h3>Senior-разработчик, ГИС-проекты</h3>
+              <p>Smallworld GIS для телеком-заказчиков России и СНГ.</p>
+            </div>
+          </article>
+        </div>
+      </section>
+    </div>
+
+    <script type="importmap">
+      { "imports": { "three": "https://unpkg.com/three@0.185.1/build/three.module.js" } }
+    </script>
+    <script type="module">
+      import * as THREE from 'three';
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      const clock = document.getElementById('clock');
+      const tick = () =>
+        (clock.textContent = new Date().toLocaleTimeString('ru-RU', { hour12: false }));
+      tick();
+      if (!reduce) setInterval(tick, 1000);
+
+      function countUp(el) {
+        const to = +el.dataset.count,
+          pre = el.dataset.prefix || '',
+          suf = el.dataset.suffix || '';
+        if (reduce) return (el.textContent = pre + to + suf);
+        const dur = 1000,
+          t0 = performance.now();
+        (function f(now) {
+          const p = Math.min(1, (now - t0) / dur);
+          el.textContent = pre + Math.round(to * (1 - Math.pow(1 - p, 3))) + suf;
+          if (p < 1) requestAnimationFrame(f);
+        })(t0);
+      }
+      const io = new IntersectionObserver(
+        (es) =>
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              countUp(e.target);
+              io.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.4 }
+      );
+      document.querySelectorAll('[data-count]').forEach((el) => io.observe(el));
+
+      /* ── The tunnel: rings of neon rushing past the console ─────── */
+      const canvas = document.getElementById('tunnel');
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      } catch (e) {
+        canvas.style.background =
+          'radial-gradient(ellipse at 50% 50%, rgba(34,231,255,.12), transparent 60%)';
+      }
+
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        renderer.setSize(innerWidth, innerHeight);
+
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.FogExp2(0x03040a, 0.055);
+        const camera = new THREE.PerspectiveCamera(72, innerWidth / innerHeight, 0.1, 120);
+        camera.position.z = 6;
+
+        const group = new THREE.Group();
+        scene.add(group);
+
+        const RINGS = 46;
+        const DEPTH = 90;
+        const rings = [];
+        const cyan = new THREE.Color('#22e7ff');
+        const mag = new THREE.Color('#ff2d95');
+
+        for (let i = 0; i < RINGS; i++) {
+          const s = 7 + Math.random() * 2.5;
+          const geo = new THREE.EdgesGeometry(new THREE.BoxGeometry(s * 1.6, s, 0.001));
+          const mat = new THREE.LineBasicMaterial({
+            color: Math.random() > 0.78 ? mag : cyan,
+            transparent: true,
+            opacity: 0.5,
+            blending: THREE.AdditiveBlending
+          });
+          const ring = new THREE.LineSegments(geo, mat);
+          ring.position.z = -(i / RINGS) * DEPTH;
+          ring.rotation.z = (Math.random() - 0.5) * 0.08;
+          group.add(ring);
+          rings.push(ring);
+        }
+
+        // Floor grid for depth cue
+        const floorGeo = new THREE.PlaneGeometry(40, DEPTH, 24, 46);
+        floorGeo.rotateX(-Math.PI / 2);
+        const floor = new THREE.LineSegments(
+          new THREE.WireframeGeometry(floorGeo),
+          new THREE.LineBasicMaterial({
+            color: 0x1a6c85,
+            transparent: true,
+            opacity: 0.32,
+            blending: THREE.AdditiveBlending
+          })
+        );
+        floor.position.set(0, -5.5, -DEPTH / 2 + 6);
+        group.add(floor);
+
+        const aim = new THREE.Vector2(0, 0);
+        const cur = new THREE.Vector2(0, 0);
+        addEventListener('pointermove', (e) => {
+          aim.set((e.clientX / innerWidth - 0.5) * 0.5, -(e.clientY / innerHeight - 0.5) * 0.35);
+        });
+
+        addEventListener('resize', () => {
+          camera.aspect = innerWidth / innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(innerWidth, innerHeight);
+        });
+
+        let scrollBoost = 0;
+        addEventListener(
+          'scroll',
+          () => {
+            scrollBoost = Math.min(1.6, scrollBoost + 0.16);
+          },
+          { passive: true }
+        );
+
+        function frame() {
+          cur.lerp(aim, 0.045);
+          camera.rotation.y = cur.x * 0.5;
+          camera.rotation.x = cur.y * 0.5;
+
+          const speed = 0.24 + scrollBoost;
+          scrollBoost *= 0.94;
+
+          for (const r of rings) {
+            r.position.z += speed;
+            if (r.position.z > 7) r.position.z -= DEPTH;
+          }
+          floor.position.z += speed;
+          if (floor.position.z > 6) floor.position.z -= DEPTH / 2;
+
+          renderer.render(scene, camera);
+          if (!reduce) requestAnimationFrame(frame);
+        }
+        frame();
+      }
+    </script>
+  </body>
+</html>

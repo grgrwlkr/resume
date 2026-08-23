@@ -1,0 +1,458 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D — Kinetic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Instrument+Sans:wght@400;500;600;700&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0c0d13;
+        --panel: #13151f;
+        --line: #212537;
+        --text: #f3f4f9;
+        --muted: #838aa6;
+        --flow-a: #5b7cfa;
+        --flow-b: #c265f5;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Hanken Grotesk', system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.62;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      /* Cursor-following bloom — the page notices you */
+      .bloom {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 0;
+        background: radial-gradient(
+          520px circle at var(--mx, 50%) var(--my, 30%),
+          rgba(91, 124, 250, 0.13),
+          transparent 62%
+        );
+        transition: background 220ms ease-out;
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 1;
+        max-width: 1140px;
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      /* ── Hero ────────────────────────────────────────────────────── */
+      .hero {
+        padding: clamp(3rem, 10vh, 7rem) 0 clamp(2rem, 6vh, 4rem);
+      }
+      h1 {
+        margin: 0;
+        font-family: 'Instrument Sans', system-ui, sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.6rem, 7.6vw, 5.8rem);
+        line-height: 0.98;
+        letter-spacing: -0.042em;
+        max-width: 18ch;
+      }
+      h1 .flow {
+        background: linear-gradient(100deg, var(--flow-a), var(--flow-b));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .sub {
+        margin: 1.6rem 0 0;
+        max-width: 46ch;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.5vw, 1.12rem);
+      }
+
+      /* Signature: a donation counter that climbs, and the curve it
+         traces — the page performs the product it describes. */
+      .ticker {
+        margin-top: clamp(2.4rem, 6vh, 3.6rem);
+        border: 1px solid var(--line);
+        border-radius: 18px;
+        background: linear-gradient(180deg, rgba(91, 124, 250, 0.06), transparent 60%),
+          var(--panel);
+        padding: clamp(1.2rem, 3vw, 1.8rem);
+        display: grid;
+        grid-template-columns: minmax(0, 1fr) minmax(0, 1.1fr);
+        gap: clamp(1rem, 3vw, 2rem);
+        align-items: center;
+      }
+      .ticker .label {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .ticker .amount {
+        font-family: 'Instrument Sans', sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.4rem, 6vw, 4rem);
+        line-height: 1;
+        letter-spacing: -0.04em;
+        font-variant-numeric: tabular-nums;
+        margin-top: 0.5rem;
+      }
+      .ticker .delta {
+        margin-top: 0.6rem;
+        font-size: 0.9rem;
+        color: var(--flow-a);
+        font-variant-numeric: tabular-nums;
+      }
+      .ticker svg {
+        width: 100%;
+        height: auto;
+        display: block;
+      }
+      .curve {
+        fill: none;
+        stroke: url(#g);
+        stroke-width: 2.5;
+        stroke-linecap: round;
+        stroke-dasharray: var(--len, 600);
+        stroke-dashoffset: var(--len, 600);
+        transition: stroke-dashoffset 1900ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .ticker.live .curve {
+        stroke-dashoffset: 0;
+      }
+      .curve-fill {
+        fill: url(#gf);
+        opacity: 0;
+        transition: opacity 1400ms ease 500ms;
+      }
+      .ticker.live .curve-fill {
+        opacity: 1;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(8.5rem, 1fr));
+        gap: clamp(0.9rem, 2vw, 1.6rem);
+        margin-top: clamp(1.6rem, 4vh, 2.4rem);
+      }
+      .stat .v {
+        font-family: 'Instrument Sans', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.7rem, 3vw, 2.3rem);
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+        line-height: 1;
+      }
+      .stat .k {
+        margin-top: 0.4rem;
+        font-size: 0.82rem;
+        color: var(--muted);
+        line-height: 1.4;
+      }
+
+      /* ── Experience ──────────────────────────────────────────────── */
+      .section {
+        padding: clamp(3rem, 8vh, 5.5rem) 0;
+      }
+      .section-head {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1.6rem;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 6.5rem minmax(0, 1fr);
+        gap: clamp(1rem, 3vw, 2rem);
+        padding: clamp(1.2rem, 2.4vw, 1.7rem) 0;
+        border-top: 1px solid var(--line);
+        opacity: 0;
+        transform: translateY(18px);
+        transition: opacity 620ms ease, transform 620ms cubic-bezier(0.22, 0.61, 0.36, 1);
+      }
+      .row.in {
+        opacity: 1;
+        transform: none;
+      }
+      .row .when {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.82rem;
+        color: var(--flow-a);
+        font-variant-numeric: tabular-nums;
+        padding-top: 0.25rem;
+      }
+      .row .when small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+      .row h3 {
+        margin: 0;
+        font-family: 'Instrument Sans', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.08rem, 1.8vw, 1.32rem);
+        letter-spacing: -0.02em;
+        line-height: 1.28;
+      }
+      .row .org {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.35rem;
+      }
+      .row p {
+        margin: 0.65rem 0 0;
+        color: var(--muted);
+        max-width: 62ch;
+      }
+      .row p b {
+        color: var(--text);
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (max-width: 820px) {
+        .ticker {
+          grid-template-columns: 1fr;
+        }
+        .row {
+          grid-template-columns: 1fr;
+          gap: 0.35rem;
+        }
+        .row .when small {
+          display: inline;
+          margin-left: 0.55rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .row {
+          opacity: 1;
+          transform: none;
+          transition: none;
+        }
+        .curve {
+          stroke-dashoffset: 0;
+          transition: none;
+        }
+        .curve-fill {
+          opacity: 1;
+          transition: none;
+        }
+        .bloom {
+          display: none;
+        }
+      }
+      a:focus-visible {
+        outline: 2px solid var(--flow-a);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bloom" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="top">
+        <span>Григорий Агапов</span>
+        <span>Москва · Team Lead</span>
+      </div>
+
+      <section class="hero">
+        <h1>Веду команду, которая делает <span class="flow">поток донатов</span> больше</h1>
+        <p class="sub">
+          Пятнадцать лет в разработке, пять — с людьми в прямом подчинении. Сейчас — продуктовая
+          команда Донатов в VK: восемь человек на четырёх платформах.
+        </p>
+
+        <div class="ticker" id="ticker">
+          <div>
+            <div class="label">Оборот донатов в профиле VK</div>
+            <div class="amount" data-count-to="478" data-suffix=" тыс. ₽">0 тыс. ₽</div>
+            <div class="delta">было 235 тыс. ₽ — рост +103 % за два месяца</div>
+          </div>
+          <svg viewBox="0 0 420 150" role="img" aria-label="Кривая роста оборота донатов">
+            <defs>
+              <linearGradient id="g" x1="0" y1="0" x2="1" y2="0">
+                <stop offset="0%" stop-color="#5b7cfa" />
+                <stop offset="100%" stop-color="#c265f5" />
+              </linearGradient>
+              <linearGradient id="gf" x1="0" y1="0" x2="0" y2="1">
+                <stop offset="0%" stop-color="#5b7cfa" stop-opacity="0.28" />
+                <stop offset="100%" stop-color="#5b7cfa" stop-opacity="0" />
+              </linearGradient>
+            </defs>
+            <path
+              class="curve-fill"
+              d="M8 126 C 90 122, 150 112, 208 88 S 330 34, 412 16 L412 142 L8 142 Z"
+            />
+            <path class="curve" id="curve" d="M8 126 C 90 122, 150 112, 208 88 S 330 34, 412 16" />
+          </svg>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="v" data-count-to="15" data-suffix=" лет">0</div>
+            <div class="k">в разработке</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-count-to="8" data-suffix="">0</div>
+            <div class="k">человек в прямом подчинении</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-count-to="52" data-suffix=" %">0</div>
+            <div class="k">конверсия в монетизацию, было 30 %</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-count-to="40" data-suffix="">0</div>
+            <div class="k">продавцов Ozon в интеграции</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">Опыт</div>
+
+        <article class="row">
+          <div class="when">2026 —<small>сейчас</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид продуктовой команды «Донаты»</h3>
+            <p>
+              Восемь человек: бэкенд, фронтенд, iOS, Android, QA. За квартал — ребрендинг и запуск
+              донатов в профиле VK. Оборот <b>×2</b>, число донов <b>×3</b>, конверсия с
+              <b>30 %</b> до <b>52 %</b>.
+            </p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="when">2025<small>апр — дек</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид платформенной команды, социальная коммерция</h3>
+            <p>
+              Три команды под координацией. Лимит товаров в сообществах снят с <b>20 тысяч</b> до
+              миллионов, интеграция с <b>40</b> продавцами Ozon, <b>3 млн</b> товаров.
+            </p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="when">2022<small>дек — мар 2025</small></div>
+          <div>
+            <div class="org">Тинькофф Банк</div>
+            <h3>Тимлид, наставничество и Performance Review</h3>
+            <p>
+              MVP платформы наставничества — в срок, пилот собран из её же участников. Performance
+              Review стабилизирован на <b>60 тысячах</b> пользователей.
+            </p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="when">2013<small>дек — мар 2019</small></div>
+          <div>
+            <div class="org">Neotech (Paravan 2000)</div>
+            <h3>Senior-разработчик, ГИС-проекты</h3>
+            <p>
+              Smallworld GIS для телеком-заказчиков России и СНГ, обратная разработка клиентских
+              систем без исходников.
+            </p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script>
+      const reduce = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // Cursor bloom
+      if (!reduce) {
+        document.addEventListener('pointermove', (e) => {
+          document.documentElement.style.setProperty('--mx', e.clientX + 'px');
+          document.documentElement.style.setProperty('--my', e.clientY + 'px');
+        });
+      }
+
+      // Curve length so the draw-on works without hardcoding
+      const curve = document.getElementById('curve');
+      if (curve) {
+        const len = Math.ceil(curve.getTotalLength());
+        curve.style.setProperty('--len', len);
+      }
+
+      // Count-up: numbers arrive the way a donation counter does
+      function countUp(el) {
+        const to = parseFloat(el.dataset.countTo);
+        const suffix = el.dataset.suffix || '';
+        if (reduce) {
+          el.textContent = to + suffix;
+          return;
+        }
+        const dur = 1400;
+        const start = performance.now();
+        function frame(now) {
+          const p = Math.min(1, (now - start) / dur);
+          const eased = 1 - Math.pow(1 - p, 3);
+          el.textContent = Math.round(to * eased) + suffix;
+          if (p < 1) requestAnimationFrame(frame);
+        }
+        requestAnimationFrame(frame);
+      }
+
+      const io = new IntersectionObserver(
+        (entries) => {
+          entries.forEach((entry) => {
+            if (!entry.isIntersecting) return;
+            const el = entry.target;
+            if (el.dataset.countTo) countUp(el);
+            else el.classList.add(el.id === 'ticker' ? 'live' : 'in');
+            io.unobserve(el);
+          });
+        },
+        { threshold: 0.35 }
+      );
+
+      document
+        .querySelectorAll('[data-count-to], .row, #ticker')
+        .forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>

@@ -1,0 +1,360 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D4 — Kinetic type</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Archivo:wdth,wght@62..125,100..900&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #0a0a0b;
+        --text: #f4f4f2;
+        --muted: #86867f;
+        --line: #1e1e1c;
+        --amber: #ffb340;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Archivo', system-ui, sans-serif;
+        font-variation-settings: 'wdth' 100, 'wght' 400;
+        font-size: 17px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .wrap {
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.3rem 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .hero {
+        min-height: min(80vh, 700px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(2rem, 6vh, 4rem) 0;
+      }
+
+      /* Signature: every glyph carries its own weight and width, driven by
+         how close the pointer is. The headline is a field, not a string. */
+      h1 {
+        margin: 0;
+        font-size: clamp(2.6rem, 9vw, 7rem);
+        line-height: 0.96;
+        letter-spacing: -0.03em;
+        text-transform: uppercase;
+        max-width: 14ch;
+      }
+      /* Words stay whole: line breaks happen between words, never inside
+         them, even though every glyph is its own element. */
+      h1 .w {
+        display: inline-block;
+        white-space: nowrap;
+      }
+      h1 .ch {
+        display: inline-block;
+        font-variation-settings: 'wdth' 88, 'wght' 300;
+        transition: font-variation-settings 260ms cubic-bezier(0.2, 0.7, 0.3, 1);
+        will-change: font-variation-settings;
+      }
+      h1 .accent {
+        color: var(--amber);
+      }
+
+      .sub {
+        margin: 1.8rem 0 0;
+        max-width: 46ch;
+        color: var(--muted);
+        font-variation-settings: 'wdth' 100, 'wght' 400;
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(1.4rem, 4vw, 3.4rem);
+        margin-top: clamp(2rem, 5vh, 3rem);
+        padding-top: 1.4rem;
+        border-top: 1px solid var(--line);
+      }
+      .stat .v {
+        font-variation-settings: 'wdth' 112, 'wght' 700;
+        font-size: clamp(1.8rem, 3.2vw, 2.6rem);
+        line-height: 1;
+        letter-spacing: -0.035em;
+        font-variant-numeric: tabular-nums;
+      }
+      .stat .k {
+        margin-top: 0.4rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+        max-width: 16ch;
+        line-height: 1.4;
+      }
+
+      .section {
+        padding: clamp(2.5rem, 7vh, 5rem) 0;
+      }
+      .section-head {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1.2rem;
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 6.5rem minmax(0, 1fr);
+        gap: clamp(1rem, 3vw, 2rem);
+        padding: clamp(1.15rem, 2.2vw, 1.7rem) 0;
+        border-top: 1px solid var(--line);
+      }
+      .row .when {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--amber);
+        font-variant-numeric: tabular-nums;
+        padding-top: 0.25rem;
+      }
+      .row .when small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+      .row .org {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.3rem;
+      }
+      /* The row title thickens when you reach for it */
+      .row h3 {
+        margin: 0;
+        font-size: clamp(1.1rem, 2vw, 1.45rem);
+        letter-spacing: -0.02em;
+        line-height: 1.24;
+        font-variation-settings: 'wdth' 96, 'wght' 500;
+        transition: font-variation-settings 320ms cubic-bezier(0.2, 0.7, 0.3, 1),
+          color 320ms ease;
+      }
+      .row:hover h3,
+      .row:focus-within h3 {
+        font-variation-settings: 'wdth' 118, 'wght' 800;
+      }
+      .row p {
+        margin: 0.6rem 0 0;
+        color: var(--muted);
+        max-width: 64ch;
+      }
+      .row p b {
+        color: var(--text);
+        font-variation-settings: 'wdth' 100, 'wght' 700;
+      }
+
+      @media (max-width: 780px) {
+        .row {
+          grid-template-columns: 1fr;
+          gap: 0.3rem;
+        }
+        .row .when small {
+          display: inline;
+          margin-left: 0.5rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        h1 .ch,
+        .row h3 {
+          transition: none;
+        }
+      }
+      :focus-visible {
+        outline: 2px solid var(--amber);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="wrap">
+      <div class="top">
+        <span>Григорий Агапов</span>
+        <span>Москва · Team Lead</span>
+      </div>
+
+      <section class="hero">
+        <h1 id="kinetic">Тимлид, который держит вес команды</h1>
+        <p class="sub">
+          Пятнадцать лет в разработке, пять — с людьми в прямом подчинении. Веду продуктовую
+          команду Донатов в VK: восемь человек, четыре платформы.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="v">8</div>
+            <div class="k">человек в прямом подчинении</div>
+          </div>
+          <div class="stat">
+            <div class="v">×2</div>
+            <div class="k">оборот донатов за два месяца</div>
+          </div>
+          <div class="stat">
+            <div class="v">×3</div>
+            <div class="k">число донов</div>
+          </div>
+          <div class="stat">
+            <div class="v">52 %</div>
+            <div class="k">конверсия, было 30 %</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">Опыт</div>
+
+        <article class="row" tabindex="0">
+          <div class="when">2026 —<small>сейчас</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид продуктовой команды «Донаты»</h3>
+            <p>
+              Восемь человек: бэкенд, фронтенд, iOS, Android, QA. За квартал — ребрендинг и запуск
+              донатов в профиле VK. Оборот <b>×2</b>, доны <b>×3</b>, конверсия с <b>30 %</b> до
+              <b>52 %</b>.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2025<small>апр — дек</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид платформенной команды, социальная коммерция</h3>
+            <p>
+              Три команды под координацией. Лимит товаров снят с <b>20 тысяч</b> до миллионов,
+              интеграция с <b>40</b> продавцами Ozon, <b>3 млн</b> товаров.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2022<small>дек — мар 2025</small></div>
+          <div>
+            <div class="org">Тинькофф Банк</div>
+            <h3>Тимлид, наставничество и Performance Review</h3>
+            <p>
+              MVP платформы наставничества — в срок. Performance Review стабилизирован на
+              <b>60 тысячах</b> пользователей.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2013<small>дек — мар 2019</small></div>
+          <div>
+            <div class="org">Neotech (Paravan 2000)</div>
+            <h3>Senior-разработчик, ГИС-проекты</h3>
+            <p>Smallworld GIS для телеком-заказчиков России и СНГ.</p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script>
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const h1 = document.getElementById('kinetic');
+
+      // Split into per-glyph spans; the word «вес» keeps the accent colour.
+      const text = h1.textContent;
+      h1.textContent = '';
+      const accentWord = 'вес';
+      text.split(' ').forEach((word, wi, words) => {
+        const isAccent = word.replace(/[^а-яёa-z]/gi, '').toLowerCase() === accentWord;
+        const w = document.createElement('span');
+        w.className = 'w';
+        [...word].forEach((c) => {
+          const s = document.createElement('span');
+          s.className = 'ch' + (isAccent ? ' accent' : '');
+          s.textContent = c;
+          w.appendChild(s);
+        });
+        h1.appendChild(w);
+        if (wi < words.length - 1) h1.appendChild(document.createTextNode(' '));
+      });
+
+      const chars = [...h1.querySelectorAll('.ch')];
+
+      // Weight field: each glyph reads its distance to the pointer.
+      let raf = null;
+      let px = -9999,
+        py = -9999;
+
+      function paint() {
+        raf = null;
+        const R = 260;
+        chars.forEach((c) => {
+          const r = c.getBoundingClientRect();
+          const dx = r.left + r.width / 2 - px;
+          const dy = r.top + r.height / 2 - py;
+          const d = Math.hypot(dx, dy);
+          const f = Math.max(0, 1 - d / R);
+          const wght = Math.round(300 + f * 600);
+          const wdth = Math.round(88 + f * 34);
+          c.style.fontVariationSettings = `'wdth' ${wdth}, 'wght' ${wght}`;
+        });
+      }
+
+      if (!reduce) {
+        addEventListener('pointermove', (e) => {
+          px = e.clientX;
+          py = e.clientY;
+          if (!raf) raf = requestAnimationFrame(paint);
+        });
+        addEventListener('pointerleave', () => {
+          px = py = -9999;
+          if (!raf) raf = requestAnimationFrame(paint);
+        });
+
+        // Idle demo sweep so the effect is visible before the first move
+        let t = 0;
+        const demo = setInterval(() => {
+          t += 0.06;
+          const r = h1.getBoundingClientRect();
+          px = r.left + (0.5 + 0.48 * Math.sin(t)) * r.width;
+          py = r.top + r.height * 0.5;
+          paint();
+          if (t > Math.PI * 2.2) clearInterval(demo);
+        }, 40);
+        addEventListener('pointermove', () => clearInterval(demo), { once: true });
+      }
+    </script>
+  </body>
+</html>

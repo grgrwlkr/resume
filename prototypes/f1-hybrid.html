@@ -1,0 +1,1087 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>Григорий Агапов — тимлид разработки</title>
+    <meta
+      name="description"
+      content="Тимлид продуктовой команды Донатов в VK. Пятнадцать лет в разработке, пять — с людьми в прямом подчинении."
+    />
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@500;600;700&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #05070e;
+        --panel: #090d18;
+        --edge: rgba(34, 231, 255, 0.2);
+        --cyan: #2ae9ff;
+        --magenta: #ff3d9e;
+        --amber: #ffc24a;
+        --lime: #7cff6b;
+        --text: #e4f0f6;
+        --muted: #7d95a4;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--void);
+        color: var(--text);
+        /* Prose is set in a grotesque, not in mono: the page has to be read
+           by a recruiter in thirty seconds, not decoded. */
+        font-family: 'Hanken Grotesk', system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+      .mono {
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+      }
+
+      /* ═══ Ambient — deliberately quiet ═══════════════════════════ */
+      .horizon {
+        position: fixed;
+        inset: auto 0 0 0;
+        height: 34vh;
+        perspective: 260px;
+        perspective-origin: 50% 0;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+        opacity: 0.5;
+        mask-image: linear-gradient(to bottom, transparent, #000 60%, #000);
+      }
+      .horizon::before {
+        content: '';
+        position: absolute;
+        inset: -60% -50% -20%;
+        background-image: linear-gradient(rgba(34, 231, 255, 0.09) 1px, transparent 1px),
+          linear-gradient(90deg, rgba(34, 231, 255, 0.09) 1px, transparent 1px);
+        background-size: 52px 52px;
+        transform: rotateX(74deg);
+        transform-origin: 50% 0;
+        animation: drift 11s linear infinite;
+      }
+      @keyframes drift {
+        to {
+          background-position: 0 52px;
+        }
+      }
+      .glowfield {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        pointer-events: none;
+        background: radial-gradient(ellipse at 12% -5%, rgba(34, 231, 255, 0.1), transparent 55%),
+          radial-gradient(ellipse at 95% 12%, rgba(255, 61, 158, 0.07), transparent 50%);
+      }
+
+      /* ═══ Boot: brief, skippable, once per session ═══════════════ */
+      #boot {
+        position: fixed;
+        inset: 0;
+        z-index: 90;
+        background: var(--void);
+        display: flex;
+        align-items: center;
+        justify-content: center;
+        padding: 2rem;
+        transition: opacity 340ms ease;
+      }
+      #boot.done {
+        opacity: 0;
+        pointer-events: none;
+      }
+      #boot pre {
+        margin: 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: clamp(0.72rem, 1.5vw, 0.88rem);
+        line-height: 1.8;
+        white-space: pre-wrap;
+        max-width: 640px;
+        width: 100%;
+      }
+      #boot .ok {
+        color: var(--lime);
+      }
+      #boot .hi {
+        color: var(--cyan);
+      }
+      #boot .dim {
+        color: var(--muted);
+      }
+      .caret {
+        display: inline-block;
+        width: 0.55em;
+        height: 1em;
+        background: var(--cyan);
+        vertical-align: -0.14em;
+        animation: blink 1s steps(2, start) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0;
+        }
+      }
+
+      /* ═══ Chrome ════════════════════════════════════════════════ */
+      .hud {
+        position: sticky;
+        top: 0;
+        z-index: 30;
+        display: flex;
+        align-items: center;
+        gap: clamp(0.7rem, 2.2vw, 1.6rem);
+        flex-wrap: wrap;
+        padding: 0.6rem clamp(1rem, 4vw, 2.6rem);
+        background: rgba(5, 7, 14, 0.9);
+        backdrop-filter: blur(12px);
+        border-bottom: 1px solid var(--edge);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.08em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .hud .on {
+        color: var(--lime);
+      }
+      .hud .on::before {
+        content: '●';
+        margin-right: 0.4rem;
+        animation: blink 1.6s steps(2, start) infinite;
+      }
+      .hud .u {
+        color: var(--cyan);
+      }
+      .hud .right {
+        margin-left: auto;
+        display: flex;
+        align-items: center;
+        gap: 0.9rem;
+      }
+      .termbtn {
+        font: inherit;
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        background: rgba(34, 231, 255, 0.08);
+        border: 1px solid var(--edge);
+        padding: 0.32rem 0.7rem;
+        cursor: pointer;
+        transition: background-color 180ms ease, border-color 180ms ease;
+      }
+      .termbtn:hover,
+      .termbtn:focus-visible {
+        background: rgba(34, 231, 255, 0.18);
+        border-color: var(--cyan);
+      }
+      .termbtn kbd {
+        font: inherit;
+        color: var(--muted);
+        margin-left: 0.45rem;
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 2;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 clamp(1rem, 4vw, 2.6rem);
+      }
+
+      /* ═══ Hero ══════════════════════════════════════════════════ */
+      .hero {
+        padding: clamp(2.6rem, 8vh, 5rem) 0 clamp(1.6rem, 4vh, 3rem);
+      }
+      .ps1 {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--muted);
+        margin: 0 0 1.1rem;
+      }
+      .ps1 b {
+        color: var(--lime);
+        font-weight: 500;
+      }
+      .ps1 span {
+        color: var(--cyan);
+      }
+
+      h1 {
+        margin: 0;
+        font-family: 'Chakra Petch', system-ui, sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.3rem, 7vw, 5.2rem);
+        line-height: 0.98;
+        letter-spacing: -0.01em;
+        text-transform: uppercase;
+        color: #f2fbff;
+        text-shadow: 0 0 34px rgba(34, 231, 255, 0.22);
+      }
+      h1 .sub {
+        display: block;
+        color: var(--cyan);
+      }
+      /* Glitch only on demand — ambient jitter hurts reading */
+      .glitch {
+        position: relative;
+        display: inline-block;
+      }
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-t);
+        position: absolute;
+        inset: 0;
+        opacity: 0;
+        pointer-events: none;
+        transition: opacity 120ms ease;
+      }
+      .glitch::before {
+        color: var(--cyan);
+        clip-path: polygon(0 0, 100% 0, 100% 45%, 0 45%);
+      }
+      .glitch::after {
+        color: var(--magenta);
+        clip-path: polygon(0 55%, 100% 55%, 100% 100%, 0 100%);
+      }
+      h1:hover .glitch::before,
+      h1:hover .glitch::after,
+      .glitch.fire::before,
+      .glitch.fire::after {
+        opacity: 0.9;
+        animation: jit 420ms steps(2) infinite;
+      }
+      h1:hover .glitch::after,
+      .glitch.fire::after {
+        animation-direction: reverse;
+      }
+      @keyframes jit {
+        0% { transform: translate(-3px, -1px); }
+        50% { transform: translate(3px, 1px); }
+        100% { transform: translate(-2px, 0); }
+      }
+
+      .lede {
+        margin: 1.5rem 0 0;
+        max-width: 56ch;
+        font-size: clamp(1rem, 1.5vw, 1.1rem);
+        color: #b9cdd8;
+      }
+      .lede b {
+        color: var(--text);
+        font-weight: 600;
+      }
+
+      .cta {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 0.7rem;
+        margin-top: 1.8rem;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        gap: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.82rem;
+        text-decoration: none;
+        padding: 0.6rem 1rem;
+        border: 1px solid var(--edge);
+        color: var(--text);
+        background: rgba(34, 231, 255, 0.06);
+        transition: background-color 180ms ease, border-color 180ms ease;
+      }
+      .btn:hover,
+      .btn:focus-visible {
+        background: rgba(34, 231, 255, 0.16);
+        border-color: var(--cyan);
+      }
+      .btn.primary {
+        background: var(--cyan);
+        color: #04202a;
+        border-color: var(--cyan);
+        font-weight: 500;
+      }
+      .btn.primary:hover {
+        background: #6df1ff;
+      }
+
+      .stats {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+        gap: 1px;
+        margin-top: clamp(2rem, 5vh, 3rem);
+        background: var(--edge);
+        border: 1px solid var(--edge);
+      }
+      .stat {
+        background: var(--panel);
+        padding: 1rem 1.1rem 1.15rem;
+      }
+      .stat .v {
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.7rem, 3.2vw, 2.4rem);
+        line-height: 1;
+        color: var(--cyan);
+        font-variant-numeric: tabular-nums;
+      }
+      .stat.m .v {
+        color: var(--magenta);
+      }
+      .stat .k {
+        margin-top: 0.5rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.06em;
+        text-transform: uppercase;
+        color: var(--muted);
+        line-height: 1.55;
+      }
+
+      /* ═══ Sections ══════════════════════════════════════════════ */
+      .section {
+        padding: clamp(2.4rem, 7vh, 4.5rem) 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: baseline;
+        gap: 0.9rem;
+        margin-bottom: 1.5rem;
+      }
+      .section-head h2 {
+        margin: 0;
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.3rem, 2.4vw, 1.8rem);
+        text-transform: uppercase;
+        letter-spacing: 0.01em;
+      }
+      .section-head .cmd {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        color: var(--muted);
+      }
+      .section-head .rule {
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--edge), transparent);
+      }
+
+      .rec {
+        display: grid;
+        grid-template-columns: 8.5rem minmax(0, 1fr);
+        gap: clamp(0.8rem, 2.6vw, 2rem);
+        padding: clamp(1.1rem, 2.4vw, 1.7rem) clamp(0.6rem, 1.6vw, 1.1rem);
+        border-left: 2px solid rgba(34, 231, 255, 0.16);
+        transition: border-color 220ms ease, background-color 220ms ease;
+      }
+      .rec + .rec {
+        margin-top: 0.3rem;
+      }
+      .rec:hover,
+      .rec:focus-within {
+        border-left-color: var(--magenta);
+        background: linear-gradient(90deg, rgba(255, 61, 158, 0.06), transparent 60%);
+      }
+      .rec .when {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.82rem;
+        color: var(--cyan);
+        font-variant-numeric: tabular-nums;
+        padding-top: 0.15rem;
+      }
+      .rec .when small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+      .rec .org {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--magenta);
+      }
+      .rec h3 {
+        margin: 0.3rem 0 0;
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.08rem, 1.9vw, 1.32rem);
+        line-height: 1.28;
+      }
+      .rec p {
+        margin: 0.6rem 0 0;
+        color: #a9becb;
+        max-width: 68ch;
+      }
+      .rec p b {
+        color: var(--amber);
+        font-weight: 600;
+      }
+
+      footer {
+        border-top: 1px solid var(--edge);
+        padding: clamp(2rem, 5vh, 3rem) 0 3rem;
+        color: var(--muted);
+        font-size: 0.86rem;
+      }
+      footer a {
+        color: var(--cyan);
+      }
+
+      /* ═══ Console overlay ═══════════════════════════════════════ */
+      #backdrop {
+        position: fixed;
+        inset: 0;
+        z-index: 70;
+        background: rgba(2, 4, 9, 0.68);
+        opacity: 0;
+        visibility: hidden;
+        transition: opacity 300ms ease, visibility 0s linear 300ms;
+      }
+      #backdrop.on {
+        opacity: 1;
+        visibility: visible;
+        transition: opacity 300ms ease, visibility 0s;
+      }
+      #console {
+        position: fixed;
+        left: 0;
+        right: 0;
+        bottom: 0;
+        height: min(62vh, 560px);
+        z-index: 80;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        /* Fully opaque: the page behind must not bleed through the text.
+           Dimming lives on a separate backdrop — a spread shadow here would
+           darken the page even while the panel sits translated off-screen. */
+        background: #04060c;
+        border-top: 1px solid var(--cyan);
+        box-shadow: 0 -24px 70px -20px rgba(34, 231, 255, 0.3);
+        transform: translateY(101%);
+        transition: transform 320ms cubic-bezier(0.22, 0.7, 0.3, 1);
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.86rem;
+      }
+      #console.open {
+        transform: none;
+      }
+      #console .bar {
+        display: flex;
+        align-items: center;
+        gap: 0.7rem;
+        padding: 0.5rem clamp(0.8rem, 2.4vw, 1.4rem);
+        border-bottom: 1px solid var(--edge);
+        font-size: 0.7rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      #console .bar .dim {
+        margin-left: 0.6rem;
+      }
+      #console .bar .close {
+        margin-left: auto;
+        background: none;
+        border: 1px solid var(--edge);
+        color: var(--muted);
+        font: inherit;
+        font-size: 0.68rem;
+        padding: 0.2rem 0.5rem;
+        cursor: pointer;
+      }
+      #console .bar .close:hover {
+        color: var(--cyan);
+        border-color: var(--cyan);
+      }
+      #cout {
+        overflow-y: auto;
+        padding: 0.9rem clamp(0.8rem, 2.4vw, 1.4rem);
+        line-height: 1.6;
+      }
+      #cout .line {
+        margin: 0;
+      }
+      #cout .echo {
+        color: var(--muted);
+        margin: 0.7rem 0 0.3rem;
+      }
+      #cout .echo b {
+        color: var(--lime);
+        font-weight: 400;
+      }
+      #cout .echo i {
+        color: var(--text);
+        font-style: normal;
+      }
+      #cout .hi { color: var(--cyan); }
+      #cout .mag { color: var(--magenta); }
+      #cout .ok { color: var(--lime); }
+      #cout .warn { color: var(--amber); }
+      #cout .dim { color: var(--muted); }
+      #cout dl {
+        display: grid;
+        grid-template-columns: minmax(8rem, 14rem) minmax(0, 1fr);
+        gap: 0.1rem 1rem;
+        margin: 0.3rem 0 0;
+      }
+      #cout dt { color: var(--muted); }
+      #cout dd { margin: 0; }
+      #cout pre {
+        margin: 0.2rem 0 0.7rem;
+        padding-left: 0.2rem;
+        color: var(--cyan);
+        font-size: clamp(0.4rem, 0.95vw, 0.66rem);
+        line-height: 1.15;
+        overflow-x: auto;
+      }
+      #console form {
+        display: flex;
+        align-items: center;
+        gap: 0.5rem;
+        padding: 0.6rem clamp(0.8rem, 2.4vw, 1.4rem);
+        border-top: 1px solid var(--edge);
+      }
+      #console .ps {
+        color: var(--lime);
+        white-space: nowrap;
+      }
+      #console .ps span {
+        color: var(--cyan);
+      }
+      #cin {
+        flex: 1;
+        min-width: 0;
+        background: none;
+        border: 0;
+        outline: none;
+        color: var(--text);
+        font: inherit;
+        caret-color: var(--cyan);
+      }
+      #cin::placeholder {
+        color: #3d5867;
+      }
+
+      @media (max-width: 780px) {
+        .rec {
+          grid-template-columns: 1fr;
+          gap: 0.3rem;
+        }
+        .rec .when small {
+          display: inline;
+          margin-left: 0.5rem;
+        }
+        #console {
+          height: 70vh;
+        }
+        .termbtn kbd {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .horizon::before,
+        .caret,
+        .hud .on::before,
+        .glitch::before,
+        .glitch::after {
+          animation: none !important;
+        }
+        #console {
+          transition: none;
+        }
+      }
+      :focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="glowfield" aria-hidden="true"></div>
+    <div class="horizon" aria-hidden="true"></div>
+
+    <div id="boot" role="status" aria-live="polite"><pre id="bootlog"></pre></div>
+
+    <header class="hud">
+      <span class="on">сессия активна</span>
+      <span>узел <span class="u">vk/донаты</span></span>
+      <span>экипаж <span class="u">08</span></span>
+      <span class="right">
+        <span id="clock" class="mono"></span>
+        <button class="termbtn" id="openTerm" type="button">
+          &gt;_ терминал <kbd>~</kbd>
+        </button>
+      </span>
+    </header>
+
+    <main class="wrap">
+      <section class="hero">
+        <p class="ps1"><b>g.agapov@vk</b>:<span>~</span>$ whoami --full</p>
+        <h1>
+          <span class="glitch" data-t="Григорий Агапов">Григорий Агапов</span>
+          <span class="sub">тимлид разработки</span>
+        </h1>
+        <p class="lede">
+          Веду продуктовую команду Донатов в VK — <b>восемь человек</b> на четырёх платформах.
+          Пятнадцать лет в разработке, пять из них с людьми в прямом подчинении. Строю продукт от
+          MVP до масштабирования, не теряя техническую глубину.
+        </p>
+
+        <div class="cta">
+          <a class="btn primary" href="#">Скачать резюме</a>
+          <a class="btn" href="#">Написать в Telegram</a>
+          <button class="btn" id="openTerm2" type="button">&gt;_ Открыть терминал</button>
+        </div>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="v" data-count="8">8</div>
+            <div class="k">человек<br />в подчинении</div>
+          </div>
+          <div class="stat m">
+            <div class="v" data-count="2" data-prefix="×">×2</div>
+            <div class="k">оборот донатов<br />за два месяца</div>
+          </div>
+          <div class="stat m">
+            <div class="v" data-count="3" data-prefix="×">×3</div>
+            <div class="k">число донов<br />за тот же срок</div>
+          </div>
+          <div class="stat">
+            <div class="v" data-count="52" data-suffix=" %">52 %</div>
+            <div class="k">конверсия<br />было 30 %</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">
+          <h2>Опыт</h2>
+          <span class="cmd">cat career.log --reverse</span>
+          <span class="rule"></span>
+        </div>
+
+        <article class="rec" tabindex="0">
+          <div class="when">2026 —<small>по сей день</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид продуктовой команды «Донаты»</h3>
+            <p>
+              Восемь человек в прямом подчинении: бэкенд, фронтенд, iOS, Android, QA. За квартал
+              провёл команду через ребрендинг и запуск донатов в профиле VK. Оборот вырос
+              <b>вдвое</b>, число донов — <b>втрое</b>, конверсия подключение → монетизация
+              поднялась с <b>30 %</b> до <b>52 %</b>.
+            </p>
+          </div>
+        </article>
+
+        <article class="rec" tabindex="0">
+          <div class="when">2025<small>апрель — декабрь</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид платформенной команды, социальная коммерция</h3>
+            <p>
+              Координировал три команды. Снял лимит товаров в сообществах с <b>20 тысяч</b> до
+              миллионов, запустил интеграцию с <b>40</b> продавцами Ozon — около <b>3 млн</b>
+              импортированных товаров. Провёл миграцию рекомендаций к сроку отключения Hadoop без
+              потери значимого трафика.
+            </p>
+          </div>
+        </article>
+
+        <article class="rec" tabindex="0">
+          <div class="when">2022<small>декабрь — март 2025</small></div>
+          <div>
+            <div class="org">Тинькофф Банк</div>
+            <h3>Тимлид, наставничество и Performance Review</h3>
+            <p>
+              Запустил в срок MVP первой в компании платформы наставничества и собрал пилот
+              целиком из её участников. Стабилизировал Performance Review на <b>60 тысяч</b>
+              пользователей с двумя пиковыми периодами в год.
+            </p>
+          </div>
+        </article>
+
+        <article class="rec" tabindex="0">
+          <div class="when">2013<small>декабрь — март 2019</small></div>
+          <div>
+            <div class="org">Neotech (Paravan 2000)</div>
+            <h3>Senior-разработчик, ГИС-проекты</h3>
+            <p>
+              Решения на General Electric Smallworld GIS для телеком-заказчиков России и СНГ.
+              Обратная разработка клиентских систем без доступа к исходному коду.
+            </p>
+          </div>
+        </article>
+      </section>
+
+      <footer>
+        <p>
+          Москва · <a href="#">gregoryagapov@icloud.com</a> · <a href="#">github.com/grgrwlkr</a>
+        </p>
+        <p class="mono" style="font-size: 0.76rem">
+          Нажмите <b style="color: var(--cyan)">~</b>, чтобы открыть терминал. Наберите
+          <b style="color: var(--cyan)">help</b> — там есть не только резюме.
+        </p>
+      </footer>
+    </main>
+
+    <!-- Console: a door, not the building. Everything above is already in
+         the HTML, so crawlers and recruiters never depend on it. -->
+    <div id="backdrop" aria-hidden="true"></div>
+    <section id="console" role="dialog" aria-modal="false" aria-label="Терминал" aria-hidden="true">
+      <div class="bar">
+        <span>g.agapov@vk — ~/career</span>
+        <span class="dim">esc — закрыть</span>
+        <button class="close" id="closeTerm" type="button">×</button>
+      </div>
+      <div id="cout"></div>
+      <form id="cform" autocomplete="off">
+        <span class="ps">g.agapov@vk:<span>~</span>$</span>
+        <input id="cin" type="text" spellcheck="false" aria-label="Командная строка"
+               placeholder="help — список команд" />
+      </form>
+    </section>
+
+    <script>
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      /* ── Clock ─────────────────────────────────────────────────── */
+      const clock = document.getElementById('clock');
+      const tick = () =>
+        (clock.textContent = new Date().toLocaleTimeString('ru-RU', { hour12: false }));
+      tick();
+      if (!reduce) setInterval(tick, 1000);
+
+      /* ── Boot: two seconds, once per session ───────────────────── */
+      const boot = document.getElementById('boot');
+      const bootlog = document.getElementById('bootlog');
+      const SEEN = 'boot-seen';
+
+      function endBoot() {
+        boot.classList.add('done');
+        setTimeout(() => boot.remove(), 380);
+        try {
+          sessionStorage.setItem(SEEN, '1');
+        } catch (e) {}
+      }
+
+      let skipped = false;
+      const skip = () => {
+        if (!skipped) {
+          skipped = true;
+          endBoot();
+        }
+      };
+
+      async function runBoot() {
+        let seen = false;
+        try {
+          seen = sessionStorage.getItem(SEEN) === '1';
+        } catch (e) {}
+        if (seen || reduce) return endBoot();
+
+        addEventListener('keydown', skip, { once: true });
+        boot.addEventListener('click', skip, { once: true });
+
+        const steps = [
+          ['VK//NET SECURE SHELL v4.2.6\n', 'hi'],
+          ['расшифровка личного дела ... ', ''],
+          ['OK\n', 'ok'],
+          ['login: ', ''],
+          ['g.agapov\n', 'hi'],
+          ['password: ', ''],
+          ['••••••••••\n', 'mag'],
+          ['\n>>> ДОСТУП РАЗРЕШЁН — допуск TEAM LEAD', 'ok']
+        ];
+        const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+        for (const [txt, cls] of steps) {
+          if (skipped) return;
+          const s = document.createElement('span');
+          if (cls) s.className = cls;
+          bootlog.appendChild(s);
+          for (const ch of txt) {
+            if (skipped) return;
+            s.textContent += ch;
+            await wait(14);
+          }
+          await wait(60);
+        }
+        const c = document.createElement('span');
+        c.className = 'caret';
+        bootlog.appendChild(c);
+        await wait(360);
+        skip();
+      }
+      runBoot();
+
+      /* ── Console ───────────────────────────────────────────────── */
+      const cons = document.getElementById('console');
+      const cout = document.getElementById('cout');
+      const cin = document.getElementById('cin');
+      const cform = document.getElementById('cform');
+
+      const ART = String.raw`
+   ▄▄▄·  ▄▄ •  ▄▄▄·  ▄▄▄·       ▌ ▐·
+  ▐█ ▀█ ▐█ ▀ ▪▐█ ▀█ ▐█ ▄█ ▄█▀▄ ▪█·█▌
+  ▄█▀▀█ ▄█ ▀█▄▄█▀▀█  ██▀·▐█▌.▐▌▐█▐█•
+  ▐█▪ ▐▌▐█▄▪▐█▐█▪ ▐▌▐█▪·•▐█▌.▐▌ ███
+   ▀  ▀ ·▀▀▀▀  ▀  ▀ .▀    ▀█▄▀▪. ▀`;
+
+      const RESP = {
+        help: `<p class="line"><span class="hi">Команды</span></p>
+<dl>
+  <dt>whoami</dt><dd>кто это и чем занимается</dd>
+  <dt>experience</dt><dd>места работы</dd>
+  <dt>impact</dt><dd>цифры, которые можно проверить</dd>
+  <dt>stack</dt><dd>технологии</dd>
+  <dt>projects</dt><dd>открытый код</dd>
+  <dt>contact</dt><dd>как связаться</dd>
+  <dt>ls · clear · exit</dt><dd>служебные</dd>
+</dl>
+<p class="line dim">// а ещё тут спрятано несколько команд, которых нет в этом списке</p>`,
+
+        whoami: `<p class="line"><span class="hi">Григорий Агапов</span> — руководитель команды разработки</p>
+<p class="line dim">Москва · 15 лет в разработке · 5 лет с людьми в прямом подчинении</p>
+<p class="line">Продуктовая команда Донатов в VK: <span class="warn">8 человек</span> — бэкенд, фронтенд, iOS, Android, QA.</p>`,
+
+        impact: `<dl>
+  <dt>оборот донатов</dt><dd><span class="warn">×2</span> за два месяца после запуска в профиле VK</dd>
+  <dt>число донов</dt><dd><span class="warn">×3</span> за тот же период</dd>
+  <dt>конверсия</dt><dd>с <span class="dim">30 %</span> до <span class="warn">52 %</span></dd>
+  <dt>лимит товаров</dt><dd>снят с <span class="dim">20 тыс.</span> до <span class="warn">миллионов</span></dd>
+  <dt>интеграция Ozon</dt><dd><span class="warn">40</span> продавцов, ~<span class="warn">3 млн</span> товаров</dd>
+  <dt>VKUI iOS / Android</dt><dd><span class="warn">64 %</span> / <span class="warn">84 %</span> покрытия</dd>
+</dl>`,
+
+        experience: `<p class="line"><span class="hi">2026 — VK</span> · тимлид «Донаты» — 8 человек, оборот ×2, доны ×3</p>
+<p class="line"><span class="hi">2025 — VK</span> · тимлид платформы соцкоммерции — 3 команды, 40 продавцов Ozon</p>
+<p class="line"><span class="hi">2022 — Тинькофф</span> · наставничество и Performance Review на 60 тыс. пользователей</p>
+<p class="line"><span class="hi">2013 — Neotech</span> · senior, ГИС-проекты на Smallworld</p>
+<p class="line dim">// подробности — на странице выше</p>`,
+
+        stack: `<dl>
+  <dt>сейчас (VK)</dt><dd>PHP · Go · React · Postgres · микросервисы</dd>
+  <dt>раньше (Tinkoff)</dt><dd>.NET · C# · Angular · TypeScript · Docker · Kubernetes</dd>
+  <dt>сообщения</dt><dd>Kafka · RabbitMQ</dd>
+  <dt>архитектура</dt><dd>декомпозиция монолита · DDD · CQRS</dd>
+</dl>`,
+
+        projects: `<p class="line"><span class="hi">Dashboard &amp; Statusline for Claude Code</span> — расширение VS Code, MIT</p>
+<p class="line dim">23 вкладки статистики, ~20 000 строк JS, ноль runtime-зависимостей</p>
+<p class="line">VS Code Marketplace · Open VSX · github.com/grgrwlkr/claude-dashboard-vscode</p>`,
+
+        contact: `<dl>
+  <dt>telegram</dt><dd class="hi">@grgrwlkr</dd>
+  <dt>почта</dt><dd class="hi">gregoryagapov@icloud.com</dd>
+  <dt>github</dt><dd class="hi">github.com/grgrwlkr</dd>
+</dl>
+<p class="line ok">// открыт к предложениям на роли инженерного лидера</p>`,
+
+        ls: `<p class="line"><span class="hi">whoami</span>  <span class="hi">experience</span>  <span class="hi">impact</span>  <span class="hi">stack</span>  <span class="hi">projects</span>  <span class="hi">contact</span>  <span class="dim">resume.pdf</span></p>`,
+
+        /* ── Пасхалки ──────────────────────────────────────────── */
+        sudo: `<p class="line mag">g.agapov не в файле sudoers. Об инциденте будет доложено.</p>`,
+        vim: `<p class="line warn">Вы вошли в vim. Чтобы выйти, наберите <span class="hi">:q!</span></p><p class="line dim">…шутка, здесь это не работает. Как и у всех.</p>`,
+        ':q!': `<p class="line ok">Свобода.</p>`,
+        coffee: `<p class="line warn">418 I'm a teapot</p><p class="line dim">Кофе кончился на релизе. Осталась только решимость.</p>`,
+        hack: `<p class="line mag">ВЗЛОМ НАЧАТ...</p><p class="line dim">обход фаервола ......... <span class="ok">OK</span></p><p class="line dim">доступ к премиям ....... <span class="mag">ОТКАЗАНО</span></p><p class="line dim">попробуйте через HR.</p>`,
+        deploy: `<p class="line warn">Деплой в пятницу вечером?</p><p class="line dim">Команда молча смотрит на вас.</p>`,
+        matrix: `<p class="line ok">Ложки нет. Есть роадмап.</p>`,
+        '42': `<p class="line hi">Ответ на главный вопрос жизни, вселенной и всего такого.</p><p class="line dim">Вопрос, к сожалению, был про сроки.</p>`,
+        rm: `<p class="line mag">rm: отказано. Здесь всё нажито честным трудом.</p>`,
+        exit: null
+      };
+
+      const ALIASES = {
+        'cat experience': 'experience',
+        'cat impact': 'impact',
+        'cat projects': 'projects',
+        'cat contact': 'contact',
+        'cat stack': 'stack',
+        'rm -rf /': 'rm',
+        'rm -rf': 'rm',
+        'sudo su': 'sudo',
+        'что ты умеешь': 'help',
+        'помощь': 'help',
+        'кто ты': 'whoami'
+      };
+
+      // Anything typed by a visitor is escaped before it can reach innerHTML.
+      // The canned responses in RESP are authored markup and go through as-is.
+      const esc = (s) =>
+        String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+
+      function line(html) {
+        const d = document.createElement('div');
+        d.innerHTML = html;
+        cout.appendChild(d);
+        cout.scrollTop = cout.scrollHeight;
+      }
+
+      function echo(cmd) {
+        line(`<p class="echo"><b>g.agapov@vk</b>:~$ <i>${esc(cmd)}</i></p>`);
+      }
+
+      function exec(raw) {
+        const cmd = raw.trim().toLowerCase();
+        if (!cmd) return;
+        echo(raw.trim());
+
+        if (cmd === 'clear') {
+          cout.innerHTML = '';
+          return;
+        }
+        if (cmd === 'exit' || cmd === 'q') {
+          closeConsole();
+          return;
+        }
+
+        // hasOwnProperty, not `in`: `in` also matches Object.prototype members,
+        // so "constructor" or "toString" would resolve to a bogus response.
+        const key = Object.prototype.hasOwnProperty.call(ALIASES, cmd) ? ALIASES[cmd] : cmd;
+        if (Object.prototype.hasOwnProperty.call(RESP, key) && RESP[key]) return line(RESP[key]);
+
+        const m = cmd.match(/^cat\s+(\S+)$/);
+        if (m) {
+          const f = m[1].replace(/\.(log|txt|md|pdf)$/, '');
+          if (Object.prototype.hasOwnProperty.call(RESP, f) && RESP[f]) return line(RESP[f]);
+          return line(`<p class="line mag">cat: ${esc(f)}: файл не найден</p>`);
+        }
+        if (cmd.startsWith('sudo')) return line(RESP.sudo);
+
+        line(
+          `<p class="line mag">${esc(cmd)}: команда не найдена</p>
+           <p class="line dim">наберите <span class="hi">help</span></p>`
+        );
+      }
+
+      const backdrop = document.getElementById('backdrop');
+      backdrop.addEventListener('click', () => closeConsole());
+
+      let greeted = false;
+      function openConsole() {
+        cons.classList.add('open');
+        backdrop.classList.add('on');
+        cons.setAttribute('aria-hidden', 'false');
+        if (!greeted) {
+          greeted = true;
+          line(`<pre>${ART}</pre>`);
+          line(
+            `<p class="line dim">соединение установлено · допуск <span class="warn">TEAM LEAD</span></p>
+             <p class="line dim">наберите <span class="hi">help</span>, а лучше поищите то, чего в help нет</p>`
+          );
+        }
+        setTimeout(() => cin.focus(), reduce ? 0 : 320);
+      }
+      function closeConsole() {
+        cons.classList.remove('open');
+        backdrop.classList.remove('on');
+        cons.setAttribute('aria-hidden', 'true');
+        document.getElementById('openTerm').focus();
+      }
+
+      document.getElementById('openTerm').addEventListener('click', openConsole);
+      document.getElementById('openTerm2').addEventListener('click', openConsole);
+      document.getElementById('closeTerm').addEventListener('click', closeConsole);
+
+      cform.addEventListener('submit', (e) => {
+        e.preventDefault();
+        exec(cin.value);
+        cin.value = '';
+      });
+
+      // Tilde opens the console, the way a game console does. Escape closes.
+      addEventListener('keydown', (e) => {
+        const typing = e.target === cin;
+        if ((e.key === '`' || e.key === '~' || e.key === 'ё' || e.key === 'Ё') && !typing) {
+          e.preventDefault();
+          cons.classList.contains('open') ? closeConsole() : openConsole();
+        } else if (e.key === 'Escape' && cons.classList.contains('open')) {
+          closeConsole();
+        }
+      });
+
+      // Deep link: ?console=1 opens the terminal, ?console=<cmd> also runs
+      // that command — so a specific answer can be shared, not just the door.
+      const deep = new URLSearchParams(location.search).get('console');
+      if (deep !== null) {
+        // Defence in depth: a link may only trigger commands this page defines.
+        // Escaping already makes arbitrary input harmless, but a URL should not
+        // be able to drive the console with text nobody here wrote.
+        const known = (c) => {
+          const k = c.trim().toLowerCase();
+          if (!k) return false;
+          if (['help', 'clear', 'exit', 'q', 'ls'].includes(k)) return true;
+          if (Object.prototype.hasOwnProperty.call(ALIASES, k)) return true;
+          if (Object.prototype.hasOwnProperty.call(RESP, k)) return true;
+          const m = k.match(/^cat\s+(\w+)$/);
+          return !!m && Object.prototype.hasOwnProperty.call(RESP, m[1]);
+        };
+        setTimeout(() => {
+          openConsole();
+          if (deep && deep !== '1' && known(deep)) exec(deep.trim());
+        }, reduce ? 0 : 420);
+      }
+
+      /* ── Counters ──────────────────────────────────────────────── */
+      function countUp(el) {
+        const to = +el.dataset.count,
+          pre = el.dataset.prefix || '',
+          suf = el.dataset.suffix || '';
+        if (reduce) return;
+        const dur = 900,
+          t0 = performance.now();
+        (function f(now) {
+          const p = Math.min(1, (now - t0) / dur);
+          el.textContent = pre + Math.round(to * (1 - Math.pow(1 - p, 3))) + suf;
+          if (p < 1) requestAnimationFrame(f);
+        })(t0);
+      }
+      const io = new IntersectionObserver(
+        (es) =>
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              countUp(e.target);
+              io.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.4 }
+      );
+      document.querySelectorAll('[data-count]').forEach((el) => io.observe(el));
+
+      /* ── Occasional glitch on the name, never constant ─────────── */
+      if (!reduce) {
+        const g = document.querySelector('.glitch');
+        setInterval(() => {
+          if (Math.random() > 0.65) {
+            g.classList.add('fire');
+            setTimeout(() => g.classList.remove('fire'), 260);
+          }
+        }, 5200);
+      }
+    </script>
+  </body>
+</html>

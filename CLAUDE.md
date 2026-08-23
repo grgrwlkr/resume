@@ -43,6 +43,9 @@ cv.master.yaml                              # canonical facts (source of truth)
 - Assistant-authored resume drafts → `resume-examples/`.
 - Assistant-authored analysis / reviews → `reviews/`.
 - `ai/` is reserved for materials produced by other AIs — do not write there.
+- `prototypes/` holds exploratory landing redesigns and is **not** production: it
+  sits outside `docs/`, so Pages never serves it. Never treat a prototype as the
+  live landing, and never edit `docs/index.html` to match one without being asked.
 - Root-level PDFs (`Gregory_Agapov_Resume.pdf`, `Gregory Agapov Results.pdf`) are
   reference material — useful for restoring details when an employer block was
   over-compressed.

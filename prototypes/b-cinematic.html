@@ -1,0 +1,387 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>B — Dark cinematic</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Bricolage+Grotesque:opsz,wdth,wght@12..96,75..100,400;12..96,75..100,600;12..96,75..100,800&family=Hanken+Grotesk:wght@400;500;600&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #0a0c13;
+        --panel: #11141f;
+        --line: #1e2334;
+        --text: #e9ebf3;
+        --muted: #757d99;
+        --glow: #6e8cff;
+        --ember: #ffb067;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--void);
+        color: var(--text);
+        font-family: 'Hanken Grotesk', system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.65;
+        -webkit-font-smoothing: antialiased;
+        overflow-x: hidden;
+      }
+
+      .wrap {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+
+      /* Signature: a live status line, borrowed from the tooling he
+         actually builds — the page announces itself as a dashboard. */
+      .statusline {
+        position: sticky;
+        top: 0;
+        z-index: 10;
+        background: rgba(10, 12, 19, 0.82);
+        backdrop-filter: blur(14px);
+        border-bottom: 1px solid var(--line);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 0.74rem;
+        letter-spacing: 0.02em;
+        color: var(--muted);
+      }
+      .statusline .inner {
+        max-width: 1180px;
+        margin: 0 auto;
+        padding: 0.62rem clamp(1.25rem, 4vw, 3rem);
+        display: flex;
+        gap: clamp(0.9rem, 3vw, 2.2rem);
+        align-items: center;
+        white-space: nowrap;
+        overflow-x: auto;
+        scrollbar-width: none;
+      }
+      .statusline .inner::-webkit-scrollbar {
+        display: none;
+      }
+      .statusline .k {
+        color: var(--glow);
+      }
+      .statusline .bar {
+        color: var(--glow);
+        letter-spacing: -0.08em;
+      }
+      .statusline .bar i {
+        color: var(--line);
+        font-style: normal;
+      }
+      .statusline .warm {
+        color: var(--ember);
+      }
+
+      /* ── Hero: a lit stage ───────────────────────────────────────── */
+      .hero {
+        position: relative;
+        min-height: min(86vh, 760px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(4rem, 12vh, 9rem) 0 clamp(3rem, 8vh, 6rem);
+      }
+      .hero::before {
+        content: '';
+        position: absolute;
+        inset: -30% -20% auto 50%;
+        translate: -50% 0;
+        width: min(120vw, 1100px);
+        aspect-ratio: 1;
+        background: radial-gradient(
+          circle at 50% 40%,
+          rgba(110, 140, 255, 0.22),
+          rgba(110, 140, 255, 0.06) 42%,
+          transparent 68%
+        );
+        pointer-events: none;
+        z-index: 0;
+      }
+      .hero > * {
+        position: relative;
+        z-index: 1;
+      }
+
+      .kicker {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.76rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--glow);
+        margin: 0 0 1.6rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: 'Bricolage Grotesque', system-ui, sans-serif;
+        font-variation-settings: 'opsz' 96, 'wdth' 88, 'wght' 800;
+        font-size: clamp(2.9rem, 8.4vw, 6.6rem);
+        line-height: 0.94;
+        letter-spacing: -0.038em;
+        text-wrap: balance;
+        max-width: 16ch;
+      }
+      h1 span {
+        color: transparent;
+        background: linear-gradient(96deg, var(--text) 20%, var(--glow) 62%, var(--ember) 96%);
+        -webkit-background-clip: text;
+        background-clip: text;
+      }
+
+      .sub {
+        margin: 1.8rem 0 0;
+        max-width: 42ch;
+        color: var(--muted);
+        font-size: clamp(1rem, 1.5vw, 1.15rem);
+      }
+
+      /* Instrument-panel readouts */
+      .readouts {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(9.5rem, 1fr));
+        gap: 1px;
+        margin-top: clamp(2.6rem, 6vh, 4rem);
+        background: var(--line);
+        border: 1px solid var(--line);
+        border-radius: 14px;
+        overflow: hidden;
+      }
+      .readout {
+        background: var(--panel);
+        padding: 1.15rem 1.25rem 1.3rem;
+        position: relative;
+      }
+      .readout .v {
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-variation-settings: 'opsz' 96, 'wdth' 82, 'wght' 600;
+        font-size: clamp(1.9rem, 3.4vw, 2.7rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+        color: var(--text);
+      }
+      .readout.hot .v {
+        color: var(--ember);
+      }
+      .readout .k {
+        margin-top: 0.55rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* ── Experience: rows that light up ──────────────────────────── */
+      .section {
+        padding: clamp(3rem, 8vh, 6rem) 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: center;
+        gap: 1rem;
+        margin-bottom: 2rem;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .section-head::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, var(--line), transparent);
+      }
+
+      .row {
+        display: grid;
+        grid-template-columns: 7.5rem minmax(0, 1fr);
+        gap: clamp(1rem, 3vw, 2.4rem);
+        padding: clamp(1.3rem, 2.4vw, 1.9rem) clamp(0.8rem, 2vw, 1.4rem);
+        border-radius: 14px;
+        border: 1px solid transparent;
+        transition: background-color 320ms ease, border-color 320ms ease;
+      }
+      .row + .row {
+        margin-top: 0.35rem;
+      }
+      .row:hover,
+      .row:focus-within {
+        background: linear-gradient(180deg, rgba(110, 140, 255, 0.07), transparent 70%);
+        border-color: var(--line);
+      }
+      .row .when {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--glow);
+        padding-top: 0.35rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .row .when small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.72rem;
+        margin-top: 0.3rem;
+      }
+      .row h3 {
+        margin: 0;
+        font-family: 'Bricolage Grotesque', sans-serif;
+        font-variation-settings: 'opsz' 40, 'wdth' 92, 'wght' 600;
+        font-size: clamp(1.1rem, 1.9vw, 1.4rem);
+        letter-spacing: -0.015em;
+        line-height: 1.25;
+      }
+      .row .org {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.7rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.4rem;
+      }
+      .row p {
+        margin: 0.7rem 0 0;
+        color: var(--muted);
+        max-width: 62ch;
+      }
+      .row p b {
+        color: var(--ember);
+        font-weight: 500;
+        font-variant-numeric: tabular-nums;
+      }
+
+      @media (max-width: 760px) {
+        .row {
+          grid-template-columns: 1fr;
+          gap: 0.4rem;
+        }
+        .row .when small {
+          display: inline;
+          margin-left: 0.6rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        * {
+          transition: none !important;
+        }
+      }
+      a:focus-visible {
+        outline: 2px solid var(--glow);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="statusline">
+      <div class="inner">
+        <span><span class="k">✻</span> 15 лет <span class="bar">████████<i>░░</i></span> 5 в лиде</span>
+        <span><span class="k">▤</span> команда 8 · 4 платформы</span>
+        <span class="warm">×2 оборот · ×3 доны</span>
+        <span><span class="k">⧉</span> VK ▸ Донаты</span>
+      </div>
+    </div>
+
+    <div class="wrap">
+      <section class="hero">
+        <p class="kicker">Москва · Team Lead</p>
+        <h1>Григорий Агапов<br /><span>ведёт продукт, который считает деньги</span></h1>
+        <p class="sub">
+          Пятнадцать лет в разработке, пять — с людьми в прямом подчинении. Сейчас — продуктовая
+          команда Донатов в VK: восемь человек, четыре платформы, метрика, которую видно каждый
+          день.
+        </p>
+
+        <div class="readouts">
+          <div class="readout">
+            <div class="v">8</div>
+            <div class="k">человек<br />в подчинении</div>
+          </div>
+          <div class="readout hot">
+            <div class="v">×2</div>
+            <div class="k">оборот донатов<br />за два месяца</div>
+          </div>
+          <div class="readout hot">
+            <div class="v">×3</div>
+            <div class="k">число донов<br />за тот же срок</div>
+          </div>
+          <div class="readout">
+            <div class="v">52 %</div>
+            <div class="k">конверсия<br />было 30 %</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">Опыт</div>
+
+        <article class="row" tabindex="0">
+          <div class="when">2026 —<small>по сей день</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид продуктовой команды «Донаты»</h3>
+            <p>
+              Восемь человек: бэкенд, фронтенд, iOS, Android, QA. За квартал — ребрендинг и
+              запуск донатов в профиле VK. Оборот вырос <b>вдвое</b>, число донов —
+              <b>втрое</b>, конверсия подключение → монетизация с <b>30 %</b> до <b>52 %</b>.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2025<small>апр — дек</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид платформенной команды, социальная коммерция</h3>
+            <p>
+              Координация трёх команд. Лимит товаров в сообществах снят с <b>20 тысяч</b> до
+              миллионов, интеграция с <b>40</b> продавцами Ozon и <b>3 млн</b> товаров. Миграция
+              рекомендаций к отключению Hadoop прошла без потери значимого трафика.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2022<small>дек — мар 2025</small></div>
+          <div>
+            <div class="org">Тинькофф Банк</div>
+            <h3>Тимлид, наставничество и Performance Review</h3>
+            <p>
+              MVP первой в компании платформы наставничества — в срок, пилот собран целиком из её
+              участников. Performance Review стабилизирован на <b>60 тысячах</b> пользователей с
+              двумя пиками в год.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2013<small>дек — мар 2019</small></div>
+          <div>
+            <div class="org">Neotech (Paravan 2000)</div>
+            <h3>Senior-разработчик, ГИС-проекты</h3>
+            <p>
+              Smallworld GIS для телеком-заказчиков России и СНГ, обратная разработка клиентских
+              систем без доступа к исходникам.
+            </p>
+          </div>
+        </article>
+      </section>
+    </div>
+  </body>
+</html>

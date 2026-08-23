@@ -1,0 +1,430 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D2 — Particle flow</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Syne:wght@600;700;800&family=Hanken+Grotesk:wght@400;500&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #07080f;
+        --text: #f2f3fa;
+        --muted: #838ab0;
+        --line: #1b1e33;
+        --a: #6c8bff;
+        --b: #c86bff;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Hanken Grotesk', system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.62;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* The flow itself: every particle is a donation travelling from a
+         reader to an author. It is the page's one big idea. */
+      #flow {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: block;
+      }
+      .veil {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: radial-gradient(ellipse at 50% 40%, transparent 30%, rgba(7, 8, 15, 0.82) 78%);
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 2;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 1.3rem 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .hero {
+        min-height: min(84vh, 740px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(2rem, 6vh, 4rem) 0;
+      }
+      h1 {
+        margin: 0;
+        font-family: 'Syne', system-ui, sans-serif;
+        font-weight: 800;
+        font-size: clamp(2.5rem, 7.4vw, 5.4rem);
+        line-height: 1.0;
+        letter-spacing: -0.035em;
+        max-width: 17ch;
+      }
+      h1 .grad {
+        background: linear-gradient(100deg, var(--a), var(--b));
+        -webkit-background-clip: text;
+        background-clip: text;
+        color: transparent;
+      }
+      .sub {
+        margin: 1.5rem 0 0;
+        max-width: 46ch;
+        color: var(--muted);
+      }
+
+      .stats {
+        display: flex;
+        flex-wrap: wrap;
+        gap: clamp(1.4rem, 4vw, 3.2rem);
+        margin-top: clamp(2rem, 5vh, 3rem);
+        padding-top: 1.4rem;
+        border-top: 1px solid var(--line);
+      }
+      .stat .v {
+        font-family: 'Syne', sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.7rem, 3vw, 2.4rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+      }
+      .stat .k {
+        margin-top: 0.4rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+        max-width: 16ch;
+        line-height: 1.4;
+      }
+
+      .section {
+        padding: clamp(2.5rem, 7vh, 5rem) 0;
+      }
+      .section-head {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1.4rem;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 6.5rem minmax(0, 1fr);
+        gap: clamp(1rem, 3vw, 2rem);
+        padding: clamp(1.1rem, 2.2vw, 1.6rem) clamp(0.6rem, 1.6vw, 1.1rem);
+        border-top: 1px solid var(--line);
+        border-radius: 12px;
+        transition: background-color 260ms ease;
+      }
+      .row:hover,
+      .row:focus-within {
+        background: rgba(108, 139, 255, 0.06);
+      }
+      .row .when {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--a);
+        font-variant-numeric: tabular-nums;
+        padding-top: 0.2rem;
+      }
+      .row .when small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+      .row .org {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.3rem;
+      }
+      .row h3 {
+        margin: 0;
+        font-family: 'Syne', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+        letter-spacing: -0.015em;
+        line-height: 1.28;
+      }
+      .row p {
+        margin: 0.6rem 0 0;
+        color: var(--muted);
+        max-width: 64ch;
+      }
+      .row p b {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      @media (max-width: 780px) {
+        .row {
+          grid-template-columns: 1fr;
+          gap: 0.3rem;
+        }
+        .row .when small {
+          display: inline;
+          margin-left: 0.5rem;
+        }
+      }
+      :focus-visible {
+        outline: 2px solid var(--a);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="flow" aria-hidden="true"></canvas>
+    <div class="veil" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="top">
+        <span>Григорий Агапов</span>
+        <span>Москва · Team Lead</span>
+      </div>
+
+      <section class="hero">
+        <h1>Каждая частица — <span class="grad">чей-то донат</span>. Моя работа — чтобы их стало больше</h1>
+        <p class="sub">
+          Продуктовая команда Донатов в VK: восемь человек, четыре платформы. Пятнадцать лет в
+          разработке, пять — с людьми в прямом подчинении.
+        </p>
+
+        <div class="stats">
+          <div class="stat">
+            <div class="v">×2</div>
+            <div class="k">оборот за два месяца</div>
+          </div>
+          <div class="stat">
+            <div class="v">×3</div>
+            <div class="k">число донов</div>
+          </div>
+          <div class="stat">
+            <div class="v">52 %</div>
+            <div class="k">конверсия, было 30 %</div>
+          </div>
+          <div class="stat">
+            <div class="v">8</div>
+            <div class="k">человек в команде</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">Опыт</div>
+
+        <article class="row" tabindex="0">
+          <div class="when">2026 —<small>сейчас</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид продуктовой команды «Донаты»</h3>
+            <p>
+              Восемь человек: бэкенд, фронтенд, iOS, Android, QA. За квартал — ребрендинг и запуск
+              донатов в профиле VK. Оборот <b>×2</b>, доны <b>×3</b>, конверсия с <b>30 %</b> до
+              <b>52 %</b>.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2025<small>апр — дек</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид платформенной команды, социальная коммерция</h3>
+            <p>
+              Три команды под координацией. Лимит товаров в сообществах снят с <b>20 тысяч</b> до
+              миллионов, интеграция с <b>40</b> продавцами Ozon и <b>3 млн</b> товаров.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2022<small>дек — мар 2025</small></div>
+          <div>
+            <div class="org">Тинькофф Банк</div>
+            <h3>Тимлид, наставничество и Performance Review</h3>
+            <p>
+              MVP платформы наставничества — в срок. Performance Review стабилизирован на
+              <b>60 тысячах</b> пользователей.
+            </p>
+          </div>
+        </article>
+
+        <article class="row" tabindex="0">
+          <div class="when">2013<small>дек — мар 2019</small></div>
+          <div>
+            <div class="org">Neotech (Paravan 2000)</div>
+            <h3>Senior-разработчик, ГИС-проекты</h3>
+            <p>Smallworld GIS для телеком-заказчиков России и СНГ.</p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script type="importmap">
+      { "imports": { "three": "https://unpkg.com/three@0.185.1/build/three.module.js" } }
+    </script>
+    <script type="module">
+      import * as THREE from 'three';
+
+      const canvas = document.getElementById('flow');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      } catch (e) {
+        canvas.style.background =
+          'radial-gradient(ellipse at 50% 35%, rgba(108,139,255,.18), transparent 60%)';
+      }
+
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        renderer.setSize(innerWidth, innerHeight);
+
+        const scene = new THREE.Scene();
+        const camera = new THREE.PerspectiveCamera(58, innerWidth / innerHeight, 0.1, 100);
+        camera.position.z = 15;
+
+        // On wide screens the sink sits right of the text column, so the
+        // headline never competes with the brightest thing on screen.
+        function layout() {
+          camera.position.x = innerWidth > 900 ? -4.6 : 0;
+          camera.position.y = innerWidth > 900 ? 1.2 : 0;
+          camera.lookAt(camera.position.x, camera.position.y, 0);
+        }
+        layout();
+
+        // Each donation is drawn as a short streak along its own path, so
+        // the eye reads direction and speed — a dot field would read as sky.
+        const COUNT = 1800;
+        const pos = new Float32Array(COUNT * 6); // two vertices per streak
+        const col = new Float32Array(COUNT * 6);
+        const seed = new Float32Array(COUNT * 3); // radius, angle, speed
+
+        const cA = new THREE.Color('#6c8bff');
+        const cB = new THREE.Color('#c86bff');
+        const tmp = new THREE.Color();
+
+        function spawn(i) {
+          const r = 10 + Math.random() * 8;
+          const a = Math.random() * Math.PI * 2;
+          seed[i * 3] = r;
+          seed[i * 3 + 1] = a;
+          seed[i * 3 + 2] = 0.02 + Math.random() * 0.05;
+          tmp.copy(cA).lerp(cB, Math.random());
+          const o = i * 6;
+          // head is bright, tail fades — direction becomes legible
+          col[o] = tmp.r;
+          col[o + 1] = tmp.g;
+          col[o + 2] = tmp.b;
+          col[o + 3] = tmp.r * 0.15;
+          col[o + 4] = tmp.g * 0.15;
+          col[o + 5] = tmp.b * 0.15;
+        }
+        for (let i = 0; i < COUNT; i++) spawn(i);
+
+        const geo = new THREE.BufferGeometry();
+        geo.setAttribute('position', new THREE.BufferAttribute(pos, 3));
+        geo.setAttribute('color', new THREE.BufferAttribute(col, 3));
+
+        const mat = new THREE.LineBasicMaterial({
+          vertexColors: true,
+          transparent: true,
+          opacity: 0.85,
+          depthWrite: false,
+          blending: THREE.AdditiveBlending
+        });
+        const points = new THREE.LineSegments(geo, mat);
+        scene.add(points);
+
+        // The sink everything falls into: the author being paid.
+        const coreGeo = new THREE.SphereGeometry(0.2, 20, 20);
+        const coreMat = new THREE.MeshBasicMaterial({
+          color: 0xd6c4ff,
+          transparent: true,
+          opacity: 0.55,
+          blending: THREE.AdditiveBlending,
+          depthWrite: false
+        });
+        const core = new THREE.Mesh(coreGeo, coreMat);
+        scene.add(core);
+
+        // Pull target follows the pointer — the flow bends toward the reader
+        const target = new THREE.Vector2(0, 0);
+        const aim = new THREE.Vector2(0, 0);
+        addEventListener('pointermove', (e) => {
+          aim.set((e.clientX / innerWidth - 0.5) * 6, -(e.clientY / innerHeight - 0.5) * 4);
+        });
+
+        addEventListener('resize', () => {
+          camera.aspect = innerWidth / innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(innerWidth, innerHeight);
+          layout();
+        });
+
+        const p = geo.attributes.position.array;
+
+        function place(i, r, a, out, off) {
+          out[off] = Math.cos(a) * r + target.x * (1 - Math.min(r, 18) / 20) * 0.8;
+          out[off + 1] = Math.sin(a) * r * 0.5 + target.y * (1 - Math.min(r, 18) / 20) * 0.8;
+          out[off + 2] = 0;
+        }
+
+        function tick() {
+          target.lerp(aim, 0.05);
+          for (let i = 0; i < COUNT; i++) {
+            const s = i * 3;
+            const sp = seed[s + 2];
+            seed[s + 1] += sp * 0.22; // swirl
+            let r = seed[s] - sp * 4.2; // fall inward
+            if (r < 0.5) {
+              spawn(i);
+              r = seed[s];
+            }
+            seed[s] = r;
+            const a = seed[s + 1];
+            const o = i * 6;
+            place(i, r, a, p, o); // head
+            place(i, r + 0.55 + sp * 12, a - sp * 0.6, p, o + 3); // tail behind it
+          }
+          geo.attributes.position.needsUpdate = true;
+          core.scale.setScalar(1 + Math.sin(performance.now() / 900) * 0.08);
+          renderer.render(scene, camera);
+          if (!reduce) requestAnimationFrame(tick);
+        }
+        tick();
+      }
+    </script>
+  </body>
+</html>

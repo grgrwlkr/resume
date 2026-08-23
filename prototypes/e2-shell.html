@@ -1,0 +1,596 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>E2 — Live shell</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;700&family=Chakra+Petch:wght@600;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #04060d;
+        --panel: #070b16;
+        --edge: rgba(34, 231, 255, 0.22);
+        --cyan: #22e7ff;
+        --magenta: #ff2d95;
+        --lime: #7cff6b;
+        --amber: #ffc24a;
+        --text: #cfe3ee;
+        --muted: #55707f;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        height: 100vh;
+        background: var(--void);
+        color: var(--text);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 14px;
+        line-height: 1.62;
+        overflow: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      .bgfx {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        background: radial-gradient(ellipse at 20% 0%, rgba(34, 231, 255, 0.09), transparent 55%),
+          radial-gradient(ellipse at 90% 100%, rgba(255, 45, 149, 0.08), transparent 55%);
+        pointer-events: none;
+      }
+      .crt {
+        position: fixed;
+        inset: 0;
+        z-index: 50;
+        pointer-events: none;
+        background: repeating-linear-gradient(
+          to bottom,
+          transparent 0 2px,
+          rgba(0, 0, 0, 0.16) 2px 3px
+        );
+      }
+      .scan {
+        position: fixed;
+        left: 0;
+        right: 0;
+        height: 140px;
+        z-index: 51;
+        pointer-events: none;
+        background: linear-gradient(180deg, transparent, rgba(34, 231, 255, 0.05), transparent);
+        animation: sweep 6.5s linear infinite;
+      }
+      @keyframes sweep {
+        from { top: -140px; }
+        to { top: 100vh; }
+      }
+
+      /* ═══ Window chrome ══════════════════════════════════════════ */
+      .shell {
+        position: relative;
+        z-index: 2;
+        height: 100vh;
+        display: grid;
+        grid-template-rows: auto minmax(0, 1fr) auto;
+        grid-template-columns: minmax(0, 1fr);
+      }
+
+      .titlebar {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        padding: 0.55rem clamp(0.8rem, 2.4vw, 1.4rem);
+        border-bottom: 1px solid var(--edge);
+        background: rgba(4, 6, 13, 0.9);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .dots {
+        display: flex;
+        gap: 0.4rem;
+      }
+      .dots i {
+        width: 9px;
+        height: 9px;
+        border-radius: 50%;
+        display: block;
+      }
+      .dots i:nth-child(1) { background: var(--magenta); }
+      .dots i:nth-child(2) { background: var(--amber); }
+      .dots i:nth-child(3) { background: var(--lime); }
+      .titlebar .path {
+        color: var(--cyan);
+      }
+      .titlebar .right {
+        margin-left: auto;
+        display: flex;
+        gap: 1rem;
+      }
+
+      .body {
+        display: grid;
+        grid-template-columns: 232px minmax(0, 1fr);
+        min-height: 0;
+      }
+      aside {
+        border-right: 1px solid var(--edge);
+        padding: 1rem clamp(0.7rem, 1.6vw, 1.1rem);
+        overflow-y: auto;
+        background: rgba(7, 11, 22, 0.55);
+      }
+      aside h4 {
+        margin: 0 0 0.6rem;
+        font-size: 0.66rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        font-weight: 500;
+      }
+      aside h4:not(:first-child) {
+        margin-top: 1.5rem;
+      }
+      aside button {
+        display: block;
+        width: 100%;
+        text-align: left;
+        background: none;
+        border: 0;
+        color: var(--text);
+        font: inherit;
+        font-size: 0.8rem;
+        padding: 0.28rem 0.45rem;
+        cursor: pointer;
+        border-left: 2px solid transparent;
+        transition: color 160ms ease, border-color 160ms ease, background-color 160ms ease;
+      }
+      aside button:hover,
+      aside button:focus-visible {
+        color: var(--cyan);
+        border-left-color: var(--cyan);
+        background: rgba(34, 231, 255, 0.07);
+        outline: none;
+      }
+      aside .hint {
+        font-size: 0.72rem;
+        color: var(--muted);
+        line-height: 1.6;
+      }
+      aside .hint b {
+        color: var(--amber);
+        font-weight: 500;
+      }
+
+      main {
+        overflow-y: auto;
+        padding: clamp(1.2rem, 2.6vw, 1.8rem) clamp(0.9rem, 2.4vw, 1.6rem);
+        scroll-behavior: smooth;
+      }
+      /* Only the ASCII banner is preformatted; the rest is real markup, so
+         pre-wrap here would leak template-literal newlines into the layout. */
+      #out {
+        word-break: break-word;
+      }
+      .ln {
+        margin: 0;
+      }
+      .cmdline {
+        color: var(--muted);
+        margin: 1.1rem 0 0.4rem;
+      }
+      .cmdline .u { color: var(--lime); }
+      .cmdline .p { color: var(--cyan); }
+      .cmdline .c { color: var(--text); }
+
+      .hi { color: var(--cyan); }
+      .mag { color: var(--magenta); }
+      .ok { color: var(--lime); }
+      .warn { color: var(--amber); }
+      .dim { color: var(--muted); }
+
+      .art {
+        color: var(--cyan);
+        font-size: clamp(0.42rem, 1.05vw, 0.72rem);
+        line-height: 1.15;
+        text-shadow: 0 0 14px rgba(34, 231, 255, 0.35);
+        margin: 0 0 0.6rem;
+      }
+
+      .card {
+        border-left: 2px solid var(--edge);
+        padding: 0.5rem 0 0.5rem 0.9rem;
+        margin: 0.55rem 0;
+      }
+      .card .h {
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 600;
+        font-size: 1.02rem;
+        color: var(--text);
+      }
+      .card .meta {
+        color: var(--magenta);
+        font-size: 0.72rem;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .card p {
+        margin: 0.35rem 0 0;
+        color: var(--muted);
+        max-width: 76ch;
+      }
+      .card b {
+        color: var(--amber);
+        font-weight: 500;
+      }
+
+      .kv {
+        display: grid;
+        grid-template-columns: 13rem minmax(0, 1fr);
+        gap: 0.15rem 1rem;
+      }
+      .kv dt {
+        color: var(--muted);
+      }
+      .kv dd {
+        margin: 0;
+        color: var(--text);
+      }
+
+      /* ═══ Prompt ═════════════════════════════════════════════════ */
+      .promptbar {
+        display: flex;
+        align-items: center;
+        gap: 0.55rem;
+        padding: 0.7rem clamp(0.9rem, 2.4vw, 1.6rem);
+        border-top: 1px solid var(--edge);
+        background: rgba(4, 6, 13, 0.92);
+      }
+      .promptbar .ps1 {
+        color: var(--lime);
+        white-space: nowrap;
+      }
+      .promptbar .ps1 span {
+        color: var(--cyan);
+      }
+      #input {
+        flex: 1;
+        min-width: 0;
+        background: transparent;
+        border: 0;
+        outline: none;
+        color: var(--text);
+        font: inherit;
+        caret-color: var(--cyan);
+      }
+      #input::placeholder {
+        color: #34505e;
+      }
+      .blink {
+        width: 0.55em;
+        height: 1.05em;
+        background: var(--cyan);
+        animation: bl 1s steps(2, start) infinite;
+      }
+      @keyframes bl {
+        50% { opacity: 0; }
+      }
+
+      @media (max-width: 800px) {
+        .body {
+          grid-template-columns: 1fr;
+        }
+        aside {
+          display: none;
+        }
+      }
+      @media (prefers-reduced-motion: reduce) {
+        .scan, .blink { animation: none; }
+        .scan { display: none; }
+      }
+    </style>
+  </head>
+  <body>
+    <div class="bgfx" aria-hidden="true"></div>
+    <div class="scan" aria-hidden="true"></div>
+
+    <div class="shell">
+      <div class="titlebar">
+        <span class="dots" aria-hidden="true"><i></i><i></i><i></i></span>
+        <span>g.agapov@vk — <span class="path">~/career</span></span>
+        <span class="right">
+          <span class="ok">● online</span>
+          <span id="clock"></span>
+        </span>
+      </div>
+
+      <div class="body">
+        <aside>
+          <h4>разделы</h4>
+          <button data-cmd="whoami">whoami</button>
+          <button data-cmd="cat experience">cat experience</button>
+          <button data-cmd="cat impact">cat impact</button>
+          <button data-cmd="stack">stack</button>
+          <button data-cmd="cat projects">cat projects</button>
+          <button data-cmd="contact">contact</button>
+
+          <h4>служебные</h4>
+          <button data-cmd="help">help</button>
+          <button data-cmd="ls">ls</button>
+          <button data-cmd="clear">clear</button>
+
+          <h4>подсказка</h4>
+          <p class="hint">
+            Печатай команды прямо в строке внизу.<br />
+            <b>Tab</b> — дополнить,<br />
+            <b>↑ ↓</b> — история,<br />
+            <b>help</b> — весь список.
+          </p>
+        </aside>
+
+        <main id="scroll">
+          <div id="out" aria-live="polite"></div>
+        </main>
+      </div>
+
+      <form class="promptbar" id="form" autocomplete="off">
+        <span class="ps1">g.agapov@vk:<span>~</span>$</span>
+        <input
+          id="input"
+          type="text"
+          placeholder="введите команду или нажмите help"
+          aria-label="Командная строка"
+          spellcheck="false"
+        />
+        <span class="blink" aria-hidden="true"></span>
+      </form>
+    </div>
+
+    <script>
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+      const out = document.getElementById('out');
+      const scroll = document.getElementById('scroll');
+      const input = document.getElementById('input');
+      const form = document.getElementById('form');
+      const clock = document.getElementById('clock');
+
+      const tick = () =>
+        (clock.textContent = new Date().toLocaleTimeString('ru-RU', { hour12: false }));
+      tick();
+      if (!reduce) setInterval(tick, 1000);
+
+      const ART = String.raw`
+   ▄▄▄·  ▄▄ •  ▄▄▄·  ▄▄▄·       ▌ ▐·
+  ▐█ ▀█ ▐█ ▀ ▪▐█ ▀█ ▐█ ▄█ ▄█▀▄ ▪█·█▌
+  ▄█▀▀█ ▄█ ▀█▄▄█▀▀█  ██▀·▐█▌.▐▌▐█▐█•
+  ▐█▪ ▐▌▐█▄▪▐█▐█▪ ▐▌▐█▪·•▐█▌.▐▌ ███
+   ▀  ▀ ·▀▀▀▀  ▀  ▀ .▀    ▀█▄▀▪. ▀`;
+
+      const FILES = {
+        whoami: () => `
+<p class="ln"><span class="hi">Григорий Агапов</span> — руководитель команды разработки (Team Lead)</p>
+<p class="ln dim">Москва · пятнадцать лет в разработке · пять лет с людьми в прямом подчинении</p>
+<div class="card">
+  <p>Веду продуктовую команду Донатов в VK: <b>8 человек</b> — бэкенд, фронтенд, iOS, Android, QA.
+  Строю продукт от MVP до масштабирования, не теряя техническую глубину: архитектура, миграции,
+  межкомандная координация.</p>
+</div>`,
+
+        impact: () => `
+<dl class="kv">
+  <dt>оборот донатов</dt><dd><span class="warn">×2</span> за два месяца после запуска в профиле VK</dd>
+  <dt>число донов</dt><dd><span class="warn">×3</span> за тот же период</dd>
+  <dt>конверсия в монетизацию</dt><dd>с <span class="dim">30 %</span> до <span class="warn">52 %</span></dd>
+  <dt>лимит товаров</dt><dd>снят с <span class="dim">20 тыс.</span> до <span class="warn">миллионов</span></dd>
+  <dt>интеграция Ozon</dt><dd><span class="warn">40</span> продавцов, ~<span class="warn">3 млн</span> товаров</dd>
+  <dt>VKUI на iOS</dt><dd>покрытие с <span class="dim">35 %</span> до <span class="warn">64 %</span>, Android — <span class="warn">84 %</span></dd>
+  <dt>Performance Review</dt><dd><span class="warn">60 тыс.</span> пользователей, два пика в год</dd>
+</dl>`,
+
+        experience: () => `
+<div class="card">
+  <div class="meta">vk · 2026 — по сей день</div>
+  <div class="h">Тимлид продуктовой команды «Донаты»</div>
+  <p>Восемь человек в прямом подчинении на четырёх платформах. За квартал провёл команду через
+  ребрендинг и запуск донатов в профиле VK. Оборот <b>×2</b>, доны <b>×3</b>, конверсия с
+  <b>30 %</b> до <b>52 %</b>. Ускорил перевод сервиса из монолита в микросервисы.</p>
+</div>
+<div class="card">
+  <div class="meta">vk · апрель — декабрь 2025</div>
+  <div class="h">Тимлид платформенной команды, социальная коммерция</div>
+  <p>Координировал три команды. Снял лимит товаров в сообществах с <b>20 тыс.</b> до миллионов,
+  запустил интеграцию с <b>40</b> продавцами Ozon (~<b>3 млн</b> товаров). Провёл миграцию
+  рекомендаций к сроку отключения Hadoop без потери значимого трафика.</p>
+</div>
+<div class="card">
+  <div class="meta">тинькофф банк · декабрь 2022 — март 2025</div>
+  <div class="h">Тимлид, наставничество и Performance Review</div>
+  <p>Запустил в срок MVP первой в компании платформы наставничества, собрал пилот целиком из её
+  участников. Стабилизировал Performance Review на <b>60 тыс.</b> пользователей.</p>
+</div>
+<div class="card">
+  <div class="meta">neotech (paravan 2000) · декабрь 2013 — март 2019</div>
+  <div class="h">Senior-разработчик, ГИС-проекты</div>
+  <p>Smallworld GIS для телеком-заказчиков России и СНГ. Обратная разработка клиентских систем
+  без доступа к исходному коду. Сертификация GE Smallworld GIS Certified Developer.</p>
+</div>
+<p class="ln dim">…ещё две записи: CINIMEX (2012–2013), AISA IT-Service (2010–2012)</p>`,
+
+        projects: () => `
+<div class="card">
+  <div class="meta">open source · mit</div>
+  <div class="h">Dashboard &amp; Statusline for Claude Code</div>
+  <p>Расширение для VS Code: дашборд из 23 вкладок по всем транскриптам на машине — расходы,
+  субагенты, прогоны workflow, лимиты — и статус-бар из пользовательского шаблона.
+  ~<b>20 000</b> строк JavaScript, <b>ноль</b> runtime-зависимостей. Опубликовано в
+  VS Code Marketplace и Open VSX.</p>
+</div>`,
+
+        stack: () => `
+<dl class="kv">
+  <dt>текущий стек (VK)</dt><dd>PHP · Go · React · Postgres · микросервисы</dd>
+  <dt>предыдущий (Tinkoff)</dt><dd>.NET · C# · Angular · TypeScript · Docker · Kubernetes</dd>
+  <dt>обмен сообщениями</dt><dd>Kafka · RabbitMQ</dd>
+  <dt>архитектура</dt><dd>декомпозиция монолита · DDD · CQRS · REST</dd>
+  <dt>лидерство</dt><dd>найм · менторинг · роадмап · работа со стейкхолдерами</dd>
+</dl>`,
+
+        contact: () => `
+<dl class="kv">
+  <dt>telegram</dt><dd class="hi">@grgrwlkr</dd>
+  <dt>почта</dt><dd class="hi">gregoryagapov@icloud.com</dd>
+  <dt>github</dt><dd class="hi">github.com/grgrwlkr</dd>
+  <dt>резюме</dt><dd class="hi">Gregory_Agapov_Resume.pdf</dd>
+</dl>
+<p class="ln ok">// открыт к предложениям на роли инженерного лидера</p>`
+      };
+
+      const CMDS = {
+        help: () => `
+<p class="ln"><span class="hi">Доступные команды</span></p>
+<dl class="kv">
+  <dt>whoami</dt><dd>кто это и чем занимается</dd>
+  <dt>cat experience</dt><dd>места работы и что там сделано</dd>
+  <dt>cat impact</dt><dd>цифры, которые можно проверить</dd>
+  <dt>cat projects</dt><dd>открытый код</dd>
+  <dt>stack</dt><dd>технологии и навыки</dd>
+  <dt>contact</dt><dd>как связаться</dd>
+  <dt>ls</dt><dd>что вообще лежит в каталоге</dd>
+  <dt>clear</dt><dd>очистить экран</dd>
+</dl>`,
+        ls: () => `
+<p class="ln"><span class="hi">experience</span>  <span class="hi">impact</span>  <span class="hi">projects</span>  <span class="hi">stack</span>  <span class="hi">contact</span>  <span class="dim">resume.pdf</span></p>`,
+        clear: () => {
+          out.innerHTML = '';
+          return null;
+        },
+        sudo: () => `<p class="ln mag">g.agapov не в файле sudoers. Об инциденте будет доложено.</p>`
+      };
+
+      function resolve(raw) {
+        const cmd = raw.trim().toLowerCase();
+        if (!cmd) return '';
+        if (cmd in CMDS) return CMDS[cmd]();
+        if (cmd in FILES) return FILES[cmd]();
+        const m = cmd.match(/^cat\s+(\S+)$/);
+        if (m) {
+          const key = m[1].replace(/\.(log|txt|md)$/, '');
+          if (key in FILES) return FILES[key]();
+          return `<p class="ln mag">cat: ${m[1]}: файл не найден</p><p class="ln dim">попробуйте <span class="hi">ls</span></p>`;
+        }
+        if (cmd.startsWith('sudo')) return CMDS.sudo();
+        return `<p class="ln mag">${cmd}: команда не найдена</p><p class="ln dim">наберите <span class="hi">help</span></p>`;
+      }
+
+      function echo(cmd) {
+        const p = document.createElement('p');
+        p.className = 'cmdline';
+        p.innerHTML = `<span class="u">g.agapov@vk</span>:<span class="p">~</span>$ <span class="c">${cmd}</span>`;
+        out.appendChild(p);
+      }
+
+      function print(html) {
+        if (html === null || html === '') return;
+        const d = document.createElement('div');
+        d.innerHTML = html;
+        out.appendChild(d);
+        scroll.scrollTop = scroll.scrollHeight;
+      }
+
+      function run(cmd, { silent } = {}) {
+        if (!silent) echo(cmd);
+        print(resolve(cmd));
+        scroll.scrollTop = scroll.scrollHeight;
+      }
+
+      /* ── History + completion ───────────────────────────────────── */
+      const history = [];
+      let hIdx = -1;
+      const ALL = [...Object.keys(CMDS), 'cat experience', 'cat impact', 'cat projects', 'whoami', 'stack', 'contact'];
+
+      form.addEventListener('submit', (e) => {
+        e.preventDefault();
+        const v = input.value;
+        if (!v.trim()) return;
+        history.push(v);
+        hIdx = history.length;
+        run(v);
+        input.value = '';
+      });
+
+      input.addEventListener('keydown', (e) => {
+        if (e.key === 'ArrowUp') {
+          e.preventDefault();
+          if (hIdx > 0) input.value = history[--hIdx];
+        } else if (e.key === 'ArrowDown') {
+          e.preventDefault();
+          if (hIdx < history.length - 1) input.value = history[++hIdx];
+          else {
+            hIdx = history.length;
+            input.value = '';
+          }
+        } else if (e.key === 'Tab') {
+          e.preventDefault();
+          const v = input.value.trim().toLowerCase();
+          const hit = ALL.find((c) => c.startsWith(v));
+          if (hit) input.value = hit;
+        }
+      });
+
+      document.querySelectorAll('aside button').forEach((b) =>
+        b.addEventListener('click', () => {
+          run(b.dataset.cmd);
+          input.focus();
+        })
+      );
+
+      addEventListener('keydown', (e) => {
+        if (e.target !== input && e.key.length === 1) input.focus();
+      });
+
+      /* ── Opening act: the shell introduces itself, then answers the
+           two questions a visitor actually has, without being asked. ── */
+      const wait = (ms) => new Promise((r) => setTimeout(r, ms));
+
+      async function typeInto(text, speed = 42) {
+        for (const ch of text) {
+          input.value += ch;
+          await wait(speed);
+        }
+      }
+
+      async function intro() {
+        print(`<pre class="art">${ART}</pre>`);
+        print(
+          `<p class="ln dim">VK//NET SECURE SHELL v4.2.6 — соединение установлено ${new Date().toLocaleDateString('ru-RU')}</p>
+           <p class="ln dim">допуск: <span class="warn">TEAM LEAD</span> · наберите <span class="hi">help</span>, чтобы увидеть команды</p>`
+        );
+        if (reduce) {
+          run('whoami', { silent: false });
+          run('cat impact', { silent: false });
+          return;
+        }
+        await wait(650);
+        await typeInto('whoami');
+        await wait(280);
+        run(input.value);
+        input.value = '';
+        await wait(700);
+        await typeInto('cat impact');
+        await wait(280);
+        run(input.value);
+        input.value = '';
+        input.focus();
+      }
+      intro();
+    </script>
+  </body>
+</html>

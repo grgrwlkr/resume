@@ -1,0 +1,375 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D3 — Terrain</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Space+Grotesk:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --bg: #050a0e;
+        --text: #e6f1f3;
+        --muted: #6f8a92;
+        --line: #12242b;
+        --teal: #2dd4bf;
+        --ice: #7dd3fc;
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--bg);
+        color: var(--text);
+        font-family: 'Space Grotesk', system-ui, sans-serif;
+        font-size: 17px;
+        line-height: 1.6;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* The growth curve, extruded into a landscape you fly over. */
+      #terrain {
+        position: fixed;
+        inset: 0;
+        z-index: 0;
+        display: block;
+      }
+      .fade {
+        position: fixed;
+        inset: 0;
+        z-index: 1;
+        pointer-events: none;
+        background: linear-gradient(180deg, rgba(5, 10, 14, 0.94) 8%, rgba(5, 10, 14, 0.35) 45%, rgba(5, 10, 14, 0.9) 92%);
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 2;
+        max-width: 1120px;
+        margin: 0 auto;
+        padding: 0 clamp(1.25rem, 4vw, 3rem);
+      }
+
+      .top {
+        display: flex;
+        justify-content: space-between;
+        padding: 1.3rem 0;
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+
+      .hero {
+        min-height: min(82vh, 720px);
+        display: flex;
+        flex-direction: column;
+        justify-content: center;
+        padding: clamp(2rem, 6vh, 4rem) 0;
+      }
+      .eyebrow {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.26em;
+        text-transform: uppercase;
+        color: var(--teal);
+        margin: 0 0 1.3rem;
+      }
+      h1 {
+        margin: 0;
+        font-weight: 700;
+        font-size: clamp(2.5rem, 7.2vw, 5.2rem);
+        line-height: 1.02;
+        letter-spacing: -0.038em;
+        max-width: 16ch;
+      }
+      h1 em {
+        font-style: normal;
+        color: var(--teal);
+      }
+      .sub {
+        margin: 1.5rem 0 0;
+        max-width: 46ch;
+        color: var(--muted);
+      }
+
+      /* Metrics as an altitude profile, not as boxes */
+      .profile {
+        margin-top: clamp(2rem, 5vh, 3rem);
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(9rem, 1fr));
+        border-top: 1px solid var(--line);
+      }
+      .peak {
+        padding: 1.1rem 1rem 1.1rem 0;
+        position: relative;
+      }
+      .peak::before {
+        content: '';
+        position: absolute;
+        top: -1px;
+        left: 0;
+        height: 2px;
+        width: var(--w, 40%);
+        background: linear-gradient(90deg, var(--teal), transparent);
+      }
+      .peak .v {
+        font-weight: 700;
+        font-size: clamp(1.7rem, 3vw, 2.3rem);
+        line-height: 1;
+        letter-spacing: -0.03em;
+        font-variant-numeric: tabular-nums;
+      }
+      .peak .k {
+        margin-top: 0.4rem;
+        font-size: 0.8rem;
+        color: var(--muted);
+        max-width: 17ch;
+        line-height: 1.4;
+      }
+
+      .section {
+        padding: clamp(2.5rem, 7vh, 5rem) 0;
+      }
+      .section-head {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.72rem;
+        letter-spacing: 0.2em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 1.3rem;
+      }
+      .row {
+        display: grid;
+        grid-template-columns: 6.5rem minmax(0, 1fr);
+        gap: clamp(1rem, 3vw, 2rem);
+        padding: clamp(1.1rem, 2.2vw, 1.6rem) 0;
+        border-top: 1px solid var(--line);
+      }
+      .row .when {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.8rem;
+        color: var(--ice);
+        font-variant-numeric: tabular-nums;
+        padding-top: 0.2rem;
+      }
+      .row .when small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+      .row .org {
+        font-family: 'JetBrains Mono', monospace;
+        font-size: 0.68rem;
+        letter-spacing: 0.16em;
+        text-transform: uppercase;
+        color: var(--muted);
+        margin-bottom: 0.3rem;
+      }
+      .row h3 {
+        margin: 0;
+        font-weight: 600;
+        font-size: clamp(1.05rem, 1.8vw, 1.28rem);
+        letter-spacing: -0.018em;
+        line-height: 1.28;
+      }
+      .row p {
+        margin: 0.6rem 0 0;
+        color: var(--muted);
+        max-width: 64ch;
+      }
+      .row p b {
+        color: var(--teal);
+        font-weight: 500;
+      }
+
+      @media (max-width: 780px) {
+        .row {
+          grid-template-columns: 1fr;
+          gap: 0.3rem;
+        }
+        .row .when small {
+          display: inline;
+          margin-left: 0.5rem;
+        }
+      }
+      :focus-visible {
+        outline: 2px solid var(--teal);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <canvas id="terrain" aria-hidden="true"></canvas>
+    <div class="fade" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="top">
+        <span>Григорий Агапов</span>
+        <span>Москва · Team Lead</span>
+      </div>
+
+      <section class="hero">
+        <p class="eyebrow">15 лет в разработке · 5 лет в лиде</p>
+        <h1>Веду команду по <em>рельефу метрик</em>, а не по интуиции</h1>
+        <p class="sub">
+          Продуктовая команда Донатов в VK: восемь человек, четыре платформы. Каждое решение
+          проверяется цифрой, которую видно на следующей неделе.
+        </p>
+
+        <div class="profile">
+          <div class="peak" style="--w: 30%">
+            <div class="v">15</div>
+            <div class="k">лет в разработке</div>
+          </div>
+          <div class="peak" style="--w: 55%">
+            <div class="v">×2</div>
+            <div class="k">оборот донатов за два месяца</div>
+          </div>
+          <div class="peak" style="--w: 78%">
+            <div class="v">×3</div>
+            <div class="k">число донов за тот же срок</div>
+          </div>
+          <div class="peak" style="--w: 95%">
+            <div class="v">52 %</div>
+            <div class="k">конверсия в монетизацию, было 30 %</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">Опыт</div>
+
+        <article class="row">
+          <div class="when">2026 —<small>сейчас</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид продуктовой команды «Донаты»</h3>
+            <p>
+              Восемь человек: бэкенд, фронтенд, iOS, Android, QA. За квартал — ребрендинг и запуск
+              донатов в профиле VK: оборот <b>×2</b>, доны <b>×3</b>, конверсия с <b>30 %</b> до
+              <b>52 %</b>.
+            </p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="when">2025<small>апр — дек</small></div>
+          <div>
+            <div class="org">VK</div>
+            <h3>Тимлид платформенной команды, социальная коммерция</h3>
+            <p>
+              Три команды под координацией. Лимит товаров снят с <b>20 тысяч</b> до миллионов,
+              интеграция с <b>40</b> продавцами Ozon, <b>3 млн</b> товаров.
+            </p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="when">2022<small>дек — мар 2025</small></div>
+          <div>
+            <div class="org">Тинькофф Банк</div>
+            <h3>Тимлид, наставничество и Performance Review</h3>
+            <p>
+              MVP платформы наставничества — в срок. Performance Review стабилизирован на
+              <b>60 тысячах</b> пользователей.
+            </p>
+          </div>
+        </article>
+
+        <article class="row">
+          <div class="when">2013<small>дек — мар 2019</small></div>
+          <div>
+            <div class="org">Neotech (Paravan 2000)</div>
+            <h3>Senior-разработчик, ГИС-проекты</h3>
+            <p>Smallworld GIS для телеком-заказчиков России и СНГ.</p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script type="importmap">
+      { "imports": { "three": "https://unpkg.com/three@0.185.1/build/three.module.js" } }
+    </script>
+    <script type="module">
+      import * as THREE from 'three';
+
+      const canvas = document.getElementById('terrain');
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      let renderer;
+      try {
+        renderer = new THREE.WebGLRenderer({ canvas, antialias: true, alpha: true });
+      } catch (e) {
+        canvas.style.background = 'linear-gradient(180deg,#061117,#050a0e)';
+      }
+
+      if (renderer) {
+        renderer.setPixelRatio(Math.min(devicePixelRatio, 2));
+        renderer.setSize(innerWidth, innerHeight);
+
+        const scene = new THREE.Scene();
+        scene.fog = new THREE.Fog(0x050a0e, 12, 42);
+
+        const camera = new THREE.PerspectiveCamera(62, innerWidth / innerHeight, 0.1, 120);
+        camera.position.set(0, 3.4, 14);
+        camera.lookAt(0, 0.4, -10);
+
+        const SEG_X = 96,
+          SEG_Y = 120,
+          W = 60,
+          H = 80;
+        const geo = new THREE.PlaneGeometry(W, H, SEG_X, SEG_Y);
+        geo.rotateX(-Math.PI / 2);
+
+        const mat = new THREE.MeshBasicMaterial({
+          color: 0x2dd4bf,
+          wireframe: true,
+          transparent: true,
+          opacity: 0.34
+        });
+        const mesh = new THREE.Mesh(geo, mat);
+        mesh.position.z = -22;
+        scene.add(mesh);
+
+        const base = Float32Array.from(geo.attributes.position.array);
+        const arr = geo.attributes.position.array;
+
+        addEventListener('resize', () => {
+          camera.aspect = innerWidth / innerHeight;
+          camera.updateProjectionMatrix();
+          renderer.setSize(innerWidth, innerHeight);
+        });
+
+        let t = 0;
+        function tick() {
+          t += 0.006;
+          for (let i = 0; i < arr.length; i += 3) {
+            const x = base[i],
+              z = base[i + 2];
+            // Two crossing waves plus a rising ridge — a growth chart with terrain
+            arr[i + 1] =
+              Math.sin(x * 0.16 + t * 1.4) * 0.85 +
+              Math.cos(z * 0.12 - t * 1.1) * 0.75 +
+              Math.max(0, -z * 0.055);
+          }
+          geo.attributes.position.needsUpdate = true;
+          mesh.position.z = -22 + ((t * 6) % (H / SEG_Y) * SEG_Y) * 0;
+          renderer.render(scene, camera);
+          if (!reduce) requestAnimationFrame(tick);
+        }
+        tick();
+      }
+    </script>
+  </body>
+</html>

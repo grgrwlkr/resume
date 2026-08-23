@@ -1,0 +1,528 @@
+<!doctype html>
+<html lang="ru">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1" />
+    <title>D1 — Cyberpunk HUD</title>
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      href="https://fonts.googleapis.com/css2?family=Chakra+Petch:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;700&display=swap"
+      rel="stylesheet"
+    />
+    <style>
+      :root {
+        --void: #04060c;
+        --deep: #070b16;
+        --grid: rgba(0, 232, 255, 0.14);
+        --cyan: #00e8ff;
+        --magenta: #ff2d95;
+        --amber: #ffc24a;
+        --text: #d8e6f0;
+        --muted: #5d7387;
+      }
+
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      body {
+        margin: 0;
+        background: var(--void);
+        color: var(--text);
+        font-family: 'JetBrains Mono', ui-monospace, monospace;
+        font-size: 15px;
+        line-height: 1.62;
+        overflow-x: hidden;
+        -webkit-font-smoothing: antialiased;
+      }
+
+      /* Perspective floor grid — synthwave horizon, done in CSS 3D so it
+         costs nothing and never blocks the text. */
+      .horizon {
+        position: fixed;
+        inset: auto 0 0 0;
+        height: 46vh;
+        perspective: 240px;
+        perspective-origin: 50% 0%;
+        pointer-events: none;
+        z-index: 0;
+        overflow: hidden;
+        mask-image: linear-gradient(to bottom, transparent, #000 45%, #000);
+      }
+      .horizon::before {
+        content: '';
+        position: absolute;
+        inset: -60% -50% -20%;
+        background-image: linear-gradient(var(--grid) 1px, transparent 1px),
+          linear-gradient(90deg, var(--grid) 1px, transparent 1px);
+        background-size: 46px 46px;
+        transform: rotateX(72deg);
+        transform-origin: 50% 0;
+        animation: drift 9s linear infinite;
+      }
+      @keyframes drift {
+        to {
+          background-position: 0 46px;
+        }
+      }
+
+      /* Scanlines + vignette: the page is being displayed on hardware. */
+      .crt {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 40;
+        background: repeating-linear-gradient(
+          to bottom,
+          rgba(0, 0, 0, 0) 0 2px,
+          rgba(0, 0, 0, 0.16) 2px 3px
+        );
+        mix-blend-mode: multiply;
+      }
+      .vignette {
+        position: fixed;
+        inset: 0;
+        pointer-events: none;
+        z-index: 39;
+        background: radial-gradient(ellipse at 50% 45%, transparent 55%, rgba(2, 4, 10, 0.75));
+      }
+
+      .wrap {
+        position: relative;
+        z-index: 2;
+        max-width: 1160px;
+        margin: 0 auto;
+        padding: 0 clamp(1rem, 4vw, 2.6rem);
+      }
+
+      /* ── HUD bar ─────────────────────────────────────────────────── */
+      .hud {
+        display: flex;
+        gap: clamp(0.8rem, 2.4vw, 2rem);
+        align-items: center;
+        flex-wrap: wrap;
+        padding: 0.85rem 0;
+        border-bottom: 1px solid rgba(0, 232, 255, 0.22);
+        font-size: 0.72rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .hud .live {
+        color: var(--cyan);
+      }
+      .hud .live::before {
+        content: '●';
+        margin-right: 0.45rem;
+        animation: blink 1.6s steps(2, start) infinite;
+      }
+      @keyframes blink {
+        50% {
+          opacity: 0.25;
+        }
+      }
+      .hud .warn {
+        color: var(--amber);
+      }
+
+      /* ── Hero ────────────────────────────────────────────────────── */
+      .hero {
+        padding: clamp(3rem, 9vh, 6rem) 0 clamp(2rem, 5vh, 3.5rem);
+      }
+      .tag {
+        font-size: 0.74rem;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+        color: var(--magenta);
+        margin: 0 0 1.4rem;
+      }
+
+      h1 {
+        margin: 0;
+        font-family: 'Chakra Petch', system-ui, sans-serif;
+        font-weight: 700;
+        font-size: clamp(2.6rem, 8vw, 6.2rem);
+        line-height: 0.95;
+        letter-spacing: -0.02em;
+        text-transform: uppercase;
+        position: relative;
+        color: var(--text);
+        text-shadow: 0 0 26px rgba(0, 232, 255, 0.28);
+      }
+      /* Chromatic split — the signature glitch, fired on load and hover */
+      .glitch {
+        position: relative;
+        display: inline-block;
+      }
+      .glitch::before,
+      .glitch::after {
+        content: attr(data-t);
+        position: absolute;
+        inset: 0;
+        pointer-events: none;
+        opacity: 0.85;
+      }
+      .glitch::before {
+        color: var(--cyan);
+        transform: translate(-2px, -1px);
+        clip-path: polygon(0 0, 100% 0, 100% 46%, 0 46%);
+        animation: g1 4.2s infinite steps(1);
+      }
+      .glitch::after {
+        color: var(--magenta);
+        transform: translate(2px, 1px);
+        clip-path: polygon(0 54%, 100% 54%, 100% 100%, 0 100%);
+        animation: g2 3.7s infinite steps(1);
+      }
+      @keyframes g1 {
+        0%, 92%, 100% { transform: translate(-2px, -1px); }
+        93% { transform: translate(-9px, -2px); }
+        95% { transform: translate(4px, 1px); }
+        97% { transform: translate(-5px, 0); }
+      }
+      @keyframes g2 {
+        0%, 90%, 100% { transform: translate(2px, 1px); }
+        91% { transform: translate(8px, 2px); }
+        94% { transform: translate(-4px, -1px); }
+        96% { transform: translate(6px, 0); }
+      }
+
+      .sub {
+        margin: 1.6rem 0 0;
+        max-width: 52ch;
+        color: var(--muted);
+        font-size: 0.95rem;
+      }
+      .sub b {
+        color: var(--text);
+        font-weight: 500;
+      }
+
+      /* Readout panels with corner brackets */
+      .panels {
+        display: grid;
+        grid-template-columns: repeat(auto-fit, minmax(10rem, 1fr));
+        gap: clamp(0.7rem, 1.8vw, 1.1rem);
+        margin-top: clamp(2.2rem, 5vh, 3.2rem);
+      }
+      .panel {
+        position: relative;
+        padding: 1.1rem 1.15rem 1.2rem;
+        background: linear-gradient(180deg, rgba(0, 232, 255, 0.05), transparent 65%);
+        border: 1px solid rgba(0, 232, 255, 0.18);
+      }
+      .panel::before,
+      .panel::after {
+        content: '';
+        position: absolute;
+        width: 9px;
+        height: 9px;
+        border: 1px solid var(--cyan);
+      }
+      .panel::before {
+        top: -1px;
+        left: -1px;
+        border-right: 0;
+        border-bottom: 0;
+      }
+      .panel::after {
+        bottom: -1px;
+        right: -1px;
+        border-left: 0;
+        border-top: 0;
+      }
+      .panel .v {
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 700;
+        font-size: clamp(1.8rem, 3.4vw, 2.6rem);
+        line-height: 1;
+        color: var(--cyan);
+        font-variant-numeric: tabular-nums;
+        text-shadow: 0 0 18px rgba(0, 232, 255, 0.4);
+      }
+      .panel.alt .v {
+        color: var(--magenta);
+        text-shadow: 0 0 18px rgba(255, 45, 149, 0.35);
+      }
+      .panel .k {
+        margin-top: 0.55rem;
+        font-size: 0.68rem;
+        letter-spacing: 0.1em;
+        text-transform: uppercase;
+        color: var(--muted);
+        line-height: 1.5;
+      }
+
+      /* ── Log-style experience ────────────────────────────────────── */
+      .section {
+        padding: clamp(2.5rem, 7vh, 4.5rem) 0;
+      }
+      .section-head {
+        display: flex;
+        align-items: center;
+        gap: 0.8rem;
+        font-size: 0.72rem;
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        color: var(--cyan);
+        margin-bottom: 1.4rem;
+      }
+      .section-head::after {
+        content: '';
+        flex: 1;
+        height: 1px;
+        background: linear-gradient(90deg, rgba(0, 232, 255, 0.35), transparent);
+      }
+
+      .log {
+        display: grid;
+        grid-template-columns: 8.5rem minmax(0, 1fr);
+        gap: clamp(0.8rem, 2.5vw, 2rem);
+        padding: 1rem clamp(0.6rem, 1.6vw, 1.1rem);
+        border-left: 2px solid rgba(0, 232, 255, 0.2);
+        transition: border-color 240ms ease, background-color 240ms ease;
+      }
+      .log + .log {
+        margin-top: 0.3rem;
+      }
+      .log:hover,
+      .log:focus-within {
+        border-left-color: var(--magenta);
+        background: linear-gradient(90deg, rgba(255, 45, 149, 0.06), transparent 60%);
+      }
+      .log .ts {
+        color: var(--cyan);
+        font-size: 0.8rem;
+        font-variant-numeric: tabular-nums;
+      }
+      .log .ts small {
+        display: block;
+        color: var(--muted);
+        font-size: 0.7rem;
+        margin-top: 0.25rem;
+      }
+      .log .org {
+        font-size: 0.68rem;
+        letter-spacing: 0.18em;
+        text-transform: uppercase;
+        color: var(--magenta);
+      }
+      .log h3 {
+        margin: 0.3rem 0 0;
+        font-family: 'Chakra Petch', sans-serif;
+        font-weight: 600;
+        font-size: clamp(1.05rem, 1.9vw, 1.3rem);
+        letter-spacing: 0.005em;
+        line-height: 1.25;
+      }
+      .log p {
+        margin: 0.6rem 0 0;
+        color: var(--muted);
+        max-width: 66ch;
+        font-size: 0.88rem;
+      }
+      .log p b {
+        color: var(--amber);
+        font-weight: 500;
+      }
+
+      @media (max-width: 780px) {
+        .log {
+          grid-template-columns: 1fr;
+          gap: 0.35rem;
+        }
+        .log .ts small {
+          display: inline;
+          margin-left: 0.5rem;
+        }
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        .horizon::before,
+        .glitch::before,
+        .glitch::after,
+        .hud .live::before {
+          animation: none !important;
+        }
+        .glitch::before,
+        .glitch::after {
+          display: none;
+        }
+      }
+      :focus-visible {
+        outline: 2px solid var(--cyan);
+        outline-offset: 3px;
+      }
+    </style>
+  </head>
+  <body>
+    <div class="horizon" aria-hidden="true"></div>
+    <div class="vignette" aria-hidden="true"></div>
+    <div class="crt" aria-hidden="true"></div>
+
+    <div class="wrap">
+      <div class="hud">
+        <span class="live">канал открыт</span>
+        <span>узел: <span style="color: var(--text)">vk / донаты</span></span>
+        <span>команда: <span style="color: var(--text)">08</span></span>
+        <span class="warn">оборот ×2 · доны ×3</span>
+        <span id="clock" style="margin-left: auto"></span>
+      </div>
+
+      <section class="hero">
+        <p class="tag">Москва · team lead · 15 лет аптайма</p>
+        <h1><span class="glitch" data-t="Григорий">Григорий</span><br /><span class="glitch" data-t="Агапов">Агапов</span></h1>
+        <p class="sub">
+          Веду продуктовую команду Донатов в VK — <b>восемь человек</b>, четыре платформы. Пятнадцать
+          лет в разработке, пять из них — с людьми в прямом подчинении. Ниже — журнал операций.
+        </p>
+
+        <div class="panels">
+          <div class="panel">
+            <div class="v" data-count="8">0</div>
+            <div class="k">человек<br />в подчинении</div>
+          </div>
+          <div class="panel alt">
+            <div class="v" data-count="2" data-prefix="×">×0</div>
+            <div class="k">оборот донатов<br />за два месяца</div>
+          </div>
+          <div class="panel alt">
+            <div class="v" data-count="3" data-prefix="×">×0</div>
+            <div class="k">число донов<br />за тот же срок</div>
+          </div>
+          <div class="panel">
+            <div class="v" data-count="52" data-suffix="%">0%</div>
+            <div class="k">конверсия<br />было 30 %</div>
+          </div>
+        </div>
+      </section>
+
+      <section class="section">
+        <div class="section-head">журнал операций</div>
+
+        <article class="log" tabindex="0">
+          <div class="ts">2026 —<small>активно</small></div>
+          <div>
+            <div class="org">vk</div>
+            <h3 data-scramble>Тимлид продуктовой команды «Донаты»</h3>
+            <p>
+              Восемь человек: бэкенд, фронтенд, iOS, Android, QA. За квартал — ребрендинг и запуск
+              донатов в профиле VK. Оборот <b>×2</b>, доны <b>×3</b>, конверсия с <b>30 %</b> до
+              <b>52 %</b>.
+            </p>
+          </div>
+        </article>
+
+        <article class="log" tabindex="0">
+          <div class="ts">2025<small>апр — дек</small></div>
+          <div>
+            <div class="org">vk</div>
+            <h3 data-scramble>Тимлид платформенной команды, соцкоммерция</h3>
+            <p>
+              Три команды под координацией. Лимит товаров снят с <b>20 000</b> до миллионов,
+              интеграция с <b>40</b> продавцами Ozon, <b>3 млн</b> товаров. Миграция рекомендаций к
+              отключению Hadoop — в срок.
+            </p>
+          </div>
+        </article>
+
+        <article class="log" tabindex="0">
+          <div class="ts">2022<small>дек — мар 2025</small></div>
+          <div>
+            <div class="org">тинькофф банк</div>
+            <h3 data-scramble>Тимлид, наставничество и Performance Review</h3>
+            <p>
+              MVP платформы наставничества — в срок, пилот собран из её же участников. Performance
+              Review стабилизирован на <b>60 000</b> пользователей.
+            </p>
+          </div>
+        </article>
+
+        <article class="log" tabindex="0">
+          <div class="ts">2013<small>дек — мар 2019</small></div>
+          <div>
+            <div class="org">neotech</div>
+            <h3 data-scramble>Senior-разработчик, ГИС-проекты</h3>
+            <p>
+              Smallworld GIS для телеком-заказчиков России и СНГ, обратная разработка клиентских
+              систем без исходников.
+            </p>
+          </div>
+        </article>
+      </section>
+    </div>
+
+    <script>
+      const reduce = matchMedia('(prefers-reduced-motion: reduce)').matches;
+
+      // HUD clock — the panel is live, not a picture of a panel
+      const clock = document.getElementById('clock');
+      function tick() {
+        const d = new Date();
+        clock.textContent = d.toLocaleTimeString('ru-RU', { hour12: false });
+      }
+      tick();
+      if (!reduce) setInterval(tick, 1000);
+
+      // Counters
+      function countUp(el) {
+        const to = +el.dataset.count;
+        const pre = el.dataset.prefix || '';
+        const suf = el.dataset.suffix || '';
+        if (reduce) return (el.textContent = pre + to + suf);
+        const dur = 1100,
+          t0 = performance.now();
+        (function f(now) {
+          const p = Math.min(1, (now - t0) / dur);
+          el.textContent = pre + Math.round(to * (1 - Math.pow(1 - p, 3))) + suf;
+          if (p < 1) requestAnimationFrame(f);
+        })(t0);
+      }
+
+      // Text decode on hover — reads as data resolving, not decoration
+      const CH = 'АБВГДЕЖЗИКЛМНОПРСТУФХЦЧШЩЭЮЯ01234567890#$%&';
+      function scramble(el) {
+        if (reduce || el.dataset.busy) return;
+        el.dataset.busy = '1';
+        const final = el.dataset.final || (el.dataset.final = el.textContent);
+        let frame = 0;
+        const total = 16;
+        const id = setInterval(() => {
+          frame++;
+          const shown = Math.floor((final.length * frame) / total);
+          el.textContent =
+            final.slice(0, shown) +
+            final
+              .slice(shown)
+              .split('')
+              .map((c) => (c === ' ' ? ' ' : CH[(Math.random() * CH.length) | 0]))
+              .join('');
+          if (frame >= total) {
+            clearInterval(id);
+            el.textContent = final;
+            delete el.dataset.busy;
+          }
+        }, 28);
+      }
+      document.querySelectorAll('.log').forEach((row) => {
+        const h = row.querySelector('[data-scramble]');
+        row.addEventListener('pointerenter', () => scramble(h));
+        row.addEventListener('focus', () => scramble(h));
+      });
+
+      const io = new IntersectionObserver(
+        (es) =>
+          es.forEach((e) => {
+            if (e.isIntersecting) {
+              countUp(e.target);
+              io.unobserve(e.target);
+            }
+          }),
+        { threshold: 0.4 }
+      );
+      document.querySelectorAll('[data-count]').forEach((el) => io.observe(el));
+    </script>
+  </body>
+</html>
