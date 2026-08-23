@@ -475,6 +475,16 @@
         sudo: () => `<p class="ln mag">g.agapov не в файле sudoers. Об инциденте будет доложено.</p>`
       };
 
+      // Anything typed by a visitor is escaped before it can reach innerHTML.
+      // The canned responses in CMDS/FILES are authored markup and go through as-is.
+      const esc = (s) =>
+        String(s)
+          .replace(/&/g, '&amp;')
+          .replace(/</g, '&lt;')
+          .replace(/>/g, '&gt;')
+          .replace(/"/g, '&quot;')
+          .replace(/'/g, '&#39;');
+
       function resolve(raw) {
         const cmd = raw.trim().toLowerCase();
         if (!cmd) return '';
@@ -484,16 +494,16 @@
         if (m) {
           const key = m[1].replace(/\.(log|txt|md)$/, '');
           if (key in FILES) return FILES[key]();
-          return `<p class="ln mag">cat: ${m[1]}: файл не найден</p><p class="ln dim">попробуйте <span class="hi">ls</span></p>`;
+          return `<p class="ln mag">cat: ${esc(m[1])}: файл не найден</p><p class="ln dim">попробуйте <span class="hi">ls</span></p>`;
         }
         if (cmd.startsWith('sudo')) return CMDS.sudo();
-        return `<p class="ln mag">${cmd}: команда не найдена</p><p class="ln dim">наберите <span class="hi">help</span></p>`;
+        return `<p class="ln mag">${esc(cmd)}: команда не найдена</p><p class="ln dim">наберите <span class="hi">help</span></p>`;
       }
 
       function echo(cmd) {
         const p = document.createElement('p');
         p.className = 'cmdline';
-        p.innerHTML = `<span class="u">g.agapov@vk</span>:<span class="p">~</span>$ <span class="c">${cmd}</span>`;
+        p.innerHTML = `<span class="u">g.agapov@vk</span>:<span class="p">~</span>$ <span class="c">${esc(cmd)}</span>`;
         out.appendChild(p);
       }
 
