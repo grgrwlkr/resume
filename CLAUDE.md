@@ -94,5 +94,9 @@ cv.master.yaml                              # canonical facts (source of truth)
   dictionary; theme and language persist in `localStorage`.
 - `docs/build-pdf.sh` renders it to A4 PDFs (`docs/dist/*.{en,ru}.pdf`) via headless
   Chrome using `?lang=<l>&theme=light&print=1`.
+- The PDFs are a styled rendering of the landing, not a screenshot of the live site.
+  Avoid page breaks that split a content block: when a block does not fit on the
+  current page, push it whole to the next one. Verify the rendered PDF visually before
+  claiming a layout fix works.
 - Treat the landing as a third derived artifact alongside the two drafts — see the
   propagation rules above.
