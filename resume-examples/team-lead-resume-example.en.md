@@ -6,7 +6,7 @@ Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | [
 
 ## Summary
 
-Hands-on Team Lead with `15+` years in software engineering and `5+` years of direct people management across teams of `6-8`. Builds products from MVP to scale without losing technical depth: architecture, migrations, cross-team coordination. Currently leading VK's Donations product team (`8` direct reports across backend, frontend, mobile, and QA).
+Hands-on Team Lead with `15+` years in software engineering and `5+` years of direct people management across teams of `6-8`. Builds products from MVP to scale: owns the backlog, planning, and releases under Scrum/Scrumban, and still designs architecture and writes microservice optimization code. Currently leading VK's Donations product team (`8` direct reports across backend, frontend, mobile, and QA).
 
 ## Selected Impact
 
@@ -25,6 +25,8 @@ Hands-on Team Lead with `15+` years in software engineering and `5+` years of di
 Jan 2026 - Present
 
 - Lead the Donations product team with `8` direct reports: `3` backend engineers, `2` frontend engineers, `1` iOS engineer, `1` Android engineer, and `1` QA engineer.
+- Own and prioritize the team backlog, independently and with the product manager; run quarterly, sprint, and release planning under `Scrum`/`Scrumban`.
+- Design the service architecture and write microservice optimization code myself, driven by per-method `RPS`, related query load, and memory and `CPU` consumption.
 - Led the Donations rebrand and launched Donations in VK profiles within one quarter, where the flow had previously been available only in Communities.
 - Aligned the product backend team and a dedicated migration team to accelerate the Donations service migration from monolith to microservices.
 - First `3` weeks after the rebrand release (a sub-feature of Donations-in-profile): `+3,276` active creators with Donations enabled (`+3.96%` over the total active-creator base), `+469` monetizing creators (`+1.4%`), `+880,743 RUB` in donations turnover (`+0.37%`), and `+3,578` donations (`+0.55%`); product manager and analyst expect the longer-running effect to exceed these early numbers.
@@ -35,6 +37,7 @@ Jan 2026 - Present
 Apr 2025 - Dec 2025
 
 - Led a platform team of `8` direct reports and coordinated the goods-scaling program across `3` teams.
+- Owned and prioritized the platform team backlog, independently and with the product manager; ran quarterly, sprint, and release planning under `Scrum`/`Scrumban`.
 - Ran load testing and shipped the scaling rollout, lifting the limit on goods listed in VK Communities from `20K` to millions.
 - Launched the `40`-seller `Ozon` integration: imported about `3M` products and generated about `1M` product offers.
 - Built the cross-team plan for the recommendation system migration and release under the `Hadoop` shutdown deadline; the teams hit the deadline and worked through an incident without losing a significant share of traffic.
@@ -50,6 +53,8 @@ Apr 2025 - Dec 2025
 Dec 2022 - Mar 2025
 
 - Led a `6`-person cross-functional team across backend, frontend, QA, design, and analytics; delivered the MVP of the company's first mentoring platform on schedule.
+- Owned and prioritized the backlog, independently and with the product manager; ran `OKR`, sprint, and release planning under `Scrum`/`Scrumban`.
+- Designed the platform architecture on `DDD`, which let the team iterate quickly on product ideas.
 - Staffed the company's first pilot entirely with mentoring-program participants who later moved into full-time roles.
 - Mentored `2` backend engineers inside the mentoring program.
 
@@ -57,6 +62,8 @@ Dec 2022 - Mar 2025
 Apr 2021 - Dec 2022
 
 - Took over the `Performance Review` project — a platform serving `60K` employees with two high-load windows per year (fall review and spring compensation cycle) — during its reset and aligned a one-year stabilization plan with the business.
+- Owned and prioritized the backlog, independently and with the product manager; ran `OKR`, sprint, and release planning under `Scrum`/`Scrumban`.
+- Owned the platform architecture and technical decisions.
 - Built and grew a `7`-person cross-functional team that established stable execution on the project.
 - Mentored a backend engineer and helped him move into a full-time role within the project.
 
@@ -98,7 +105,7 @@ Nov 2010 - May 2012
 
 ### Dashboard & Statusline for Claude Code
 
-**Author and maintainer, open-source VS Code extension (MIT)**  
+**Author and maintainer, open-source VS Code extension (MIT, non-commercial personal project)**  
 Aug 2026 - present | `JavaScript`, `Node.js`, `VS Code Extension API`
 
 [VS Code Marketplace](https://marketplace.visualstudio.com/items?itemName=grgrwlkr.claude-dashboard) · [Open VSX](https://open-vsx.org/extension/grgrwlkr/claude-dashboard) · [GitHub](https://github.com/grgrwlkr/claude-dashboard-vscode)
@@ -111,7 +118,7 @@ Aug 2026 - present | `JavaScript`, `Node.js`, `VS Code Extension API`
 
 ## Skills
 
-**Leadership & Delivery:** team leadership, engineer growth, mentoring, stakeholder management, roadmap planning, cross-functional coordination
+**Leadership & Delivery:** team leadership, engineer growth, mentoring, stakeholder management, roadmap planning, backlog management, release planning, Scrum, Scrumban, OKR, cross-functional coordination
 
 **Architecture & Systems:** monolith decomposition, microservices, DDD, CQRS, API design, REST APIs
 
