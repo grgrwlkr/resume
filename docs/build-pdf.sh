@@ -26,7 +26,7 @@ render() {
   local out="$OUT_DIR/Gregory_Agapov_Resume.$lang.pdf"
   local profile
   profile="$(mktemp -d)"
-  local url="file://$SRC?lang=$lang&theme=light&print=1"
+  local url="file://$SRC?lang=$lang&print=1"
 
   echo "Rendering $lang -> $out"
   # New headless Chrome sometimes refuses to exit after --print-to-pdf;
