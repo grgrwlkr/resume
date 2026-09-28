@@ -37,7 +37,7 @@ Jan 2026 - Present
 Apr 2025 - Dec 2025
 
 - Led a platform team of `8` direct reports and coordinated the goods-scaling program across `3` teams.
-- Owned and prioritized the platform team backlog, independently and with the product manager; ran quarterly, sprint, and release planning under `Scrumban`.
+- Owned and prioritized the platform team backlog independently; ran quarterly, sprint, and release planning under `Scrumban`.
 - Ran load testing and shipped the scaling rollout, lifting the limit on goods listed in VK Communities from `20K` to millions.
 - Launched the `40`-seller `Ozon` integration: imported about `3M` products and generated about `1M` product offers.
 - Built the cross-team plan for the recommendation system migration and release under the `Hadoop` shutdown deadline; the teams hit the deadline and worked through an incident without losing a significant share of traffic.
