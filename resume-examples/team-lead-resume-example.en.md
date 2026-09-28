@@ -130,7 +130,7 @@ Aug 2026 - present | `JavaScript`, `Node.js`, `VS Code Extension API`
 
 ## Education
 
-**Degree in Computer Science**  
+**Programming Technician**, Software for Computer Engineering and Automated Systems (secondary vocational education)  
 
 International College of Business and Design at the Moscow Technical University of Communications and Informatics  
 Sep 2006 - Jun 2010 | Moscow, Russia

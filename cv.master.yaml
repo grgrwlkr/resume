@@ -675,7 +675,13 @@ skills:
 
 education:
   - id: mtuci-college-computer-science
-    degree: Degree in Computer Science
+    degree: Programming Technician
+    degreeRu: Техник-программист
+    level: secondary vocational education
+    levelRu: среднее специальное образование
+    specialty: Software for Computer Engineering and Automated Systems
+    specialtyRu: Программное обеспечение вычислительной техники и автоматизированных систем
+    source: hh.ru profile education entry, confirmed by the user 2026-09-29
     institution: International College of Business and Design at the Moscow Technical University of Communications and Informatics
     start: 2006-09
     end: 2010-06
