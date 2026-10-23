@@ -80,6 +80,9 @@ Hands-on Team Lead с `15+` годами в разработке и `5+` год�
 
 ### Neotech (Paravan 2000)
 
+<!-- Legal-entity records and address history: cv.master.yaml, experience[id=neotech-gis-senior].legalEntities.
+     Neotech and Paravan 2000 have separate INNs and legal addresses; employment mapping needs confirmation. -->
+
 **Старший разработчик (Senior Developer), проект геоинформационных систем (GIS GE Smallworld)**  
 дек. 2013 - мар. 2019
 

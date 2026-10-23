@@ -354,6 +354,43 @@ experience:
   - id: neotech-gis-senior
     company: Neotech
     alternativeName: Paravan 2000
+    legalEntities:
+      - id: neotech
+        name: ООО "НЕОТЕХ"
+        inn: '7703805668'
+        ogrn: '1147746118893'
+        director: Носов Кирилл Вячеславович
+        registeredOn: '2014-02-12'
+        legalAddress:
+          value: 123112, г. Москва, Пресненская набережная, д. 12, этаж 45, комната 11, помещение I
+          checkedOn: '2026-10-23'
+          verificationStatus: verified_in_public_registry_aggregators
+        legalAddressHistory:
+          - value: 123104, г. Москва, Спиридоньевский переулок, д. 8
+            validUntilExclusive: '2017-06-20'
+          - value: 123100, г. Москва, Пресненская набережная, д. 12, этаж 45, комната 11, помещение I
+            validFrom: '2017-06-20'
+            validUntilExclusive: '2020-11-25'
+          - value: 123112, г. Москва, Пресненская набережная, д. 12, этаж 45, комната 11, помещение I
+            validFrom: '2020-11-25'
+        sources:
+          - https://www.tbank.ru/business/contractor/legal/1147746118893/
+          - https://star-pro.ru/proverka-kontragenta/organization/1147746118893--ooo-neotex
+          - https://synapsenet.ru/organizacii/1147746118893-ooo-neoteh
+        employerMappingStatus: needs_confirmation
+      - id: paravan-2000
+        name: ООО "ПАРАВАН - 2000"
+        inn: '7703220725'
+        ogrn: '1027700509176'
+        director: Половинкин Олег Евгеньевич
+        legalAddress:
+          value: 123557, г. Москва, Большой Тишинский переулок, д. 26, корп. 13-14, помещение XII
+          checkedOn: '2026-10-23'
+          verificationStatus: verified_in_official_license_register_and_public_registry_aggregators
+        sources:
+          - https://digital.mchs.gov.ru/fgpn/license/77-06-2012-000607
+          - https://www.tbank.ru/business/contractor/legal/1027700509176/
+        employerMappingStatus: needs_confirmation
     title: Senior Developer
     project: GIS projects
     start: 2013-12
@@ -763,6 +800,9 @@ targetProfiles:
 
 verification:
   reviewBeforePublishing:
+    - id: neotech-paravan-legal-entities
+      item: Legal entities behind the Neotech (Paravan 2000) experience block
+      detail: 'Separate registry records and legal addresses were saved on 2026-10-23 under experience[id=neotech-gis-senior].legalEntities. ООО "НЕОТЕХ" (INN 7703805668) and ООО "ПАРАВАН - 2000" (INN 7703220725) are distinct legal entities with different addresses. Registry details are source-backed; their exact relationship to the employment record and any transfer dates still need confirmation from employment documents or the user. ООО "НЕОТЕХ" was registered on 2014-02-12, after the resume block starts in 2013-12; do not attribute the entire period to that legal entity or change the resume dates without confirmation. Legal addresses must not be presented as office locations.'
     - id: vk-role-details
       item: VK responsibilities and achievements
       detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. Donations rebrand metrics are confirmed for the first three weeks after release: +3,276 creators with Donations enabled (+3.96% over the active-creator base), +469 monetizing creators (+1.4%), +880,743 RUB in donations turnover (+0.37%), and +3,578 donations (+0.55%); these came from product manager and analyst summary and are an early partial read of the larger Donations-in-profile rollout. SocCom details are confirmed: a direct platform team of 8, cross-team synchronization across 3 teams during the goods-scaling initiative, delivery leadership for 3 additional backend engineers from another team, scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Donations in VK profiles is now released, with confirmed April-May 2026 product growth metrics: profiles with Donations connected 789 to 999 (+27%), monetizing profiles 240 to 521 (+117%), donations turnover about 235K to about 478K RUB (+103%), donation count 430 to 1,200 (+179%), connection-to-monetization about 30% to about 52%, and about 80% of turnover from one-time donations. Optional follow-up precision before final publication: full Donations-in-profile DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'

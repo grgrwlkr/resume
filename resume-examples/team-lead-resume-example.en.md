@@ -80,6 +80,9 @@ Apr 2019 - Apr 2020
 
 ### Neotech (Paravan 2000)
 
+<!-- Legal-entity records and address history: cv.master.yaml, experience[id=neotech-gis-senior].legalEntities.
+     Neotech and Paravan 2000 have separate INNs and legal addresses; employment mapping needs confirmation. -->
+
 **Senior Developer, GIS Projects**  
 Dec 2013 - Mar 2019
 

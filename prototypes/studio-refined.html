@@ -1,0 +1,1970 @@
+<!doctype html>
+<html lang="en" data-mode="comfort">
+  <head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1, viewport-fit=cover" />
+    <meta name="robots" content="noindex, nofollow" />
+    <meta name="theme-color" content="#505050" />
+    <title>Gregory Agapov — Engineering Team Lead</title>
+    <meta
+      name="description"
+      content="Gregory Agapov — Engineering Team Lead in Moscow. 15+ years in software engineering, 5+ years of people management. Currently leading VK's Donations product team."
+    />
+
+    <!-- Open Graph / Twitter. og:image and og:url must be ABSOLUTE URLs for most scrapers
+         (Facebook, LinkedIn, Telegram). Card source: assets/og-card.html. -->
+    <meta property="og:type" content="profile" />
+    <meta property="og:site_name" content="Gregory Agapov" />
+    <meta property="og:locale" content="en_US" />
+    <meta property="og:locale:alternate" content="ru_RU" />
+    <meta property="og:title" content="Gregory Agapov — Engineering Team Lead" />
+    <meta
+      property="og:description"
+      content="Hands-on Team Lead. 15+ years in software engineering, 5+ years of people management. VK Donations product team."
+    />
+    <meta property="og:image" content="https://grgrwlkr.github.io/resume/assets/og.jpg" />
+    <meta property="og:image:type" content="image/jpeg" />
+    <meta property="og:image:width" content="1200" />
+    <meta property="og:image:height" content="630" />
+    <meta property="og:image:alt" content="Gregory Agapov — Engineering Team Lead" />
+    <meta property="og:url" content="https://grgrwlkr.github.io/resume/" />
+    <link rel="canonical" href="https://grgrwlkr.github.io/resume/" />
+    <meta name="twitter:card" content="summary_large_image" />
+    <meta name="twitter:title" content="Gregory Agapov — Engineering Team Lead" />
+    <meta
+      name="twitter:description"
+      content="Hands-on Team Lead. 15+ years in software engineering, 5+ years of people management. VK Donations product team."
+    />
+    <meta name="twitter:image" content="https://grgrwlkr.github.io/resume/assets/og.jpg" />
+    <meta name="twitter:image:alt" content="Gregory Agapov — Engineering Team Lead" />
+
+    <!-- Structured data: lets search engines model the page as a person. -->
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "Person",
+        "name": "Gregory Agapov",
+        "alternateName": "Григорий Агапов",
+        "jobTitle": "Engineering Team Lead",
+        "email": "mailto:gregoryagapov@icloud.com",
+        "image": "https://grgrwlkr.github.io/resume/assets/og.jpg",
+        "url": "https://grgrwlkr.github.io/resume/",
+        "address": {
+          "@type": "PostalAddress",
+          "addressLocality": "Moscow",
+          "addressCountry": "RU"
+        },
+        "worksFor": { "@type": "Organization", "name": "VK" },
+        "alumniOf": {
+          "@type": "EducationalOrganization",
+          "name": "International College of Business and Design at MTUCI"
+        },
+        "knowsLanguage": ["ru", "en"],
+        "sameAs": [
+          "https://t.me/xawkay",
+          "https://github.com/grgrwlkr",
+          "https://www.linkedin.com/in/gregory-agapov-24b13221"
+        ]
+      }
+    </script>
+
+    <!-- Font: Manrope (display weights 200-300, body 400-700); Cyrillic included -->
+    <link rel="preconnect" href="https://fonts.googleapis.com" />
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+    <link
+      rel="stylesheet"
+      href="https://fonts.googleapis.com/css2?family=Manrope:wght@200;300;400;500;600;700&display=swap"
+    />
+
+    <!-- Pre-paint: resolve lang, mode and print preview before the body renders to avoid flicker.
+         URL params: ?lang=ru|en  ?mode=comfort|sport  ?print=1 (A4 preview; build-pdf.sh uses it). -->
+    <script>
+      (function () {
+        try {
+          var url = new URL(window.location.href);
+          var urlLang = url.searchParams.get('lang');
+          var urlMode = url.searchParams.get('mode');
+          var isPrint = url.searchParams.get('print') === '1';
+
+          var savedLang = null;
+          try {
+            savedLang = localStorage.getItem('lang');
+          } catch (e) {
+            /* storage may be blocked under file:// */
+          }
+          var browserLang = (navigator.language || 'en').slice(0, 2).toLowerCase();
+          var lang = urlLang || savedLang || (browserLang === 'ru' ? 'ru' : 'en');
+          document.documentElement.lang = lang === 'ru' ? 'ru' : 'en';
+
+          // Comfort is the default on every visit: recruiters land on the short version.
+          document.documentElement.dataset.mode = urlMode === 'sport' ? 'sport' : 'comfort';
+
+          if (isPrint) document.documentElement.classList.add('print-mode');
+          window.__urlOverrides = { lang: !!urlLang };
+        } catch (e) {
+          /* fall through to defaults */
+        }
+      })();
+    </script>
+
+    <style>
+      /* ---------- Tokens ---------- */
+      :root {
+        --ink: #161616;
+        --paper: #f4f4f4;
+        --muted: #5a5a5a;
+        --body: #3a3a3a;
+        --line: #d4d4d4;
+        --line-soft: #e0e0e0;
+        --accent: #1c69d4;
+        --accent-hover: #1557b0;
+        --pad: 64px;
+        --ease: cubic-bezier(0.22, 0.61, 0.36, 1);
+        /* The portrait is shot on a grey seamless backdrop; the hero continues that backdrop,
+           so the photo height drives the whole first screen. */
+        --photoH: clamp(760px, 100svh, 1100px);
+        --stageS: clamp(640px, calc(var(--photoH) * 0.69), 760px);
+      }
+      *,
+      *::before,
+      *::after {
+        box-sizing: border-box;
+      }
+      html {
+        scroll-behavior: smooth;
+      }
+      body {
+        margin: 0;
+        background: var(--paper);
+        color: var(--ink);
+        font-family: 'Manrope', system-ui, -apple-system, 'Segoe UI', sans-serif;
+        -webkit-font-smoothing: antialiased;
+        text-rendering: optimizeLegibility;
+      }
+      a {
+        color: inherit;
+      }
+      a:hover {
+        color: var(--accent);
+      }
+      :focus-visible {
+        outline: 2px solid var(--accent);
+        outline-offset: 3px;
+      }
+      .sr-only {
+        position: absolute;
+        width: 1px;
+        height: 1px;
+        overflow: hidden;
+        clip: rect(0 0 0 0);
+        white-space: nowrap;
+      }
+      .skip {
+        position: absolute;
+        left: 16px;
+        top: -60px;
+        z-index: 10;
+        background: var(--ink);
+        color: #fff;
+        padding: 12px 16px;
+        text-decoration: none;
+      }
+      .skip:focus {
+        top: 16px;
+      }
+      .wrap {
+        max-width: 1440px;
+        margin: 0 auto;
+        padding: 0 var(--pad);
+      }
+
+      /* ---------- Mode visibility ---------- */
+      [data-mode='comfort'] .s-only,
+      [data-mode='sport'] .c-only,
+      [data-mode='comfort'] .s-link,
+      [data-mode='sport'] .to-sport {
+        display: none !important;
+      }
+      .mob {
+        display: none;
+      }
+      @keyframes rise {
+        from {
+          opacity: 0;
+          transform: translateY(14px);
+        }
+        to {
+          opacity: 1;
+          transform: none;
+        }
+      }
+      /* Re-runs every time a block comes back from display:none, i.e. on each mode switch. */
+      .swap {
+        animation: rise 0.55s var(--ease) both;
+      }
+
+      /* ---------- Hero ---------- */
+      .hero {
+        position: relative;
+      }
+      .stage {
+        position: relative;
+        height: var(--photoH);
+        overflow: hidden;
+        transition: height 0.7s var(--ease);
+      }
+      .stage::before,
+      .stage::after {
+        content: '';
+        position: absolute;
+        inset: 0;
+        transition: opacity 0.7s var(--ease);
+      }
+      .stage::before {
+        background: linear-gradient(180deg, #505050 0%, #585858 14%, #6e6e6e 28%, #8e8e8e 40%, #a9a9a9 52%, #b3b3b3 64%, #b9b9b9 80%, #d0d0d0 100%);
+      }
+      .stage::after {
+        background: linear-gradient(180deg, #9c9c9c 0%, #adadad 20%, #b4b4b4 45%, #bababa 70%, #d0d0d0 100%);
+        opacity: 0;
+      }
+      [data-mode='sport'] .stage {
+        height: var(--stageS);
+      }
+      [data-mode='sport'] .stage::after {
+        opacity: 1;
+      }
+      .photo {
+        position: absolute;
+        z-index: 1;
+        left: 50%;
+        top: 0;
+        height: var(--photoH);
+        width: auto;
+        transform: translateX(-50%);
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0%, #000 22%, #000 78%, transparent 100%);
+        transition: top 0.7s var(--ease);
+      }
+      [data-mode='sport'] .photo {
+        top: calc(var(--stageS) - var(--photoH) + 20px);
+      }
+      .h-c,
+      .h-s {
+        transition:
+          opacity 0.45s var(--ease),
+          visibility 0.45s;
+      }
+      [data-mode='sport'] .h-c,
+      [data-mode='comfort'] .h-s {
+        opacity: 0;
+        visibility: hidden;
+      }
+      [data-mode='sport'] .h-s,
+      [data-mode='comfort'] .h-c {
+        transition-delay: 0.25s;
+      }
+
+      /* Nav */
+      .nav {
+        position: absolute;
+        z-index: 3;
+        top: 0;
+        left: 0;
+        right: 0;
+        display: flex;
+        justify-content: space-between;
+        align-items: center;
+        padding: 16px var(--pad);
+        color: #fff;
+        font-size: 15px;
+        font-weight: 500;
+        transition: color 0.5s var(--ease);
+      }
+      [data-mode='sport'] .nav {
+        color: var(--ink);
+      }
+      .brand {
+        letter-spacing: 0.24em;
+        text-transform: uppercase;
+        font-weight: 600;
+        text-decoration: none;
+        padding: 12px 0;
+      }
+      .nav a:hover {
+        color: inherit;
+        opacity: 0.75;
+      }
+      .nav-right,
+      .nav-links {
+        display: flex;
+        align-items: center;
+        gap: 32px;
+      }
+      .nav-links a {
+        text-decoration: none;
+        padding: 12px 0;
+      }
+      .lang,
+      .mode {
+        display: flex;
+        align-items: center;
+        gap: 10px;
+        font-size: 11px;
+        font-weight: 700;
+        letter-spacing: 0.2em;
+      }
+      .mode {
+        padding-left: 24px;
+        border-left: 1px solid rgba(255, 255, 255, 0.35);
+      }
+      [data-mode='sport'] .mode {
+        border-left-color: rgba(22, 22, 22, 0.35);
+      }
+      .lang-btn,
+      .mode-btn {
+        background: none;
+        border: 0;
+        border-bottom: 1px solid transparent;
+        color: inherit;
+        font: inherit;
+        letter-spacing: inherit;
+        padding: 16px 0 4px;
+        min-height: 44px;
+        cursor: pointer;
+        opacity: 0.55;
+      }
+      .lang-btn[aria-pressed='true'],
+      .mode-btn[aria-pressed='true'] {
+        opacity: 1;
+        border-bottom-color: currentColor;
+      }
+      .lang-btn:hover,
+      .mode-btn:hover {
+        opacity: 1;
+      }
+
+      /* Comfort hero */
+      .hero-title {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        right: 0;
+        top: calc(var(--photoH) * 0.125);
+        padding: 0 24px;
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 14px;
+        color: #fff;
+        text-align: center;
+      }
+      .eyebrow {
+        font-size: 16px;
+        font-weight: 500;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+      h1 {
+        margin: 0;
+        font-size: clamp(56px, 6vw, 104px);
+        line-height: 1;
+        font-weight: 200;
+        letter-spacing: -0.02em;
+      }
+      .tagline {
+        margin: 0;
+        font-size: clamp(20px, 1.8vw, 26px);
+        font-weight: 300;
+      }
+      .sub {
+        margin: 0;
+        font-size: 16px;
+        opacity: 0.85;
+      }
+      .hero-col {
+        position: absolute;
+        z-index: 2;
+        bottom: 150px;
+        width: clamp(250px, 22vw, 320px);
+        display: flex;
+        flex-direction: column;
+        gap: 22px;
+      }
+      .hero-col.left {
+        left: var(--pad);
+      }
+      .hero-col.right {
+        right: var(--pad);
+        text-align: right;
+      }
+      .hc {
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        border-top: 1px solid rgba(22, 22, 22, 0.35);
+        padding-top: 12px;
+      }
+      .hc-label {
+        font-size: 13px;
+        letter-spacing: 0.12em;
+        text-transform: uppercase;
+      }
+      .hc-big {
+        font-size: 44px;
+        font-weight: 300;
+        line-height: 1.1;
+      }
+      .hc-note {
+        font-size: 13px;
+        line-height: 1.4;
+        color: #2e2e2e;
+      }
+      .cta {
+        display: flex;
+        gap: 16px;
+      }
+      .hero-cta {
+        position: absolute;
+        z-index: 2;
+        left: 0;
+        right: 0;
+        bottom: 48px;
+        justify-content: center;
+      }
+      .btn {
+        display: inline-flex;
+        align-items: center;
+        justify-content: center;
+        width: 280px;
+        min-height: 56px;
+        padding: 0 16px;
+        font-size: 16px;
+        font-weight: 600;
+        text-align: center;
+        text-decoration: none;
+        transition:
+          background 0.2s,
+          color 0.2s;
+      }
+      .btn-primary {
+        background: var(--accent);
+        color: #fff;
+      }
+      .btn-primary:hover {
+        background: var(--accent-hover);
+        color: #fff;
+      }
+      .btn-ghost {
+        background: #fff;
+        color: var(--ink);
+      }
+      .btn-ghost:hover {
+        background: #e9e9e9;
+        color: var(--ink);
+      }
+
+      /* Sport hero */
+      .sport-left {
+        position: absolute;
+        z-index: 2;
+        left: var(--pad);
+        top: 96px;
+        width: 360px;
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+      }
+      .sport-left .eyebrow {
+        font-size: 14px;
+        font-weight: 600;
+      }
+      .sport-name {
+        margin: 0;
+        font-size: 50px;
+        line-height: 1;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+      }
+      .sport-tag {
+        margin: 0;
+        font-size: 18px;
+        line-height: 1.45;
+      }
+      .sport-para {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.5;
+        color: #2e2e2e;
+      }
+      .sport-left .cta {
+        gap: 12px;
+        margin-top: 6px;
+      }
+      .sport-left .btn,
+      .mob-intro .btn {
+        flex: 1 1 0;
+        width: auto;
+        min-height: 52px;
+        font-size: 14px;
+      }
+      .sport-left .btn-primary,
+      .mob-intro .btn-primary {
+        background: var(--ink);
+      }
+      .sport-left .btn-primary:hover,
+      .mob-intro .btn-primary:hover {
+        background: #333;
+      }
+      .sport-left .btn-ghost,
+      .mob-intro .btn-ghost {
+        background: transparent;
+        border: 1px solid var(--ink);
+      }
+      .sport-grid {
+        position: absolute;
+        z-index: 2;
+        right: var(--pad);
+        top: 96px;
+        width: 300px;
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 22px 20px;
+        text-align: right;
+      }
+      .mini {
+        border-top: 1px solid rgba(22, 22, 22, 0.4);
+        padding-top: 8px;
+      }
+      .mini-big {
+        display: block;
+        font-size: 34px;
+        font-weight: 300;
+      }
+      .mini-label {
+        font-size: 12px;
+      }
+
+      /* ---------- Sections ---------- */
+      .sec {
+        padding-top: 104px;
+      }
+      .sec-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        gap: 24px;
+        border-bottom: 1px solid var(--line);
+        padding-bottom: 16px;
+        margin-bottom: 32px;
+      }
+      .sec-head h2 {
+        margin: 0;
+        font-size: 40px;
+        font-weight: 200;
+      }
+      .sec-note {
+        font-size: 14px;
+        color: var(--muted);
+        text-align: right;
+      }
+      .grid4 {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 32px;
+      }
+      .grid4.rows {
+        row-gap: 40px;
+      }
+      .spec,
+      .tcell,
+      .kcell {
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+      }
+      .spec-big {
+        font-size: 52px;
+        font-weight: 200;
+        line-height: 1;
+        white-space: nowrap;
+      }
+      .unit {
+        font-size: 18px;
+        font-weight: 500;
+      }
+      .spec-note {
+        font-size: 15px;
+        color: var(--muted);
+      }
+      .tcell-big {
+        font-size: 30px;
+        font-weight: 300;
+        line-height: 1.15;
+      }
+      .tcell-note {
+        font-size: 15px;
+        line-height: 1.5;
+        color: var(--body);
+      }
+      .kcell p {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.6;
+      }
+      .hrow {
+        display: grid;
+        grid-template-columns: 200px 1fr 1.3fr;
+        column-gap: 40px;
+        padding: 24px 0;
+        border-bottom: 1px solid var(--line-soft);
+        align-items: baseline;
+      }
+      .hrow.wide {
+        grid-template-columns: 200px 320px 1fr;
+        align-items: start;
+      }
+      .dates {
+        font-size: 15px;
+        color: var(--muted);
+      }
+      .org {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .hrow.wide .org {
+        font-size: 20px;
+      }
+      .role {
+        font-size: 16px;
+        color: var(--body);
+      }
+      .role.muted {
+        font-size: 15px;
+        color: var(--muted);
+      }
+      .htext {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--body);
+      }
+      .bullets {
+        margin: 0;
+        padding: 0;
+        list-style: none;
+        display: flex;
+        flex-direction: column;
+        gap: 8px;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+      .bullets li::before {
+        content: '— ';
+      }
+      .two {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 64px;
+      }
+      .two.wide-left {
+        grid-template-columns: 2fr 1fr;
+      }
+      .block {
+        display: flex;
+        flex-direction: column;
+        gap: 14px;
+        border-top: 2px solid var(--ink);
+        padding-top: 18px;
+      }
+      .kicker {
+        font-size: 13px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: var(--muted);
+      }
+      .kit-lines {
+        margin: 0;
+        font-size: 22px;
+        font-weight: 300;
+        line-height: 1.5;
+      }
+      .proj-name {
+        font-size: 22px;
+        font-weight: 600;
+      }
+      .wide-left .proj-name {
+        font-size: 26px;
+      }
+      .proj-text {
+        margin: 0;
+        font-size: 16px;
+        line-height: 1.55;
+        color: var(--body);
+      }
+      .links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 20px;
+        font-size: 15px;
+      }
+      .links a {
+        padding: 10px 0;
+      }
+      .block.small p {
+        margin: 0;
+        font-size: 15px;
+        line-height: 1.55;
+      }
+
+      /* ---------- Footer ---------- */
+      .footer {
+        margin-top: 112px;
+        background: var(--ink);
+        color: #f4f4f4;
+      }
+      .foot {
+        display: flex;
+        justify-content: space-between;
+        align-items: flex-end;
+        flex-wrap: wrap;
+        gap: 32px;
+        padding-top: 72px;
+        padding-bottom: 72px;
+      }
+      .foot-main {
+        display: flex;
+        flex-direction: column;
+        gap: 16px;
+      }
+      .kicker.light {
+        color: #f4f4f4;
+        opacity: 0.7;
+      }
+      .foot-mail {
+        color: #f4f4f4;
+        font-size: clamp(24px, 3.4vw, 48px);
+        font-weight: 200;
+        text-decoration: none;
+      }
+      .foot-links {
+        display: flex;
+        flex-wrap: wrap;
+        gap: 28px;
+        font-size: 16px;
+      }
+      .foot-links a {
+        color: #f4f4f4;
+        padding: 10px 0;
+      }
+      .footer a:hover {
+        color: #9cc2ff;
+      }
+
+      /* ---------- Stacked layout (tablet and phone) ---------- */
+      @media (max-width: 1099px) {
+        :root {
+          --pad: 32px;
+        }
+        .desk {
+          display: none !important;
+        }
+        .mob {
+          display: block;
+        }
+        .stage {
+          height: 900px;
+        }
+        .photo {
+          top: auto;
+          bottom: 0;
+          height: 720px;
+          /* Fade top and sides so the photo's own vignette melts into the stage gradient. */
+          -webkit-mask-image:
+            linear-gradient(180deg, transparent 0%, #000 18%),
+            linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+          -webkit-mask-composite: source-in;
+          mask-image:
+            linear-gradient(180deg, transparent 0%, #000 18%),
+            linear-gradient(90deg, transparent 0%, #000 20%, #000 80%, transparent 100%);
+          mask-composite: intersect;
+        }
+        [data-mode='sport'] .stage {
+          height: 560px;
+        }
+        [data-mode='sport'] .photo {
+          top: auto;
+          bottom: -40px;
+          left: auto;
+          right: -20%;
+          transform: none;
+          -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 22%);
+          mask-image: linear-gradient(90deg, transparent 0%, #000 22%);
+        }
+        .nav {
+          padding: 6px var(--pad);
+        }
+        .nav-links {
+          display: none;
+        }
+        .nav-right {
+          gap: 16px;
+        }
+        .mode {
+          padding-left: 14px;
+          font-size: 10px;
+        }
+        .lang {
+          font-size: 10px;
+        }
+        .hero-title {
+          top: 96px;
+          gap: 10px;
+        }
+        .eyebrow {
+          font-size: 12px;
+        }
+        .tagline {
+          font-size: 18px;
+        }
+        .sub {
+          font-size: 13px;
+        }
+        .sport-left {
+          top: 88px;
+          width: min(48%, 280px);
+          gap: 12px;
+        }
+        .sport-left .eyebrow {
+          font-size: 11px;
+        }
+        .sport-name {
+          font-size: 38px;
+        }
+        .sport-tag {
+          font-size: 14px;
+          line-height: 1.4;
+        }
+        .sport-grid {
+          top: auto;
+          bottom: 24px;
+          left: var(--pad);
+          right: auto;
+          width: 200px;
+          gap: 12px;
+          text-align: left;
+        }
+        .mini:nth-child(n + 5) {
+          display: none;
+        }
+        .mini-big {
+          font-size: 26px;
+        }
+        .mob-grid {
+          display: grid;
+          grid-template-columns: repeat(3, minmax(0, 1fr));
+          gap: 20px 16px;
+          padding-top: 28px;
+        }
+        .mcell {
+          display: flex;
+          flex-direction: column;
+          gap: 2px;
+          border-top: 1px solid #b5b5b5;
+          padding-top: 10px;
+        }
+        .mcell-big {
+          font-size: 34px;
+          font-weight: 200;
+        }
+        .mcell-label {
+          font-size: 13px;
+          color: #4a4a4a;
+        }
+        .mob-stats .cta {
+          flex-direction: column;
+          gap: 10px;
+          margin-top: 28px;
+        }
+        .mob-stats .btn {
+          width: 100%;
+        }
+        .mob-stats .btn-ghost {
+          border: 1px solid var(--line);
+        }
+        .mob-intro .wrap {
+          display: flex;
+          flex-direction: column;
+          gap: 16px;
+          padding-top: 24px;
+        }
+        .sec {
+          padding-top: 64px;
+        }
+        .sec-head {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 4px;
+          padding-bottom: 12px;
+          margin-bottom: 20px;
+        }
+        .sec-head h2 {
+          font-size: 28px;
+        }
+        .sec-note {
+          text-align: left;
+          font-size: 13px;
+        }
+        .grid4 {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+          gap: 24px 16px;
+        }
+        .grid4.tgrid {
+          grid-template-columns: 1fr;
+          gap: 18px;
+        }
+        .spec {
+          gap: 6px;
+        }
+        .spec-big {
+          font-size: 32px;
+        }
+        .unit {
+          font-size: 14px;
+        }
+        .spec-note {
+          font-size: 13px;
+        }
+        .tcell,
+        .kcell {
+          gap: 4px;
+        }
+        .tcell-big {
+          font-size: 24px;
+        }
+        .tcell-note,
+        .kcell p {
+          font-size: 14px;
+        }
+        .hrow,
+        .hrow.wide {
+          grid-template-columns: 1fr;
+          row-gap: 6px;
+          padding: 18px 0;
+        }
+        .dates {
+          font-size: 13px;
+        }
+        .org,
+        .hrow.wide .org {
+          font-size: 18px;
+        }
+        .htext {
+          font-size: 15px;
+        }
+        .bullets {
+          font-size: 14px;
+          gap: 6px;
+        }
+        .two,
+        .two.wide-left {
+          grid-template-columns: 1fr;
+          gap: 32px;
+        }
+        .block {
+          gap: 10px;
+          padding-top: 14px;
+        }
+        .kicker {
+          font-size: 12px;
+        }
+        .kit-lines {
+          font-size: 17px;
+          line-height: 1.55;
+        }
+        .proj-name,
+        .wide-left .proj-name {
+          font-size: 18px;
+        }
+        .proj-text {
+          font-size: 15px;
+        }
+        .footer {
+          margin-top: 72px;
+        }
+        .foot {
+          flex-direction: column;
+          align-items: flex-start;
+          gap: 20px;
+          padding-top: 48px;
+          padding-bottom: 40px;
+        }
+        .foot-links {
+          gap: 24px;
+          font-size: 15px;
+        }
+      }
+      @media (max-width: 599px) {
+        :root {
+          --pad: 16px;
+        }
+        .stage {
+          height: 820px;
+        }
+        .photo {
+          height: 660px;
+        }
+        [data-mode='sport'] .stage {
+          height: 520px;
+        }
+        [data-mode='sport'] .photo {
+          bottom: 10px;
+          right: -170px;
+        }
+        .hero-title {
+          top: 88px;
+        }
+        h1 {
+          font-size: 46px;
+        }
+        .tagline {
+          font-size: 17px;
+          line-height: 1.35;
+        }
+        .sport-name {
+          font-size: 34px;
+        }
+        .mob-grid {
+          grid-template-columns: repeat(2, minmax(0, 1fr));
+        }
+      }
+
+
+      /* Local refinement: reuse the original CTA in the mobile hero. */
+      .mobile-hero-actions {
+        display: none;
+      }
+      @media (max-width: 1099px) {
+        .mobile-hero-actions {
+          display: flex;
+          justify-content: center;
+          width: min(100%, 560px);
+          gap: 12px;
+          margin-top: 12px;
+        }
+        .mobile-hero-actions .btn {
+          flex: 1 1 0;
+          width: auto;
+          min-height: 52px;
+          padding: 8px 12px;
+          font-size: 14px;
+        }
+        .mcell-big[data-i18n="hero.r2.big"] {
+          font-size: clamp(27px, 5vw, 34px);
+        }
+      }
+
+      /* ---------- Print: two designed A4 sheets ---------- */
+      /* ?print=1 previews the sheets on screen; build-pdf.sh prints that URL. */
+      #print {
+        display: none;
+      }
+      html.print-mode body {
+        background: #d9d9d9;
+      }
+      html.print-mode #screen,
+      html.print-mode .skip {
+        display: none;
+      }
+      html.print-mode #print {
+        display: flex;
+        flex-direction: column;
+        align-items: center;
+        gap: 24px;
+        padding: 24px 0;
+      }
+      @page {
+        size: A4;
+        margin: 0;
+      }
+      @media print {
+        html,
+        body,
+        html.print-mode body {
+          background: #fff;
+        }
+        #screen,
+        .skip {
+          display: none !important;
+        }
+        #print,
+        html.print-mode #print {
+          display: block;
+          padding: 0;
+        }
+        .sheet {
+          box-shadow: none !important;
+          break-after: page;
+        }
+        .sheet:last-child {
+          break-after: auto;
+        }
+      }
+      .sheet {
+        position: relative;
+        width: 210mm;
+        height: 297mm;
+        overflow: hidden;
+        background: #fff;
+        color: var(--ink);
+        box-shadow: 0 2px 14px rgba(0, 0, 0, 0.18);
+        -webkit-print-color-adjust: exact;
+        print-color-adjust: exact;
+      }
+      .sheet a {
+        text-decoration: none;
+      }
+      .p-band {
+        position: relative;
+        height: 400px;
+        overflow: hidden;
+        background: linear-gradient(180deg, #969696 0%, #a8a8a8 30%, #b3b3b3 55%, #bcbcbc 80%, #cdcdcd 100%);
+      }
+      .p-photo {
+        position: absolute;
+        left: 323px;
+        top: -262px;
+        width: 460px;
+        height: 690px;
+        object-fit: cover;
+        -webkit-mask-image: linear-gradient(90deg, transparent 0%, #000 28%, #000 88%, transparent 100%);
+        mask-image: linear-gradient(90deg, transparent 0%, #000 28%, #000 88%, transparent 100%);
+      }
+      .p-hero {
+        position: absolute;
+        left: 48px;
+        top: 44px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 10px;
+      }
+      .p-eyebrow {
+        font-size: 11px;
+        font-weight: 600;
+        letter-spacing: 0.3em;
+        text-transform: uppercase;
+      }
+      .p-name {
+        font-size: 42px;
+        line-height: 1;
+        font-weight: 300;
+        letter-spacing: -0.02em;
+      }
+      .p-tag {
+        font-size: 14px;
+        line-height: 1.4;
+        font-weight: 500;
+      }
+      .p-contacts {
+        position: absolute;
+        left: 48px;
+        bottom: 32px;
+        width: 300px;
+        display: flex;
+        flex-direction: column;
+        gap: 4px;
+        font-size: 12px;
+        line-height: 1.45;
+      }
+      .p-contacts .strong {
+        font-weight: 600;
+      }
+      .p-body {
+        padding: 24px 48px 0;
+        display: flex;
+        flex-direction: column;
+        gap: 20px;
+      }
+      .p-body2 {
+        padding-top: 48px;
+        gap: 22px;
+      }
+      .p-body section {
+        display: flex;
+        flex-direction: column;
+        gap: 12px;
+      }
+      .p-profile {
+        margin: 0;
+        font-size: 13px;
+        line-height: 1.55;
+      }
+      .p-head {
+        display: flex;
+        justify-content: space-between;
+        align-items: baseline;
+        border-bottom: 1px solid #bdbdbd;
+        padding-bottom: 6px;
+        font-size: 12px;
+        color: #555;
+      }
+      .p-head h2 {
+        margin: 0;
+        font-size: 18px;
+        font-weight: 300;
+        color: var(--ink);
+      }
+      .p-specs {
+        display: grid;
+        grid-template-columns: repeat(4, minmax(0, 1fr));
+        gap: 14px 20px;
+      }
+      .p-big {
+        font-size: 26px;
+        font-weight: 200;
+        line-height: 1.1;
+      }
+      .p-unit {
+        font-size: 12px;
+        font-weight: 600;
+      }
+      .p-note {
+        font-size: 12px;
+        line-height: 1.35;
+        color: #444;
+      }
+      .p-role {
+        display: grid;
+        grid-template-columns: 118px 1fr;
+        column-gap: 20px;
+      }
+      .p-dates {
+        font-size: 12px;
+        line-height: 1.5;
+        color: #555;
+      }
+      .p-title {
+        font-size: 14px;
+        font-weight: 700;
+        margin-bottom: 3px;
+      }
+      .p-li {
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .p-muted {
+        color: #444;
+      }
+      .p-kit {
+        display: grid;
+        grid-template-columns: repeat(2, minmax(0, 1fr));
+        gap: 10px 28px;
+        font-size: 12px;
+        line-height: 1.5;
+      }
+      .p-misc {
+        display: grid !important;
+        grid-template-columns: repeat(3, minmax(0, 1fr));
+        column-gap: 24px;
+        font-size: 12px;
+        line-height: 1.5;
+        border-top: 1px solid #bdbdbd;
+        padding-top: 10px;
+      }
+      .p-kicker {
+        font-size: 11px;
+        letter-spacing: 0.14em;
+        text-transform: uppercase;
+        color: #555;
+        margin-bottom: 2px;
+      }
+      .p-foot {
+        position: absolute;
+        left: 48px;
+        right: 48px;
+        bottom: 28px;
+        display: flex;
+        justify-content: space-between;
+        font-size: 12px;
+        color: #555;
+        border-top: 1px solid #d6d6d6;
+        padding-top: 8px;
+      }
+
+      @media (prefers-reduced-motion: reduce) {
+        html {
+          scroll-behavior: auto;
+        }
+        *,
+        *::before,
+        *::after {
+          transition: none !important;
+          animation: none !important;
+        }
+      }
+
+    </style>
+  </head>
+  <body>
+    <a class="skip" href="#specs" data-i18n="skip">Skip to content</a>
+    <div id="screen">
+<section class="hero" id="top"><div class="stage"><img class="photo" src="../docs/assets/portrait.jpg" alt="Gregory Agapov" data-i18n-attr="alt:hero.name" width="724" height="1086" fetchpriority="high"><nav class="nav" data-i18n-attr="aria-label:nav.label" aria-label="Primary"><a class="brand" href="#top" data-i18n="nav.brand">Agapov</a><div class="nav-right"><div class="nav-links"><a href="#specs" data-i18n="nav.specs">Specs</a><a href="#history" data-i18n="nav.experience">Experience</a><a href="#kit" class="s-link" data-i18n="nav.kit">Equipment</a><a href="#contact" data-i18n="nav.contact">Contact</a></div><div class="lang" role="group" data-i18n-attr="aria-label:nav.lang" aria-label="Language"><button type="button" class="lang-btn" data-lang="ru" aria-pressed="false">RU</button><button type="button" class="lang-btn" data-lang="en" aria-pressed="true">EN</button></div><div class="mode" role="group" data-i18n-attr="aria-label:nav.mode" aria-label="Viewing mode"><button type="button" class="mode-btn" data-mode-btn="comfort" aria-pressed="true" data-i18n="mode.comfort">OVERVIEW</button><button type="button" class="mode-btn" data-mode-btn="sport" aria-pressed="false" data-i18n="mode.sport">FULL</button></div></div></nav><div class="h-c hero-title"><div class="eyebrow" data-i18n="hero.role">Team Lead</div><h1 data-i18n="hero.name">Gregory Agapov</h1><p class="tagline" data-i18n="hero.tagline">Calm under pressure. Uncompromising on results.</p><p class="sub" data-i18n="hero.sub">Donations product team · VK · Moscow</p><div class="cta mobile-hero-actions"><a class="btn btn-primary" href="https://t.me/xawkay" target="_blank" rel="noopener noreferrer"><span data-i18n="cta.telegram">Message on Telegram</span></a><a class="btn btn-ghost" data-pdf href="../docs/dist/Gregory_Agapov_Resume.en.pdf" download><span data-i18n="cta.pdf">Resume PDF</span></a></div></div><div class="h-c hero-col left desk"><div class="hc"><span class="hc-label" data-i18n="hero.l0.label">Years engineering · leading teams</span><span class="hc-big" data-i18n="hero.l0.big">15+ / 5+</span></div><div class="hc"><span class="hc-label" data-i18n="hero.l1.label">Direct reports now</span><span class="hc-big" data-i18n="hero.l1.big">8</span><span class="hc-note" data-i18n="hero.l1.note">backend, frontend, iOS, Android, QA</span></div><div class="hc"><span class="hc-label" data-i18n="hero.l2.label">Teams in one plan</span><span class="hc-big" data-i18n="hero.l2.big">3</span><span class="hc-note" data-i18n="hero.l2.note">+3 backend engineers from an adjacent team</span></div></div><div class="h-c hero-col right desk"><div class="hc"><span class="hc-label" data-i18n="hero.r0.label">Donations turnover growth</span><span class="hc-big" data-i18n="hero.r0.big">+103%</span><span class="hc-note" data-i18n="hero.r0.note">VK profiles, Apr–May 2026</span></div><div class="hc"><span class="hc-label" data-i18n="hero.r1.label">Platform users</span><span class="hc-big" data-i18n="hero.r1.big">60K</span><span class="hc-note" data-i18n="hero.r1.note">Performance Review at T-Bank</span></div><div class="hc"><span class="hc-label" data-i18n="hero.r2.label">Goods limit</span><span class="hc-big" data-i18n="hero.r2.big">20K → 1M+</span><span class="hc-note" data-i18n="hero.r2.note">VK Communities, 2025</span></div></div><div class="cta h-c hero-cta desk"><a class="btn btn-primary" href="https://t.me/xawkay" target="_blank" rel="noopener noreferrer"><span data-i18n="cta.telegram">Message on Telegram</span></a><a class="btn btn-ghost" data-pdf href="../docs/dist/Gregory_Agapov_Resume.en.pdf" download><span data-i18n="cta.pdf">Resume PDF</span></a></div><div class="h-s sport-left"><div class="eyebrow" data-i18n="hero.role">Team Lead</div><p class="sport-name" data-i18n="hero.name">Gregory Agapov</p><p class="sport-tag" data-i18n="hero.tagline">Calm under pressure. Uncompromising on results.</p><p class="sport-para desk" data-i18n="sport.para">15+ years in engineering, 5+ leading teams of 6–8. I own the backlog, planning and releases, and still design architecture and write optimization code myself.</p><div class="cta desk"><a class="btn btn-primary" href="https://t.me/xawkay" target="_blank" rel="noopener noreferrer"><span data-i18n="cta.telegram">Message on Telegram</span></a><a class="btn btn-ghost" data-pdf href="../docs/dist/Gregory_Agapov_Resume.en.pdf" download><span data-i18n="cta.pdf">Resume PDF</span></a></div></div><div class="h-s sport-grid"><div class="mini"><span class="mini-big">15+</span><span class="mini-label" data-i18n="sport.mini.0">years engineering</span></div><div class="mini"><span class="mini-big">5+</span><span class="mini-label" data-i18n="sport.mini.1">years leading</span></div><div class="mini"><span class="mini-big">8</span><span class="mini-label" data-i18n="sport.mini.2">direct reports now</span></div><div class="mini"><span class="mini-big">3</span><span class="mini-label" data-i18n="sport.mini.3">teams in one plan</span></div><div class="mini"><span class="mini-big">+103%</span><span class="mini-label" data-i18n="sport.mini.4">Donations turnover</span></div><div class="mini"><span class="mini-big">60K</span><span class="mini-label" data-i18n="sport.mini.5">Performance Review users</span></div></div></div></section>
+<section class="c-only mob mob-stats"><div class="wrap"><div class="mob-grid"><div class="mcell"><span class="mcell-big" data-i18n="hero.l0.big">15+ / 5+</span><span class="mcell-label" data-i18n="hero.l0.label">Years engineering · leading teams</span></div><div class="mcell"><span class="mcell-big" data-i18n="hero.l1.big">8</span><span class="mcell-label" data-i18n="hero.l1.label">Direct reports now</span></div><div class="mcell"><span class="mcell-big" data-i18n="hero.l2.big">3</span><span class="mcell-label" data-i18n="hero.l2.label">Teams in one plan</span></div><div class="mcell"><span class="mcell-big" data-i18n="hero.r0.big">+103%</span><span class="mcell-label" data-i18n="hero.r0.label">Donations turnover growth</span></div><div class="mcell"><span class="mcell-big" data-i18n="hero.r1.big">60K</span><span class="mcell-label" data-i18n="hero.r1.label">Platform users</span></div><div class="mcell"><span class="mcell-big" data-i18n="hero.r2.big">20K → 1M+</span><span class="mcell-label" data-i18n="hero.r2.label">Goods limit</span></div></div></div></section>
+<section class="s-only mob mob-intro"><div class="wrap"><p class="sport-para" data-i18n="sport.para">15+ years in engineering, 5+ leading teams of 6–8. I own the backlog, planning and releases, and still design architecture and write optimization code myself.</p><div class="cta "><a class="btn btn-primary" href="https://t.me/xawkay" target="_blank" rel="noopener noreferrer"><span data-i18n="cta.telegram">Message on Telegram</span></a><a class="btn btn-ghost" data-pdf href="../docs/dist/Gregory_Agapov_Resume.en.pdf" download><span data-i18n="cta.pdf">Resume PDF</span></a></div></div></section>
+      <main id="main">
+<section id="specs" class="sec"><div class="wrap"><div class="c-only swap"><div class="sec-head"><h2 data-i18n="specs.title">Technical specifications</h2><span class="sec-note" data-i18n="specs.note">Donations in VK profiles, Apr–May 2026 · VK Social Commerce, 2025</span></div><div class="grid4"><div class="spec"><span class="spec-big"><span data-i18n="specs.c.0.big">+103</span> <span class="unit" data-i18n="specs.c.0.unit">%</span></span><span class="spec-note" data-i18n="specs.c.0.note">Donations turnover, ~235K → ~478K RUB</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.c.1.big">+179</span> <span class="unit" data-i18n="specs.c.1.unit">%</span></span><span class="spec-note" data-i18n="specs.c.1.note">donations count, 430 → 1,200</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.c.2.big">30 → 52</span> <span class="unit" data-i18n="specs.c.2.unit">%</span></span><span class="spec-note" data-i18n="specs.c.2.note">connection-to-monetization</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.c.3.big">20K → 1M+</span></span><span class="spec-note" data-i18n="specs.c.3.note">goods in Communities, 3 teams</span></div></div></div><div class="s-only swap"><div class="sec-head"><h2 data-i18n="specs.titleFull">Technical specifications · full</h2><span class="sec-note" data-i18n="specs.noteFull">Donations: Apr–May 2026 · Social Commerce: 2025</span></div><div class="grid4 rows"><div class="spec"><span class="spec-big"><span data-i18n="specs.s.0.big">+103</span> <span class="unit" data-i18n="specs.s.0.unit">%</span></span><span class="spec-note" data-i18n="specs.s.0.note">Donations turnover, ~235K → ~478K RUB</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.s.1.big">+179</span> <span class="unit" data-i18n="specs.s.1.unit">%</span></span><span class="spec-note" data-i18n="specs.s.1.note">donations count, 430 → 1,200</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.s.2.big">+117</span> <span class="unit" data-i18n="specs.s.2.unit">%</span></span><span class="spec-note" data-i18n="specs.s.2.note">monetizing profiles, 240 → 521</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.s.3.big">30 → 52</span> <span class="unit" data-i18n="specs.s.3.unit">%</span></span><span class="spec-note" data-i18n="specs.s.3.note">connection-to-monetization</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.s.4.big">20K → 1M+</span></span><span class="spec-note" data-i18n="specs.s.4.note">goods limit in Communities</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.s.5.big">~3</span> <span class="unit" data-i18n="specs.s.5.unit">M</span></span><span class="spec-note" data-i18n="specs.s.5.note">products from 40 Ozon sellers, ~1M offers</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.s.6.big">35 → 64</span> <span class="unit" data-i18n="specs.s.6.unit">%</span></span><span class="spec-note" data-i18n="specs.s.6.note">VKUI coverage on iOS; Android — 84%</span></div><div class="spec"><span class="spec-big"><span data-i18n="specs.s.7.big">+3,276</span></span><span class="spec-note" data-i18n="specs.s.7.note">creators with Donations, 3 weeks after rebrand</span></div></div></div></div></section>
+<section class="sec s-only swap"><div class="wrap"><div class="sec-head"><h2 data-i18n="lead.title">How I run a team</h2><span class="sec-note" data-i18n="lead.note">Backlog, planning and process are mine in every Team Lead role</span></div><div class="grid4 tgrid"><div class="tcell"><span class="tcell-big" data-i18n="lead.0.big">Backlog</span><span class="tcell-note" data-i18n="lead.0.note">with the product manager or alone; fully mine in Social Commerce</span></div><div class="tcell"><span class="tcell-big" data-i18n="lead.1.big">Quarter · sprint · release</span><span class="tcell-note" data-i18n="lead.1.note">planning levels; OKR at T-Bank</span></div><div class="tcell"><span class="tcell-big" data-i18n="lead.2.big">Scrum → Scrumban</span><span class="tcell-note" data-i18n="lead.2.note">Scrum at T-Bank, Scrumban at VK</span></div><div class="tcell"><span class="tcell-big" data-i18n="lead.3.big">People growth</span><span class="tcell-note" data-i18n="lead.3.note">mentored 3 engineers; pilot mentees moved into full-time roles</span></div></div></div></section>
+<section class="sec s-only swap"><div class="wrap"><div class="sec-head"><h2 data-i18n="hood.title">Under the hood</h2><span class="sec-note" data-i18n="hood.note">Technical depth, not just coordination</span></div><div class="grid4 tgrid"><div class="tcell"><span class="tcell-big" data-i18n="hood.0.big">RPS · CPU · RAM</span><span class="tcell-note" data-i18n="hood.0.note">the metrics I use to write Donations microservice optimization code myself</span></div><div class="tcell"><span class="tcell-big" data-i18n="hood.1.big">DDD</span><span class="tcell-note" data-i18n="hood.1.note">mentoring platform architecture — fast product iterations</span></div><div class="tcell"><span class="tcell-big" data-i18n="hood.2.big">Migrations</span><span class="tcell-note" data-i18n="hood.2.note">monolith → microservices; feed and recommendations moved before the Hadoop shutdown</span></div><div class="tcell"><span class="tcell-big" data-i18n="hood.3.big">3 platforms</span><span class="tcell-note" data-i18n="hood.3.note">iOS, Android and web in one UI layer: VKUI and SPA</span></div></div></div></section>
+<section id="history" class="sec"><div class="wrap"><div class="sec-head"><h2 data-i18n="history.title">Experience</h2><a href="#history" class="sec-note c-inline to-sport" data-go-sport><span data-i18n="history.more">Full experience</span></a></div><div class="c-only swap"><div class="hrow"><span class="dates" data-i18n="history.c.0.dates">01.2026 — present</span><div><div class="org" data-i18n="history.c.0.org">VK</div><div class="role" data-i18n="history.c.0.role">Team Lead, Donations product team</div></div><p class="htext" data-i18n="history.c.0.text">8 direct reports. Rebrand and launch in VK profiles within a quarter; turnover +103% in two months.</p></div><div class="hrow"><span class="dates" data-i18n="history.c.1.dates">04.2025 — 12.2025</span><div><div class="org" data-i18n="history.c.1.org">VK</div><div class="role" data-i18n="history.c.1.role">Team Lead, Social Commerce Platform</div></div><p class="htext" data-i18n="history.c.1.text">Goods limit in Communities: 20K → millions across 3 teams. Recommendation system migrated before the Hadoop shutdown.</p></div><div class="hrow"><span class="dates" data-i18n="history.c.2.dates">04.2021 — 03.2025</span><div><div class="org" data-i18n="history.c.2.org">T-Bank (Tinkoff)</div><div class="role" data-i18n="history.c.2.role">Team Lead: Performance Review, Mentoring</div></div><p class="htext" data-i18n="history.c.2.text">Reset of a platform serving 60K employees; the company&#x27;s first mentoring platform MVP shipped on schedule.</p></div><div class="hrow"><span class="dates" data-i18n="history.c.3.dates">2010 — 2021</span><div><div class="org" data-i18n="history.c.3.org">T-Bank, Neotech, CINIMEX, AISA</div><div class="role" data-i18n="history.c.3.role">Middle → Senior Developer</div></div><p class="htext" data-i18n="history.c.3.text">.NET and Angular; GE Smallworld GIS for MTS and MGTS; automation for Russian Railways.</p></div></div><div class="s-only swap"><div class="hrow wide"><span class="dates" data-i18n="history.s.0.dates">01.2026 — present</span><div><div class="org" data-i18n="history.s.0.role">Team Lead, Donations</div><div class="role muted" data-i18n="history.s.0.org">VK · Communities business unit</div></div><ul class="bullets"><li data-i18n="history.s.0.b0">8 direct reports: 3 backend, 2 frontend, iOS, Android, QA</li><li data-i18n="history.s.0.b1">Backlog, quarterly, sprint and release planning under Scrumban</li><li data-i18n="history.s.0.b2">Design the architecture and write optimization code driven by RPS, CPU and memory</li><li data-i18n="history.s.0.b3">Rebrand and launch of Donations in VK profiles within one quarter</li><li data-i18n="history.s.0.b4">Aligned product backend with the migration team: monolith → microservices</li><li data-i18n="history.s.0.b5">Apr–May 2026: turnover +103%, donations +179%, monetizing profiles +117%</li></ul></div><div class="hrow wide"><span class="dates" data-i18n="history.s.1.dates">04.2025 — 12.2025</span><div><div class="org" data-i18n="history.s.1.role">Team Lead, Social Commerce</div><div class="role muted" data-i18n="history.s.1.org">VK · platform team</div></div><ul class="bullets"><li data-i18n="history.s.1.b0">8 direct reports; goods-scaling program across 3 teams</li><li data-i18n="history.s.1.b1">Owned the backlog alone, no product manager; quarterly, sprint and release planning under Scrumban</li><li data-i18n="history.s.1.b2">Load testing and rollout: limit 20K → millions</li><li data-i18n="history.s.1.b3">40-seller Ozon integration: ~3M products, ~1M offers</li><li data-i18n="history.s.1.b4">Recommendation migration by the Hadoop shutdown; incident handled without losing a significant share of traffic</li></ul></div><div class="hrow wide"><span class="dates" data-i18n="history.s.2.dates">12.2022 — 03.2025</span><div><div class="org" data-i18n="history.s.2.role">Team Lead, Mentoring</div><div class="role muted" data-i18n="history.s.2.org">T-Bank</div></div><ul class="bullets"><li data-i18n="history.s.2.b0">Cross-functional team of 6: backend, frontend, QA, design, analytics</li><li data-i18n="history.s.2.b1">DDD architecture; backlog with the product manager, OKR and releases under Scrum</li><li data-i18n="history.s.2.b2">MVP of the company&#x27;s first mentoring platform — on schedule</li><li data-i18n="history.s.2.b3">Pilot staffed entirely by program participants who later moved into full-time roles</li></ul></div><div class="hrow wide"><span class="dates" data-i18n="history.s.3.dates">04.2021 — 12.2022</span><div><div class="org" data-i18n="history.s.3.role">Team Lead, Performance Review</div><div class="role muted" data-i18n="history.s.3.org">T-Bank</div></div><ul class="bullets"><li data-i18n="history.s.3.b0">Platform for 60K employees, two high-load windows a year; one-year stabilization plan aligned with the business</li><li data-i18n="history.s.3.b1">Built and grew a 7-person team</li><li data-i18n="history.s.3.b2">Architecture and technical decisions; backlog, OKR and releases under Scrum</li></ul></div><div class="hrow wide"><span class="dates" data-i18n="history.s.4.dates">04.2019 — 04.2021</span><div><div class="org" data-i18n="history.s.4.role">Middle → Senior Developer</div><div class="role muted" data-i18n="history.s.4.org">T-Bank</div></div><ul class="bullets"><li data-i18n="history.s.4.b0">Designed and launched the org-structure service from scratch: .NET, Angular, Postgres, microservices</li><li data-i18n="history.s.4.b1">Performance Review, in-house task tracker and feedback systems</li></ul></div><div class="hrow wide"><span class="dates" data-i18n="history.s.5.dates">12.2013 — 03.2019</span><div><div class="org" data-i18n="history.s.5.role">Senior Developer, GIS</div><div class="role muted" data-i18n="history.s.5.org">Neotech (Paravan 2000)</div></div><ul class="bullets"><li data-i18n="history.s.5.b0">GE Smallworld GIS for MTS, MGTS and TAT Telecom</li><li data-i18n="history.s.5.b1">Reverse engineered client systems without source-code access</li><li data-i18n="history.s.5.b2">GE Smallworld GIS Certified Developer</li></ul></div><div class="hrow wide"><span class="dates" data-i18n="history.s.6.dates">11.2010 — 01.2013</span><div><div class="org" data-i18n="history.s.6.role">Middle Developer</div><div class="role muted" data-i18n="history.s.6.org">CINIMEX · AISA IT-Service</div></div><ul class="bullets"><li data-i18n="history.s.6.b0">Terminals and digital forms for Russian Railways machinists; Java EE, IBM Db2</li><li data-i18n="history.s.6.b1">IBM WebSphere, IBM Message Broker, ESQL</li></ul></div></div></div></section>
+<section class="sec c-only swap"><div class="wrap two"><div class="block"><span class="kicker" data-i18n="kit.title">Equipment</span><p class="kit-lines"><span data-i18n="kit.c.0">Backlog · planning · releases — Scrum / Scrumban</span><br><span data-i18n="kit.c.1">Architecture and RPS / CPU / RAM optimization</span><br><span data-i18n="kit.c.2">PHP · Go · React · Postgres — now</span><br><span data-i18n="kit.c.3">.NET · C# · Angular · Kubernetes — before</span><br><span data-i18n="kit.c.4">Microservices · DDD · Kafka · RabbitMQ</span></p></div><div class="block"><span class="kicker" data-i18n="project.title">Side project</span><div class="proj-name">Dashboard &amp; Statusline for Claude Code</div><p class="proj-text" data-i18n="project.short">Open-source VS Code extension, ~20,000 lines with zero runtime dependencies.</p><div class="links"><a href="https://marketplace.visualstudio.com/items?itemName=grgrwlkr.claude-dashboard">Marketplace</a><a href="https://open-vsx.org/extension/grgrwlkr/claude-dashboard">Open VSX</a><a href="https://github.com/grgrwlkr/claude-dashboard-vscode">GitHub</a></div></div></div></section>
+<section id="kit" class="sec s-only swap"><div class="wrap"><div class="sec-head"><h2 data-i18n="kit.title">Equipment</h2></div><div class="grid4 tgrid"><div class="kcell"><span class="kicker" data-i18n="kit.s.0.label">Leadership</span><p data-i18n="kit.s.0.text">Team leadership, engineer growth, mentoring, stakeholder management, roadmap planning</p></div><div class="kcell"><span class="kicker" data-i18n="kit.s.1.label">Architecture</span><p data-i18n="kit.s.1.text">Monolith decomposition, microservices, DDD, CQRS, API design</p></div><div class="kcell"><span class="kicker" data-i18n="kit.s.2.label">Stack VK · T-Bank</span><p data-i18n="kit.s.2.text">PHP, Go, React, Postgres · .NET, C#, Angular, TypeScript, Docker, Kubernetes, CI/CD</p></div><div class="kcell"><span class="kicker" data-i18n="kit.s.3.label">Messaging</span><p data-i18n="kit.s.3.text">Kafka, RabbitMQ</p></div></div></div></section>
+<section class="sec s-only swap"><div class="wrap two wide-left"><div class="block"><span class="kicker" data-i18n="project.titleSince">Side project · since 08.2026</span><div class="proj-name">Dashboard &amp; Statusline for Claude Code</div><p class="proj-text" data-i18n="project.long">Open-source VS Code extension (MIT, non-commercial): a 23-tab dashboard over every transcript on the machine — spend, subagents, workflow runs, usage limits — and a status bar built from a template with 45 placeholders. ~20,000 lines of JavaScript in 33 modules, zero runtime dependencies, no telemetry.</p><div class="links"><a href="https://marketplace.visualstudio.com/items?itemName=grgrwlkr.claude-dashboard">Marketplace</a><a href="https://open-vsx.org/extension/grgrwlkr/claude-dashboard">Open VSX</a><a href="https://github.com/grgrwlkr/claude-dashboard-vscode">GitHub</a></div></div><div class="block small"><span class="kicker" data-i18n="edu.title">Education and more</span><p data-i18n="edu.degree">Programming Technician (secondary vocational), International College of Business and Design at MTUCI, 2006–2010</p><p>General Electric Smallworld GIS Certified Developer</p><p data-i18n="edu.langs">Russian — native · English — B2</p></div></div></section>
+      </main>
+<footer id="contact" class="footer"><div class="wrap foot"><div class="foot-main"><span class="kicker light" data-i18n="footer.kicker">The test drive is a conversation</span><a class="foot-mail" href="mailto:gregoryagapov@icloud.com">gregoryagapov@icloud.com</a></div><div class="foot-links"><a href="https://t.me/xawkay" target="_blank" rel="noopener noreferrer">Telegram</a><a href="https://github.com/grgrwlkr">GitHub</a><a href="https://www.linkedin.com/in/gregory-agapov-24b13221">LinkedIn</a><a data-pdf href="../docs/dist/Gregory_Agapov_Resume.en.pdf" download>PDF</a></div></div></footer>
+      <p class="sr-only" id="modeStatus" role="status" aria-live="polite"></p>
+    </div>
+    <div id="print" aria-hidden="true">
+<article class="sheet"><div class="p-band"><img src="../docs/assets/portrait.jpg" alt="" class="p-photo"><div class="p-hero"><div class="p-eyebrow" data-i18n="print.role">Team Lead</div><div class="p-name"><span data-i18n="print.first">Gregory</span><br><span data-i18n="print.last">Agapov</span></div><div class="p-tag"><span data-i18n="print.tag1">Calm under pressure.</span><br><span data-i18n="print.tag2">Uncompromising on results.</span></div></div><div class="p-contacts"><span data-i18n="print.city">Moscow, Russia</span><a href="https://t.me/xawkay" class="strong">t.me/xawkay · Telegram</a><a href="mailto:gregoryagapov@icloud.com">gregoryagapov@icloud.com</a><a href="https://github.com/grgrwlkr">github.com/grgrwlkr</a><a href="https://www.linkedin.com/in/gregory-agapov-24b13221">linkedin.com/in/gregory-agapov-24b13221</a></div></div><div class="p-body"><p class="p-profile" data-i18n="print.profile">Hands-on Team Lead with 15+ years in software engineering and 5+ years of direct people management across teams of 6–8. Builds products from MVP to scale: owns the backlog, planning and releases under Scrum/Scrumban, and still designs architecture and writes microservice optimization code. Currently leading VK&#x27;s Donations product team: 8 direct reports across backend, frontend, mobile and QA.</p><section><div class="p-head"><h2 data-i18n="print.specs">Technical specifications</h2><span data-i18n="print.specsNote">VK, 2025–2026</span></div><div class="p-specs"><div><div class="p-big"><span data-i18n="print.spec.0.big">+103</span> <span class="p-unit" data-i18n="print.spec.0.unit">%</span></div><div class="p-note" data-i18n="print.spec.0.note">Donations turnover in 2 months, ~235K → ~478K RUB</div></div><div><div class="p-big"><span data-i18n="print.spec.1.big">+179</span> <span class="p-unit" data-i18n="print.spec.1.unit">%</span></div><div class="p-note" data-i18n="print.spec.1.note">donations count, 430 → 1,200</div></div><div><div class="p-big"><span data-i18n="print.spec.2.big">30→52</span> <span class="p-unit" data-i18n="print.spec.2.unit">%</span></div><div class="p-note" data-i18n="print.spec.2.note">connection-to-monetization</div></div><div><div class="p-big"><span data-i18n="print.spec.3.big">1</span> <span class="p-unit" data-i18n="print.spec.3.unit">quarter</span></div><div class="p-note" data-i18n="print.spec.3.note">rebrand and launch in VK profiles</div></div><div><div class="p-big"><span data-i18n="print.spec.4.big">20K→1M+</span></div><div class="p-note" data-i18n="print.spec.4.note">goods limit in Communities, 3 teams</div></div><div><div class="p-big"><span data-i18n="print.spec.5.big">40</span></div><div class="p-note" data-i18n="print.spec.5.note">Ozon sellers: ~3M products, ~1M offers</div></div><div><div class="p-big"><span data-i18n="print.spec.6.big">35→64</span> <span class="p-unit" data-i18n="print.spec.6.unit">%</span></div><div class="p-note" data-i18n="print.spec.6.note">VKUI coverage on iOS; Android — 84%</div></div><div><div class="p-big"><span data-i18n="print.spec.7.big">60K</span></div><div class="p-note" data-i18n="print.spec.7.note">Performance Review users, T-Bank</div></div></div></section><section><div class="p-head"><h2 data-i18n="print.exp">Experience</h2><span data-i18n="print.expNote">VK · PHP, Go, React, Postgres, monolith and microservices</span></div><div class="p-role"><div class="p-dates" data-i18n="print.r0.dates">01.2026 — present</div><div><div class="p-title" data-i18n="print.r0.title">VK · Team Lead, Donations product team</div><div class="p-li" data-i18n="print.r0.b0">— 8 direct reports: 3 backend, 2 frontend, iOS, Android, QA</div><div class="p-li" data-i18n="print.r0.b1">— Within a quarter, delivered the rebrand and launched Donations in VK profiles (previously Communities only)</div><div class="p-li" data-i18n="print.r0.b2">— Aligned product backend with the migration team, speeding up the move from monolith to microservices</div><div class="p-li" data-i18n="print.r0.b3">— Apr–May 2026: turnover +103%, donations +179%, monetizing profiles 240 → 521 (+117%)</div></div></div><div class="p-role"><div class="p-dates" data-i18n="print.r1.dates">04.2025 — 12.2025</div><div><div class="p-title" data-i18n="print.r1.title">VK · Team Lead, Social Commerce Platform</div><div class="p-li" data-i18n="print.r1.b0">— 8 direct reports; goods-scaling program across 3 teams</div><div class="p-li" data-i18n="print.r1.b1">— Load testing and rollout: goods limit in Communities 20K → millions</div><div class="p-li" data-i18n="print.r1.b2">— 40-seller Ozon integration: ~3M imported products, ~1M offers</div><div class="p-li" data-i18n="print.r1.b3">— Recommendation migration by the Hadoop shutdown; incident handled without losing a significant share of traffic</div></div></div></section></div><div class="p-foot"><span data-i18n="print.foot1">Gregory Agapov · Team Lead</span><span>1 / 2</span></div></article>
+<article class="sheet"><div class="p-body p-body2"><section><div class="p-head"><h2 data-i18n="print.exp2">Experience · continued</h2><span data-i18n="print.exp2Note">T-Bank · .NET, C#, Angular, Postgres, Kubernetes</span></div><div class="p-role"><div class="p-dates" data-i18n="print.r2.dates">12.2022 — 03.2025</div><div><div class="p-title" data-i18n="print.r2.title">T-Bank · Team Lead, Mentoring project</div><div class="p-li" data-i18n="print.r2.b0">— Cross-functional team of 6: backend, frontend, QA, design, analytics</div><div class="p-li" data-i18n="print.r2.b1">— DDD architecture; backlog with the product manager, OKR planning, sprints and releases under Scrum</div><div class="p-li" data-i18n="print.r2.b2">— Delivered the MVP of the company&#x27;s first mentoring platform on schedule</div><div class="p-li" data-i18n="print.r2.b3">— Staffed the first pilot entirely with program participants, who later moved into full-time roles</div><div class="p-li" data-i18n="print.r2.b4">— Mentored 2 backend engineers inside the program</div></div></div><div class="p-role"><div class="p-dates" data-i18n="print.r3.dates">04.2021 — 12.2022</div><div><div class="p-title" data-i18n="print.r3.title">T-Bank · Team Lead, Performance Review project</div><div class="p-li" data-i18n="print.r3.b0">— Took over a platform serving 60K employees (two high-load windows a year) during its reset; aligned a one-year stabilization plan with the business</div><div class="p-li" data-i18n="print.r3.b1">— Built and grew a 7-person cross-functional team</div><div class="p-li" data-i18n="print.r3.b2">— Architecture and technical decisions; backlog, OKR, sprints and releases under Scrum</div></div></div><div class="p-role"><div class="p-dates" data-i18n="print.r4.dates">04.2019 — 04.2021</div><div><div class="p-title" data-i18n="print.r4.title">T-Bank · Middle → Senior Developer</div><div class="p-li" data-i18n="print.r4.b0">— Designed and launched the org-structure service from scratch: .NET, Angular, Postgres, microservices</div><div class="p-li" data-i18n="print.r4.b1">— Performance Review, in-house task tracker and feedback systems</div></div></div><div class="p-role"><div class="p-dates" data-i18n="print.r5.dates">12.2013 — 03.2019</div><div><div class="p-title" data-i18n="print.r5.title">Neotech (Paravan 2000) · Senior Developer, GIS</div><div class="p-li" data-i18n="print.r5.b0">— GE Smallworld GIS solutions for MTS, MGTS and TAT Telecom</div><div class="p-li" data-i18n="print.r5.b1">— Reverse engineered client systems without source-code access</div><div class="p-li" data-i18n="print.r5.b2">— International GE Smallworld developer conferences in the UK, Italy and the Netherlands</div></div></div><div class="p-role"><div class="p-dates" data-i18n="print.r6.dates">11.2010 — 01.2013</div><div><div class="p-title" data-i18n="print.r6.title">CINIMEX · AISA IT-Service · Middle Developer</div><div class="p-li" data-i18n="print.r6.b0">— Terminals and digital forms for Russian Railways machinists; Java EE, SOAP, IBM Db2</div><div class="p-li" data-i18n="print.r6.b1">— IBM WebSphere, IBM Message Broker, ESQL</div></div></div></section><section><div class="p-head"><h2 data-i18n="print.proj">Side project</h2></div><div class="p-role"><div class="p-dates" data-i18n="print.projDates">08.2026 — present</div><div><div class="p-title">Dashboard &amp; Statusline for Claude Code</div><div class="p-li" data-i18n="print.projText">Open-source VS Code extension (MIT, non-commercial): a 23-tab dashboard over transcripts — spend, subagents, workflow runs, limits — and a templated status bar. ~20,000 lines of JavaScript, 33 modules, zero runtime dependencies, no telemetry.</div><div class="p-li p-muted">VS Code Marketplace · Open VSX · github.com/grgrwlkr/claude-dashboard-vscode</div></div></div></section><section><div class="p-head"><h2 data-i18n="print.kit">Equipment</h2></div><div class="p-kit"><div><b data-i18n="print.kit0.l">Leadership:</b> <span data-i18n="print.kit0.t">team leadership, engineer growth, mentoring, stakeholders, roadmap</span></div><div><b data-i18n="print.kit1.l">Architecture:</b> <span data-i18n="print.kit1.t">monolith decomposition, microservices, DDD, CQRS, API design</span></div><div><b data-i18n="print.kit2.l">Now (VK):</b> <span data-i18n="print.kit2.t">PHP, Go, React, Postgres, microservices</span></div><div><b data-i18n="print.kit3.l">Before (T-Bank):</b> <span data-i18n="print.kit3.t">.NET, C#, Angular, TypeScript, Docker, Kubernetes, CI/CD</span></div><div><b data-i18n="print.kit4.l">Messaging:</b> <span data-i18n="print.kit4.t">Kafka, RabbitMQ</span></div><div><b data-i18n="print.kit5.l">Process:</b> <span data-i18n="print.kit5.t">backlog (alone and with the PM), quarter/OKR · sprint · release, Scrum → Scrumban</span></div></div></section><section class="p-misc"><div><div class="p-kicker" data-i18n="print.eduL">Education</div><span data-i18n="print.edu">Programming Technician (secondary vocational), International College of Business and Design at MTUCI, 2006–2010</span></div><div><div class="p-kicker" data-i18n="print.certL">Certification</div><span>General Electric Smallworld GIS Certified Developer</span></div><div><div class="p-kicker" data-i18n="print.langL">Languages</div><span data-i18n="print.lang1">Russian — native</span><br><span>English — B2</span></div></section></div><div class="p-foot"><span>t.me/xawkay · gregoryagapov@icloud.com · github.com/grgrwlkr</span><span>2 / 2</span></div></article>
+    </div>
+    <script>
+      const dict = {
+ "en": {
+  "mode.sport": "FULL",
+  "mode.comfort": "OVERVIEW",
+  "pageTitle": "Gregory Agapov — Engineering Team Lead",
+  "nav.mode": "Viewing mode",
+  "nav.lang": "Language",
+  "nav.brand": "Agapov",
+  "nav.specs": "Specs",
+  "nav.experience": "Experience",
+  "nav.kit": "Equipment",
+  "nav.contact": "Contact",
+  "nav.label": "Primary",
+  "hero.role": "Team Lead",
+  "hero.name": "Gregory Agapov",
+  "hero.tagline": "Calm under pressure. Uncompromising on results.",
+  "hero.sub": "Donations product team · VK · Moscow",
+  "hero.l0.label": "Years engineering · leading teams",
+  "hero.l0.big": "15+ / 5+",
+  "hero.l1.note": "backend, frontend, iOS, Android, QA",
+  "hero.l1.label": "Direct reports now",
+  "hero.l1.big": "8",
+  "hero.l2.note": "+3 backend engineers from an adjacent team",
+  "hero.l2.label": "Teams in one plan",
+  "hero.l2.big": "3",
+  "hero.r0.note": "VK profiles, Apr–May 2026",
+  "hero.r0.label": "Donations turnover growth",
+  "hero.r0.big": "+103%",
+  "hero.r1.note": "Performance Review at T-Bank",
+  "hero.r1.label": "Platform users",
+  "hero.r1.big": "60K",
+  "hero.r2.note": "VK Communities, 2025",
+  "hero.r2.label": "Goods limit",
+  "hero.r2.big": "20K → 1M+",
+  "cta.telegram": "Message on Telegram",
+  "cta.pdf": "Resume PDF",
+  "sport.mini.0": "years engineering",
+  "sport.mini.1": "years leading",
+  "sport.mini.2": "direct reports now",
+  "sport.mini.3": "teams in one plan",
+  "sport.mini.4": "Donations turnover",
+  "sport.mini.5": "Performance Review users",
+  "sport.para": "15+ years in engineering, 5+ leading teams of 6–8. I own the backlog, planning and releases, and still design architecture and write optimization code myself.",
+  "specs.note": "Donations in VK profiles, Apr–May 2026 · VK Social Commerce, 2025",
+  "specs.title": "Technical specifications",
+  "specs.c.0.unit": "%",
+  "specs.c.0.big": "+103",
+  "specs.c.0.note": "Donations turnover, ~235K → ~478K RUB",
+  "specs.c.1.unit": "%",
+  "specs.c.1.big": "+179",
+  "specs.c.1.note": "donations count, 430 → 1,200",
+  "specs.c.2.unit": "%",
+  "specs.c.2.big": "30 → 52",
+  "specs.c.2.note": "connection-to-monetization",
+  "specs.c.3.big": "20K → 1M+",
+  "specs.c.3.note": "goods in Communities, 3 teams",
+  "specs.noteFull": "Donations: Apr–May 2026 · Social Commerce: 2025",
+  "specs.titleFull": "Technical specifications · full",
+  "specs.s.0.unit": "%",
+  "specs.s.0.big": "+103",
+  "specs.s.0.note": "Donations turnover, ~235K → ~478K RUB",
+  "specs.s.1.unit": "%",
+  "specs.s.1.big": "+179",
+  "specs.s.1.note": "donations count, 430 → 1,200",
+  "specs.s.2.unit": "%",
+  "specs.s.2.big": "+117",
+  "specs.s.2.note": "monetizing profiles, 240 → 521",
+  "specs.s.3.unit": "%",
+  "specs.s.3.big": "30 → 52",
+  "specs.s.3.note": "connection-to-monetization",
+  "specs.s.4.big": "20K → 1M+",
+  "specs.s.4.note": "goods limit in Communities",
+  "specs.s.5.unit": "M",
+  "specs.s.5.big": "~3",
+  "specs.s.5.note": "products from 40 Ozon sellers, ~1M offers",
+  "specs.s.6.unit": "%",
+  "specs.s.6.big": "35 → 64",
+  "specs.s.6.note": "VKUI coverage on iOS; Android — 84%",
+  "specs.s.7.big": "+3,276",
+  "specs.s.7.note": "creators with Donations, 3 weeks after rebrand",
+  "lead.note": "Backlog, planning and process are mine in every Team Lead role",
+  "lead.title": "How I run a team",
+  "lead.0.big": "Backlog",
+  "lead.0.note": "with the product manager or alone; fully mine in Social Commerce",
+  "lead.1.big": "Quarter · sprint · release",
+  "lead.1.note": "planning levels; OKR at T-Bank",
+  "lead.2.big": "Scrum → Scrumban",
+  "lead.2.note": "Scrum at T-Bank, Scrumban at VK",
+  "lead.3.big": "People growth",
+  "lead.3.note": "mentored 3 engineers; pilot mentees moved into full-time roles",
+  "hood.note": "Technical depth, not just coordination",
+  "hood.title": "Under the hood",
+  "hood.0.big": "RPS · CPU · RAM",
+  "hood.0.note": "the metrics I use to write Donations microservice optimization code myself",
+  "hood.1.big": "DDD",
+  "hood.1.note": "mentoring platform architecture — fast product iterations",
+  "hood.2.big": "Migrations",
+  "hood.2.note": "monolith → microservices; feed and recommendations moved before the Hadoop shutdown",
+  "hood.3.big": "3 platforms",
+  "hood.3.note": "iOS, Android and web in one UI layer: VKUI and SPA",
+  "history.more": "Full experience",
+  "history.c.0.dates": "01.2026 — present",
+  "history.c.0.org": "VK",
+  "history.c.0.role": "Team Lead, Donations product team",
+  "history.c.0.text": "8 direct reports. Rebrand and launch in VK profiles within a quarter; turnover +103% in two months.",
+  "history.c.1.dates": "04.2025 — 12.2025",
+  "history.c.1.org": "VK",
+  "history.c.1.role": "Team Lead, Social Commerce Platform",
+  "history.c.1.text": "Goods limit in Communities: 20K → millions across 3 teams. Recommendation system migrated before the Hadoop shutdown.",
+  "history.c.2.dates": "04.2021 — 03.2025",
+  "history.c.2.org": "T-Bank (Tinkoff)",
+  "history.c.2.role": "Team Lead: Performance Review, Mentoring",
+  "history.c.2.text": "Reset of a platform serving 60K employees; the company's first mentoring platform MVP shipped on schedule.",
+  "history.c.3.dates": "2010 — 2021",
+  "history.c.3.org": "T-Bank, Neotech, CINIMEX, AISA",
+  "history.c.3.role": "Middle → Senior Developer",
+  "history.c.3.text": ".NET and Angular; GE Smallworld GIS for MTS and MGTS; automation for Russian Railways.",
+  "history.s.0.dates": "01.2026 — present",
+  "history.s.0.role": "Team Lead, Donations",
+  "history.s.0.org": "VK · Communities business unit",
+  "history.s.0.b0": "8 direct reports: 3 backend, 2 frontend, iOS, Android, QA",
+  "history.s.0.b1": "Backlog, quarterly, sprint and release planning under Scrumban",
+  "history.s.0.b2": "Design the architecture and write optimization code driven by RPS, CPU and memory",
+  "history.s.0.b3": "Rebrand and launch of Donations in VK profiles within one quarter",
+  "history.s.0.b4": "Aligned product backend with the migration team: monolith → microservices",
+  "history.s.0.b5": "Apr–May 2026: turnover +103%, donations +179%, monetizing profiles +117%",
+  "history.s.1.dates": "04.2025 — 12.2025",
+  "history.s.1.role": "Team Lead, Social Commerce",
+  "history.s.1.org": "VK · platform team",
+  "history.s.1.b0": "8 direct reports; goods-scaling program across 3 teams",
+  "history.s.1.b1": "Owned the backlog alone, no product manager; quarterly, sprint and release planning under Scrumban",
+  "history.s.1.b2": "Load testing and rollout: limit 20K → millions",
+  "history.s.1.b3": "40-seller Ozon integration: ~3M products, ~1M offers",
+  "history.s.1.b4": "Recommendation migration by the Hadoop shutdown; incident handled without losing a significant share of traffic",
+  "history.s.2.dates": "12.2022 — 03.2025",
+  "history.s.2.role": "Team Lead, Mentoring",
+  "history.s.2.org": "T-Bank",
+  "history.s.2.b0": "Cross-functional team of 6: backend, frontend, QA, design, analytics",
+  "history.s.2.b1": "DDD architecture; backlog with the product manager, OKR and releases under Scrum",
+  "history.s.2.b2": "MVP of the company's first mentoring platform — on schedule",
+  "history.s.2.b3": "Pilot staffed entirely by program participants who later moved into full-time roles",
+  "history.s.3.dates": "04.2021 — 12.2022",
+  "history.s.3.role": "Team Lead, Performance Review",
+  "history.s.3.org": "T-Bank",
+  "history.s.3.b0": "Platform for 60K employees, two high-load windows a year; one-year stabilization plan aligned with the business",
+  "history.s.3.b1": "Built and grew a 7-person team",
+  "history.s.3.b2": "Architecture and technical decisions; backlog, OKR and releases under Scrum",
+  "history.s.4.dates": "04.2019 — 04.2021",
+  "history.s.4.role": "Middle → Senior Developer",
+  "history.s.4.org": "T-Bank",
+  "history.s.4.b0": "Designed and launched the org-structure service from scratch: .NET, Angular, Postgres, microservices",
+  "history.s.4.b1": "Performance Review, in-house task tracker and feedback systems",
+  "history.s.5.dates": "12.2013 — 03.2019",
+  "history.s.5.role": "Senior Developer, GIS",
+  "history.s.5.org": "Neotech (Paravan 2000)",
+  "history.s.5.b0": "GE Smallworld GIS for MTS, MGTS and TAT Telecom",
+  "history.s.5.b1": "Reverse engineered client systems without source-code access",
+  "history.s.5.b2": "GE Smallworld GIS Certified Developer",
+  "history.s.6.dates": "11.2010 — 01.2013",
+  "history.s.6.role": "Middle Developer",
+  "history.s.6.org": "CINIMEX · AISA IT-Service",
+  "history.s.6.b0": "Terminals and digital forms for Russian Railways machinists; Java EE, IBM Db2",
+  "history.s.6.b1": "IBM WebSphere, IBM Message Broker, ESQL",
+  "history.title": "Experience",
+  "kit.title": "Equipment",
+  "kit.c.0": "Backlog · planning · releases — Scrum / Scrumban",
+  "kit.c.1": "Architecture and RPS / CPU / RAM optimization",
+  "kit.c.2": "PHP · Go · React · Postgres — now",
+  "kit.c.3": ".NET · C# · Angular · Kubernetes — before",
+  "kit.c.4": "Microservices · DDD · Kafka · RabbitMQ",
+  "project.title": "Side project",
+  "project.short": "Open-source VS Code extension, ~20,000 lines with zero runtime dependencies.",
+  "kit.s.0.label": "Leadership",
+  "kit.s.0.text": "Team leadership, engineer growth, mentoring, stakeholder management, roadmap planning",
+  "kit.s.1.label": "Architecture",
+  "kit.s.1.text": "Monolith decomposition, microservices, DDD, CQRS, API design",
+  "kit.s.2.label": "Stack VK · T-Bank",
+  "kit.s.2.text": "PHP, Go, React, Postgres · .NET, C#, Angular, TypeScript, Docker, Kubernetes, CI/CD",
+  "kit.s.3.label": "Messaging",
+  "kit.s.3.text": "Kafka, RabbitMQ",
+  "project.titleSince": "Side project · since 08.2026",
+  "project.long": "Open-source VS Code extension (MIT, non-commercial): a 23-tab dashboard over every transcript on the machine — spend, subagents, workflow runs, usage limits — and a status bar built from a template with 45 placeholders. ~20,000 lines of JavaScript in 33 modules, zero runtime dependencies, no telemetry.",
+  "edu.title": "Education and more",
+  "edu.degree": "Programming Technician (secondary vocational), International College of Business and Design at MTUCI, 2006–2010",
+  "edu.langs": "Russian — native · English — B2",
+  "footer.kicker": "The test drive is a conversation",
+  "print.role": "Team Lead",
+  "print.first": "Gregory",
+  "print.last": "Agapov",
+  "print.tag1": "Calm under pressure.",
+  "print.tag2": "Uncompromising on results.",
+  "print.city": "Moscow, Russia",
+  "print.profile": "Hands-on Team Lead with 15+ years in software engineering and 5+ years of direct people management across teams of 6–8. Builds products from MVP to scale: owns the backlog, planning and releases under Scrum/Scrumban, and still designs architecture and writes microservice optimization code. Currently leading VK's Donations product team: 8 direct reports across backend, frontend, mobile and QA.",
+  "print.specs": "Technical specifications",
+  "print.specsNote": "VK, 2025–2026",
+  "print.spec.0.unit": "%",
+  "print.spec.0.big": "+103",
+  "print.spec.0.note": "Donations turnover in 2 months, ~235K → ~478K RUB",
+  "print.spec.1.unit": "%",
+  "print.spec.1.big": "+179",
+  "print.spec.1.note": "donations count, 430 → 1,200",
+  "print.spec.2.unit": "%",
+  "print.spec.2.big": "30→52",
+  "print.spec.2.note": "connection-to-monetization",
+  "print.spec.3.unit": "quarter",
+  "print.spec.3.big": "1",
+  "print.spec.3.note": "rebrand and launch in VK profiles",
+  "print.spec.4.big": "20K→1M+",
+  "print.spec.4.note": "goods limit in Communities, 3 teams",
+  "print.spec.5.big": "40",
+  "print.spec.5.note": "Ozon sellers: ~3M products, ~1M offers",
+  "print.spec.6.unit": "%",
+  "print.spec.6.big": "35→64",
+  "print.spec.6.note": "VKUI coverage on iOS; Android — 84%",
+  "print.spec.7.big": "60K",
+  "print.spec.7.note": "Performance Review users, T-Bank",
+  "print.exp": "Experience",
+  "print.expNote": "VK · PHP, Go, React, Postgres, monolith and microservices",
+  "print.r0.dates": "01.2026 — present",
+  "print.r0.title": "VK · Team Lead, Donations product team",
+  "print.r0.b0": "— 8 direct reports: 3 backend, 2 frontend, iOS, Android, QA",
+  "print.r0.b1": "— Within a quarter, delivered the rebrand and launched Donations in VK profiles (previously Communities only)",
+  "print.r0.b2": "— Aligned product backend with the migration team, speeding up the move from monolith to microservices",
+  "print.r0.b3": "— Apr–May 2026: turnover +103%, donations +179%, monetizing profiles 240 → 521 (+117%)",
+  "print.r1.dates": "04.2025 — 12.2025",
+  "print.r1.title": "VK · Team Lead, Social Commerce Platform",
+  "print.r1.b0": "— 8 direct reports; goods-scaling program across 3 teams",
+  "print.r1.b1": "— Load testing and rollout: goods limit in Communities 20K → millions",
+  "print.r1.b2": "— 40-seller Ozon integration: ~3M imported products, ~1M offers",
+  "print.r1.b3": "— Recommendation migration by the Hadoop shutdown; incident handled without losing a significant share of traffic",
+  "print.foot1": "Gregory Agapov · Team Lead",
+  "print.exp2": "Experience · continued",
+  "print.exp2Note": "T-Bank · .NET, C#, Angular, Postgres, Kubernetes",
+  "print.r2.dates": "12.2022 — 03.2025",
+  "print.r2.title": "T-Bank · Team Lead, Mentoring project",
+  "print.r2.b0": "— Cross-functional team of 6: backend, frontend, QA, design, analytics",
+  "print.r2.b1": "— DDD architecture; backlog with the product manager, OKR planning, sprints and releases under Scrum",
+  "print.r2.b2": "— Delivered the MVP of the company's first mentoring platform on schedule",
+  "print.r2.b3": "— Staffed the first pilot entirely with program participants, who later moved into full-time roles",
+  "print.r2.b4": "— Mentored 2 backend engineers inside the program",
+  "print.r3.dates": "04.2021 — 12.2022",
+  "print.r3.title": "T-Bank · Team Lead, Performance Review project",
+  "print.r3.b0": "— Took over a platform serving 60K employees (two high-load windows a year) during its reset; aligned a one-year stabilization plan with the business",
+  "print.r3.b1": "— Built and grew a 7-person cross-functional team",
+  "print.r3.b2": "— Architecture and technical decisions; backlog, OKR, sprints and releases under Scrum",
+  "print.r4.dates": "04.2019 — 04.2021",
+  "print.r4.title": "T-Bank · Middle → Senior Developer",
+  "print.r4.b0": "— Designed and launched the org-structure service from scratch: .NET, Angular, Postgres, microservices",
+  "print.r4.b1": "— Performance Review, in-house task tracker and feedback systems",
+  "print.r5.dates": "12.2013 — 03.2019",
+  "print.r5.title": "Neotech (Paravan 2000) · Senior Developer, GIS",
+  "print.r5.b0": "— GE Smallworld GIS solutions for MTS, MGTS and TAT Telecom",
+  "print.r5.b1": "— Reverse engineered client systems without source-code access",
+  "print.r5.b2": "— International GE Smallworld developer conferences in the UK, Italy and the Netherlands",
+  "print.r6.dates": "11.2010 — 01.2013",
+  "print.r6.title": "CINIMEX · AISA IT-Service · Middle Developer",
+  "print.r6.b0": "— Terminals and digital forms for Russian Railways machinists; Java EE, SOAP, IBM Db2",
+  "print.r6.b1": "— IBM WebSphere, IBM Message Broker, ESQL",
+  "print.proj": "Side project",
+  "print.projDates": "08.2026 — present",
+  "print.projText": "Open-source VS Code extension (MIT, non-commercial): a 23-tab dashboard over transcripts — spend, subagents, workflow runs, limits — and a templated status bar. ~20,000 lines of JavaScript, 33 modules, zero runtime dependencies, no telemetry.",
+  "print.kit": "Equipment",
+  "print.kit0.l": "Leadership:",
+  "print.kit0.t": "team leadership, engineer growth, mentoring, stakeholders, roadmap",
+  "print.kit1.l": "Architecture:",
+  "print.kit1.t": "monolith decomposition, microservices, DDD, CQRS, API design",
+  "print.kit2.l": "Now (VK):",
+  "print.kit2.t": "PHP, Go, React, Postgres, microservices",
+  "print.kit3.l": "Before (T-Bank):",
+  "print.kit3.t": ".NET, C#, Angular, TypeScript, Docker, Kubernetes, CI/CD",
+  "print.kit4.l": "Messaging:",
+  "print.kit4.t": "Kafka, RabbitMQ",
+  "print.kit5.l": "Process:",
+  "print.kit5.t": "backlog (alone and with the PM), quarter/OKR · sprint · release, Scrum → Scrumban",
+  "print.eduL": "Education",
+  "print.edu": "Programming Technician (secondary vocational), International College of Business and Design at MTUCI, 2006–2010",
+  "print.certL": "Certification",
+  "print.langL": "Languages",
+  "print.lang1": "Russian — native",
+  "skip": "Skip to content"
+ },
+ "ru": {
+  "mode.sport": "ПОДРОБНО",
+  "mode.comfort": "КРАТКО",
+  "pageTitle": "Григорий Агапов — Team Lead",
+  "nav.mode": "Режим просмотра",
+  "nav.lang": "Язык",
+  "nav.brand": "Агапов",
+  "nav.specs": "Характеристики",
+  "nav.experience": "Опыт",
+  "nav.kit": "Комплектация",
+  "nav.contact": "Контакты",
+  "nav.label": "Основная навигация",
+  "hero.role": "Team Lead",
+  "hero.name": "Григорий Агапов",
+  "hero.tagline": "Спокойно под давлением. Жёстко к результату.",
+  "hero.sub": "Продуктовая команда Донатов · VK · Москва",
+  "hero.l0.label": "Лет в разработке · во главе команд",
+  "hero.l0.big": "15+ / 5+",
+  "hero.l1.note": "бэкенд, фронтенд, iOS, Android, QA",
+  "hero.l1.label": "Прямых подчинённых сейчас",
+  "hero.l1.big": "8",
+  "hero.l2.note": "+3 бэкенд-инженера из соседней команды",
+  "hero.l2.label": "Команды в одном плане",
+  "hero.l2.big": "3",
+  "hero.r0.note": "профили VK, апрель–май 2026",
+  "hero.r0.label": "Рост оборота Донатов",
+  "hero.r0.big": "+103%",
+  "hero.r1.note": "Performance Review в Т-Банке",
+  "hero.r1.label": "Пользователей платформы",
+  "hero.r1.big": "60 тыс.",
+  "hero.r2.note": "сообщества VK, 2025",
+  "hero.r2.label": "Лимит товаров",
+  "hero.r2.big": "20K → млн",
+  "cta.telegram": "Написать в Telegram",
+  "cta.pdf": "Резюме PDF",
+  "sport.mini.0": "лет в разработке",
+  "sport.mini.1": "лет руководства",
+  "sport.mini.2": "прямых сейчас",
+  "sport.mini.3": "команды в одном плане",
+  "sport.mini.4": "оборот Донатов",
+  "sport.mini.5": "польз. Performance Review",
+  "sport.para": "15+ лет в разработке, 5+ — во главе команд из 6–8 человек. Бэклог, планирование и релизы — на мне; архитектуру и код оптимизации пишу сам.",
+  "specs.note": "Донаты в профилях VK, апрель–май 2026 · соцкоммерция VK, 2025",
+  "specs.title": "Технические характеристики",
+  "specs.c.0.unit": "%",
+  "specs.c.0.big": "+103",
+  "specs.c.0.note": "оборот Донатов, ~235K → ~478K ₽",
+  "specs.c.1.unit": "%",
+  "specs.c.1.big": "+179",
+  "specs.c.1.note": "число донатов, 430 → 1 200",
+  "specs.c.2.unit": "%",
+  "specs.c.2.big": "30 → 52",
+  "specs.c.2.note": "конверсия подключение → монетизация",
+  "specs.c.3.big": "20K → млн",
+  "specs.c.3.note": "товаров в сообществах, 3 команды",
+  "specs.noteFull": "Донаты: апрель–май 2026 · Соцкоммерция: 2025",
+  "specs.titleFull": "Технические характеристики · полные",
+  "specs.s.0.unit": "%",
+  "specs.s.0.big": "+103",
+  "specs.s.0.note": "оборот Донатов, ~235K → ~478K ₽",
+  "specs.s.1.unit": "%",
+  "specs.s.1.big": "+179",
+  "specs.s.1.note": "число донатов, 430 → 1 200",
+  "specs.s.2.unit": "%",
+  "specs.s.2.big": "+117",
+  "specs.s.2.note": "зарабатывающие профили, 240 → 521",
+  "specs.s.3.unit": "%",
+  "specs.s.3.big": "30 → 52",
+  "specs.s.3.note": "конверсия подключение → монетизация",
+  "specs.s.4.big": "20K → млн",
+  "specs.s.4.note": "лимит товаров в сообществах",
+  "specs.s.5.unit": "млн",
+  "specs.s.5.big": "~3",
+  "specs.s.5.note": "товаров от 40 продавцов Ozon, ~1 млн предложений",
+  "specs.s.6.unit": "%",
+  "specs.s.6.big": "35 → 64",
+  "specs.s.6.note": "покрытие VKUI на iOS; Android — 84%",
+  "specs.s.7.big": "+3 276",
+  "specs.s.7.note": "авторов с донатом за 3 недели после ребрендинга",
+  "lead.note": "Бэклог, планирование и процесс — на мне во всех ролях Team Lead",
+  "lead.title": "Как веду команду",
+  "lead.0.big": "Бэклог",
+  "lead.0.note": "сам и вместе с продактом; в соцкоммерции — целиком сам",
+  "lead.1.big": "Квартал · спринт · релиз",
+  "lead.1.note": "уровни планирования; в Т-Банке — через OKR",
+  "lead.2.big": "Scrum → Scrumban",
+  "lead.2.note": "Scrum в Т-Банке, Scrumban в VK",
+  "lead.3.big": "Рост людей",
+  "lead.3.note": "менторил 3 инженеров; менти из пилота перешли в штатные роли",
+  "hood.note": "Техническая глубина — не только организация",
+  "hood.title": "Под капотом",
+  "hood.0.big": "RPS · CPU · RAM",
+  "hood.0.note": "метрики, по которым сам пишу код оптимизации микросервисов Донатов",
+  "hood.1.big": "DDD",
+  "hood.1.note": "архитектура платформы наставничества — быстрые итерации идей",
+  "hood.2.big": "Миграции",
+  "hood.2.note": "монолит → микросервисы; лента и рекомендации — к отключению Hadoop",
+  "hood.3.big": "3 платформы",
+  "hood.3.note": "iOS, Android и веб в одном UI-контуре: VKUI и SPA",
+  "history.more": "Весь опыт подробно",
+  "history.c.0.dates": "01.2026 — сейчас",
+  "history.c.0.org": "VK",
+  "history.c.0.role": "Team Lead, продуктовая команда «Донаты»",
+  "history.c.0.text": "8 прямых. Ребрендинг и запуск в профилях VK за квартал; оборот +103% за два месяца.",
+  "history.c.1.dates": "04.2025 — 12.2025",
+  "history.c.1.org": "VK",
+  "history.c.1.role": "Team Lead, платформа социальной коммерции",
+  "history.c.1.text": "Лимит товаров в сообществах: 20 тыс. → миллионы; 3 команды. Миграция рекомендаций к отключению Hadoop.",
+  "history.c.2.dates": "04.2021 — 03.2025",
+  "history.c.2.org": "Т-Банк",
+  "history.c.2.role": "Team Lead: Performance Review, наставничество",
+  "history.c.2.text": "Перезапуск платформы на 60 тыс. сотрудников; MVP первой в компании платформы наставничества в срок.",
+  "history.c.3.dates": "2010 — 2021",
+  "history.c.3.org": "Т-Банк, Neotech, CINIMEX, AISA",
+  "history.c.3.role": "Middle → Senior Developer",
+  "history.c.3.text": ".NET и Angular; GE Smallworld GIS для МТС и МГТС; автоматизация для РЖД.",
+  "history.s.0.dates": "01.2026 — сейчас",
+  "history.s.0.role": "Team Lead, Донаты",
+  "history.s.0.org": "VK · направление Сообществ",
+  "history.s.0.b0": "8 прямых: 3 бэкенд, 2 фронтенд, iOS, Android, QA",
+  "history.s.0.b1": "Бэклог, квартальное планирование, спринты и релизы по Scrumban",
+  "history.s.0.b2": "Сам проектирую архитектуру и пишу код оптимизации по RPS, CPU и памяти",
+  "history.s.0.b3": "Ребрендинг и запуск Донатов в профилях VK за один квартал",
+  "history.s.0.b4": "Связал бэкенд продукта с командой миграции: монолит → микросервисы",
+  "history.s.0.b5": "Апрель–май 2026: оборот +103%, донаты +179%, зарабатывающие профили +117%",
+  "history.s.1.dates": "04.2025 — 12.2025",
+  "history.s.1.role": "Team Lead, соцкоммерция",
+  "history.s.1.org": "VK · платформенная команда",
+  "history.s.1.b0": "8 прямых; программа масштабирования товаров на 3 команды",
+  "history.s.1.b1": "Бэклог целиком сам, без продакта; квартал, спринты и релизы по Scrumban",
+  "history.s.1.b2": "Нагрузочное тестирование и выпуск: лимит 20 тыс. → миллионы",
+  "history.s.1.b3": "Интеграция с 40 продавцами Ozon: ~3 млн товаров, ~1 млн предложений",
+  "history.s.1.b4": "Миграция рекомендаций к отключению Hadoop; инцидент без потери значимой доли трафика",
+  "history.s.2.dates": "12.2022 — 03.2025",
+  "history.s.2.role": "Team Lead, наставничество",
+  "history.s.2.org": "Т-Банк",
+  "history.s.2.b0": "Кросс-функциональная команда из 6: бэкенд, фронтенд, QA, дизайн, аналитика",
+  "history.s.2.b1": "Архитектура на DDD; бэклог вместе с продактом, OKR и релизы по Scrum",
+  "history.s.2.b2": "MVP первой в компании платформы наставничества — в срок",
+  "history.s.2.b3": "Пилот целиком из участников программы; затем они перешли в штат",
+  "history.s.3.dates": "04.2021 — 12.2022",
+  "history.s.3.role": "Team Lead, Performance Review",
+  "history.s.3.org": "Т-Банк",
+  "history.s.3.b0": "Платформа на 60 тыс. сотрудников, два пиковых периода в год; годовой план стабилизации с бизнесом",
+  "history.s.3.b1": "Собрал и развил команду из 7 человек",
+  "history.s.3.b2": "Архитектура и технические решения; бэклог, OKR и релизы по Scrum",
+  "history.s.4.dates": "04.2019 — 04.2021",
+  "history.s.4.role": "Middle → Senior Developer",
+  "history.s.4.org": "Т-Банк",
+  "history.s.4.b0": "С нуля спроектировал и запустил сервис оргструктуры: .NET, Angular, Postgres, микросервисы",
+  "history.s.4.b1": "Performance Review, внутренний таск-трекер и системы обратной связи",
+  "history.s.5.dates": "12.2013 — 03.2019",
+  "history.s.5.role": "Senior Developer, GIS",
+  "history.s.5.org": "Neotech (Paravan 2000)",
+  "history.s.5.b0": "GE Smallworld GIS для МТС, МГТС и TAT Telecom",
+  "history.s.5.b1": "Реверс-инжиниринг клиентских систем без доступа к исходникам",
+  "history.s.5.b2": "Сертифицированный разработчик GE Smallworld GIS",
+  "history.s.6.dates": "11.2010 — 01.2013",
+  "history.s.6.role": "Middle Developer",
+  "history.s.6.org": "CINIMEX · AISA IT-Service",
+  "history.s.6.b0": "Терминалы и цифровые формы для машинистов РЖД; Java EE, IBM Db2",
+  "history.s.6.b1": "IBM WebSphere, IBM Message Broker, ESQL",
+  "history.title": "Опыт",
+  "kit.title": "Комплектация",
+  "kit.c.0": "Бэклог · планирование · релизы — Scrum / Scrumban",
+  "kit.c.1": "Архитектура и оптимизация по RPS, CPU, RAM",
+  "kit.c.2": "PHP · Go · React · Postgres — сейчас",
+  "kit.c.3": ".NET · C# · Angular · Kubernetes — ранее",
+  "kit.c.4": "Микросервисы · DDD · Kafka · RabbitMQ",
+  "project.title": "Собственный проект",
+  "project.short": "Open-source расширение VS Code, ~20 000 строк без runtime-зависимостей.",
+  "kit.s.0.label": "Лидерство",
+  "kit.s.0.text": "Руководство командой, рост инженеров, менторство, работа со стейкхолдерами, роадмап",
+  "kit.s.1.label": "Архитектура",
+  "kit.s.1.text": "Распил монолита, микросервисы, DDD, CQRS, API design",
+  "kit.s.2.label": "Стек VK · Т-Банк",
+  "kit.s.2.text": "PHP, Go, React, Postgres · .NET, C#, Angular, TypeScript, Docker, Kubernetes, CI/CD",
+  "kit.s.3.label": "Messaging",
+  "kit.s.3.text": "Kafka, RabbitMQ",
+  "project.titleSince": "Собственный проект · с 08.2026",
+  "project.long": "Open-source расширение VS Code (MIT, некоммерческий личный проект): дашборд из 23 вкладок по всем транскриптам на машине — траты, субагенты, workflow, лимиты — и строка статуса из шаблона с 45 плейсхолдерами. ~20 000 строк JavaScript в 33 модулях, ноль runtime-зависимостей, без телеметрии.",
+  "edu.title": "Образование и прочее",
+  "edu.degree": "Техник-программист (среднее специальное), Международный колледж бизнеса и дизайна при МТУСИ, 2006–2010",
+  "edu.langs": "Русский — родной · English — B2",
+  "footer.kicker": "Тест-драйв — это разговор",
+  "print.role": "Team Lead",
+  "print.first": "Григорий",
+  "print.last": "Агапов",
+  "print.tag1": "Спокойно под давлением.",
+  "print.tag2": "Жёстко к результату.",
+  "print.city": "Москва, Россия",
+  "print.profile": "Hands-on Team Lead с 15+ годами в разработке и 5+ годами прямого руководства командами из 6–8 человек. Строю продукт от MVP до масштабирования: веду бэклог, планирование и релизы по Scrum/Scrumban, сам прорабатываю архитектуру и пишу код оптимизации микросервисов. Сейчас — продуктовая команда Донатов в VK: 8 прямых подчинённых, бэкенд, фронтенд, мобайл и QA.",
+  "print.specs": "Технические характеристики",
+  "print.specsNote": "VK, 2025–2026",
+  "print.spec.0.unit": "%",
+  "print.spec.0.big": "+103",
+  "print.spec.0.note": "оборот Донатов за 2 мес., ~235K → ~478K ₽",
+  "print.spec.1.unit": "%",
+  "print.spec.1.big": "+179",
+  "print.spec.1.note": "число донатов, 430 → 1 200",
+  "print.spec.2.unit": "%",
+  "print.spec.2.big": "30→52",
+  "print.spec.2.note": "конверсия подключение → монетизация",
+  "print.spec.3.unit": "квартал",
+  "print.spec.3.big": "1",
+  "print.spec.3.note": "ребрендинг и запуск в профилях VK",
+  "print.spec.4.big": "20K→млн",
+  "print.spec.4.note": "лимит товаров в сообществах, 3 команды",
+  "print.spec.5.big": "40",
+  "print.spec.5.note": "продавцов Ozon: ~3 млн товаров, ~1 млн предложений",
+  "print.spec.6.unit": "%",
+  "print.spec.6.big": "35→64",
+  "print.spec.6.note": "покрытие VKUI на iOS; Android — 84%",
+  "print.spec.7.big": "60K",
+  "print.spec.7.note": "пользователей Performance Review, Т-Банк",
+  "print.exp": "Опыт",
+  "print.expNote": "VK · PHP, Go, React, Postgres, монолит и микросервисы",
+  "print.r0.dates": "01.2026 — сейчас",
+  "print.r0.title": "VK · Team Lead, продуктовая команда «Донаты»",
+  "print.r0.b0": "— 8 прямых: 3 бэкенд, 2 фронтенд, iOS, Android, QA",
+  "print.r0.b1": "— За квартал провёл ребрендинг и запустил Донаты в профилях VK (раньше — только в Сообществах)",
+  "print.r0.b2": "— Связал бэкенд продукта с командой миграции, ускорив переезд сервиса из монолита в микросервисы",
+  "print.r0.b3": "— Апрель–май 2026: оборот +103%, донаты +179%, зарабатывающие профили 240 → 521 (+117%)",
+  "print.r1.dates": "04.2025 — 12.2025",
+  "print.r1.title": "VK · Team Lead, платформа социальной коммерции",
+  "print.r1.b0": "— 8 прямых; программа масштабирования товаров между 3 командами",
+  "print.r1.b1": "— Нагрузочное тестирование и выпуск: лимит товаров в сообществах 20 тыс. → миллионы",
+  "print.r1.b2": "— Интеграция с 40 продавцами Ozon: ~3 млн импортированных товаров, ~1 млн предложений",
+  "print.r1.b3": "— Миграция рекомендаций к отключению Hadoop; инцидент пройден без потери значимой доли трафика",
+  "print.foot1": "Григорий Агапов · Team Lead",
+  "print.exp2": "Опыт · продолжение",
+  "print.exp2Note": "Т-Банк · .NET, C#, Angular, Postgres, Kubernetes",
+  "print.r2.dates": "12.2022 — 03.2025",
+  "print.r2.title": "Т-Банк · Team Lead, проект наставничества",
+  "print.r2.b0": "— Кросс-функциональная команда из 6: бэкенд, фронтенд, QA, дизайн, аналитика",
+  "print.r2.b1": "— Архитектура на DDD; бэклог вместе с продактом, планирование по OKR, спринты и релизы по Scrum",
+  "print.r2.b2": "— В срок запустил MVP первой в компании платформы наставничества",
+  "print.r2.b3": "— Собрал первый пилот целиком из участников программы; затем они перешли в штатные роли",
+  "print.r2.b4": "— Менторил 2 бэкенд-инженеров внутри программы",
+  "print.r3.dates": "04.2021 — 12.2022",
+  "print.r3.title": "Т-Банк · Team Lead, проект Performance Review",
+  "print.r3.b0": "— Принял платформу на 60 тыс. сотрудников (два пиковых периода в год) на этапе перезапуска; согласовал с бизнесом годовой план стабилизации",
+  "print.r3.b1": "— Собрал и развил кросс-функциональную команду из 7 человек",
+  "print.r3.b2": "— Архитектура и технические решения; бэклог, OKR, спринты и релизы по Scrum",
+  "print.r4.dates": "04.2019 — 04.2021",
+  "print.r4.title": "Т-Банк · Middle → Senior Developer",
+  "print.r4.b0": "— С нуля спроектировал и запустил сервис оргструктуры: .NET, Angular, Postgres, микросервисы",
+  "print.r4.b1": "— Performance Review, внутренний таск-трекер и системы обратной связи",
+  "print.r5.dates": "12.2013 — 03.2019",
+  "print.r5.title": "Neotech (Paravan 2000) · Senior Developer, GIS",
+  "print.r5.b0": "— Решения на GE Smallworld GIS для МТС, МГТС и TAT Telecom",
+  "print.r5.b1": "— Реверс-инжиниринг клиентских систем без доступа к исходному коду",
+  "print.r5.b2": "— Международные конференции GE Smallworld в Великобритании, Италии и Нидерландах",
+  "print.r6.dates": "11.2010 — 01.2013",
+  "print.r6.title": "CINIMEX · AISA IT-Service · Middle Developer",
+  "print.r6.b0": "— Терминалы и цифровые формы для машинистов РЖД; Java EE, SOAP, IBM Db2",
+  "print.r6.b1": "— IBM WebSphere, IBM Message Broker, ESQL",
+  "print.proj": "Собственный проект",
+  "print.projDates": "08.2026 — сейчас",
+  "print.projText": "Open-source расширение VS Code (MIT, некоммерческий): дашборд из 23 вкладок по транскриптам — траты, субагенты, workflow, лимиты — и строка статуса из шаблона. ~20 000 строк JavaScript, 33 модуля, ноль runtime-зависимостей, без телеметрии.",
+  "print.kit": "Комплектация",
+  "print.kit0.l": "Лидерство:",
+  "print.kit0.t": "руководство командой, рост инженеров, менторство, стейкхолдеры, роадмап",
+  "print.kit1.l": "Архитектура:",
+  "print.kit1.t": "распил монолита, микросервисы, DDD, CQRS, API design",
+  "print.kit2.l": "Сейчас (VK):",
+  "print.kit2.t": "PHP, Go, React, Postgres, микросервисы",
+  "print.kit3.l": "Ранее (Т-Банк):",
+  "print.kit3.t": ".NET, C#, Angular, TypeScript, Docker, Kubernetes, CI/CD",
+  "print.kit4.l": "Messaging:",
+  "print.kit4.t": "Kafka, RabbitMQ",
+  "print.kit5.l": "Процесс:",
+  "print.kit5.t": "бэклог (сам и с продактом), квартал/OKR · спринт · релиз, Scrum → Scrumban",
+  "print.eduL": "Образование",
+  "print.edu": "Техник-программист (среднее специальное), Международный колледж бизнеса и дизайна при МТУСИ, 2006–2010",
+  "print.certL": "Сертификация",
+  "print.langL": "Языки",
+  "print.lang1": "Русский — родной",
+  "skip": "Перейти к содержанию"
+ }
+};
+      let currentLang = document.documentElement.lang === 'ru' ? 'ru' : 'en';
+
+      // Resolve a key like "history.s.0.b1" against the current dictionary.
+      function t(key) {
+        const v = dict[currentLang][key];
+        return v !== undefined ? v : key;
+      }
+
+      function applyLang(l) {
+        currentLang = l;
+        document.documentElement.lang = l;
+        if (!(window.__urlOverrides && window.__urlOverrides.lang)) {
+          try {
+            localStorage.setItem('lang', l);
+          } catch (e) {
+            /* ignore */
+          }
+        }
+        document.title = t('pageTitle');
+        document.querySelectorAll('[data-i18n]').forEach((el) => {
+          el.textContent = t(el.dataset.i18n);
+        });
+        document.querySelectorAll('[data-i18n-attr]').forEach((el) => {
+          el.dataset.i18nAttr.split(',').forEach((pair) => {
+            const [attr, key] = pair.split(':').map((s) => s.trim());
+            if (attr && key) el.setAttribute(attr, t(key));
+          });
+        });
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
+          btn.setAttribute('aria-pressed', btn.dataset.lang === l ? 'true' : 'false');
+        });
+        // Point every PDF link at the language-matched résumé export.
+        const pdfHref = '../docs/dist/Gregory_Agapov_Resume.' + l + '.pdf';
+        document.querySelectorAll('[data-pdf]').forEach((a) => a.setAttribute('href', pdfHref));
+      }
+
+      // Comfort = the short recruiter version; Sport = the full spec sheet. Same page, same URL.
+      function applyMode(mode, announce) {
+        document.documentElement.dataset.mode = mode;
+        document.querySelectorAll('.mode-btn').forEach((btn) => {
+          btn.setAttribute('aria-pressed', btn.dataset.modeBtn === mode ? 'true' : 'false');
+        });
+        if (announce) {
+          const status = document.getElementById('modeStatus');
+          if (status)
+            status.textContent =
+              currentLang === 'ru'
+                ? mode === 'sport'
+                  ? 'Полная версия резюме'
+                  : 'Краткая версия резюме'
+                : mode === 'sport'
+                  ? 'Full resume'
+                  : 'Resume overview';
+        }
+      }
+
+      document.addEventListener('DOMContentLoaded', () => {
+        applyLang(currentLang);
+        applyMode(document.documentElement.dataset.mode === 'sport' ? 'sport' : 'comfort', false);
+
+        document.querySelectorAll('.lang-btn').forEach((btn) => {
+          btn.addEventListener('click', () => applyLang(btn.dataset.lang));
+        });
+        document.querySelectorAll('.mode-btn').forEach((btn) => {
+          btn.addEventListener('click', () => applyMode(btn.dataset.modeBtn, true));
+        });
+        document.querySelectorAll('[data-go-sport]').forEach((a) => {
+          a.addEventListener('click', (e) => {
+            e.preventDefault();
+            applyMode('sport', true);
+            requestAnimationFrame(() => document.getElementById('history').scrollIntoView());
+          });
+        });
+      });
+
+    </script>
+  </body>
+</html>
