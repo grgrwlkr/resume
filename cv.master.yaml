@@ -2,6 +2,7 @@ schemaVersion: 1
 
 metadata:
   purpose: canonical_resume_source
+  publicEmploymentDatePrecision: month
   firstClassProfiles:
     - teamLead
   maintainedResumeLanguages:
@@ -16,7 +17,7 @@ metadata:
 basics:
   fullName: Gregory Agapov
   fullNameRu: Григорий Агапов
-  defaultHeadline: Team Lead
+  defaultHeadline: Engineering Leader
   legacyHeadline: Team Leader & Proud Geek
   location:
     city: Moscow
@@ -56,8 +57,10 @@ positioning:
   summaryBlocks:
     - id: handsOnLead
       text: Hands-on engineering leader who combines direct people management, delivery ownership, and technical depth across backend, frontend, mobile, data, and platform concerns.
-    - id: currentVkScope
-      text: Currently leads the Donations product team in VK's Communities business unit after driving SocCom platform initiatives in product scaling, critical migration, and frontend unification across iOS, Android, and web.
+    - id: vkScope
+      text: Led VK's eight-person Donations team, including the on-time launch of VK Donut in MAX, after driving SocCom initiatives in product scaling, critical migration, and frontend unification. VK employment through November 2026.
+    - id: alfaBankRole
+      text: At Alfa-Bank from December 2026, in the Government Interaction Automation Department. Omit the role title from public versions pending clarification.
     - id: turnaroundBuilder
       text: Strong fit for situations that need a product or team reset, clearer direction, and execution discipline without losing technical credibility.
     - id: mentorManager
@@ -93,11 +96,38 @@ positioning:
       - Should actively show appreciation and make space for others.
 
 experience:
+  - id: alfa-bank
+    company: Alfa-Bank
+    companyRu: Альфа-Банк
+    department: Government Interaction Automation Department
+    departmentRu: Отдел автоматизации взаимодействия с госорганами
+    start: '2026-11-30'
+    publicPresentation:
+      startMonth: '2026-12'
+      roleTitle: omit_pending_clarification
+      source: User requested month-only public employment dates, December 2026 for Alfa-Bank, and omission of the Alfa-Bank title while clarifying details on 2026-11-03.
+    appointment:
+      confirmedOn: '2026-11-03'
+      statusAtConfirmation: offer_accepted_start_date_agreed
+      offeredTitleRu: Руководитель направления
+      offeredTitleTranslation: Head of Function
+      source: User-provided accepted-offer screenshot records the offered title and department; user confirms the exact start date, superseding the screenshot's date-to-be-agreed field. The role title is pending clarification and is not for public display.
+    notes:
+      - Keep the exact start date internally; render as "from December 2026" in English and "с декабря 2026" in Russian, as explicitly requested by the user.
+      - Responsibilities, team size, stack, and achievements have not been provided; do not infer them from the title or department.
+    tags:
+      - engineering_leadership
+      - government_interaction_automation
+
   - id: vk-team-lead
     company: VK
     title: Team Lead
     start: 2025-04
-    end: present
+    end: '2026-11-27'
+    departure:
+      confirmedOn: '2026-11-03'
+      statusAtConfirmation: resignation_signed_end_date_agreed
+      source: User confirmed the signed resignation and final employment date.
     location: Moscow, Russia
     teamAssignments:
       - id: vk-donations-product
@@ -108,10 +138,11 @@ experience:
         surfaces:
           - VK Communities
           - VK profiles
+          - MAX channels
         role: Team Lead
         start: 2026-01
-        end: present
-        focus: Donations across VK Communities and VK profiles.
+        end: '2026-11-27'
+        focus: Donations across VK Communities, VK profiles, and MAX channels.
         team:
           directReports: 8
           composition:
@@ -123,13 +154,24 @@ experience:
         responsibilities:
           - Led the Donations team with eight direct reports across backend, frontend, iOS, Android, and QA.
           - Connected backend delivery with a dedicated migration team to accelerate the Donations service move from monolith to microservices.
-          - Owns and prioritizes the team backlog, independently and with the product manager; runs quarterly, sprint, and release planning under Scrumban.
-          - Designs the service architecture and personally writes microservice optimization code, driven by per-method RPS, related query load, and memory and CPU consumption.
+          - Owned and prioritized the team backlog, independently and with the product manager; ran quarterly, sprint, and release planning under Scrumban.
+          - Designed the service architecture and personally wrote microservice optimization code, driven by per-method RPS, related query load, and memory and CPU consumption.
         achievements:
+          - Led the team that launched VK Donut in MAX on 1 October 2026 within the agreed deadline, delivering a separate Go service for MAX integration and bot operation and load-testing all scenarios.
+          - In the first four weeks of VK Donut in MAX, 8,500 authors connected, more than 2,000 authors earned money, and donations turnover reached 2.7 million RUB.
           - Delivered the Donations rebrand and launched Donations in VK profiles within one quarter, where donations had previously been available only in Communities.
           - Launched Donations in VK profiles and drove strong month-over-month growth in the first two months (April-May 2026) - donations turnover roughly doubled from about 235K to about 478K RUB (+103%), the number of donations nearly tripled from 430 to 1,200 (+179%), profiles with Donations connected grew from 789 to 999 (+27%), and monetizing profiles grew from 240 to 521 (+117%), lifting connection-to-monetization from about 30% to about 52%.
           - Drove measurable lift from the Donations rebrand within the first three weeks after release, partly preceding the full Donations-in-profile rollout to which the rebrand belongs - +3,276 creators with Donations enabled (+3.96% over the active-creator base), +469 monetizing creators (+1.4%), +880,743 RUB in donations turnover (+0.37%), and +3,578 donations (+0.55%).
         metrics:
+          maxFirstFourWeeks:
+            launchDate: '2026-10-01'
+            window: first 4 weeks after launch
+            scope: VK Donut in MAX channels
+            connectedAuthors: 8500
+            earningAuthorsMoreThan: 2000
+            donationsTurnoverRub: 2700000
+            source: User-provided screenshot of the VK Donut in MAX first-results post, supplied 2026-11-03.
+            engineeringSource: User confirmed the separate Go integration and bot service, load testing of all scenarios, and delivery by the agreed deadline on 2026-11-03.
           donationsRebrandFirstThreeWeeks:
             window: first 3 weeks after release
             scope: Donations rebrand (sub-feature of the Donations-in-profile initiative)
@@ -200,7 +242,7 @@ experience:
       - SocCom assignment now has confirmed scaling, migration, process, and frontend-unification outcomes.
       - Donations in VK profiles is released; April-May 2026 product growth metrics are confirmed. The early rebrand numbers are a separate first-3-weeks read; full-feature DAU/MAU was not provided and is optional.
     tags:
-      - current_role
+      - role_with_confirmed_end_date
       - team_lead
       - direct_people_management
       - php
@@ -478,16 +520,17 @@ projects:
       - vk-team-lead
     role: Team Lead
     start: 2026-01
-    end: present
+    end: '2026-11-27'
     whyItMatters:
-      - Product team assignment for Donations across VK Communities and VK profiles.
+      - Product team assignment for Donations across VK Communities, VK profiles, and MAX channels.
+      - Launched VK Donut in MAX on time with a separate Go integration and bot service and load testing of all scenarios; first four weeks saw 8,500 connected authors, more than 2,000 earning authors, and 2.7M RUB turnover.
       - Shows direct people leadership across backend, frontend, mobile, and QA.
       - Includes a one-quarter rebrand and product expansion from Communities into VK profiles.
       - Drove strong month-over-month growth after launching Donations in VK profiles - turnover about doubled and donation count nearly tripled in the first two months (April-May 2026).
       - Shows involvement in the move from monolith to microservices.
       - Shipped a measurable rebrand uplift in 3 weeks - +3.96% creators with Donations enabled, +1.4% monetizing creators, +0.37% turnover, +0.55% donation count - as an early read on the larger Donations-in-profile feature.
     tags:
-      - current_role
+      - role_with_confirmed_end_date
       - product_team
       - communities
       - donations
@@ -738,9 +781,10 @@ targetProfiles:
     targetTitle: Team Lead
     goal: Maximize evidence of leadership, mentoring, turnaround ownership, and hands-on technical credibility.
     summaryStrategy:
-      openingNarrative: Hands-on Team Lead with 15+ years in software engineering and 5+ years of direct people management across teams of 6-8. Builds products from MVP to scale - owns the backlog, planning, and releases under Scrum/Scrumban, and still designs architecture and writes microservice optimization code. Currently leading VK's Donations product team (8 direct reports across backend, frontend, mobile, and QA).
+      openingNarrative: Engineering leader with 15+ years in software engineering and 5+ years of direct people management across teams of 6-8. Led VK's eight-person Donations team, combining delivery and architecture with hands-on microservice optimization, and delivered VK Donut in MAX on time. At Alfa-Bank from December 2026, in the Government Interaction Automation Department.
       proofPoints:
-        - Leads an 8-person Donations team across backend, frontend, iOS, Android, and QA.
+        - Led an 8-person Donations team across backend, frontend, iOS, Android, and QA.
+        - Delivered VK Donut in MAX on time with a separate Go integration and bot service and load testing of all scenarios; first four weeks brought 8,500 connected authors, more than 2,000 earning authors, and 2.7M RUB turnover.
         - Delivered a one-quarter rebrand and expanded Donations from Communities into VK profiles, with the rebrand alone adding +3.96% creators with Donations enabled and +1.4% monetizing creators in the first three weeks.
         - After launching Donations in VK profiles, drove month-over-month growth in the first two months - donations turnover roughly doubled (+103%) and donation count nearly tripled (+179%), with connection-to-monetization improving from about 30% to about 52%.
         - Helped accelerate the Donations service move from monolith to microservices.
@@ -771,6 +815,7 @@ targetProfiles:
       - process_building
       - frontend_unification
     preferredExperienceIds:
+      - alfa-bank
       - vk-team-lead
       - tinkoff-mentoring-team-lead
       - tinkoff-performance-review-team-lead
@@ -800,12 +845,15 @@ targetProfiles:
 
 verification:
   reviewBeforePublishing:
+    - id: alfa-bank-role-details
+      item: Alfa-Bank role scope after the accepted offer
+      detail: 'The accepted-offer screenshot records the offered title and department. Exact start date 2026-11-30 is confirmed by the user on 2026-11-03 and supersedes the screenshot. The user subsequently requested public display from 12.2026 and omission of the role title pending clarification; preserve the exact date and offered title only as internal source details. Responsibilities, team size, reporting scope, stack, and achievements are not yet provided; omit unsupported claims. Compensation and third-party personal information from the offer are outside the resume scope and must not be copied into derived artifacts.'
     - id: neotech-paravan-legal-entities
       item: Legal entities behind the Neotech (Paravan 2000) experience block
       detail: 'Separate registry records and legal addresses were saved on 2026-10-23 under experience[id=neotech-gis-senior].legalEntities. ООО "НЕОТЕХ" (INN 7703805668) and ООО "ПАРАВАН - 2000" (INN 7703220725) are distinct legal entities with different addresses. Registry details are source-backed; their exact relationship to the employment record and any transfer dates still need confirmation from employment documents or the user. ООО "НЕОТЕХ" was registered on 2014-02-12, after the resume block starts in 2013-12; do not attribute the entire period to that legal entity or change the resume dates without confirmation. Legal addresses must not be presented as office locations.'
     - id: vk-role-details
       item: VK responsibilities and achievements
-      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to present. The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. Donations rebrand metrics are confirmed for the first three weeks after release: +3,276 creators with Donations enabled (+3.96% over the active-creator base), +469 monetizing creators (+1.4%), +880,743 RUB in donations turnover (+0.37%), and +3,578 donations (+0.55%); these came from product manager and analyst summary and are an early partial read of the larger Donations-in-profile rollout. SocCom details are confirmed: a direct platform team of 8, cross-team synchronization across 3 teams during the goods-scaling initiative, delivery leadership for 3 additional backend engineers from another team, scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Donations in VK profiles is now released, with confirmed April-May 2026 product growth metrics: profiles with Donations connected 789 to 999 (+27%), monetizing profiles 240 to 521 (+117%), donations turnover about 235K to about 478K RUB (+103%), donation count 430 to 1,200 (+179%), connection-to-monetization about 30% to about 52%, and about 80% of turnover from one-time donations. Optional follow-up precision before final publication: full Donations-in-profile DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'
+      detail: 'User confirmed employment at VK started in 2025-04 as a Team Lead on two assignments: the platform team in the SocCom business unit from 2025-04 through 2025-12, and the Donations product team from 2026-01 to 2026-11-27 (signed resignation and end date confirmed by the user on 2026-11-03). The shared stack is PHP, Go, React, in-house storage systems, Postgres, monolith, and microservices. Donations details are confirmed: 8 direct reports (3 backend, 2 frontend, 1 iOS, 1 Android, 1 QA), a one-quarter rebrand, launch into VK profiles beyond Communities, backend delivery connected to a dedicated migration team for moving the service from monolith to microservices, and product reach growth that supported DAU/MAU. Donations rebrand metrics are confirmed for the first three weeks after release: +3,276 creators with Donations enabled (+3.96% over the active-creator base), +469 monetizing creators (+1.4%), +880,743 RUB in donations turnover (+0.37%), and +3,578 donations (+0.55%); these came from product manager and analyst summary and are an early partial read of the larger Donations-in-profile rollout. SocCom details are confirmed: a direct platform team of 8, cross-team synchronization across 3 teams during the goods-scaling initiative, delivery leadership for 3 additional backend engineers from another team, scaling community goods from 20K to millions, 40 Ozon seller integrations with about 3M imported products and about 1M AdBlogger offers, recommendation-system migration under the Hadoop shutdown deadline, creation of the K2 Goods component for feed migration, platform process rollout, and VKUI / SPA frontend unification. Donations in VK profiles is now released, with confirmed April-May 2026 product growth metrics: profiles with Donations connected 789 to 999 (+27%), monetizing profiles 240 to 521 (+117%), donations turnover about 235K to about 478K RUB (+103%), donation count 430 to 1,200 (+179%), connection-to-monetization about 30% to about 52%, and about 80% of turnover from one-time donations. Optional follow-up precision before final publication: full Donations-in-profile DAU/MAU impact and the exact traffic-loss metric avoided during migration incident response.'
     - id: delivery-process-details
       item: Delivery-process ownership per role (added for getmatch moderation, 2026-09-28)
       detail: 'User confirmed for all Team Lead roles - backlog owned and prioritized independently and with the product manager (every team had one except the SocCom platform team, where the user owned the backlog alone); sprint and release planning everywhere; OKR planning at Tinkoff, quarterly planning at VK; pure Scrum at Tinkoff, Scrumban at VK. Still open - which product metrics the user personally owned as team goals, whether the hands-on microservice optimization work also covers the SocCom assignment (currently attributed to Donations only), and whether "owned the platform architecture" holds for Performance Review (derived from "built the architecture at Tinkoff").'

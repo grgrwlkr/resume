@@ -15,6 +15,8 @@ docs/
 ├── .nojekyll              # serve files verbatim, no Jekyll processing
 ├── assets/
 │   ├── portrait.jpg
+│   ├── print-header.html   # background/portrait source for PDF compatibility
+│   ├── print-header.png    # opaque 3x artwork, rebuilt by build-pdf.sh
 │   ├── og.jpg             # 1200×630 social card
 │   └── og-card.html       # source template for og.jpg
 └── dist/
@@ -56,6 +58,10 @@ Static, no framework — point the project's output/publish directory at `docs/`
 
 ## Notes
 
+- `build-pdf.sh` first renders `assets/print-header.html` into an opaque image.
+  This keeps portrait transparency masks out of the PDF for macOS Preview;
+  headings, contacts, and resume text remain searchable and selectable.
+  Adjust the PDF portrait crop and background in that source, then rebuild.
 - Theme (`theme`) and language (`lang`) persist in `localStorage`. First visit respects `prefers-color-scheme` and `navigator.language`.
 - Tailwind dark mode is class-based; the pre-paint script in `<head>` sets the correct class before first render to avoid flicker.
 - Fonts (Fraunces display + Hanken Grotesk body) load from Google Fonts. If embedding offline, swap to a local `@font-face`.

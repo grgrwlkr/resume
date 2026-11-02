@@ -1,16 +1,17 @@
 # Gregory Agapov
 
-**Engineering Team Lead**
+**Engineering Leader**
 
 Moscow, Russia | [gregoryagapov@icloud.com](mailto:gregoryagapov@icloud.com) | [GitHub](https://github.com/grgrwlkr) | [LinkedIn](https://www.linkedin.com/in/gregory-agapov-24b13221)
 
 ## Summary
 
-Hands-on Team Lead with `15+` years in software engineering and `5+` years of direct people management across teams of `6-8`. Builds products from MVP to scale: owns the backlog, planning, and releases under Scrum/Scrumban, and still designs architecture and writes microservice optimization code. Currently leading VK's Donations product team (`8` direct reports across backend, frontend, mobile, and QA).
+Engineering leader with `15+` years in software engineering and `5+` years of direct people management across teams of `6-8`. Led VK's `8`-person Donations team, combining delivery and architecture with hands-on microservice optimization, and delivered VK Donut in MAX on time. At Alfa-Bank from December 2026, in the Government Interaction Automation Department.
 
 ## Selected Impact
 
-- At VK, lead the `8`-person Donations product team: within one quarter, delivered a rebrand and launched Donations in VK profiles, accelerating the service migration from monolith to microservices. In the first two months after the profiles launch, donations turnover roughly doubled (`+103%`), the number of donations nearly tripled (`+179%`), and connection-to-monetization improved from about `30%` to about `52%`.
+- Led the team that launched `VK Donut` in `MAX` within the agreed deadline: a dedicated `Go` service for integration and bot operation, with all scenarios load-tested. In the first `4` weeks, `8,500` authors joined, more than `2,000` earned money, and donations turnover reached `2.7M RUB`.
+- At VK, led the `8`-person Donations product team: within one quarter, delivered a rebrand and launched Donations in VK profiles, accelerating the service migration from monolith to microservices. In the first two months after the profiles launch, donations turnover roughly doubled (`+103%`), the number of donations nearly tripled (`+179%`), and connection-to-monetization improved from about `30%` to about `52%`.
 - At VK, removed a core business constraint in social commerce by coordinating `3` teams to scale goods in Communities from `20K` to millions, and launched integration with `40` Ozon sellers, importing about `3M` products and creating about `1M` product offers.
 - Led the recommendation system migration under the Hadoop shutdown deadline, helped teams work through an incident without losing a significant share of traffic, and in parallel drove client and platform modernization: coverage of the `VKUI` design system grew from `35%` to `64%` on iOS and reached `84%` on Android.
 - At Tinkoff (T-Bank), delivered the MVP of the company's first mentoring platform on schedule, staffed the first pilot entirely with mentoring-program participants who later moved into full-time roles.
@@ -18,15 +19,23 @@ Hands-on Team Lead with `15+` years in software engineering and `5+` years of di
 
 ## Work Experience
 
+### Alfa-Bank
+
+From Dec 2026
+
+Government Interaction Automation Department.
+
 ### VK
 
 **Team Lead, Donations Product Team, Communities Business Unit**
 
-Jan 2026 - Present
+Jan 2026 - Nov 2026
 
-- Lead the Donations product team with `8` direct reports: `3` backend engineers, `2` frontend engineers, `1` iOS engineer, `1` Android engineer, and `1` QA engineer.
-- Own and prioritize the team backlog, independently and with the product manager; run quarterly, sprint, and release planning under `Scrumban`.
-- Design the service architecture and write microservice optimization code myself, driven by per-method `RPS`, related query load, and memory and `CPU` consumption.
+- Led the Donations product team with `8` direct reports: `3` backend engineers, `2` frontend engineers, `1` iOS engineer, `1` Android engineer, and `1` QA engineer.
+- Owned and prioritized the team backlog, independently and with the product manager; ran quarterly, sprint, and release planning under `Scrumban`.
+- Designed the service architecture and wrote microservice optimization code, driven by per-method `RPS`, related query load, and memory and `CPU` consumption.
+- Led the team that launched `VK Donut` in `MAX` channels on 1 October 2026 within the agreed deadline: delivered a dedicated `Go` service for MAX integration and bot operation, and load-tested all scenarios.
+- In the first `4` weeks of VK Donut in MAX, `8,500` authors joined, more than `2,000` authors earned money, and donations turnover reached `2.7M RUB`.
 - Led the Donations rebrand and launched Donations in VK profiles within one quarter, where the flow had previously been available only in Communities.
 - Aligned the product backend team and a dedicated migration team to accelerate the Donations service migration from monolith to microservices.
 - First `3` weeks after the rebrand release (a sub-feature of Donations-in-profile): `+3,276` active creators with Donations enabled (`+3.96%` over the total active-creator base), `+469` monetizing creators (`+1.4%`), `+880,743 RUB` in donations turnover (`+0.37%`), and `+3,578` donations (`+0.55%`); product manager and analyst expect the longer-running effect to exceed these early numbers.
@@ -125,7 +134,7 @@ Aug 2026 - present | `JavaScript`, `Node.js`, `VS Code Extension API`
 
 **Architecture & Systems:** monolith decomposition, microservices, DDD, CQRS, API design, REST APIs
 
-**Current stack (VK):** PHP, Go, React, Postgres, microservices
+**VK stack:** PHP, Go, React, Postgres, microservices
 
 **Previous stack (Tinkoff):** .NET, C#, Angular, TypeScript, Postgres, Docker, Kubernetes, CI/CD
 

@@ -21,22 +21,46 @@ fi
 
 mkdir -p "$OUT_DIR"
 
-render() {
-  local lang="$1"
-  local out="$OUT_DIR/Gregory_Agapov_Resume.$lang.pdf"
+# Chrome can keep running after writing an export; validate the fresh temporary
+# output before replacing any tracked asset.
+timeout_bin=""
+if command -v gtimeout >/dev/null 2>&1; then
+  timeout_bin="gtimeout"
+elif command -v timeout >/dev/null 2>&1; then
+  timeout_bin="timeout"
+fi
+
+render_header() {
   local profile
   profile="$(mktemp -d)"
+  local out="$profile/print-header.png"
+
+  echo "Rendering opaque PDF header artwork"
+  ${timeout_bin:+$timeout_bin --kill-after=5 25} "$CHROME" \
+    --headless=new --disable-gpu --no-sandbox --hide-scrollbars \
+    --user-data-dir="$profile" \
+    --force-device-scale-factor=3 --window-size=794,330 \
+    --screenshot="$out" \
+    "file://$HERE/assets/print-header.html" >/dev/null 2>&1 || true
+
+  if [[ ! -s "$out" ]]; then
+    rm -rf "$profile"
+    echo "Failed to render PDF header artwork" >&2
+    return 1
+  fi
+  mv "$out" "$HERE/assets/print-header.png"
+  rm -rf "$profile"
+}
+
+render() {
+  local lang="$1"
+  local profile
+  profile="$(mktemp -d)"
+  local out="$profile/resume.pdf"
+  local target="$OUT_DIR/Gregory_Agapov_Resume.$lang.pdf"
   local url="file://$SRC?lang=$lang&print=1"
 
-  echo "Rendering $lang -> $out"
-  # New headless Chrome sometimes refuses to exit after --print-to-pdf;
-  # wrap it with gtimeout so the build doesn't hang. PDF is written before exit.
-  local timeout_bin=""
-  if command -v gtimeout >/dev/null 2>&1; then
-    timeout_bin="gtimeout"
-  elif command -v timeout >/dev/null 2>&1; then
-    timeout_bin="timeout"
-  fi
+  echo "Rendering $lang -> $target"
 
   ${timeout_bin:+$timeout_bin --kill-after=5 25} "$CHROME" \
     --headless=new \
@@ -48,14 +72,17 @@ render() {
     --print-to-pdf="$out" \
     "$url" >/dev/null 2>&1 || true
 
-  rm -rf "$profile"
   if [[ ! -s "$out" ]]; then
-    echo "Failed to render $out" >&2
+    rm -rf "$profile"
+    echo "Failed to render $target" >&2
     return 1
   fi
-  ls -lh "$out"
+  mv "$out" "$target"
+  rm -rf "$profile"
+  ls -lh "$target"
 }
 
+render_header
 render en
 render ru
 
