@@ -1,0 +1,16 @@
+[
+  {
+    "source": "AGENTS.md",
+    "archive": ".codex/archive/agent-standard-2026-11-08/AGENTS.source.txt",
+    "kind": "file",
+    "sha256": "5a52daab8cbe7883b1d3b16a3b9ff84cd7e302dff312c2ac977aa402948a7290",
+    "source_commit": "9cb3b57a91bdf70207706d0ba317ccdac781bf6d"
+  },
+  {
+    "source": "CLAUDE.md",
+    "archive": ".codex/archive/agent-standard-2026-11-08/CLAUDE.source.txt",
+    "kind": "file",
+    "sha256": "cf21e3ca137315e7d234aee66ede97690a4421c9cb1221516874ed8820e26427",
+    "source_commit": "9cb3b57a91bdf70207706d0ba317ccdac781bf6d"
+  }
+]

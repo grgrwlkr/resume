@@ -1,5 +1,17 @@
 # Resume Workspace
 
+<!-- shared-instruction-standard:start -->
+## Shared agent instructions
+
+`AGENTS.md` is the project instruction source for every agent. `CLAUDE.md`, when
+present, contains only `@AGENTS.md`. Maintain project skills in `.agents/skills/`;
+client folders may contain operational adapters, not separate copies of rules or skills.
+Read applicable nested `AGENTS.md` and the references named by this file. Shared
+references remain authoritative regardless of a `.codex/` directory name. Use the
+current client's real tools; this convention grants no publication, deployment,
+credential access or permission beyond the user's authorized task.
+<!-- shared-instruction-standard:end -->
+
 Data-driven resume system. `cv.master.yaml` is the canonical source of truth; the
 two markdown drafts and the public landing are all derived from it. There is no
 application code here — only resume content, generation rules, and one static landing.
