@@ -21,7 +21,7 @@ cv.master.yaml                              # canonical facts (source of truth)
   ├── resume-examples/*.en.md               # derived draft (English)
   ├── resume-examples/*.ru.md               # derived draft (Russian)
   └── docs/index.html                       # derived single-file landing (RU/EN i18n)
-        └── build-pdf.sh → dist/*.{ru,en}.pdf  # docs/ is the GitHub Pages publish root
+        └── docs/build-pdf.sh → docs/dist/*.{ru,en}.pdf  # docs/ is the GitHub Pages publish root
 ```
 
 ## Source of truth & propagation
