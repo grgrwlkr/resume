@@ -513,6 +513,25 @@ experience:
       - integrations
 
 projects:
+  - id: elena-kaurkina
+    name: Veterinary nutrition website for Elena Kaurkina
+    role: Designer and full-stack developer
+    links:
+      website: https://kaurkina.ru/
+    highlights:
+      - Designed and built the public site, including a blog and five calculators for tracking growth and weight in cats and dogs.
+      - Built a client portal where pet owners submit questionnaires and receive diet plans, and an admin portal where the nutritionist manages requests and publishes articles.
+    stack:
+      - TypeScript
+      - Angular (server-side rendering for the blog)
+      - NestJS
+      - Bun
+      - PostgreSQL
+    tags:
+      - personal_project
+      - web_design
+      - full_stack_development
+
   - id: vk-communities-donations
     name: Product team, Donations, Communities business unit
     employer: VK

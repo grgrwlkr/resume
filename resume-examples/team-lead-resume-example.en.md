@@ -115,6 +115,15 @@ Nov 2010 - May 2012
 
 ## Projects
 
+### Veterinary nutrition website for Elena Kaurkina
+
+**Design and development** · [kaurkina.ru](https://kaurkina.ru/)
+
+- Designed and built the site, including a blog and five calculators that help cat and dog owners track their pets’ growth and weight.
+- Built a client portal where owners fill out pet questionnaires and receive diet plans, and an admin portal where the nutritionist manages requests and publishes articles.
+
+Stack — `TypeScript`, `Angular` (server-side rendering for the blog), `NestJS`, `Bun`, `PostgreSQL`.
+
 ### Dashboard & Statusline for Claude Code
 
 **Author and maintainer, open-source VS Code extension (MIT, non-commercial personal project)**  
